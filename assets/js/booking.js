@@ -11,6 +11,7 @@ let activeBooking = {
   addedFood: [], // Array of food items added: { name, price }
   bundle: null // Selected bundle if any
 };
+window.activeBooking = activeBooking;
 
 document.addEventListener('DOMContentLoaded', () => {
   initBookingWizard();
@@ -88,6 +89,10 @@ function initBookingWizard() {
     });
 
     currentStep = stepIndex;
+    window.bookingCurrentStep = stepIndex;
+    if (window.updatePremiumSessionHUD) {
+      window.updatePremiumSessionHUD();
+    }
 
     // Load step-specific contents
     if (currentStep === 0) {
@@ -264,6 +269,9 @@ function selectStation(station) {
         </div>
       </div>
     `;
+  }
+  if (window.updatePremiumSessionHUD) {
+    window.updatePremiumSessionHUD();
   }
 }
 
@@ -938,6 +946,9 @@ window.toggleFoodInWizard = function(name, price, btn) {
   
   // Track selection
   Tracker.track('Wizard Food Toggled', { name, price });
+  if (window.updatePremiumSessionHUD) {
+    window.updatePremiumSessionHUD();
+  }
 };
 
 // Initial calls on load

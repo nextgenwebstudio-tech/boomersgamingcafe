@@ -3013,8 +3013,8 @@ button {
   font-family: var(--mono);
 }
 
-/* Mobile Cart Toggle Button */
-.mobile-cart-toggle {
+/* Mobile HUD Toggle Button */
+.mobile-hud-toggle {
   display: none;
   position: fixed;
   bottom: 24px;
@@ -3032,16 +3032,16 @@ button {
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
 }
-.mobile-cart-toggle:hover {
+.mobile-hud-toggle:hover {
   background: #c3e83b;
 }
-.mobile-cart-toggle:active {
+.mobile-hud-toggle:active {
   transform: scale(0.9);
 }
-.mobile-cart-toggle .cart-icon {
+.mobile-hud-toggle .hud-icon {
   font-size: 24px;
 }
-.mobile-cart-toggle .badge {
+.mobile-hud-toggle .badge {
   position: absolute;
   top: -5px;
   right: -5px;
@@ -3053,107 +3053,524 @@ button {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.cart-close-btn {
+.hud-close-btn {
   display: none;
 }
 
-/* Floating Sticky Booking Cart widget */
-.sticky-booking-cart {
+/* Premium Session HUD Dashboard Panel */
+.premium-session-hud {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  width: 350px;
+  width: 380px;
+  height: calc(100vh - 120px);
+  max-height: 800px;
   background: rgba(10, 11, 14, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  border-radius: 20px;
   z-index: 998;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   transform: translateY(120%);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  overflow: hidden;
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
+  overflow-y: auto;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }
-.sticky-booking-cart.active {
+
+.premium-session-hud::-webkit-scrollbar {
+  width: 4px;
+}
+.premium-session-hud::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.premium-session-hud.active {
   transform: translateY(0);
 }
 
-.cart-header {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 20px 32px;
+/* HUD Header styles */
+.hud-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
-.cart-header h4 {
-  font: 700 12px var(--mono);
+.hud-status-dot {
+  width: 8px;
+  height: 8px;
+  background: #00db78;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00db78;
+  display: inline-block;
+  animation: pulseStatus 2s infinite;
+}
+@keyframes pulseStatus {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* Step Progress styles */
+.hud-progress-block {
+  margin-bottom: 20px;
+}
+.hud-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font: 700 10px var(--mono);
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.hud-progress-bar-wrap {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hud-progress-bar {
+  height: 100%;
+  background: var(--lime);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Station Preview details */
+.hud-station-preview {
+  display: flex;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.hud-station-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+.hud-station-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hud-station-info h3 {
+  font: 700 15px var(--display);
   color: #fff;
+  margin: 0 0 4px;
+}
+.hud-station-info p {
+  font: 500 10px var(--mono);
+  color: var(--muted);
   margin: 0;
   text-transform: uppercase;
 }
-.cart-badge-count {
-  background: var(--lime);
-  color: #000;
-  font: 700 10px var(--mono);
-  padding: 2px 8px;
-  border-radius: 12px;
+
+/* Section Title */
+.hud-section-title {
+  font: 700 9px var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
 }
 
-.cart-body {
-  padding: 24px 32px;
-  max-height: 180px;
-  overflow-y: auto;
+/* Session Details list */
+.hud-details-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.hud-details-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+.hud-details-item span {
+  font: 500 9px var(--mono);
+  color: var(--muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.hud-details-item strong {
+  font: 700 11px var(--display);
+  color: #fff;
 }
 
-.cart-item-row {
+/* Equipment list */
+.hud-equipment-block {
+  margin-bottom: 20px;
+}
+.hud-eq-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.hud-eq-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.hud-eq-list li span {
+  color: var(--muted);
+}
+.hud-eq-list li strong {
+  color: #fff;
+}
+
+/* Kitchen & food mini cards */
+.hud-kitchen-block {
+  margin-bottom: 20px;
+}
+.hud-food-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hud-food-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+.hud-food-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
-  color: var(--muted);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
 }
-.cart-item-row div {
+.hud-food-card-left {
+  display: flex;
+  flex-direction: column;
+}
+.hud-food-card-left strong {
+  font: 700 12px var(--display);
+  color: #fff;
+  margin-bottom: 2px;
+}
+.hud-food-card-left span {
+  font: 500 8px var(--mono);
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.hud-food-card-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
-.cart-item-row div button {
+.hud-food-card-right b {
+  font: 700 13px var(--display);
+  color: var(--lime);
+}
+.hud-food-card-right button {
   background: transparent;
   border: none;
   color: var(--red);
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   padding: 0 4px;
 }
 
-.cart-footer {
-  padding: 24px 32px;
-  background: rgba(255, 255, 255, 0.01);
+/* Live capacity status */
+.hud-live-status-block {
+  margin-bottom: 20px;
 }
-.cart-summary-line {
+.hud-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.hud-status-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 10px;
+}
+.hud-status-card span {
+  color: var(--muted);
+}
+.hud-status-card b {
+  color: #fff;
+}
+
+/* Countdown */
+.hud-countdown-block {
+  margin-bottom: 20px;
+  background: rgba(255, 79, 112, 0.03);
+  border: 1px solid rgba(255, 79, 112, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+}
+.hud-countdown-row {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.hud-countdown-row span {
+  font: 500 8px var(--mono);
+  color: var(--muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.hud-countdown-row strong {
+  font: 700 14px var(--display);
+  color: #fff;
+}
+
+/* Pricing line */
+.hud-pricing-block {
+  margin-bottom: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+}
+.hud-price-line {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   color: var(--muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
-.cart-summary-line.total {
-  font: 700 15px var(--display);
+.hud-price-line.total {
+  font: 700 16px var(--display);
   color: #fff;
-  margin: 8px 0 14px;
-  border-top: 1px dashed var(--line);
-  padding-top: 8px;
+  border-top: 1px dashed rgba(255,255,255,0.12);
+  padding-top: 12px;
+  margin-top: 12px;
 }
-.cart-summary-line.total span {
-  color: #fff;
-}
-.cart-summary-line.total b {
+.hud-price-line.total strong {
   color: var(--lime);
 }
 
+/* Ticket Preview */
+.hud-ticket-preview {
+  margin-bottom: 20px;
+  background: rgba(0, 219, 120, 0.02);
+  border: 1px solid rgba(0, 219, 120, 0.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+.hud-ticket-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141519;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.hud-ticket-details {
+  display: flex;
+  flex-direction: column;
+}
+.hud-ticket-details strong {
+  font: 700 13px var(--display);
+  color: #fff;
+  margin-bottom: 2px;
+}
+.hud-ticket-details span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.hud-ticket-qr {
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+}
+.hud-ticket-link {
+  font: 700 10px var(--mono);
+  color: var(--lime);
+  text-transform: uppercase;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+}
 
+/* Floating Reserve CTA */
+.hud-cta-wrap {
+  margin-bottom: 20px;
+}
+.hud-reserve-btn {
+  width: 100%;
+  height: 54px;
+  background: #efbd4e;
+  border: none;
+  border-radius: 12px;
+  font: 800 12px var(--mono);
+  color: #171008;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(239, 189, 78, 0.25);
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.hud-reserve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(239, 189, 78, 0.45);
+  background: #fbc758;
+}
+.hud-reserve-btn:active {
+  transform: translateY(1px);
+}
+.hud-btn-arrow {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hud-reserve-btn:hover .hud-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Achievement strip at the bottom */
+.hud-achievement-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 12px;
+  text-align: center;
+  font: 500 8px var(--mono);
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Dynamic theme custom overrides */
+.premium-session-hud.theme-valorant {
+  border-color: rgba(255, 79, 112, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 79, 112, 0.15);
+}
+.premium-session-hud.theme-valorant .hud-status-dot {
+  background: #ff4f70;
+  box-shadow: 0 0 8px #ff4f70;
+}
+.premium-session-hud.theme-valorant .hud-progress-bar {
+  background: #ff4f70;
+}
+.premium-session-hud.theme-valorant .hud-reserve-btn {
+  background: #ff4f70;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(255, 79, 112, 0.25);
+}
+.premium-session-hud.theme-valorant .hud-reserve-btn:hover {
+  background: #ff6582;
+  box-shadow: 0 10px 30px rgba(255, 79, 112, 0.45);
+}
+
+.premium-session-hud.theme-cs2 {
+  border-color: rgba(107, 207, 255, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(107, 207, 255, 0.15);
+}
+.premium-session-hud.theme-cs2 .hud-status-dot {
+  background: #6bcfff;
+  box-shadow: 0 0 8px #6bcfff;
+}
+.premium-session-hud.theme-cs2 .hud-progress-bar {
+  background: #6bcfff;
+}
+.premium-session-hud.theme-cs2 .hud-reserve-btn {
+  background: #6bcfff;
+  color: #171008;
+  box-shadow: 0 6px 20px rgba(107, 207, 255, 0.25);
+}
+.premium-session-hud.theme-cs2 .hud-reserve-btn:hover {
+  background: #85d7ff;
+  box-shadow: 0 10px 30px rgba(107, 207, 255, 0.45);
+}
+
+.premium-session-hud.theme-eafc {
+  border-color: rgba(0, 219, 120, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 219, 120, 0.15);
+}
+.premium-session-hud.theme-eafc .hud-status-dot {
+  background: #00db78;
+  box-shadow: 0 0 8px #00db78;
+}
+.premium-session-hud.theme-eafc .hud-progress-bar {
+  background: #00db78;
+}
+.premium-session-hud.theme-eafc .hud-reserve-btn {
+  background: #00db78;
+  color: #171008;
+  box-shadow: 0 6px 20px rgba(0, 219, 120, 0.25);
+}
+.premium-session-hud.theme-eafc .hud-reserve-btn:hover {
+  background: #1eff90;
+  box-shadow: 0 10px 30px rgba(0, 219, 120, 0.45);
+}
+
+.premium-session-hud.theme-racing {
+  border-color: rgba(195, 232, 59, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(195, 232, 59, 0.15);
+}
+.premium-session-hud.theme-racing .hud-status-dot {
+  background: var(--lime);
+  box-shadow: 0 0 8px var(--lime);
+}
+.premium-session-hud.theme-racing .hud-progress-bar {
+  background: var(--lime);
+}
+.premium-session-hud.theme-racing .hud-reserve-btn {
+  background: var(--lime);
+  color: #171008;
+  box-shadow: 0 6px 20px rgba(195, 232, 59, 0.25);
+}
+.premium-session-hud.theme-racing .hud-reserve-btn:hover {
+  background: #d4f84c;
+  box-shadow: 0 10px 30px rgba(195, 232, 59, 0.45);
+}
+
+.premium-session-hud.theme-vr {
+  border-color: rgba(173, 140, 255, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(173, 140, 255, 0.15);
+}
+.premium-session-hud.theme-vr .hud-status-dot {
+  background: #ad8cff;
+  box-shadow: 0 0 8px #ad8cff;
+}
+.premium-session-hud.theme-vr .hud-progress-bar {
+  background: #ad8cff;
+}
+.premium-session-hud.theme-vr .hud-reserve-btn {
+  background: #ad8cff;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(173, 140, 255, 0.25);
+}
+.premium-session-hud.theme-vr .hud-reserve-btn:hover {
+  background: #beabff;
+  box-shadow: 0 10px 30px rgba(173, 140, 255, 0.45);
+}

@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize mobile responsive menu
   initMobileMenu();
 
-  // Initialize mobile cart drawer toggle
-  initMobileCart();
+  // Initialize mobile responsive HUD toggle
+  initMobileHUD();
 
   // Initialize reveal animations (progressive fallback to IntersectionObserver if GSAP ScrollTrigger fails)
   initScrollReveals();
@@ -334,14 +334,14 @@ function initMobileMenu() {
 }
 
 /**
- * 8. Mobile Cart Drawer Toggle & Swipe Setup
+ * 8. Mobile HUD Drawer Toggle & Swipe Setup
  */
-function initMobileCart() {
-  const toggleBtn = document.getElementById('mobileCartToggleBtn');
-  const closeBtn = document.getElementById('mobileCartCloseBtn');
-  const cart = document.getElementById('floatingCartWidget');
+function initMobileHUD() {
+  const toggleBtn = document.getElementById('mobileHUDToggleBtn');
+  const closeBtn = document.getElementById('hudCloseBtn');
+  const hud = document.getElementById('premiumSessionHUD');
   
-  if (!toggleBtn || !cart) return;
+  if (!toggleBtn || !hud) return;
 
   // Create overlay if not present
   let cartOverlay = document.getElementById('mobileCartOverlay');
@@ -352,26 +352,26 @@ function initMobileCart() {
     document.body.appendChild(cartOverlay);
   }
 
-  const openCart = () => {
-    cart.classList.add('drawer-active');
+  const openHUD = () => {
+    hud.classList.add('drawer-active');
     cartOverlay.classList.add('active');
     document.body.classList.add('no-scroll');
   };
 
-  const closeCart = () => {
-    cart.classList.remove('drawer-active');
+  const closeHUD = () => {
+    hud.classList.remove('drawer-active');
     cartOverlay.classList.remove('active');
     document.body.classList.remove('no-scroll');
   };
 
-  toggleBtn.addEventListener('click', openCart);
-  if (closeBtn) closeBtn.addEventListener('click', closeCart);
-  cartOverlay.addEventListener('click', closeCart);
+  toggleBtn.addEventListener('click', openHUD);
+  if (closeBtn) closeBtn.addEventListener('click', closeHUD);
+  cartOverlay.addEventListener('click', closeHUD);
 
-  // Close when clicking checkout button or other links inside the cart
-  const checkoutBtn = cart.querySelector('a.button');
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', closeCart);
+  // Close when clicking reserve button
+  const reserveBtn = hud.querySelector('#hudReserveBtn');
+  if (reserveBtn) {
+    reserveBtn.addEventListener('click', closeHUD);
   }
 }
 

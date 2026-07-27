@@ -1077,6 +1077,181 @@
   </div>
 
 
+  <!-- Premium Session HUD Widget -->
+  <aside class="premium-session-hud active" id="premiumSessionHUD" aria-label="Premium Session HUD">
+    <!-- Close button for mobile drawer -->
+    <button class="hud-close-btn" id="hudCloseBtn" aria-label="Close HUD">&times;</button>
+    
+    <div class="hud-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img class="brand-mark" src="assets/images/logo.png" style="width: 20px; height: 20px; filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
+        <h4 style="font: 700 12px var(--mono); color: #fff; margin: 0; text-transform: uppercase;">YOUR SESSION</h4>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span class="hud-status-dot"></span>
+        <span style="font: 700 9px var(--mono); color: #00db78; text-transform: uppercase; letter-spacing: 0.05em;">LIVE</span>
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="hud-progress-block">
+      <div class="hud-progress-label">
+        <span id="hudProgressText">STEP 1 OF 7</span>
+        <span id="hudProgressPercent">14%</span>
+      </div>
+      <div class="hud-progress-bar-wrap">
+        <div class="hud-progress-bar" id="hudProgressBar" style="width: 14%;"></div>
+      </div>
+    </div>
+
+    <!-- Station Details & Thumbnail -->
+    <div class="hud-station-preview">
+      <div class="hud-station-thumb" id="hudStationThumb" style="background-image: url('assets/images/boomers_pc_lounge.jpg');"></div>
+      <div class="hud-station-info">
+        <h3 id="hudStationName">Browse Stations</h3>
+        <p id="hudStationSpecs">No Specs Available</p>
+        <div style="display: flex; gap: 6px; align-items: center; font-size: 10px; color: var(--muted); margin-top: 4px;">
+          <span>👤 <span id="hudPlayersCount">1 Gamer</span></span>
+          <span>•</span>
+          <span>📍 <span id="hudBranchName">Coimbatore</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Details List -->
+    <div class="hud-details-list">
+      <div class="hud-details-item">
+        <span>🎮 Zone</span>
+        <strong id="hudZoneName">PC Arena</strong>
+      </div>
+      <div class="hud-details-item">
+        <span>⏰ Time</span>
+        <strong id="hudTimeSlot">Today • 7:00 PM</strong>
+      </div>
+      <div class="hud-details-item">
+        <span>⌛ Duration</span>
+        <strong id="hudDurationText">2 Hours</strong>
+      </div>
+    </div>
+
+    <!-- Gaming Equipment Preview -->
+    <div class="hud-equipment-block" id="hudEquipmentBlock">
+      <div class="hud-section-title">EQUIPMENT PRO</div>
+      <ul class="hud-eq-list" id="hudEqList">
+        <li><span>Processor:</span><strong>Intel i7</strong></li>
+        <li><span>Graphics:</span><strong>RTX 3070</strong></li>
+        <li><span>Monitor:</span><strong>240Hz Display</strong></li>
+        <li><span>Keyboard:</span><strong>Mechanical Keyboard</strong></li>
+        <li><span>Headset:</span><strong>HyperX Headset</strong></li>
+      </ul>
+    </div>
+
+    <!-- Kitchen Section -->
+    <div class="hud-kitchen-block" id="hudKitchenBlock">
+      <div class="hud-section-title">KITCHEN ADD-ONS</div>
+      <div class="hud-food-cards" id="hudFoodCards">
+        <!-- Mini cards loaded dynamically in menu.js -->
+        <div class="hud-food-empty">🍔 No food added yet</div>
+      </div>
+    </div>
+
+    <!-- Live Status strip -->
+    <div class="hud-live-status-block">
+      <div class="hud-section-title">LIVE STATUS</div>
+      <div class="hud-status-grid">
+        <div class="hud-status-card">
+          <span>🟢 PC Arena</span>
+          <b>12 Available</b>
+        </div>
+        <div class="hud-status-card">
+          <span>🟡 PS5</span>
+          <b>3 Available</b>
+        </div>
+        <div class="hud-status-card">
+          <span>🔴 VR</span>
+          <b>Full</b>
+        </div>
+        <div class="hud-status-card">
+          <span>🏁 Sim Racing</span>
+          <b>2 Left</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Countdown Section -->
+    <div class="hud-countdown-block" id="hudCountdownBlock">
+      <div class="hud-section-title">NEXT SLOT COUNTDOWN</div>
+      <div class="hud-countdown-row">
+        <div>
+          <span>Next Slot</span>
+          <strong id="hudNextSlotTime">07:30 PM</strong>
+        </div>
+        <div>
+          <span>Starts In</span>
+          <strong id="hudCountdownTimer">08m 42s</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Summary (GST & Total) -->
+    <div class="hud-pricing-block">
+      <div class="hud-price-line">
+        <span>Gaming Cost</span>
+        <strong id="hudGamingCost">₹0</strong>
+      </div>
+      <div class="hud-price-line">
+        <span>Kitchen Add-ons</span>
+        <strong id="hudKitchenCost">₹0</strong>
+      </div>
+      <div class="hud-price-line">
+        <span>GST (18%)</span>
+        <strong id="hudGstCost">₹0</strong>
+      </div>
+      <div class="hud-price-line total">
+        <span>GRAND TOTAL</span>
+        <strong id="hudGrandTotal">₹0</strong>
+      </div>
+    </div>
+
+    <!-- Ticket Preview Section -->
+    <div class="hud-ticket-preview" id="hudTicketPreview" style="display: none;">
+      <div class="hud-section-title">YOUR TICKET</div>
+      <div class="hud-ticket-card">
+        <div class="hud-ticket-details">
+          <strong id="hudTicketZone">PC Arena</strong>
+          <span id="hudTicketStation">Station 12</span>
+          <span id="hudTicketTime">Today • 7:00 PM</span>
+        </div>
+        <div class="hud-ticket-qr">
+          <span style="font-size: 28px;">🔲</span>
+        </div>
+      </div>
+      <a href="#book" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
+    </div>
+
+    <!-- Floating CTA -->
+    <div class="hud-cta-wrap">
+      <button class="hud-reserve-btn" id="hudReserveBtn" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}">
+        <span>LOCK MY STATION</span>
+        <span class="hud-btn-arrow">➔</span>
+      </button>
+    </div>
+
+    <!-- Achievement Strip at very bottom of card -->
+    <div class="hud-achievement-strip">
+      <div>⭐ 4.9 Rating</div>
+      <div>👥 14K Players</div>
+      <div>🏆 200+ Tourneys</div>
+      <div>⚡ Since 2018</div>
+    </div>
+  </aside>
+
+  <!-- Mobile Floating HUD Toggle Button -->
+  <button class="mobile-hud-toggle" id="mobileHUDToggleBtn" aria-label="View Session HUD">
+    <span class="hud-icon">🎮</span>
+    <span class="badge" id="mobileHUDCountBadge">0</span>
+  </button>
+
   <!-- Floating Availability Sidebar Widget -->
   <aside class="floating-avail-widget" id="floatingAvailWidget" aria-label="Live availability sidebar">
     <div class="floating-avail-title">Live Capacity</div>

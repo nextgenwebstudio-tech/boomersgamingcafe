@@ -348,7 +348,7 @@ document.addEventListener('change', () => {
   const playersInput = document.getElementById('w-players');
   if (durationInput) cartState.gamingHrs = parseInt(durationInput.value) || 2;
   if (playersInput) cartState.gamingPlayers = parseInt(playersInput.value) || 1;
-  updateStickyCartWidget();
+  updatePremiumSessionHUD();
 });
 
 // Intercept booking wizard selections to sync station rates
@@ -356,7 +356,7 @@ window.addEventListener('stationSelected', (e) => {
   if (e.detail) {
     cartState.stationName = e.detail.name;
     cartState.gamingRate = e.detail.price;
-    updateStickyCartWidget();
+    updatePremiumSessionHUD();
   }
 });
 
@@ -385,7 +385,7 @@ window.addFoodToCart = function(itemId) {
     cartState.addedFood.push({ id: found.id, name: found.name, price: found.price, qty: 1 });
   }
 
-  updateStickyCartWidget();
+  updatePremiumSessionHUD();
   alert(`Added ${found.name} to your session order!`);
   Tracker.track('Cart Item Added', { name: found.name });
 };
@@ -420,7 +420,7 @@ window.addFoodQtyToCart = function(itemId) {
     cartState.addedFood.push({ id: found.id, name: found.name, price: found.price, qty: qty });
   }
 
-  updateStickyCartWidget();
+  updatePremiumSessionHUD();
   closeFoodDetailsModal();
   alert(`Added ${qty}x ${found.name} to your session order!`);
 };
@@ -439,7 +439,7 @@ window.removeCartItem = function(itemId) {
     }
 
     cartState.addedFood.splice(idx, 1);
-    updateStickyCartWidget();
+    updatePremiumSessionHUD();
     Tracker.track('Cart Item Removed', { id: itemId });
   }
 };
@@ -475,100 +475,240 @@ function animateCartValue(element, start, end, duration = 300) {
 /**
  * Re-calculate costs and update sticky widget HTML
  */
-function updateStickyCartWidget() {
-  const cartBody = document.getElementById('stickyCartItemsList');
-  const cartCount = document.getElementById('stickyCartCountBadge');
-  const mobileCartCount = document.getElementById('mobileCartCountBadge');
-  const gamingTotalDisp = document.getElementById('cart-gaming-total');
-  const foodTotalDisp = document.getElementById('cart-food-total');
-  const gstDisp = document.getElementById('cart-gst');
-  const grandTotalDisp = document.getElementById('cart-grand-total');
+function updatePremiumSessionHUD() {
+  const hud = document.getElementById('premiumSessionHUD');
+  if (!hud) return;
 
-  if (!cartBody) return;
+  const activeBooking = window.activeBooking || {
+    branch: 'coimbatore',
+    zone: 'pc',
+    station: null,
+    duration: 2,
+    players: 1,
+    slots: ['7:00 PM'],
+    addedFood: []
+  };
 
-  const hasStation = window.activeBooking && window.activeBooking.station;
+  // 1. Dynamic Theme Class
+  hud.classList.remove('theme-valorant', 'theme-cs2', 'theme-eafc', 'theme-racing', 'theme-vr');
+  const theme = getActiveGameTheme(activeBooking);
+  if (theme) hud.classList.add(theme);
 
-  if (!hasStation) {
-    // 6. Session Cart Empty State
-    cartBody.innerHTML = `
-      <div style="padding: 24px; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.6;">
-        <span style="font-size: 20px; display: block; margin-bottom: 8px;">🎮</span>
-        <b>No station selected yet</b><br>
-        <span style="font-size: 10px; display: block; margin-top: 4px; margin-bottom: 12px;">Choose a station to begin your session.</span>
-        <button type="button" class="cafe-add-btn" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})" style="margin: 0 auto; display: block;">Browse Stations</button>
-      </div>
-    `;
-    if (cartCount) cartCount.textContent = '0';
-    if (mobileCartCount) mobileCartCount.textContent = '0';
-    if (gamingTotalDisp) gamingTotalDisp.textContent = '₹0';
-    if (foodTotalDisp) foodTotalDisp.textContent = '₹0';
-    if (gstDisp) gstDisp.textContent = '₹0';
-    if (grandTotalDisp) grandTotalDisp.textContent = '₹0';
-    previousCartValues.gaming = 0;
-    previousCartValues.food = 0;
-    previousCartValues.gst = 0;
-    previousCartValues.grand = 0;
-    return;
+  // 2. Step Progress Bar
+  const currentStep = window.bookingCurrentStep !== undefined ? window.bookingCurrentStep : 0;
+  const progressText = document.getElementById('hudProgressText');
+  const progressPercent = document.getElementById('hudProgressPercent');
+  const progressBar = document.getElementById('hudProgressBar');
+  if (progressText && progressPercent && progressBar) {
+    const stepNum = currentStep + 1;
+    progressText.textContent = `STEP ${stepNum} OF 7`;
+    const percent = Math.round((stepNum / 7) * 100);
+    progressPercent.textContent = `${percent}%`;
+    progressBar.style.width = `${percent}%`;
   }
 
-  // Compute Gaming Cost
-  const gamingCost = cartState.gamingRate * cartState.gamingHrs * cartState.gamingPlayers;
-  animateCartValue(gamingTotalDisp, previousCartValues.gaming, gamingCost);
-  previousCartValues.gaming = gamingCost;
+  // 3. Station details & Thumbnail
+  const nameDisp = document.getElementById('hudStationName');
+  const specsDisp = document.getElementById('hudStationSpecs');
+  const thumbDisp = document.getElementById('hudStationThumb');
+  const playersDisp = document.getElementById('hudPlayersCount');
+  const branchDisp = document.getElementById('hudBranchName');
 
-  // Populate food rows
-  cartBody.innerHTML = '';
-  let foodTotal = 0;
-  let totalItems = 0;
+  if (nameDisp) {
+    nameDisp.textContent = activeBooking.station ? activeBooking.station.name : 'Select Station';
+  }
+  if (specsDisp) {
+    specsDisp.textContent = activeBooking.station 
+      ? `${activeBooking.station.gpu} · ${activeBooking.station.monitor}` 
+      : 'No Specs Selected';
+  }
+  if (thumbDisp) {
+    let thumbUrl = 'assets/images/boomers_pc_lounge.jpg';
+    if (activeBooking.zone === 'racing') {
+      thumbUrl = 'assets/images/boomers_racing_sim.jpg';
+    } else if (activeBooking.zone === 'console' || activeBooking.zone === 'vr') {
+      thumbUrl = 'assets/images/boomers_vr_lounge.jpg';
+    }
+    thumbDisp.style.backgroundImage = `url('${thumbUrl}')`;
+  }
+  if (playersDisp) {
+    playersDisp.textContent = `${activeBooking.players} Gamer${activeBooking.players > 1 ? 's' : ''}`;
+  }
+  if (branchDisp) {
+    branchDisp.textContent = activeBooking.branch.charAt(0).toUpperCase() + activeBooking.branch.slice(1);
+  }
 
-  if (cartState.addedFood.length === 0) {
-    // Dynamic empty state for Food Add-ons
-    const emptyRow = document.createElement('div');
-    emptyRow.style.padding = '12px';
-    emptyRow.style.textAlign = 'center';
-    emptyRow.style.fontSize = '11px';
-    emptyRow.style.color = 'var(--muted)';
-    emptyRow.style.border = '1px dashed rgba(255,255,255,0.08)';
-    emptyRow.style.borderRadius = '8px';
-    emptyRow.innerHTML = `
-      🍔 No food added yet<br>
-      <a href="#power-up" onclick="document.getElementById('power-up').scrollIntoView({behavior: 'smooth'})" style="color: var(--lime); text-decoration: underline; display: inline-block; margin-top: 6px; font-family: var(--mono); font-size: 10px;">Explore Power-Up Station →</a>
-    `;
-    cartBody.appendChild(emptyRow);
-  } else {
-    cartState.addedFood.forEach(item => {
-      foodTotal += item.price * item.qty;
-      totalItems += item.qty;
+  // 4. Session details list
+  const zoneDisp = document.getElementById('hudZoneName');
+  const timeDisp = document.getElementById('hudTimeSlot');
+  const durationDisp = document.getElementById('hudDurationText');
 
-      const row = document.createElement('div');
-      row.className = 'cart-item-row';
-      row.innerHTML = `
-        <span>${item.qty}x ${item.name}</span>
-        <div>
-          <b>₹${item.price * item.qty}</b>
-          <button onclick="removeCartItem('${item.id}')" aria-label="Remove item">&times;</button>
-        </div>
+  if (zoneDisp) {
+    const zoneLabels = { pc: 'PC Arena', console: 'Console Lounge', vip: 'VIP Squad', racing: 'Sim Racing', vr: 'VR Lounge' };
+    zoneDisp.textContent = zoneLabels[activeBooking.zone] || activeBooking.zone.toUpperCase();
+  }
+  if (timeDisp) {
+    timeDisp.textContent = activeBooking.slots && activeBooking.slots.length > 0 
+      ? `Today • ${activeBooking.slots[0]}` 
+      : 'Not Selected';
+  }
+  if (durationDisp) {
+    durationDisp.textContent = `${activeBooking.duration} Hour${activeBooking.duration > 1 ? 's' : ''}`;
+  }
+
+  // 5. Gaming Equipment Specs
+  const eqList = document.getElementById('hudEqList');
+  if (eqList) {
+    let eqHTML = '';
+    const isPune = activeBooking.branch === 'pune';
+    const gpuName = activeBooking.station ? activeBooking.station.gpu : (activeBooking.zone === 'vip' ? 'RTX 4070 SUPER' : (isPune ? 'RTX 4070 SUPER' : 'RTX 3070'));
+    const monitorHz = activeBooking.station ? activeBooking.station.monitor : (isPune ? '240Hz' : '180Hz');
+
+    if (activeBooking.zone === 'racing') {
+      eqHTML = `
+        <li><span>Rig:</span><strong>Logitech G29/G923</strong></li>
+        <li><span>Pedals:</span><strong>3-Pedal Floor Unit</strong></li>
+        <li><span>Shifter:</span><strong>Manual H-Shifter</strong></li>
+        <li><span>Cockpit:</span><strong>Playseat Seat</strong></li>
+        <li><span>Screen:</span><strong>Triple 27" Curved</strong></li>
       `;
-      cartBody.appendChild(row);
-    });
+    } else if (activeBooking.zone === 'vr') {
+      eqHTML = `
+        <li><span>Headset:</span><strong>PlayStation VR2</strong></li>
+        <li><span>Controllers:</span><strong>Sense Haptic</strong></li>
+        <li><span>Tracking:</span><strong>Inside-out IR</strong></li>
+        <li><span>Area:</span><strong>3m x 3m VR Pod</strong></li>
+        <li><span>Haptics:</span><strong>TactSuit Support</strong></li>
+      `;
+    } else if (activeBooking.zone === 'console') {
+      eqHTML = `
+        <li><span>Console:</span><strong>PlayStation 5</strong></li>
+        <li><span>Display:</span><strong>4K OLED TV</strong></li>
+        <li><span>Controller:</span><strong>DualSense Wireless</strong></li>
+        <li><span>Couch:</span><strong>Premium Recliner</strong></li>
+        <li><span>Sound:</span><strong>Dolby Atmos</strong></li>
+      `;
+    } else {
+      // pc / vip
+      const cpu = activeBooking.zone === 'vip' ? 'Intel i9' : 'Intel i7';
+      eqHTML = `
+        <li><span>Processor:</span><strong>${cpu}</strong></li>
+        <li><span>Graphics:</span><strong>${gpuName}</strong></li>
+        <li><span>Monitor:</span><strong>${monitorHz} Display</strong></li>
+        <li><span>Keyboard:</span><strong>Mechanical Pro</strong></li>
+        <li><span>Headset:</span><strong>HyperX Headset</strong></li>
+      `;
+    }
+    eqList.innerHTML = eqHTML;
   }
 
-  animateCartValue(foodTotalDisp, previousCartValues.food, foodTotal);
-  previousCartValues.food = foodTotal;
-  
-  if (cartCount) cartCount.textContent = totalItems;
-  if (mobileCartCount) mobileCartCount.textContent = totalItems;
+  // 6. Food Preview cards aggregation
+  const foodContainer = document.getElementById('hudFoodCards');
+  let foodTotal = 0;
+  let totalItemsCount = 0;
+  if (foodContainer) {
+    if (activeBooking.addedFood.length === 0) {
+      foodContainer.innerHTML = '<div class="hud-food-empty">🍔 No food added yet</div>';
+    } else {
+      const aggregatedFood = [];
+      activeBooking.addedFood.forEach(item => {
+        foodTotal += item.price;
+        totalItemsCount += 1;
+        const existing = aggregatedFood.find(f => f.name === item.name);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          let prep = '12 mins';
+          let categoryLabel = 'Snack';
+          // Find details from POWER_UP_MENU
+          Object.keys(POWER_UP_MENU).forEach(cat => {
+            const found = POWER_UP_MENU[cat].find(f => f.name === item.name);
+            if (found) {
+              prep = found.prep;
+              categoryLabel = found.popularity || 'Freshly Prepared';
+            }
+          });
+          aggregatedFood.push({
+            name: item.name,
+            price: item.price,
+            qty: 1,
+            prep: prep,
+            categoryLabel: categoryLabel
+          });
+        }
+      });
 
-  // GST & Grand Total
+      foodContainer.innerHTML = '';
+      aggregatedFood.forEach(item => {
+        const emoji = item.name.toLowerCase().includes('drink') || item.name.toLowerCase().includes('mojito') || item.name.toLowerCase().includes('soda') || item.name.toLowerCase().includes('shake') || item.name.toLowerCase().includes('tea') || item.name.toLowerCase().includes('coffee') ? '🥤' : '🍔';
+        const card = document.createElement('div');
+        card.className = 'hud-food-card';
+        card.innerHTML = `
+          <div class="hud-food-card-left">
+            <strong>${emoji} ${item.qty}x ${item.name}</strong>
+            <span>${item.categoryLabel} • ${item.prep}</span>
+          </div>
+          <div class="hud-food-card-right">
+            <b>₹${item.price * item.qty}</b>
+            <button type="button" onclick="window.removeHUDFoodItem('${item.name}')" aria-label="Remove item">&times;</button>
+          </div>
+        `;
+        foodContainer.appendChild(card);
+      });
+    }
+  }
+
+  // 7. Badge count sync
+  const mobileHUDBadge = document.getElementById('mobileHUDCountBadge');
+  if (mobileHUDBadge) {
+    mobileHUDBadge.textContent = totalItemsCount;
+  }
+
+  // 8. Cost calculations & Countup animation
+  const rate = activeBooking.station ? activeBooking.station.price : 100;
+  const gamingCost = rate * activeBooking.duration * activeBooking.players;
   const subTotal = gamingCost + foodTotal;
   const gst = Math.round(subTotal * 0.18);
   const grandTotal = subTotal + gst;
 
+  const gamingDisp = document.getElementById('hudGamingCost');
+  const kitchenDisp = document.getElementById('hudKitchenCost');
+  const gstDisp = document.getElementById('hudGstCost');
+  const totalDisp = document.getElementById('hudGrandTotal');
+
+  animateCartValue(gamingDisp, previousCartValues.gaming, gamingCost);
+  previousCartValues.gaming = gamingCost;
+
+  animateCartValue(kitchenDisp, previousCartValues.food, foodTotal);
+  previousCartValues.food = foodTotal;
+
   animateCartValue(gstDisp, previousCartValues.gst, gst);
   previousCartValues.gst = gst;
-  
-  animateCartValue(grandTotalDisp, previousCartValues.grand, grandTotal);
+
+  animateCartValue(totalDisp, previousCartValues.grand, grandTotal);
   previousCartValues.grand = grandTotal;
+
+  // 9. Ticket Preview Section (Visible on Step 7)
+  const ticketPreview = document.getElementById('hudTicketPreview');
+  if (ticketPreview) {
+    if (currentStep === 6) {
+      ticketPreview.style.display = 'block';
+      const tZone = document.getElementById('hudTicketZone');
+      const tStation = document.getElementById('hudTicketStation');
+      const tTime = document.getElementById('hudTicketTime');
+      if (tZone) {
+        tZone.textContent = zoneDisp ? zoneDisp.textContent : 'PC Arena';
+      }
+      if (tStation) {
+        tStation.textContent = activeBooking.station ? activeBooking.station.name : 'Station TBD';
+      }
+      if (tTime) {
+        tTime.textContent = timeDisp ? timeDisp.textContent : 'Today • 7:00 PM';
+      }
+    } else {
+      ticketPreview.style.display = 'none';
+    }
+  }
 
   // Sync with main booking cost displays if visible
   const summaryCostDisp = document.getElementById('bookingSummaryCost');
@@ -577,7 +717,70 @@ function updateStickyCartWidget() {
   }
 }
 
-/**
+function getActiveGameTheme(activeBooking) {
+  if (activeBooking.station && activeBooking.station.game) {
+    const game = activeBooking.station.game.toLowerCase();
+    if (game.includes('valorant')) return 'theme-valorant';
+    if (game.includes('cs2') || game.includes('dota')) return 'theme-cs2';
+    if (game.includes('fc') || game.includes('tekken')) return 'theme-eafc';
+    if (game.includes('racing') || game.includes('sim')) return 'theme-racing';
+    if (game.includes('vr') || game.includes('world')) return 'theme-vr';
+  } else if (activeBooking.zone) {
+    const zone = activeBooking.zone.toLowerCase();
+    if (zone.includes('racing')) return 'theme-racing';
+    if (zone.includes('console')) return 'theme-eafc';
+    if (zone.includes('vip')) return 'theme-valorant';
+    if (zone.includes('pc')) return 'theme-cs2';
+    if (zone.includes('vr')) return 'theme-vr';
+  }
+  return '';
+}
+
+window.removeHUDFoodItem = function(foodName) {
+  if (window.activeBooking) {
+    const idx = activeBooking.addedFood.findIndex(f => f.name === foodName);
+    if (idx > -1) {
+      activeBooking.addedFood.splice(idx, 1);
+      
+      // Sync checkbox in step 5 if visible
+      const checkboxes = document.querySelectorAll('#wizardFoodList .booking-choice-btn');
+      checkboxes.forEach(card => {
+        const title = card.querySelector('b').textContent;
+        if (title === foodName) {
+          const btn = card.querySelector('.cafe-add-btn');
+          if (btn) btn.textContent = '+ Add';
+          card.style.background = '#22242a';
+          card.style.borderColor = 'var(--line)';
+        }
+      });
+
+      window.updatePremiumSessionHUD();
+      Tracker.track('Cart Item Removed', { name: foodName });
+    }
+  }
+};
+
+// Start live countdown timer on load
+function startHUDCountdown() {
+  const timerDisp = document.getElementById('hudCountdownTimer');
+  if (!timerDisp) return;
+
+  let duration = 522; // 8m 42s
+  setInterval(() => {
+    duration--;
+    if (duration < 0) duration = 900;
+    const mins = Math.floor(duration / 60);
+    const secs = duration % 60;
+    timerDisp.textContent = `${mins.toString().padStart(2, '0')}m ${secs.toString().padStart(2, '0')}s`;
+  }, 1000);
+}
+
+// Kickoff countdown
+document.addEventListener('DOMContentLoaded', () => {
+  startHUDCountdown();
+});
+
+/* **
  * Render Food Gallery and open lightbox modal on click
  */
 function renderFoodGalleryLightbox() {
@@ -602,3 +805,10 @@ function renderFoodGalleryLightbox() {
     gallery.appendChild(item);
   });
 }
+
+// Initialise HUD on page load
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.updatePremiumSessionHUD) {
+    window.updatePremiumSessionHUD();
+  }
+});
