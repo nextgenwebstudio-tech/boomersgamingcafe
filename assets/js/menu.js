@@ -585,12 +585,12 @@ function renderFoodGalleryLightbox() {
   if (!gallery) return;
 
   const foodImagesList = [
-    "assets/images/boomers_cafe_food.jpg",
+    "assets/images/cafe-background.jpg",
     "assets/images/boomers_pc_lounge.jpg",
-    "assets/images/boomers_cafe_food.jpg",
-    "assets/images/boomers_cafe_food.jpg",
+    "assets/images/cafe-background.jpg",
+    "assets/images/cafe-background.jpg",
     "assets/images/boomers_pc_lounge.jpg",
-    "assets/images/boomers_cafe_food.jpg"
+    "assets/images/cafe-background.jpg"
   ];
 
   gallery.innerHTML = '';

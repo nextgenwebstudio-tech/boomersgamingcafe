@@ -3,7 +3,7 @@
 let currentLightboxIndex = 0;
 const galleryImages = [
   "assets/images/boomers_pc_lounge.jpg",
-  "assets/images/boomers_cafe_food.jpg",
+  "assets/images/cafe-background.jpg",
   "assets/images/boomers_racing_sim.jpg",
   "assets/images/boomers_vr_lounge.jpg"
 ];

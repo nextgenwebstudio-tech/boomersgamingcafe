@@ -1349,7 +1349,7 @@ button {
 .cafe-photo {
   height: 560px;
   background: linear-gradient(0deg, rgba(38, 23, 15, 0.25), rgba(38, 23, 15, 0.05)),
-              url('../images/boomers_cafe_food.jpg') center/cover;
+              url('../images/cafe-background.jpg') center/cover;
   position: relative;
 }
 

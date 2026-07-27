@@ -56,25 +56,13 @@ function initStickyNavbar() {
  */
 function initLoadingScreen() {
   const loader = document.getElementById('loader');
-  const bar = document.querySelector('.loader-bar');
-  if (!loader || !bar) return;
+  if (!loader) return;
 
-  let progress = 0;
-  const interval = setInterval(() => {
-    // Increment loading progress
-    progress += Math.floor(Math.random() * 15) + 5;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(interval);
-      
-      // Delay slightly at 100% then hide loader
-      setTimeout(() => {
-        loader.classList.add('loaded');
-        Tracker.track('Loading Complete');
-      }, 300);
-    }
-    bar.style.width = `${progress}%`;
-  }, 80);
+  // Fade out loader after 1.8 seconds of logo pulsing
+  setTimeout(() => {
+    loader.classList.add('loaded');
+    Tracker.track('Loading Complete');
+  }, 1800);
 }
 
 /**
