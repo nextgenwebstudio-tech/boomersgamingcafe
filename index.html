@@ -1088,48 +1088,6 @@
     </div>
   </div>
 
-  <!-- Mobile Floating Cart Toggle Button -->
-  <button class="mobile-cart-toggle" id="mobileCartToggleBtn" aria-label="View Session Cart">
-    <span class="cart-icon">🛒</span>
-    <span class="badge" id="mobileCartCountBadge">0</span>
-  </button>
-
-  <!-- Sticky Booking Cart Widget -->
-  <aside class="sticky-booking-cart active" id="floatingCartWidget" aria-label="Quick Session Cart">
-    <div class="cart-header">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img class="brand-mark" src="assets/images/logo.png" style="width: 20px; height: 20px; filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
-        <h4 style="font: 700 12px var(--mono); color: #fff; margin: 0; text-transform: uppercase;">Session Cart</h4>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span class="cart-badge-count" id="stickyCartCountBadge">0</span>
-        <button class="cart-close-btn" id="mobileCartCloseBtn" aria-label="Close Cart" style="background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 0 5px; line-height: 1;">&times;</button>
-      </div>
-    </div>
-    <div class="cart-body" id="stickyCartItemsList">
-      <!-- Dynamic cart rows populated in menu.js -->
-    </div>
-    <div class="cart-footer">
-      <div class="cart-summary-line">
-        <span>🎮 <span style="color:#fff;">Gaming</span></span>
-        <b id="cart-gaming-total">₹0</b>
-      </div>
-      <div class="cart-summary-line">
-        <span>🍔 <span style="color:#fff;">Food</span></span>
-        <b id="cart-food-total">₹0</b>
-      </div>
-      <div class="cart-summary-line">
-        <span>🧾 <span style="color:#fff;">GST</span></span>
-        <b id="cart-gst">₹0</b>
-      </div>
-      <div class="cart-summary-line total">
-        <span>TOTAL</span>
-        <b id="cart-grand-total">₹0</b>
-      </div>
-      <a href="#book" class="button" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}" style="width: 100%; justify-content: center; text-transform: uppercase; font-size: 11px;">Secure Checkout ➔</a>
-      <small style="display:block; font-size:9px; color:var(--muted); margin-top:6px; text-transform:uppercase; font-family:var(--mono); text-align:center; letter-spacing:0.05em;">Estimated Time: 2 min</small>
-    </div>
-  </aside>
 
   <!-- Floating Availability Sidebar Widget -->
   <aside class="floating-avail-widget" id="floatingAvailWidget" aria-label="Live availability sidebar">
