@@ -804,8 +804,56 @@
           </div>
         </div>
         
+        <!-- Compact Floating Booking Card (Option 1 & 2 Combined) -->
+        <div class="booking-card reveal" id="compactBookingCard" style="display: block;">
+          <div class="hud-header" style="border: none; padding-bottom: 0; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="hud-icon" style="font-size: 16px;">🎮</span>
+              <h3 style="font: 700 13px var(--mono); color: #fff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">READY TO PLAY</h3>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="hud-status-dot"></span>
+              <span style="font: 700 9px var(--mono); color: #00db78; text-transform: uppercase;">LIVE</span>
+            </div>
+          </div>
+          
+          <h2 style="font: 800 24px var(--display); color: #fff; margin: 0 0 20px; line-height: 1.2;">BOOK YOUR SESSION</h2>
+          
+          <!-- Dropdown Inputs -->
+          <div class="booking-field" style="margin-bottom: 16px;">
+            <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Location</label>
+            <select id="compact-branch" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
+              <option value="coimbatore" style="background:#141519; color:#fff;">Coimbatore (Tamil Nadu)</option>
+              <option value="pune" style="background:#141519; color:#fff;">Pune (Viman Nagar)</option>
+            </select>
+          </div>
+
+          <div class="booking-field" style="margin-bottom: 16px;">
+            <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Experience Zone</label>
+            <select id="compact-zone" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
+              <option value="pc" style="background:#141519; color:#fff;">PC Arena (240Hz/RTX)</option>
+              <option value="console" style="background:#141519; color:#fff;">Console Lounge (PS5/Tekken)</option>
+              <option value="vip" style="background:#141519; color:#fff;">VIP Squad Room (Private/RTX 4070)</option>
+              <option value="racing" style="background:#141519; color:#fff;">Sim Racing (Logitech G29 setup)</option>
+              <option value="vr" style="background:#141519; color:#fff;">VR Lounge (PlayStation VR2)</option>
+            </select>
+          </div>
+
+          <!-- Dynamic Info Row -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 12px 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;">
+            <span style="font: 500 11px var(--mono); color: var(--muted);" id="compact-avail-text">🟢 12 Available Stations</span>
+            <span style="font: 700 13px var(--display); color: var(--lime);" id="compact-price-text">From ₹100/hr</span>
+          </div>
+
+          <!-- Book Button -->
+          <button class="hud-reserve-btn" id="startBookingBtn" style="height: 52px; background: var(--lime); color: #171008;" onclick="window.startFullBookingFlow()">
+            <span>FIND MY STATION</span>
+            <span class="hud-btn-arrow">➔</span>
+          </button>
+        </div>
+
         <!-- Multi-Step Wizard Panel Card -->
-        <div class="booking-card reveal" id="bookingCardForm">
+        <div class="booking-card reveal" id="bookingCardForm" style="display: none;">
           
           <!-- Step 1: Branch Selection -->
           <div class="booking-step-panel active" id="step-0">
@@ -1078,7 +1126,7 @@
 
 
   <!-- Premium Session HUD Widget -->
-  <aside class="premium-session-hud active" id="premiumSessionHUD" aria-label="Premium Session HUD">
+  <aside class="premium-session-hud" id="premiumSessionHUD" aria-label="Premium Session HUD">
     <!-- Close button for mobile drawer -->
     <button class="hud-close-btn" id="hudCloseBtn" aria-label="Close HUD">&times;</button>
     

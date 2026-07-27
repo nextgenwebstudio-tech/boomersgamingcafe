@@ -958,4 +958,107 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Highlight default spec column (Coimbatore is column 2, Pune is column 1)
   switchBranchSpec('pune');
+
+  // Initialize compact booking card controls
+  initCompactBookingCard();
 });
+
+/**
+ * 7. Compact Booking Card Controller & Flow Transition
+ */
+function initCompactBookingCard() {
+  const branchSelect = document.getElementById('compact-branch');
+  const zoneSelect = document.getElementById('compact-zone');
+  
+  if (!branchSelect || !zoneSelect) return;
+
+  function updateCompactCardDetails() {
+    const branch = branchSelect.value;
+    const zone = zoneSelect.value;
+
+    // 1. Calculate live availability
+    let availCount = 0;
+    if (window.STATIONS_DATA) {
+      const filtered = STATIONS_DATA.filter(s => s.branch === branch && s.zone === zone);
+      availCount = filtered.filter(s => s.status === 'available').length;
+    }
+    
+    const availText = document.getElementById('compact-avail-text');
+    if (availText) {
+      if (availCount > 0) {
+        availText.innerHTML = `🟢 ${availCount} Available Station${availCount > 1 ? 's' : ''}`;
+      } else {
+        availText.innerHTML = `🔴 Zone Full`;
+      }
+    }
+
+    // 2. Set starting price dynamically
+    let priceVal = 100;
+    if (zone === 'pc') priceVal = branch === 'pune' ? 120 : 100;
+    else if (zone === 'console') priceVal = branch === 'pune' ? 150 : 120;
+    else if (zone === 'vip') priceVal = branch === 'pune' ? 300 : 250;
+    else if (zone === 'racing') priceVal = branch === 'pune' ? 200 : 150;
+    else if (zone === 'vr') priceVal = 200;
+
+    const priceText = document.getElementById('compact-price-text');
+    if (priceText) {
+      if (zone === 'vr' && branch === 'coimbatore') {
+        priceText.textContent = 'Pune Only';
+        if (availText) availText.innerHTML = `🔴 Not Available`;
+      } else {
+        priceText.textContent = `From ₹${priceVal}/hr`;
+      }
+    }
+  }
+
+  branchSelect.addEventListener('change', updateCompactCardDetails);
+  zoneSelect.addEventListener('change', updateCompactCardDetails);
+
+  // Run once to initialize
+  updateCompactCardDetails();
+}
+
+window.startFullBookingFlow = function() {
+  const branchSelect = document.getElementById('compact-branch');
+  const zoneSelect = document.getElementById('compact-zone');
+  if (!branchSelect || !zoneSelect) return;
+
+  const selectedBranch = branchSelect.value;
+  const selectedZone = zoneSelect.value;
+
+  // 1. Programmatically select radios in wizard form
+  const branchRadio = document.querySelector(`input[name="w-branch"][value="${selectedBranch}"]`);
+  const zoneRadio = document.querySelector(`input[name="w-zone"][value="${selectedZone}"]`);
+
+  if (branchRadio) {
+    branchRadio.checked = true;
+    branchRadio.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  if (zoneRadio) {
+    zoneRadio.checked = true;
+    zoneRadio.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // 2. Toggle visible cards
+  const compactCard = document.getElementById('compactBookingCard');
+  const wizardForm = document.getElementById('bookingCardForm');
+  if (compactCard) compactCard.style.display = 'none';
+  if (wizardForm) wizardForm.style.display = 'block';
+
+  // 3. Show Detailed Session HUD Sidebar
+  const hud = document.getElementById('premiumSessionHUD');
+  if (hud) {
+    hud.classList.add('active');
+    const mobileHUDBadge = document.getElementById('mobileHUDCountBadge');
+    if (mobileHUDBadge) mobileHUDBadge.textContent = '0';
+  }
+
+  // 4. Jump directly to step 3 (Station selection)
+  if (window.bookingWizardShowStep) {
+    window.bookingWizardShowStep(2);
+  }
+  
+  if (window.updatePremiumSessionHUD) {
+    window.updatePremiumSessionHUD();
+  }
+};
