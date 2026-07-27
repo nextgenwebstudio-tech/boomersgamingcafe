@@ -1,0 +1,183 @@
+/* Boomer's Gaming Cafe - Animations Stylesheet */
+
+@keyframes breathe {
+  to { transform: scale(1.1); }
+}
+
+@keyframes ticker {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes scan {
+  0%, 100% { left: 0; }
+  50% { left: 87%; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* GSAP Scroll Trigger Reveal Styles */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Loading Screen Animation */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #08090c;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+#loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  font: 800 36px var(--display);
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.loader-logo i {
+  color: var(--lime);
+  font-style: normal;
+}
+
+.loader-bar-wrap {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.loader-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--lime);
+  box-shadow: 0 0 10px var(--lime);
+  transition: width 0.1s linear;
+}
+
+.loader-status {
+  margin-top: 10px;
+  font: 500 10px var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Custom Cursor Glow */
+.custom-cursor {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(239, 189, 78, 0.08) 0%, rgba(239, 189, 78, 0) 70%);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: screen;
+  transition: width 0.3s ease, height 0.3s ease, background 0.5s ease;
+  will-change: transform;
+}
+
+.custom-cursor.hovering {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(239, 189, 78, 0.15) 0%, rgba(239, 189, 78, 0) 75%);
+}
+
+/* Page Transitions */
+.page-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Magnetic offset styling helper */
+.magnetic {
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* Cinematic Hero Video Loop (Zoom, Blur, Fade Transitions) */
+@keyframes cinematicVideoLoop {
+  0% {
+    transform: scale(1.05);
+    filter: blur(0px);
+    opacity: 0.42;
+  }
+  85% {
+    opacity: 0.42;
+  }
+  94% {
+    transform: scale(1.12);
+    filter: blur(6px);
+    opacity: 0;
+  }
+  98% {
+    transform: scale(1.05);
+    filter: blur(0px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.05);
+    filter: blur(0px);
+    opacity: 0.42;
+  }
+}
+
+.hero-video.ready {
+  animation: cinematicVideoLoop 20s ease-in-out infinite;
+}
+

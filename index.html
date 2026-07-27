@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08090c" />
+  <meta name="description" content="Enter the Arena at Boomer's Gaming Café. High-spec gaming setups, sim racing, VR, esports tournaments, and a premium power-up kitchen in Pune and Coimbatore." />
+  <title>Boomer's — Enter the Arena</title>
+  
+  <!-- Favicon link -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Libraries (GSAP & ScrollTrigger) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  
+  <!-- Core Modular Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+
+  <!-- Loading Screen (Phase 4) -->
+  <div id="loader" role="status" aria-live="polite">
+    <div class="loader-logo">BOOMER'<i>S</i></div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+    <div class="loader-status">Loading Arena...</div>
+  </div>
+
+  <!-- Desktop Sticky Booking Header (Phase 1/4) -->
+  <div id="desktop-sticky-book" aria-label="Quick Booking Bar">
+    <div class="wrap">
+      <div class="sticky-book-info">
+        <span>Branch: <b id="sticky-val-branch">Coimbatore</b></span>
+        <span>Zone: <b id="sticky-val-zone">PC Arena</b></span>
+        <span>Station: <b id="sticky-val-station">Not Selected</b></span>
+        <span>Time: <b id="sticky-val-time">7:00 PM</b></span>
+      </div>
+      <a href="#book" class="button">Book Now ↗</a>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="nav" aria-label="Main Navigation">
+    <a class="brand" href="#top">
+      <img class="brand-mark" src="assets/images/logo.png" alt="Boomer's Gaming Café logo">
+      BOOMER'<i>S</i>
+    </a>
+    <div class="nav-links">
+      <a href="#play">Games</a>
+      <a href="#arena">Locations</a>
+      <a href="#power-up">Power-Up Station</a>
+      <a href="#calendar">Tournaments</a>
+      <a href="#membership">Membership</a>
+      <a href="#community">Events</a>
+      <a href="#book" class="nav-book-link">Book Now</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <!-- Hamburger Toggle Button for mobile viewports -->
+      <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Fullscreen Mobile Navigation Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <nav class="mobile-menu-links">
+      <a href="#play" onclick="window.toggleMobileMenu()">Games</a>
+      <a href="#arena" onclick="window.toggleMobileMenu()">Locations</a>
+      <a href="#power-up" onclick="window.toggleMobileMenu()">Power-Up Station</a>
+      <a href="#calendar" onclick="window.toggleMobileMenu()">Tournaments</a>
+      <a href="#membership" onclick="window.toggleMobileMenu()">Membership</a>
+      <a href="#community" onclick="window.toggleMobileMenu()">Events</a>
+      <a href="#book" class="button" onclick="window.toggleMobileMenu()" style="margin-top: 20px; width: 100%; text-align: center; text-transform: uppercase;">Book Now ↗</a>
+    </nav>
+  </div>
+
+  <!-- Main Content Areas -->
+  <main id="top">
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero-sec" aria-label="Welcome to Boomer's">
+      <div class="hero-media" style="background-image: url('assets/images/boomers_pc_lounge.jpg');"></div>
+      
+      <!-- Video Loop Background (Phase 1) -->
+      <video class="hero-video" muted loop playsinline poster="assets/images/boomers_pc_lounge.jpg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-gaming-setup-with-neon-lights-40017-large.mp4" type="video/mp4" />
+      </video>
+      
+      <div class="hero-orbit" aria-hidden="true"></div>
+      <div class="hero-light" aria-hidden="true"></div>
+      <div class="hero-noise" aria-hidden="true"></div>
+      
+      <div class="wrap">
+        <div class="hero-main reveal">
+          <div class="eyebrow">Coimbatore · Pune · Est. 2018</div>
+          <h1>Enter<br>the <em>arena.</em></h1>
+          <p class="hero-lead">High-spec battlestations, a pulse you can feel, and a community that plays to win. This is gaming, switched all the way on.</p>
+          
+          <div class="hero-actions" style="margin-bottom: 20px;">
+            <a class="button" href="#book">Book Now <span>↗</span></a>
+            <a class="button secondary" href="#arena">Explore Arena <span>↓</span></a>
+            <a class="button secondary" href="#arena" style="border-color: rgba(255,255,255,0.15); color: #fff;">View Pricing <span>↓</span></a>
+          </div>
+
+          <!-- Hero trust elements -->
+          <div style="display: inline-flex; align-items: center; gap: 20px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 99px; background: rgba(8, 9, 12, 0.5); font: 500 11px var(--mono); color: var(--muted); flex-wrap: wrap; justify-content: center;">
+            <span style="color: #efbd4e;">⭐ <strong style="color: #fff;">4.9</strong> Google Rating</span>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <span>👥 <strong style="color: #fff;">14K+</strong> Gamers</span>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <span>🏆 <strong style="color: #fff;">200+</strong> Tournaments</span>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <span>🎮 <strong style="color: #fff;">64</strong> Elite Stations</span>
+          </div>
+        </div>
+        
+        <div class="hero-bottom reveal">
+          <div class="hero-meta">
+            <div>Open today<strong>10:00 — 01:00</strong></div>
+            <div>Players online<strong>47 / 64</strong></div>
+            <div>Next drop<strong>Valorant @ 19:30</strong></div>
+          </div>
+          <aside class="booking-float" aria-label="Quick Booking Options">
+            <div class="booking-head">Drop in tonight <span class="live">Live capacity</span></div>
+            <div class="booking-row">
+              <div class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">Location<b>Coimbatore ⌄</b></div>
+              <div class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">From<b>7:30 PM ⌄</b></div>
+            </div>
+            <a class="button" href="#book">Find a station →</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Activity Ticker Strip -->
+    <div class="activity-ticker-wrap" aria-label="Live Arena Updates">
+      <div class="activity-ticker">
+        <div class="ticker-item"><span class="live-dot"></span> LIVE STATUS</div>
+        <div class="ticker-item">🟢 12 PCs Available</div>
+        <div class="ticker-item">🟢 3 PS5 Available</div>
+        <div class="ticker-item">🔴 VR Full</div>
+        <div class="ticker-item">🏆 Next Tournament in 02:15:44</div>
+        <!-- Loop copy -->
+        <div class="ticker-item"><span class="live-dot"></span> LIVE STATUS</div>
+        <div class="ticker-item">🟢 12 PCs Available</div>
+        <div class="ticker-item">🟢 3 PS5 Available</div>
+        <div class="ticker-item">🔴 VR Full</div>
+        <div class="ticker-item">🏆 Next Tournament in 02:15:44</div>
+        <!-- Loop copy 2 -->
+        <div class="ticker-item"><span class="live-dot"></span> LIVE STATUS</div>
+        <div class="ticker-item">🟢 12 PCs Available</div>
+        <div class="ticker-item">🟢 3 PS5 Available</div>
+        <div class="ticker-item">🔴 VR Full</div>
+        <div class="ticker-item">🏆 Next Tournament in 02:15:44</div>
+      </div>
+    </div>
+
+    <!-- Story / Pitch Section -->
+    <section class="story" id="story-sec">
+      <div class="story-grid">
+        <div class="story-copy reveal">
+          <div class="section-kicker">More than a setup</div>
+          <h2 class="display">The room <span>changes</span> when you walk in.</h2>
+          <p>From the first boot-up to the final round, Boomer's is built around the feeling of playing together. Bright screens, louder wins, and no compromises on gear.</p>
+          
+          <!-- Achievement Badges (Phase 3) -->
+          <div class="story-numbers">
+            <div><b>64</b><small>Elite stations</small></div>
+            <div><b>14K+</b><small>Regular players</small></div>
+            <div><b>4.9</b><small>Google rating</small></div>
+          </div>
+        </div>
+        <div class="story-image" style="background-image: url('assets/images/boomers_pc_lounge.jpg');">
+          <span class="photo-tag">A look inside · Pune Lounge</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Launcher Section -->
+    <section class="section launcher" id="play">
+      <div class="wrap">
+        <div class="launcher-top reveal">
+          <div>
+            <div class="section-kicker">Choose your queue</div>
+            <h2 class="display">Pick a game.<br><span>Own the room.</span></h2>
+          </div>
+          <p class="section-intro">A living launcher, not a menu. Each game shows its own scene, availability, and energy.</p>
+        </div>
+        
+        <!-- Game Tabs -->
+        <div class="game-tabs reveal" role="tablist">
+          <button class="game-tab active" role="tab" aria-selected="true" data-id="valorant" style="--game:#ff4f70;background-image:url('assets/images/boomers_pc_lounge.jpg')">
+            <small>Tactical FPS</small><b>VALORANT</b><i>↗</i>
+          </button>
+          <button class="game-tab" role="tab" aria-selected="false" data-id="eafc" style="--game:#e1a350;background-image:url('assets/images/boomers_pc_lounge.jpg')">
+            <small>Sports</small><b>EA FC 25</b><i>↗</i>
+          </button>
+          <button class="game-tab" role="tab" aria-selected="false" data-id="cs2" style="--game:#6bcfff;background-image:url('assets/images/boomers_pc_lounge.jpg')">
+            <small>Competitive FPS</small><b>CS2</b><i>↗</i>
+          </button>
+          <button class="game-tab" role="tab" aria-selected="false" data-id="racing" style="--game:#ad8cff;background-image:url('assets/images/boomers_racing_sim.jpg')">
+            <small>Sim racing</small><b>RACING</b><i>↗</i>
+          </button>
+        </div>
+        
+        <!-- Active Game Panel -->
+        <div class="game-panel reveal" id="gamePanel" style="position: relative; --panel-image: url('assets/images/boomers_pc_lounge.jpg'); --game: #ff4f70; --glow: #ff4f7044;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span id="gameBadge" style="font: 700 8px var(--mono); color: #000; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; background: #ff4f70;">Popular</span>
+              <span id="gameRating" style="color: #efbd4e; font-size: 11px;">★★★★★</span>
+            </div>
+            <h3 class="game-title" id="gameTitle">VALORANT</h3>
+            <p class="section-intro" id="gameCopy">Precision, pressure, and the cleanest tactical shots in the room.</p>
+          </div>
+          <div class="game-detail" style="grid-template-columns: repeat(2, 1fr); gap: 12px 24px;">
+            <div>Players Online<b id="gamePlayers">18 online</b></div>
+            <div>Available Stations<b id="gameStations">8 available</b></div>
+            <div>Avg Wait<b id="gameWaitTime">4 mins</b></div>
+            <div>Recommended Setup<b id="gameSetup" style="font-size: 11px;">RTX 4070 SUPER / 240Hz</b></div>
+          </div>
+          <a class="button" href="#book">Lock a seat →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Arena Map -->
+    <section class="section arena" id="arena">
+      <div class="wrap">
+        <div class="arena-head reveal">
+          <div>
+            <div class="section-kicker">Live from the floor</div>
+            <h2 class="display">The arena<br>is <span>awake.</span></h2>
+          </div>
+          <div class="live">Updated 12 sec ago</div>
+        </div>
+        
+        <div class="pulse-line" aria-hidden="true"></div>
+        
+        <div class="floor">
+          <!-- SVG Map with dynamic dots rendered by JS -->
+          <div class="floor-plan reveal" id="arenaFloorPlan">
+            <span class="zone pc z1">PC ARENA</span>
+            <span class="zone ps z2">CONSOLE LOUNGE</span>
+            <span class="zone vip z3">VIP SQUAD ROOM</span>
+            <span class="zone pc z4">RACING</span>
+          </div>
+          
+          <div class="arena-status reveal">
+            <!-- Availability Dashboard Widget (Phase 2) -->
+            <div class="live-availability" id="liveAvailabilityDashboardWrap">
+              <div class="live-avail-title">Live Capacity Status <span class="live">Online</span></div>
+              <div class="live-avail-grid" id="liveAvailabilityDashboard">
+                <!-- Loaded Dynamically -->
+              </div>
+            </div>
+            
+            <div class="status-row" style="margin-top:20px;">
+              <div class="status-name"><b>PC Arena</b><small>RTX 4070 · 240Hz</small></div>
+              <div class="status-right"><b>8 / 30</b><small>Available</small></div>
+            </div>
+            <div class="status-row">
+              <div class="status-name"><b>Console Lounge</b><small>PS5 · 4K OLED</small></div>
+              <div class="status-right"><b style="color:#ffbb54">3 / 12</b><small>Available</small></div>
+            </div>
+            <div class="status-row">
+              <div class="status-name"><b>VIP Squad Room</b><small>Private · 5 seats</small></div>
+              <div class="status-right"><b style="color:var(--violet)">1 / 3</b><small>Available</small></div>
+            </div>
+            <a class="button secondary" style="margin-top:25px" href="#book">Reserve exact station →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Power-Up Station (Café launcher, Phase 2) -->
+    <!-- Power-Up Station Section (v7 Menu Expansion) -->
+    <section class="section cafe" id="power-up" style="background: #08090c; padding-top: 100px;">
+      <div class="wrap" style="max-width: 1200px;">
+        
+        <!-- Cinematic Menu Hero -->
+        <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px;">
+          <div>
+            <div class="section-kicker" style="color: var(--lime);">Power-up Station</div>
+            <h1 class="display" style="font-size: 52px; line-height: 0.95; margin-bottom: 20px;">FUEL YOUR<br><span>SESSION.</span></h1>
+            <p class="section-intro" style="margin-bottom: 30px;">Select from BGC's gourmet kitchen loadouts. Real gaming setup snacks, thick potion milkshakes, and squad combo boxes prepared to keep you in the queue.</p>
+            
+            <!-- Menu Features -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; font-family: var(--mono); font-size: 11px; text-transform: uppercase;">
+              <div style="display:flex; align-items:center; gap:8px;">⭐ Best Sellers</div>
+              <div style="display:flex; align-items:center; gap:8px;">🍳 Freshly Prepared</div>
+              <div style="display:flex; align-items:center; gap:8px;">🎁 Gaming Combos</div>
+              <div style="display:flex; align-items:center; gap:8px;">🎮 Order While Gaming</div>
+            </div>
+          </div>
+          
+          <div class="cafe-photo" style="background-image: url('assets/images/boomers_cafe_food.jpg'); height: 350px; border-radius: 18px; border: 1px solid var(--line);">
+            <span class="photo-tag">The Kitchen · Fresh Upgrades</span>
+          </div>
+        </div>
+
+
+        <!-- Search and Quick Filters Shelf -->
+        <div class="reveal" style="background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="position: relative; display: flex; gap: 15px; flex-wrap: wrap;">
+            <input type="text" id="foodSearchInput" placeholder="Search loadout snacks or drinks..." style="flex: 1; min-width: 250px; background: rgba(0,0,0,0.4); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: var(--mono);">
+          </div>
+          
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; font-family: var(--mono); font-size: 10px;">
+            <button class="food-filter-btn active" data-filter="all" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">All Items</button>
+            <button class="food-filter-btn" data-filter="veg" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--lime); cursor: pointer; text-transform: uppercase;">🟢 Veg Only</button>
+            <button class="food-filter-btn" data-filter="non-veg" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--red); cursor: pointer; text-transform: uppercase;">🔴 Non-Veg</button>
+            <button class="food-filter-btn" data-filter="under-200" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Under ₹200</button>
+            <button class="food-filter-btn" data-filter="bestseller" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #efbd4e; cursor: pointer; text-transform: uppercase;">⭐ Best Seller</button>
+            <button class="food-filter-btn" data-filter="snacks" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Snacks</button>
+            <button class="food-filter-btn" data-filter="drinks" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Drinks</button>
+            <button class="food-filter-btn" data-filter="combos" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--lime); cursor: pointer; text-transform: uppercase;">🎁 Combos</button>
+          </div>
+        </div>
+
+        <!-- Category Tab Selectors (12 categories) -->
+        <div class="reveal" style="margin-bottom: 30px;">
+          <div class="cafe-tabs" role="tablist" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; border-bottom: 1px solid var(--line);">
+            <button class="cafe-tab-btn" onclick="switchCafeTab('best-sellers', this)">⭐ Best Sellers</button>
+            <button class="cafe-tab-btn active" onclick="switchCafeTab('xp-starters', this)">🍟 XP Starters</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('tactical-starters', this)">🍗 Tactical Starters</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('sandwich', this)">🥪 Sandwich Bay</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('burger', this)">🍔 Main Loadout</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('wrap', this)">🌯 Tactical Wraps</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('pasta', this)">🍝 Energy Boost</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('maggi', this)">🍜 Instant Respawn</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('popcorn', this)">🍿 Side Quests</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('milkshake', this)">🥤 Potion Bar</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('hot-beverages', this)">☕ Recharge Station</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('cold-beverages', this)">🍹 Cold Beverage Depot</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('mocktails', this)">🍹 Mocktail Lab</button>
+            <button class="cafe-tab-btn" onclick="switchCafeTab('squad-combos', this)">🎁 Squad Combos</button>
+          </div>
+        </div>
+        
+        <!-- Tab items content grid -->
+        <div class="cafe-items-list reveal" id="cafeItemsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+          <!-- Loaded Dynamically from menu.js -->
+        </div>
+
+        <!-- Food Loadout Masonry Gallery -->
+        <div class="reveal" style="margin-top: 60px; border-top: 1px solid var(--line); padding-top: 50px;">
+          <h3 style="font: 700 16px var(--mono); color: #fff; text-transform: uppercase; margin-bottom: 24px; letter-spacing: 0.15em;">📸 Loadout Gallery</h3>
+          <div class="gallery-grid" id="foodMasonryGallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <!-- Populated dynamically in menu.js -->
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Happy Hours Deals -->
+    <section class="happy">
+      <div class="wrap happy-grid">
+        <div class="reveal">
+          <div class="section-kicker" style="color:#d876ff">For the regulars</div>
+          <h2 class="display">Happy<br><span>hours.</span></h2>
+          <p class="section-intro">One reason to make the mid-week queue your favourite queue.</p>
+        </div>
+        <div class="deal-panel reveal">
+          <div class="deal-copy">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;">
+              <span class="eyebrow" style="color:#ee75ff; margin: 0;">1 + 1 deal</span>
+              <span style="font: 700 8px var(--mono); background: #ff4f70; color: #fff; padding: 3px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">🔥 Limited Offer</span>
+            </div>
+            <p>Enjoy Happy Hours every Monday, Tuesday and Wednesday. Purchase one hour of gaming and get one extra hour free—on both PC and console gaming.</p>
+            <ul class="deal-list">
+              <li>📅 Every Mon, Tue & Wed</li>
+              <li>⏰ Buy 1 hour, get 2 hours</li>
+              <li>🎮 PC & Console · 1 to 4 joysticks</li>
+              <li>💰 Prices starting at ₹100</li>
+            </ul>
+            <a class="button" href="#book">Book Happy Hours →</a>
+          </div>
+          <div class="deal-image"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Food + Gaming Bundle Deals (Phase 2) -->
+    <section class="section" style="background:#111215;">
+      <div class="wrap">
+        <div class="library-head reveal">
+          <div class="section-kicker">Combo savings</div>
+          <h2 class="display">Loadout<br><span>bundles.</span></h2>
+          <p class="section-intro">Grab maximum gaming value: combined sessions and kitchen refills in one single checkout.</p>
+        </div>
+        
+        <div class="gallery-grid reveal" style="margin-top:40px;">
+          <!-- Custom Bundle cards -->
+          <div class="badge-card" style="text-align: left; border-color: rgba(239, 189, 78, 0.4); position: relative;">
+            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #ff4f70; color: #fff; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">🔥 Popular</span>
+            <div style="font: 500 10px var(--mono); color: var(--lime); text-transform: uppercase;">Solo Grinder</div>
+            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Solo Grinder Combo</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours PC Gaming + 1 RTX Burger + 1 Soft Drink.</p>
+            <div style="font: 500 9px var(--mono); color: var(--lime); margin-bottom: 15px;">🔥 Save ₹91 · Ordered 247 times</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
+              <span style="font: 700 22px var(--display); color: var(--lime);">₹349 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹440</small></span>
+              <button class="cafe-add-btn" onclick="addBundleToBooking('bundle-1')">+ Add Combo</button>
+            </div>
+          </div>
+          
+          <div class="badge-card" style="text-align: left; border-color: rgba(176, 119, 88, 0.4); position: relative;">
+            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #5d40b6; color: #fff; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">⚡ Best Seller</span>
+            <div style="font: 500 10px var(--mono); color: #ffbb54; text-transform: uppercase;">Co-Op Lounge</div>
+            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Console Co-Op Combo</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours PS5 Lounge + 1 Loaded Nachos + 2 Soft Drinks.</p>
+            <div style="font: 500 9px var(--mono); color: #ffbb54; margin-bottom: 15px;">🔥 Save ₹121 · Ordered 184 times</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
+              <span style="font: 700 22px var(--display); color: #ffbb54;">₹499 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹620</small></span>
+              <button class="cafe-add-btn" style="color:#ffbb54; border-color:#ffbb54;" onclick="addBundleToBooking('bundle-2')">+ Add Combo</button>
+            </div>
+          </div>
+          
+          <div class="badge-card" style="text-align: left; border-color: rgba(0, 219, 120, 0.4); position: relative;">
+            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #00db78; color: #000; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">🏎️ Pro Racer</span>
+            <div style="font: 500 10px var(--mono); color: #00db78; text-transform: uppercase;">Speed Run</div>
+            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Pro Racer Pack</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours Sim Racing Cockpit + 1 Spicy Wrap + 1 Red Bull.</p>
+            <div style="font: 500 9px var(--mono); color: #00db78; margin-bottom: 15px;">🔥 Save ₹101 · Ordered 96 times</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
+              <span style="font: 700 22px var(--display); color: #00db78;">₹449 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹550</small></span>
+              <button class="cafe-add-btn" style="color:#00db78; border-color:#00db78;" onclick="addBundleToBooking('bundle-3')">+ Add Combo</button>
+            </div>
+          </div>
+
+          <div class="badge-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; border: 1px dashed var(--line);">
+            <span class="badge-icon">🎁</span>
+            <div class="badge-title">Custom Deal?</div>
+            <p style="font-size:12px; color:var(--muted);">Select your station and stack food items during booking.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Library -->
+    <section class="section game-library">
+      <div class="wrap">
+        <div class="library-head reveal">
+          <div class="section-kicker">Play your way</div>
+          <h2 class="display">PC & PS5.<br><span>All killer, no filler.</span></h2>
+          <p class="section-intro">Competitive esports, big-screen couch sessions, and a game library that gives every squad a reason to return.</p>
+        </div>
+        <div class="library-grid reveal">
+          <div class="library-game" style="--cover:url('assets/images/boomers_pc_lounge.jpg')"><small>PC</small><b>VALORANT</b></div>
+          <div class="library-game" style="--cover:url('assets/images/boomers_pc_lounge.jpg')"><small>PC</small><b>DOTA 2</b></div>
+          <div class="library-game" style="--cover:url('assets/images/boomers_pc_lounge.jpg')"><small>PC</small><b>CS2</b></div>
+          <div class="library-game" style="--cover:url('assets/images/boomers_pc_lounge.jpg')"><small>PS5</small><b>EA FC</b></div>
+          <div class="library-game" style="--cover:url('assets/images/boomers_pc_lounge.jpg')"><small>PS5</small><b>TEKKEN</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simulator & VR Modes -->
+    <section class="section modes">
+      <div class="wrap mode-grid">
+        <article class="mode glass-card reveal" style="--mode-color:#00e47b; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
+          <div class="mode-tag" style="color: #00db78;">Logitech Simulation</div>
+          <h3 style="margin-top: 15px; font-family: var(--display); letter-spacing: -0.06em;">SIM<br><span style="color: #00db78;">RACING</span></h3>
+          <p>Immerse yourself in professional racing physics. Professional Logitech G29 / G923 simulator setups with true force feedback, pedals, and manual shifters.</p>
+          
+          <!-- Large simulator preview loop -->
+          <div style="position: relative; margin: 24px 0 16px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
+            <video autoplay muted loop playsinline poster="assets/images/boomers_racing_sim.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-race-car-simulator-in-esports-arena-41551-large.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <!-- Feature Cards Grid (6 items) -->
+          <div class="mode-details-box" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">🏎️</span>
+              <b>Logitech G29/G923</b>
+              <span style="color: var(--muted); font-size: 9px;">Force Feedback Wheel</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">🦶</span>
+              <b>3 Pedal Racing Setup</b>
+              <span style="color: var(--muted); font-size: 9px;">Realistic Gas/Brake/Clutch</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">🖥️</span>
+              <b>Triple Monitor</b>
+              <span style="color: var(--muted); font-size: 9px;">180° Curved Displays</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">⚙️</span>
+              <b>Manual Shifter</b>
+              <span style="color: var(--muted); font-size: 9px;">6-Speed H-Pattern Shift</span>
+            </div>
+            <div class="mode-detail-item" style="grid-column: span 2;">
+              <span style="font-size: 16px;">💺</span>
+              <b>Cockpit Seating</b>
+              <span style="color: var(--muted); font-size: 9px;">Steel-Chassis Bucket Seat Rig</span>
+            </div>
+          </div>
+
+          <!-- Specs Panel -->
+          <div class="mode-specs-list">
+            <div class="mode-spec-row"><span>Hardware</span><b>Logitech Force Feedback</b></div>
+            <div class="mode-spec-row"><span>Supported Games</span><b style="font-size:11px;">Assetto Corsa · F1 25 · Forza · Dirt Rally</b></div>
+          </div>
+
+          <!-- How it works strip -->
+          <div class="mode-steps-strip">
+            <span>① Sit in Cockpit</span>
+            <span>➔</span>
+            <span>② Grab the Wheel</span>
+            <span>➔</span>
+            <span>③ Race Like Real Life</span>
+          </div>
+
+          <!-- Status and Booking Button -->
+          <div class="mode-status-row">
+            <div class="mode-status-info">
+              <div style="color: #00db78; font-weight: bold; font-family: var(--mono); font-size: 10px;">🟢 AVAILABLE AT PUNE</div>
+              <div style="color: #ffbb54; font-weight: bold; font-family: var(--mono); margin-top: 3px; font-size: 10px;">🚀 COIMBATORE COMING SOON</div>
+            </div>
+            <a href="#book" class="button" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="padding: 10px 18px; font-size: 10px; transition: transform 0.2s; will-change: transform;">Reserve Cockpit</a>
+          </div>
+        </article>
+
+        <article class="mode glass-card reveal" style="--mode-color:#00c8ff; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
+          <div class="mode-tag" style="color: #00c8ff;">VR Experience</div>
+          <h3 style="margin-top: 15px; font-family: var(--display); letter-spacing: -0.06em;">VR<br><span style="color: #00c8ff;">EXPERIENCE</span></h3>
+          <p>OLED HDR, eye tracking and 3D spatial haptics. Step into immersive worlds beyond the screen with PS VR2 room-scale playrooms.</p>
+          
+          <!-- Large VR preview loop -->
+          <div style="position: relative; margin: 24px 0 16px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
+            <video autoplay muted loop playsinline poster="assets/images/boomers_vr_lounge.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-man-playing-vr-game-in-esports-arena-41550-large.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <!-- Feature Cards Grid (6 items) -->
+          <div class="mode-details-box" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">🥽</span>
+              <b>PlayStation VR2</b>
+              <span style="color: var(--muted); font-size: 9px;">Room Scale Space</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">⚡</span>
+              <b>4K HDR OLED</b>
+              <span style="color: var(--muted); font-size: 9px;">Dual 2000x2040 displays</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">👀</span>
+              <b>Eye Tracking</b>
+              <span style="color: var(--muted); font-size: 9px;">Foveated Rendering Sensors</span>
+            </div>
+            <div class="mode-detail-item">
+              <span style="font-size: 16px;">🎮</span>
+              <b>Motion Controllers</b>
+              <span style="color: var(--muted); font-size: 9px;">VR Sense Haptic Triggers</span>
+            </div>
+            <div class="mode-detail-item" style="grid-column: span 2;">
+              <span style="font-size: 16px;">🕹️</span>
+              <b>20+ Supported Games</b>
+              <span style="color: var(--muted); font-size: 9px;">Beat Saber · GT7 · Resident Evil</span>
+            </div>
+          </div>
+
+          <!-- Specs Panel -->
+          <div class="mode-specs-list">
+            <div class="mode-spec-row"><span>Display Specs</span><b>OLED 120Hz Refresh</b></div>
+            <div class="mode-spec-row"><span>Available Games</span><b style="font-size:11px;">Beat Saber · GT7 · Resident Evil · Arizona Sunshine</b></div>
+          </div>
+
+          <!-- How it works strip -->
+          <div class="mode-steps-strip">
+            <span>① Wear VR Headset</span>
+            <span>➔</span>
+            <span>② Calibrate Eyes</span>
+            <span>➔</span>
+            <span>③ Enter Virtual World</span>
+          </div>
+
+          <!-- Status and Booking Button -->
+          <div class="mode-status-row">
+            <div class="mode-status-info">
+              <div style="color: #00db78; font-weight: bold; font-family: var(--mono); font-size: 10px;">🟢 AVAILABLE AT PUNE</div>
+              <div style="color: #ffbb54; font-weight: bold; font-family: var(--mono); margin-top: 3px; font-size: 10px;">🚀 COIMBATORE COMING SOON</div>
+            </div>
+            <a href="#book" class="button" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="padding: 10px 18px; font-size: 10px; border-color: #00c8ff; color: #00c8ff; transition: transform 0.2s; will-change: transform;">Book VR (30 Min Session)</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Branch Specifications & visual comparison matrix (Phase 3) -->
+    <section class="section branch-specs">
+      <div class="wrap spec-intro">
+        <div class="reveal">
+          <div class="section-kicker">The setup, by location</div>
+          <h2 class="display">Choose your<br><span>battleground.</span></h2>
+          <p class="section-intro">See details for specs, displays, and virtual gear at our Pune and Coimbatore locations before you lock your queue.</p>
+        </div>
+        
+        <!-- Pune & Coimbatore Cards (Replaces Table) -->
+        <div class="reveal" style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 30px;">
+          <!-- Pune Card -->
+          <div class="badge-card glass-card" style="padding: 30px; border: 1px solid rgba(255,255,255,0.08); text-align: left; position: relative; background: rgba(20,21,25,0.6); border-radius: 18px;">
+            <span style="position: absolute; top: 20px; right: 20px; font: 700 8px var(--mono); background: var(--lime); color: #000; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">🟢 Active Arena</span>
+            <h3 style="font: 700 24px var(--display); color: #fff; margin: 0 0 4px; letter-spacing: -0.04em;">PUNE</h3>
+            <span style="font: 500 10px var(--mono); color: var(--muted); text-transform: uppercase;">Viman Nagar</span>
+            
+            <div style="margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+              <div style="display: flex; justify-content: space-between;"><span>💻 Graphics Engine</span><b>RTX 4070 SUPER</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>⚡ Display Hz</span><b>240Hz Esports</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>📺 Playrooms</span><b>PS5 + 4K OLED</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>🏎️ Simulators</span><b>Logitech G923 Pro</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>🥽 VR Lounges</span><b>PS VR2 Room Scale</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>🍟 Kitchen</span><b>Full Menu</b></div>
+            </div>
+            
+            <a href="#book" class="button" onclick="activeBooking.branch='pune'; if(window.bookingWizardShowStep){window.bookingWizardShowStep(1);}" style="width: 100%; text-align: center; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Pune Setup →</a>
+          </div>
+          
+          <!-- Coimbatore Card -->
+          <div class="badge-card glass-card" style="padding: 30px; border: 1px solid rgba(255,255,255,0.08); text-align: left; position: relative; background: rgba(20,21,25,0.6); border-radius: 18px;">
+            <span style="position: absolute; top: 20px; right: 20px; font: 700 8px var(--mono); background: #ffbb54; color: #000; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">🟢 Active Arena</span>
+            <h3 style="font: 700 24px var(--display); color: #fff; margin: 0 0 4px; letter-spacing: -0.04em;">COIMBATORE</h3>
+            <span style="font: 500 10px var(--mono); color: var(--muted); text-transform: uppercase;">RS Puram</span>
+            
+            <div style="margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+              <div style="display: flex; justify-content: space-between;"><span>💻 Graphics Engine</span><b>RTX 3070</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>⚡ Display Hz</span><b>180Hz Pro</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>📺 Playrooms</span><b>PS5 + 4K TV</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>🏎️ Simulators</span><b>Logitech G29 Setup</b></div>
+              <div style="display: flex; justify-content: space-between;"><span>🥽 VR Lounges</span><span style="color:var(--muted)">❌ Coming Soon</span></div>
+              <div style="display: flex; justify-content: space-between;"><span>🍟 Kitchen</span><b>Full Menu</b></div>
+            </div>
+            
+            <a href="#book" class="button secondary" onclick="activeBooking.branch='coimbatore'; if(window.bookingWizardShowStep){window.bookingWizardShowStep(1);}" style="width: 100%; text-align: center; border-color: rgba(255,255,255,0.15); color: #fff; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Coimbatore Setup →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Moment & Schedule Section -->
+    <section class="moment" id="community">
+      <div class="wrap reveal">
+        <div class="eyebrow">This week at Boomer's</div>
+        <h2 class="display">Everyone has<br>a <span style="color:var(--lime)">main-character</span> moment.</h2>
+        <p class="section-intro">College clashes, late-night ranked sessions, and tournament finals under the lights. Find your people, then find your game.</p>
+        
+        <div class="moment-fact" id="communityLiveEvent" style="border-left: 2px solid var(--lime); padding-left: 16px;">
+          LIVE STREAM DROPS<br>
+          <b style="color:#fff">Campus Clash: Valorant</b><br>
+          Starting soon...
+        </div>
+      </div>
+    </section>
+
+    <!-- Tournament Live Schedule Timeline (Phase 3) -->
+    <section class="section" style="background:#090b0d;">
+      <div class="wrap">
+        <div class="arena-head reveal">
+          <div>
+            <div class="section-kicker">Hourly timeline</div>
+            <h2 class="display">Today's live<br><span>schedule.</span></h2>
+          </div>
+          <div class="live">Pulsing live</div>
+        </div>
+        
+        <div class="schedule-timeline reveal" id="liveScheduleContainer">
+          <!-- Loaded Dynamically from data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Venue Gallery Section (Phase 3) -->
+    <section class="section" style="background:#101115;">
+      <div class="wrap">
+        <div class="library-head reveal">
+          <div class="section-kicker">Look Inside</div>
+          <h2 class="display">Inside<br><span>Boomer's.</span></h2>
+          <p class="section-intro">Real gaming rooms, tournament crowds, console pods, and actual player victories caught on camera.</p>
+        </div>
+        
+        <div class="gallery-grid reveal" id="venueGallery">
+          <!-- Loaded dynamically with full screen lightbox triggers -->
+          <div class="gallery-item" onclick="openLightbox(0)">
+            <img src="assets/images/boomers_pc_lounge.jpg" alt="PC Gaming Setup Lounge">
+          </div>
+          <div class="gallery-item" onclick="openLightbox(1)">
+            <img src="assets/images/boomers_cafe_food.jpg" alt="Esports Cafe Kitchen">
+          </div>
+          <div class="gallery-item" onclick="openLightbox(2)">
+            <img src="assets/images/boomers_racing_sim.jpg" alt="Sim Racing cockpit">
+          </div>
+          <div class="gallery-item" onclick="openLightbox(3)">
+            <img src="assets/images/boomers_vr_lounge.jpg" alt="VR Lounge Experience">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal (Phase 3) -->
+    <div class="lightbox" id="galleryLightbox">
+      <div class="lightbox-content">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg" src="" alt="Venue Large Screen">
+        <span class="lightbox-nav lightbox-prev" onclick="changeLightboxSlide(-1)">&#10094;</span>
+        <span class="lightbox-nav lightbox-next" onclick="changeLightboxSlide(1)">&#10095;</span>
+      </div>
+    </div>
+
+    <!-- Corporate & Party Bookings -->
+    <section class="section" style="background:#0b0b0d">
+      <div class="wrap">
+        <div class="library-head reveal">
+          <div class="section-kicker">Play together</div>
+          <h2 class="display">Level up<br><span>the occasion.</span></h2>
+          <p class="section-intro">Corporate team time, birthdays, and a full-on gaming night with your squad—available at both Pune and Coimbatore.</p>
+        </div>
+        <div class="event-grid" style="margin-top:45px">
+          <article class="event-card reveal" style="--event-bg:url('assets/images/corporate-booking.jpg')">
+            <div class="eyebrow">Team off-site</div>
+            <h3>Corporate<br>booking</h3>
+            <p>Reserve premium gaming rigs or consoles for your team in a distraction-free setting.</p>
+            <a class="button secondary" href="#book">Plan your session →</a>
+          </article>
+          <article class="event-card reveal" style="--event-bg:url('assets/images/party-booking.jpg')">
+            <div class="eyebrow" style="color:#e77fff">Celebrate here</div>
+            <h3>Party<br>booking</h3>
+            <p>Birthdays, celebrations, or simply an epic night with the squad—make it a shared experience.</p>
+            <a class="button secondary" href="#book">Book a party →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Step Booking Wizard Card Section -->
+    <section class="section book" id="book">
+      <div class="wrap booking-grid">
+        <div class="reveal" style="position: relative;">
+          <div class="section-kicker">Your next session</div>
+          <h2 class="display">From plan<br>to <span>play.</span></h2>
+          
+          <div class="steps">
+            <div class="step active"><b>Branch</b><p>1</p></div>
+            <div class="step"><b>Zone</b><p>2</p></div>
+            <div class="step"><b>Station</b><p>3</p></div>
+            <div class="step"><b>Time</b><p>4</p></div>
+            <div class="step"><b>Food</b><p>5</p></div>
+            <div class="step"><b>Summary</b><p>6</p></div>
+            <div class="step"><b>Ticket</b><p>7</p></div>
+          </div>
+          
+          <!-- Interactive Cost Calculator Widget (Phase 2) -->
+          <div class="calc-widget">
+            <h4 style="font: 700 12px var(--mono); color: var(--lime); text-transform: uppercase; margin: 0 0 15px;">Session Cost Calculator</h4>
+            <div class="calc-grid">
+              <div class="calc-field">
+                <label for="calc-branch">Location</label>
+                <select id="calc-branch">
+                  <option value="coimbatore">Coimbatore</option>
+                  <option value="pune">Pune</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="calc-game">Session Queue</label>
+                <select id="calc-game">
+                  <option value="Valorant">Valorant (PC)</option>
+                  <option value="CS2">CS2 (PC)</option>
+                  <option value="EA FC 25">EA FC 25 (Console)</option>
+                  <option value="Tekken 8">Tekken (Console)</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="calc-hours">Hours</label>
+                <input type="number" id="calc-hours" value="2" min="1" max="12">
+              </div>
+              <div class="calc-field">
+                <label for="calc-players">Gamers</label>
+                <input type="number" id="calc-players" value="1" min="1" max="5">
+              </div>
+            </div>
+            <div class="calc-summary">
+              <div class="calc-row"><span>Gaming cost:</span><b id="calc-disp-gaming">₹200</b></div>
+              <div class="calc-row"><span>Food combos & tax:</span><b id="calc-disp-food">₹0</b></div>
+              <div class="calc-row"><span>GST (18%):</span><b id="calc-disp-gst">₹36</b></div>
+              <div class="calc-row total"><span>Est. Total:</span><b id="calc-disp-total">₹236</b></div>
+            </div>
+          </div>
+
+          <!-- Venue Image with Info Overlay -->
+          <div style="position: relative; margin-top: 30px; border-radius: 18px; overflow: hidden; height: 220px; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%), url('assets/images/boomers_pc_lounge.jpg') center/cover;">
+            <div class="booking-image-overlay">
+              <h4>RTX Arena</h4>
+              <div class="overlay-stats">
+                <span>💻 64 Elite Stations</span>
+                <span>🖥️ 240Hz Monitors</span>
+              </div>
+              <div class="overlay-status">● Available Now</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Multi-Step Wizard Panel Card -->
+        <div class="booking-card reveal" id="bookingCardForm">
+          
+          <!-- Step 1: Branch Selection -->
+          <div class="booking-step-panel active" id="step-0">
+            <h3>Choose Branch</h3>
+            <div class="booking-choices">
+              <label class="booking-choice-btn selected">
+                <span>Coimbatore <small>Tamil Nadu</small></span>
+                <input type="radio" name="w-branch" value="coimbatore" checked style="display:none;">
+                <b>Select</b>
+              </label>
+              <label class="booking-choice-btn">
+                <span>Pune <small>Viman Nagar</small></span>
+                <input type="radio" name="w-branch" value="pune" style="display:none;">
+                <b>Select</b>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Zone Selection -->
+          <div class="booking-step-panel" id="step-1">
+            <h3>Choose Gaming Zone</h3>
+            <div class="booking-choices">
+              <label class="booking-choice-btn selected">
+                <span>🎮 PC Arena <small>240Hz High spec rigs</small></span>
+                <input type="radio" name="w-zone" value="pc" checked style="display:none;">
+                <b>Select</b>
+              </label>
+              <label class="booking-choice-btn">
+                <span>📺 Console Lounge <small>PS5 split-screen lounges</small></span>
+                <input type="radio" name="w-zone" value="console" style="display:none;">
+                <b>Select</b>
+              </label>
+              <label class="booking-choice-btn">
+                <span>👑 VIP Squad Room <small>Private team spaces</small></span>
+                <input type="radio" name="w-zone" value="vip" style="display:none;">
+                <b>Select</b>
+              </label>
+              <label class="booking-choice-btn">
+                <span>🏎️ Sim Racing <small>Cockpit wheel configurations</small></span>
+                <input type="radio" name="w-zone" value="racing" style="display:none;">
+                <b>Select</b>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 3: Station Selection Grid & Map Trigger -->
+          <div class="booking-step-panel" id="step-2">
+            <h3>Select Live Station</h3>
+            <div style="font-size:11px; color:var(--muted); margin-bottom:12px;">You can also select directly on the live arena floorplan map!</div>
+            <div class="station-booker" id="wizardStationList" style="max-height:220px; overflow-y:auto; gap:6px; margin-top:0;">
+              <!-- Loaded dynamically based on branch & zone selection -->
+            </div>
+            
+            <div id="selectedStationDetail" style="margin-top:15px; background:rgba(255,255,255,0.03); border-radius:2px;">
+              <p style="padding:15px; font-size:12px; color:var(--muted); text-align:center; margin:0;">Please select a station from map or list.</p>
+            </div>
+          </div>
+
+          <!-- Step 4: Session Settings -->
+          <div class="booking-step-panel" id="step-3">
+            <h3>Session Options</h3>
+            <div class="calc-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
+              <div class="calc-field">
+                <label for="w-duration">Duration (Hours)</label>
+                <input type="number" id="w-duration" value="2" min="1" max="10">
+              </div>
+              <div class="calc-field">
+                <label for="w-players">Gamers</label>
+                <input type="number" id="w-players" value="1" min="1" max="4">
+              </div>
+            </div>
+            
+            <label style="font: 500 9px var(--mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; display:block;">Select Slot Time</label>
+            <div class="slot-grid" id="slotsSelectorWrap">
+              <label class="slot active">
+                6:00 PM <input type="checkbox" name="w-slot" value="6:00 PM" checked style="display:none;">
+              </label>
+              <label class="slot">
+                6:30 PM <input type="checkbox" name="w-slot" value="6:30 PM" style="display:none;">
+              </label>
+              <label class="slot active">
+                7:00 PM <input type="checkbox" name="w-slot" value="7:00 PM" checked style="display:none;">
+              </label>
+              <label class="slot">
+                7:30 PM <input type="checkbox" name="w-slot" value="7:30 PM" style="display:none;">
+              </label>
+              <label class="slot">
+                8:00 PM <input type="checkbox" name="w-slot" value="8:00 PM" style="display:none;">
+              </label>
+              <label class="slot">
+                8:30 PM <input type="checkbox" name="w-slot" value="8:30 PM" style="display:none;">
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 5: Café Food Upgrades (New) -->
+          <div class="booking-step-panel" id="step-4">
+            <h3>Add Power-Up Snacks</h3>
+            <p style="font-size:11px; color:var(--muted); margin-bottom:15px;">Stack your session with premium snacks. Added items update your cart instantly.</p>
+            <div id="wizardFoodList" style="max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
+              <!-- Loaded dynamically in booking.js -->
+            </div>
+          </div>
+
+          <!-- Step 6: Summary & Checkout Simulation -->
+          <div class="booking-step-panel" id="step-5">
+            <h3>Review Summary & Checkout</h3>
+            
+            <div id="bookingSummaryCost" style="margin-bottom:20px;">
+              <!-- Cost totals and add-on lists updated dynamically -->
+            </div>
+            
+            <div class="calc-field" style="margin-bottom:15px;">
+              <label>Enter Mock Credit Card Number</label>
+              <input type="text" placeholder="4111 2222 3333 4444" value="4111 2222 3333 4444" style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--line); padding:10px; color:#fff;">
+            </div>
+          </div>
+
+          <!-- Step 7: Confirmation Success Ticket -->
+          <div class="booking-step-panel" id="step-6">
+            <div id="bookingSuccessTicket">
+              <!-- Confirmation receipt rendering (QR, download buttons) -->
+            </div>
+          </div>
+
+          <!-- Wizard control buttons -->
+          <div class="booking-nav-row">
+            <button class="button secondary hidden" type="button" id="wizardPrevBtn">← Back</button>
+            <button class="button" type="button" id="wizardNextBtn">Continue →</button>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Tournament Registration Calendar -->
+    <section class="section calendar" id="calendar">
+      <div class="wrap">
+        <div class="arena-head reveal">
+          <div>
+            <div class="section-kicker">Tournament calendar</div>
+            <h2 class="display">This month<br><span>in play.</span></h2>
+          </div>
+          <p class="section-intro">A clear launchpad for registrations, brackets, reminders, and live results.</p>
+        </div>
+        
+        <div class="calendar-grid reveal" id="tournamentsCalendarContainer">
+          <!-- Calendar items generated dynamically from data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PRO Membership section -->
+    <section class="section membership" id="membership">
+      <div class="wrap membership-grid">
+        <div class="reveal">
+          <div class="section-kicker" style="color:#d48dff">For the committed</div>
+          <h2 class="display">Boomer's<br><span>PRO.</span></h2>
+          <p class="section-intro">A clear monthly reason to make Boomer's your regular arena—with value that grows alongside the community.</p>
+        </div>
+        
+        <div class="member-card reveal">
+          <h3>BOOMER'S PRO</h3>
+          <div class="member-price">₹999<small>/ month</small></div>
+          <ul class="member-list">
+            <li>Complimentary gaming hours</li>
+            <li>Tournament access</li>
+            <li>Café and session discounts</li>
+            <li>Priority station booking</li>
+          </ul>
+          <button class="button" style="width:100%;" onclick="alert('Thank you for joining Boomer\'s PRO! (Mock Subscription Activated)')">Join Boomer's PRO →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof & Review Slider -->
+    <section class="section proof" id="reviews">
+      <div class="wrap proof-grid">
+        <div class="reveal">
+          <div class="section-kicker">The community speaks</div>
+          <div class="rating" id="displayAvgRating">4.9</div>
+          <div class="stars" id="displayStars">★★★★★</div>
+          <p class="section-intro" style="color:#625950">Google-rating-ready proof, backed by real gamer feedback and verified reviews in our arenas.</p>
+          
+          <!-- Testimonials Slider (Phase 3) -->
+          <div class="reviews-slider-wrap">
+            <div class="reviews-track" id="reviewsTrack">
+              <!-- Loaded Dynamically from data.js -->
+            </div>
+            <div class="reviews-nav" id="reviewsNav">
+              <!-- Dots dynamically loaded -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Live GSAP counter metrics (Phase 3) -->
+        <div class="metrics reveal">
+          <div class="metric"><b class="count-metric" data-val="14000">0</b><small>Gamers</small></div>
+          <div class="metric"><b class="count-metric" data-val="50000">0</b><small>Bookings</small></div>
+          <div class="metric"><b class="count-metric" data-val="200">0</b><small>Tournaments</small></div>
+          <div class="metric"><b class="count-metric" data-val="2">0</b><small>City arenas</small></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Links & Feeds -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <div class="section-kicker">The game is waiting</div>
+          <h2 class="display">Meet you in<br>the <span>arena.</span></h2>
+        </div>
+        <a href="#book" class="button">Book a station →</a>
+      </div>
+      
+      <div class="footer-quick">
+        <div>
+          <h4>Quick booking</h4>
+          <p>Reserve a PC, PS5, sim racing cockpit, or VR session before you arrive.</p>
+          <a href="#book" style="color:var(--lime)">Start booking →</a>
+        </div>
+        <div>
+          <h4>Our branches</h4>
+          <p><b>Pune</b> · Viman Nagar<br><small style="color:var(--muted)">10:00 AM - 01:00 AM</small><br><a href="https://maps.google.com" target="_blank" style="color:var(--lime); display:inline; font-size:11px; margin-top:2px;">📍 View Map</a></p>
+          <p style="margin-top:10px;"><b>Coimbatore</b> · RS Puram<br><small style="color:var(--muted)">10:00 AM - 11:00 PM</small><br><a href="https://maps.google.com" target="_blank" style="color:var(--lime); display:inline; font-size:11px; margin-top:2px;">📍 View Map</a></p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://discord.gg" target="_blank">Discord</a>
+          <a href="https://wa.me/919999999999" target="_blank">WhatsApp Chat</a>
+          <a href="mailto:boomergamingcafe@gmail.com">Email Support</a>
+          <a href="tel:+919999999999">Call Pune: +91 99999 99999</a>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p>New tournaments, drops, and Happy Hours.</p>
+          <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Done'" aria-label="Newsletter">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <span>&copy; 2026 Boomer's Gaming Café</span>
+        <div class="socials">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://discord.gg" target="_blank">Discord</a>
+          <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
+          <a href="#book">Terms & Privacy</a>
+        </div>
+        <span>Coimbatore · Pune</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Food Details Popup Modal -->
+  <div class="food-modal" id="foodDetailModal">
+    <div class="food-modal-wrapper glass-card">
+      <span class="food-modal-close" onclick="closeFoodDetailsModal()">&times;</span>
+      <div id="foodModalContent">
+        <!-- Populated dynamically in menu.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Floating Cart Toggle Button -->
+  <button class="mobile-cart-toggle" id="mobileCartToggleBtn" aria-label="View Session Cart">
+    <span class="cart-icon">🛒</span>
+    <span class="badge" id="mobileCartCountBadge">0</span>
+  </button>
+
+  <!-- Sticky Booking Cart Widget -->
+  <aside class="sticky-booking-cart active" id="floatingCartWidget" aria-label="Quick Session Cart">
+    <div class="cart-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img class="brand-mark" src="assets/images/logo.png" style="width: 20px; height: 20px; filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
+        <h4 style="font: 700 12px var(--mono); color: #fff; margin: 0; text-transform: uppercase;">Session Cart</h4>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="cart-badge-count" id="stickyCartCountBadge">0</span>
+        <button class="cart-close-btn" id="mobileCartCloseBtn" aria-label="Close Cart" style="background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 0 5px; line-height: 1;">&times;</button>
+      </div>
+    </div>
+    <div class="cart-body" id="stickyCartItemsList">
+      <!-- Dynamic cart rows populated in menu.js -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-summary-line">
+        <span>🎮 <span style="color:#fff;">Gaming</span></span>
+        <b id="cart-gaming-total">₹0</b>
+      </div>
+      <div class="cart-summary-line">
+        <span>🍔 <span style="color:#fff;">Food</span></span>
+        <b id="cart-food-total">₹0</b>
+      </div>
+      <div class="cart-summary-line">
+        <span>🧾 <span style="color:#fff;">GST</span></span>
+        <b id="cart-gst">₹0</b>
+      </div>
+      <div class="cart-summary-line total">
+        <span>TOTAL</span>
+        <b id="cart-grand-total">₹0</b>
+      </div>
+      <a href="#book" class="button" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}" style="width: 100%; justify-content: center; text-transform: uppercase; font-size: 11px;">Secure Checkout ➔</a>
+      <small style="display:block; font-size:9px; color:var(--muted); margin-top:6px; text-transform:uppercase; font-family:var(--mono); text-align:center; letter-spacing:0.05em;">Estimated Time: 2 min</small>
+    </div>
+  </aside>
+
+  <!-- Floating Availability Sidebar Widget -->
+  <aside class="floating-avail-widget" id="floatingAvailWidget" aria-label="Live availability sidebar">
+    <div class="floating-avail-title">Live Capacity</div>
+    <div class="floating-avail-row">
+      <span>🟢 PC Arena</span>
+      <b id="float-avail-pc">12 Available</b>
+    </div>
+    <div class="floating-avail-row">
+      <span>🟡 Console</span>
+      <b id="float-avail-ps">3 Available</b>
+    </div>
+    <div class="floating-avail-row">
+      <span>🔴 VR Lounge</span>
+      <b id="float-avail-vr">Full</b>
+    </div>
+    <div style="font-size: 8px; color: var(--muted); text-align: center; margin-top: 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing:0.05em;">Updated 15 sec ago</div>
+    <a href="#book" class="floating-avail-btn">Book Now</a>
+  </aside>
+
+  <!-- Audio Toggle Floating button (Phase 4) -->
+  <button class="audio-toggle" id="audioToggleBtn" aria-label="Toggle Audio">
+    <span class="audio-icon">🔇</span> Sound <b class="audio-state-text">OFF</b>
+  </button>
+
+  <!-- Mobile Sticky Bottom Booking Trigger -->
+  <a class="mobile-book" href="#book">Book a station →</a>
+
+  <!-- Script Modules loading progressively -->
+  <script src="assets/js/tracker.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/launcher.js"></script>
+  <script src="assets/js/booking.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/gallery.js"></script>
+  <script src="assets/js/audio.js"></script>
+  
+  <script>
+    // Activate the 20-second hero video once the page loads and video can play
+    const heroVid = document.querySelector('.hero-video');
+    if (heroVid) {
+      heroVid.addEventListener('canplaythrough', () => {
+        heroVid.classList.add('ready');
+        heroVid.play();
+      });
+      // Force trigger if already loaded in cache
+      if (heroVid.readyState >= 3) {
+        heroVid.classList.add('ready');
+        heroVid.play();
+      }
+    }
+  </script>
+</body>
+</html>

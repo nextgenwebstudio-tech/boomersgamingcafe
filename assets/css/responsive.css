@@ -1,0 +1,639 @@
+/* Hide mobile overlay by default on desktop viewports */
+.mobile-menu-overlay {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  /* General Variables and Layouts */
+  .nav {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 20px !important;
+    height: 66px;
+  }
+  
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-cta {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+  
+  .hero-media, .hero-video {
+    position: relative !important;
+    height: 240px !important;
+    z-index: 1 !important;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .hero {
+    padding: 80px 0 20px !important;
+    min-height: auto;
+  }
+  
+  .hero h1 {
+    font-size: clamp(3.2rem, 14vw, 5.5rem);
+    line-height: 0.85;
+    margin-bottom: 20px;
+  }
+  
+  .hero-orbit {
+    width: 75vw;
+    right: -20%;
+    top: 18%;
+  }
+  
+  /* Flex/Grid collapses to single columns */
+  .hero-bottom,
+  .story-grid,
+  .floor,
+  .booking-grid,
+  .cafe-grid,
+  .happy-grid,
+  .mode-grid,
+  .spec-intro,
+  .event-grid,
+  .proof-grid,
+  .membership-grid,
+  .library-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  
+  .booking-float {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .hero-meta {
+    gap: 17px;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+  
+  .story-copy {
+    padding: 40px 24px;
+    padding-right: 24px;
+  }
+  
+  .story-copy .display {
+    font-size: clamp(2.2rem, 10vw, 4rem);
+  }
+  
+  .story-image {
+    min-height: 320px;
+  }
+  
+  /* Game Launcher */
+  .game-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 30px;
+  }
+  
+  .game-tab {
+    min-height: 140px;
+    padding: 15px;
+  }
+  
+  .game-tab b {
+    font-size: 18px;
+  }
+  
+  .game-panel {
+    padding: 24px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 24px;
+  }
+  
+  .game-panel .button {
+    justify-self: start;
+    width: 100%;
+  }
+  
+  .game-detail {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  /* Live Arena Floor Plan */
+  .floor {
+    gap: 24px;
+  }
+  
+  .floor-plan {
+    min-height: 320px;
+  }
+  
+  .z1, .z2, .z3, .z4 {
+    padding: 6px;
+    font-size: 8px;
+  }
+  
+  /* Cafe & Bundles */
+  .cafe-photo {
+    height: 300px;
+  }
+  
+  .happy {
+    padding: 50px 0;
+  }
+  
+  .deal-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .deal-copy {
+    padding: 24px;
+  }
+  
+  .deal-image {
+    min-height: 200px;
+  }
+  
+  /* Library */
+  .library-game {
+    height: 200px;
+  }
+  
+  .library-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  /* Simulator Specs & Modes */
+  .mode {
+    min-height: 350px;
+    padding: 24px;
+  }
+  
+  .mode h3 {
+    margin: 20px 0 12px;
+  }
+  
+  .mode-foot {
+    inset: auto 24px 24px;
+  }
+  
+  /* Calendar & Membership */
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .calendar-event {
+    min-height: 140px;
+  }
+  
+  .member-card {
+    box-shadow: 10px 10px 0 rgba(239, 189, 78, 0.85);
+    padding: 24px;
+  }
+  
+  .member-price {
+    font-size: 48px;
+  }
+  
+  /* Bookings */
+  .booking-card {
+    box-shadow: 10px 10px 0 var(--lime);
+    padding: 20px;
+  }
+  
+  .slot-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Footer elements */
+  .footer-top {
+    display: block;
+  }
+  
+  .footer-top .button {
+    margin-top: 24px;
+    width: 100%;
+  }
+  
+  .footer-quick {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .footer-bottom {
+    display: block;
+    line-height: 2;
+    text-align: center;
+  }
+  
+  .socials {
+    margin: 12px 0;
+    justify-content: center;
+  }
+  
+  /* Mobile Sticky Booking Bar */
+  .mobile-book {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: var(--lime);
+    color: #171008;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    font: 800 12px var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hide desktop sticky booking header */
+  #desktop-sticky-book {
+    display: none !important;
+  }
+  
+  /* Swipeable layouts for horizontal scroll triggers on mobile */
+  .swipe-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+  
+  .swipe-gallery::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .swipe-gallery > * {
+    scroll-snap-align: start;
+    flex: 0 0 85%;
+  }
+
+  /* Mobile Floating Cart Toggle Button */
+  .mobile-cart-toggle {
+    display: flex !important;
+  }
+
+  .cart-close-btn {
+    display: block !important;
+  }
+
+  /* Sticky cart styled as slide-up drawer on mobile */
+  .sticky-booking-cart {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    transform: translateY(105%) !important;
+    z-index: 10002 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-bottom: none !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6) !important;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  .sticky-booking-cart.drawer-active {
+    transform: translateY(0) !important;
+  }
+
+  /* Overlay backdrop when mobile cart is open */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cart-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Add bottom padding to body so mobile sticky book button doesn't cover content */
+  body {
+    padding-bottom: 90px;
+  }
+
+  /* Floating availability widget hidden on mobile */
+  .floating-avail-widget {
+    display: none !important;
+  }
+}
+
+/* Landscape/Tablet Adjustments */
+@media (min-width: 801px) and (max-width: 1100px) {
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  .story-grid, .floor, .booking-grid, .cafe-grid, .happy-grid, .membership-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .library-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .calendar-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ==========================================
+   Premium Mobile-First Overlay Drawer & Swipes
+   (Screens below 768px viewport width)
+   ========================================== */
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Dynamic Hamburger Toggle Button */
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10001;
+    padding: 0;
+    outline: none;
+  }
+  
+  .nav-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: left center;
+  }
+  
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate3d(2px, -1px, 0);
+    background-color: var(--lime);
+  }
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate3d(2px, 1px, 0);
+    background-color: var(--lime);
+  }
+
+  /* Fullscreen Backdrop Blur Navigation Menu Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 9, 12, 0.97);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, -20px, 0);
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    width: 80%;
+  }
+
+  .mobile-menu-links a {
+    font: 700 24px var(--display);
+    color: #fff;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .mobile-menu-links a:hover,
+  .mobile-menu-links a:focus {
+    color: var(--lime);
+  }
+
+  /* Lock body scrolling when overlay is active */
+  body.no-scroll {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Hero Section stacks and heights */
+  .hero {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+  
+  .hero-main {
+    text-align: center;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Touch-friendly Game Launcher Swipe tab lists */
+  .game-tabs {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-top: 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .game-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .game-tab {
+    flex: 0 0 75%;
+    scroll-snap-align: start;
+    min-height: 120px !important;
+  }
+
+  /* Power-Up Categories Horizontal swipe list */
+  .cafe-tabs {
+    display: flex !important;
+    overflow-x: auto !important;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cafe-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Café cards carousel swipes */
+  .cafe-items-list {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 16px;
+    padding: 12px 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .cafe-items-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cafe-items-list .badge-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
+  /* Interactive Floor Plan pinch / zoom hints */
+  .floor-plan {
+    overflow: auto;
+    cursor: grab;
+    min-height: 280px;
+    touch-action: pan-x pan-y;
+  }
+
+  .station-dot {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  /* Reviews & Testimonials Carousel Swiping */
+  .reviews-slider-wrap {
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .reviews-slider-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews-track {
+    display: flex !important;
+    transform: none !important; /* Deactivates javascript horizontal translations */
+  }
+
+  .review-slide {
+    flex: 0 0 88% !important;
+    scroll-snap-align: start;
+    margin-right: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px !important;
+    border-radius: 18px;
+  }
+
+  .reviews-nav {
+    display: none !important;
+  }
+
+  /* Gallery Masonry to Swipe Carousel */
+  .gallery-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-item {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
+
+  /* Section Padding reduction on mobile views */
+  .section {
+    padding: 80px 0 !important;
+  }
+
+  /* Button touch target optimization (minimum 48px height) */
+  .button,
+  .cafe-add-btn,
+  .nav-cta,
+  .mobile-menu-links a,
+  .game-tab,
+  .cafe-tab-btn,
+  .branch-button {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Deal image hover micro-animation */
+.deal-image {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
+}
+.deal-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(93, 64, 182, 0.25);
+}
