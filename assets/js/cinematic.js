@@ -6,12 +6,12 @@
 
   // Cinematic media rotation. Replace the local image paths with Boomer's final 6–8 second video cuts when supplied.
   const scenes = [
-    'assets/images/boomers_pc_lounge.jpg',
-    'assets/images/pc_ps5_cover.jpg',
-    'assets/images/boomers_racing_sim.jpg',
-    'assets/images/boomers_vr_lounge.jpg',
-    'assets/images/boomers_cafe_food.jpg',
-    'assets/images/party-booking.jpg'
+    '/assets/images/boomers_pc_lounge.jpg',
+    '/assets/images/pc_ps5_cover.jpg',
+    '/assets/images/boomers_racing_sim.jpg',
+    '/assets/images/boomers_vr_lounge.jpg',
+    '/assets/images/boomers_cafe_food.jpg',
+    '/assets/images/party-booking.jpg'
   ];
   const sceneLayer = document.createElement('div');
   sceneLayer.className = 'hero-scenes';
