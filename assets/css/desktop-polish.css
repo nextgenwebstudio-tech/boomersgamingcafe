@@ -69,9 +69,10 @@
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 38px !important;
-    padding: 0 20px !important;
-    border-radius: 6px !important;
+    height: 32px !important;
+    padding: 0 16px !important;
+    border-radius: 4px !important;
+    font-size: 10px !important;
     font-weight: 700 !important;
     background: var(--accent) !important;
     color: #000 !important;
@@ -86,7 +87,7 @@
   }
   .nav-book-link:hover {
     background: #ffc300 !important;
-    transform: translateY(-2px) !important;
+    transform: translateY(-1px) !important;
     box-shadow: 0 6px 20px rgba(255, 183, 3, 0.4) !important;
   }
   .hero-live-card{position:absolute;right:0;top:50%;width:270px;transform:translateY(-48%);padding:19px;border:1px solid rgba(239,189,78,.42);background:linear-gradient(145deg,rgba(20,17,14,.78),rgba(11,12,15,.72));backdrop-filter:blur(17px);box-shadow:0 20px 55px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);z-index:2}.hero-live-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 0,rgba(239,189,78,.2),transparent 38%);pointer-events:none}.hero-live-card>*{position:relative}.hero-live-card .live{display:block;margin-bottom:11px}.hero-live-card h3{font:700 26px/.9 var(--display);letter-spacing:-.07em;margin:0 0 7px}.hero-live-card p{font-size:12px;color:#c7bbb0;margin:0 0 18px}.hero-live-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 0;border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13);font:500 9px var(--mono);letter-spacing:.07em;color:#a89b8f;text-transform:uppercase}.hero-live-meta b{display:block;color:#fff;font:700 16px var(--display);letter-spacing:-.05em;margin-top:4px;text-transform:none}.hero-live-card a{display:inline-flex;margin-top:15px;color:var(--lime);font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.hero-live-card a:hover{color:#fff}.hero-bottom{grid-template-columns:1fr 330px;margin-top:36px}
