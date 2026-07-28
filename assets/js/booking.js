@@ -74,16 +74,16 @@ function initBookingWizard() {
       nextBtn.textContent = "Continue →";
     }
 
+
     // Highlight step progress indicators
     stepIndicators.forEach((indicator, idx) => {
       indicator.classList.toggle('active', idx === stepIndex);
       const stepNames = ["Branch", "Zone", "Station", "Time", "Food", "Summary", "Ticket"];
       const displayLabel = stepNames[idx] || "Step";
+      indicator.innerHTML = `<b>${displayLabel}</b><p>0${idx + 1}</p>`;
       if (idx < stepIndex) {
-        indicator.innerHTML = `<b>${displayLabel}</b><p>✓</p>`;
         indicator.classList.add('completed');
       } else {
-        indicator.innerHTML = `<b>${displayLabel}</b><p>${idx + 1}</p>`;
         indicator.classList.remove('completed');
       }
     });

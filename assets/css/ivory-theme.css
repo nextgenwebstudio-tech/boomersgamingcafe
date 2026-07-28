@@ -218,47 +218,94 @@
    BOOK SECTION (booking wizard)
    Dark→Ivory fade — gradient endpoint uses updated --paper token
    ================================================================ */
+/* ================================================================
+   BOOK SECTION (booking wizard) - PREMIUM DARK STYLING
+   The steps side panel is on the dark portion of the gradient background.
+   We style it to match the premium black/gold aesthetic with excellent contrast.
+   ================================================================ */
 .book {
   background: linear-gradient(
     180deg,
-    #101115 0%,
-    #14151a 80px,
-    var(--paper) 220px
+    #0d0d0f 0%,
+    #14151a 220px,
+    var(--paper) 600px
   ) !important;
-  color: var(--ink-heading);
+  color: #fff;
 }
 
-.book .section-kicker {
-  color: var(--accent);
+/* Large Background Title "FROM PLAN TO PLAY" */
+.book .display {
+  color: rgba(255, 255, 255, 0.18) !important; /* Subtle but readable 18% opacity */
+}
+.book .display span {
+  color: rgba(255, 255, 255, 0.35) !important;
 }
 
-/* Steps dividers and text on ivory background */
+/* Step list spacing and divider line */
 .step {
-  border-top-color: var(--paper-border) !important;
+  padding: 24px 0 !important; /* Increased line spacing to improve readability */
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important; /* Clean thin border */
 }
 
-/* Step title text (Branch, Zone, Station …) */
+/* Base style for step text */
 .book .step b {
-  color: var(--ink-heading) !important;
+  font-family: var(--display) !important;
+  font-size: 17px !important;
+  letter-spacing: -0.03em !important;
+  transition: color 0.3s ease !important;
 }
 
-/* Step counter number on the right */
-.book .step p {
-  color: var(--ink-muted) !important;
+/* Step labels based on wizard states */
+/* Inactive/Upcoming Steps: Grey */
+.book .step:not(.completed):not(.active) b {
+  color: rgba(255, 255, 255, 0.72) !important; /* Inactive grey */
+}
+.book .step:not(.completed):not(.active)::before {
+  content: '○' !important; /* Upcoming hollow circle */
+  color: #8E8E95 !important;
 }
 
-/* Step counter pseudo-element (01, 02 …) */
+/* Active Step: Glowing Gold */
+.book .step.active b {
+  color: #F5C34D !important; /* Active gold */
+  text-shadow: 0 0 10px rgba(245, 195, 77, 0.15);
+}
+.book .step.active::before {
+  content: '▶' !important; /* Current indicator arrow */
+  color: #F5C34D !important;
+  text-shadow: 0 0 10px rgba(245, 195, 77, 0.3);
+}
+
+/* Completed Steps: High Contrast White */
+.book .step.completed b {
+  color: #FFFFFF !important; /* Completed white */
+}
+.book .step.completed::before {
+  content: '✔' !important; /* Completed checkmark */
+  color: #FFFFFF !important;
+}
+
+/* Left & Right Step Numbers: consistent #8E8E95, font-weight 600 */
 .book .step::before {
-  color: var(--ink-muted) !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  width: 24px !important;
+  display: inline-block !important;
 }
 
-/* Section kicker "YOUR NEXT SESSION" lands on ivory */
+.book .step p {
+  color: #8E8E95 !important;
+  font-family: var(--mono) !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  margin: 0 0 0 auto !important;
+}
+
+/* Section kicker "YOUR NEXT SESSION" */
 .book .section-kicker {
   color: var(--accent) !important;
 }
-
-/* "From plan to play." heading — stays white (renders on dark zone) */
-/* ".book .display" intentionally NOT overridden to dark */
 
 
 /* ================================================================
