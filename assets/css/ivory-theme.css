@@ -93,18 +93,12 @@
   color: var(--ink-body);
 }
 
-/* Location cards: white-glass look on ivory bg */
+/* Location cards: keep dark — premium dark-card-on-ivory aesthetic */
+/* Cards already have inline background: rgba(20,21,25,0.6) which we preserve */
+/* Only warm up the border and shadow */
 .branch-specs .badge-card.glass-card {
-  background: rgba(255, 255, 255, 0.72) !important;
-  border: 1px solid var(--paper-border) !important;
-  box-shadow: 0 8px 32px var(--paper-shadow) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Headings inside location cards already white-on-dark — keep them */
-.branch-specs .badge-card h3 {
-  color: #fff !important;
+  border: 1px solid rgba(239, 189, 78, 0.18) !important;
+  box-shadow: 0 12px 40px var(--paper-shadow-md) !important;
 }
 
 /* ================================================================
@@ -333,4 +327,96 @@
 
 .branch-specs .comparison-table td {
   color: var(--ink-body);
+}
+
+/* ================================================================
+   COMPREHENSIVE TEXT CONTRAST — all ivory sections
+   Catch-all: any text that defaults to body color (#f8f8f4 = near
+   white) needs to be forced dark on ivory backgrounds.
+   ================================================================ */
+
+/* Game Library — all text elements */
+.game-library .display,
+.game-library h2,
+.game-library h3 {
+  color: var(--ink-heading) !important;
+}
+
+.game-library p,
+.game-library .section-intro {
+  color: var(--ink-body) !important;
+}
+
+/* Branch Specs — section-level text */
+.branch-specs .display,
+.branch-specs h2 {
+  color: var(--ink-heading) !important;
+}
+
+.branch-specs p,
+.branch-specs .section-intro {
+  color: var(--ink-body) !important;
+}
+
+/* Gallery — section-level text */
+.ivory-gallery .display,
+.ivory-gallery h2,
+.ivory-gallery h3 {
+  color: var(--ink-heading) !important;
+}
+
+.ivory-gallery p,
+.ivory-gallery .section-intro {
+  color: var(--ink-body) !important;
+}
+
+/* Calendar — section-level text + dynamic event cards */
+.calendar .display,
+.calendar h2 {
+  color: var(--ink-heading) !important;
+}
+
+.calendar p,
+.calendar .section-intro {
+  color: var(--ink-body) !important;
+}
+
+/* Calendar event time numbers keep gold accent */
+.calendar .calendar-event time {
+  color: var(--accent) !important;
+}
+
+/* Calendar event title and description */
+.calendar .calendar-event b {
+  color: var(--ink-heading) !important;
+}
+
+.calendar .calendar-event p {
+  color: var(--ink-body) !important;
+}
+
+/* Story section — body text and numbers */
+.story p {
+  color: var(--ink-body) !important;
+}
+
+.story-numbers b {
+  color: var(--ink-heading);
+}
+
+/* Proof section */
+.proof .section-kicker {
+  color: var(--accent) !important;
+}
+
+.proof p,
+.proof .section-intro,
+.review-slide {
+  color: var(--ink-body) !important;
+}
+
+.proof h2,
+.proof .display,
+.proof .rating {
+  color: var(--ink-heading) !important;
 }
