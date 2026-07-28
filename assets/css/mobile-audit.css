@@ -253,4 +253,10 @@ button.button.hero-primary-cta {
     color: #fff !important;
     opacity: 1 !important;
   }
+
+  /* Remove the 3 food spotlight cards in mobile */
+  #cinematicFoodDetails {
+    display: none !important;
+  }
 }
+
