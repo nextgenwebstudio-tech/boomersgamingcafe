@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/cinematic.css" />
+  <link rel="stylesheet" href="assets/css/mobile-audit.css" />
+  <link rel="stylesheet" href="assets/css/desktop-polish.css" />
 </head>
 <body>
 
@@ -53,9 +56,9 @@
     <div class="nav-links">
       <a href="#play">Games</a>
       <a href="#arena">Locations</a>
-      <a href="#power-up">Power-Up Station</a>
+      <a href="menu.html">Power-Up Station</a>
       <a href="#calendar">Tournaments</a>
-      <a href="#membership">Membership</a>
+      <a href="membership.html">Membership</a>
       <a href="#community">Events</a>
       <a href="#book" class="nav-book-link">Book Now</a>
     </div>
@@ -72,13 +75,13 @@
   <!-- Fullscreen Mobile Navigation Menu Overlay -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <nav class="mobile-menu-links">
-      <a href="#play" onclick="window.toggleMobileMenu()">Games</a>
-      <a href="#arena" onclick="window.toggleMobileMenu()">Locations</a>
-      <a href="#power-up" onclick="window.toggleMobileMenu()">Power-Up Station</a>
-      <a href="#calendar" onclick="window.toggleMobileMenu()">Tournaments</a>
-      <a href="#membership" onclick="window.toggleMobileMenu()">Membership</a>
-      <a href="#community" onclick="window.toggleMobileMenu()">Events</a>
-      <a href="#book" class="button" onclick="window.toggleMobileMenu()" style="margin-top: 20px; width: 100%; text-align: center; text-transform: uppercase;">Book Now ↗</a>
+      <a href="#play" onclick="window.toggleMobileMenu()" style="--i:0">Games</a>
+      <a href="#arena" onclick="window.toggleMobileMenu()" style="--i:1">Locations</a>
+      <a href="menu.html" onclick="window.toggleMobileMenu()" style="--i:2">Power-Up Station</a>
+      <a href="#calendar" onclick="window.toggleMobileMenu()" style="--i:3">Tournaments</a>
+      <a href="membership.html" onclick="window.toggleMobileMenu()" style="--i:4">Membership</a>
+      <a href="#community" onclick="window.toggleMobileMenu()" style="--i:5">Events</a>
+      <a href="#book" class="mobile-menu-book-btn" onclick="window.toggleMobileMenu()" style="--i:6">Book Now ↗</a>
     </nav>
   </div>
 
@@ -90,43 +93,76 @@
       <div class="hero-media" style="background-image: url('assets/images/boomers_pc_lounge.jpg');"></div>
       
       <!-- Video Loop Background (Phase 1) -->
-      <video class="hero-video" muted loop playsinline poster="assets/images/boomers_pc_lounge.jpg">
+      <video class="hero-video" autoplay muted loop playsinline poster="assets/images/boomers_pc_lounge.jpg">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-gaming-setup-with-neon-lights-40017-large.mp4" type="video/mp4" />
       </video>
       
-      <div class="hero-orbit" aria-hidden="true"></div>
+      <div class="hero-orbit-wrap" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;">
+        <div class="hero-orbit" aria-hidden="true"></div>
+        <!-- Live Tournament Card — centered inside the golden ring -->
+        <div class="hero-ring-card" id="heroLiveCard" style="pointer-events: auto;">
+          <div class="ring-card-live-row">
+            <span class="ring-card-dot"></span>
+            <span class="ring-card-live-label">LIVE NOW</span>
+          </div>
+          <div class="ring-card-title">Campus Clash</div>
+          <div class="ring-card-sub">Valorant Championship · Finals</div>
+          <div class="ring-card-divider"></div>
+          <div class="ring-card-countdown-label">NEXT MATCH IN</div>
+          <div class="ring-card-countdown" id="ringCardCountdown">02:15:44</div>
+          <div class="ring-card-stats">
+            <span>👥 <strong>127</strong> Watching</span>
+            <span>🏆 <strong>32</strong> Registered</span>
+          </div>
+          <a href="https://twitch.tv" target="_blank" rel="noopener" class="ring-card-btn">Watch Live →</a>
+        </div>
+      </div>
+      <canvas id="heroParticles" style="position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: 0.65;"></canvas>
       <div class="hero-light" aria-hidden="true"></div>
       <div class="hero-noise" aria-hidden="true"></div>
       
-      <div class="wrap">
+      <div class="wrap" style="position: relative;">
         <div class="hero-main reveal">
           <div class="eyebrow">Coimbatore · Pune · Est. 2018</div>
-          <h1>Enter<br>the <em>arena.</em></h1>
+          <h1>Enter the<br><em>arena.</em></h1>
           <p class="hero-lead">High-spec battlestations, a pulse you can feel, and a community that plays to win. This is gaming, switched all the way on.</p>
           
           <div class="hero-actions" style="margin-bottom: 20px;">
-            <a class="button" href="#book">Book Now <span>↗</span></a>
-            <a class="button secondary" href="#arena">Explore Arena <span>↓</span></a>
-            <a class="button secondary" href="#arena" style="border-color: rgba(255,255,255,0.15); color: #fff;">View Pricing <span>↓</span></a>
+            <a class="button hero-primary-cta" href="#book">Book Now <span>↗</span></a>
+            <div class="hero-secondary-ctas">
+              <a class="button secondary" href="#arena">Explore Arena <span>↓</span></a>
+              <a class="button secondary" href="#membership" style="border-color: rgba(255,255,255,0.15); color: #fff;">View Pricing <span>↓</span></a>
+            </div>
           </div>
 
-          <!-- Hero trust elements -->
-          <div style="display: inline-flex; align-items: center; gap: 20px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 99px; background: rgba(8, 9, 12, 0.5); font: 500 11px var(--mono); color: var(--muted); flex-wrap: wrap; justify-content: center;">
-            <span style="color: #efbd4e;">⭐ <strong style="color: #fff;">4.9</strong> Google Rating</span>
-            <span style="color: rgba(255,255,255,0.2);">|</span>
-            <span>👥 <strong style="color: #fff;">14K+</strong> Gamers</span>
-            <span style="color: rgba(255,255,255,0.2);">|</span>
-            <span>🏆 <strong style="color: #fff;">200+</strong> Tournaments</span>
-            <span style="color: rgba(255,255,255,0.2);">|</span>
-            <span>🎮 <strong style="color: #fff;">64</strong> Elite Stations</span>
+          <!-- Mobile-only tournament banner (hidden on desktop, shown on mobile) -->
+          <div class="hero-mobile-tournament-banner" id="heroMobileTournamentBanner">
+            <div class="mobile-tourn-left">
+              <span class="mobile-tourn-dot"></span>
+              <span class="mobile-tourn-live">LIVE NOW</span>
+              <span class="mobile-tourn-name">Campus Clash · Valorant</span>
+            </div>
+            <a href="https://twitch.tv" target="_blank" rel="noopener" class="mobile-tourn-watch">Watch →</a>
           </div>
+
         </div>
         
         <div class="hero-bottom reveal">
-          <div class="hero-meta">
-            <div>Open today<strong>10:00 — 01:00</strong></div>
-            <div>Players online<strong>47 / 64</strong></div>
-            <div>Next drop<strong>Valorant @ 19:30</strong></div>
+          <div class="hero-meta hero-stats-card">
+            <div class="hero-stat-item">
+              <span class="stat-lbl">🕒 Open Today</span>
+              <strong>10 AM - 1 AM</strong>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="stat-lbl">👥 Players</span>
+              <strong>47 / 64</strong>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="stat-lbl">🏆 Next Event</span>
+              <strong>Valorant @ 19:30</strong>
+            </div>
           </div>
           <aside class="booking-float" aria-label="Quick Booking Options">
             <div class="booking-head">Drop in tonight <span class="live">Live capacity</span></div>
@@ -136,6 +172,39 @@
             </div>
             <a class="button" href="#book">Find a station →</a>
           </aside>
+
+          <!-- Mobile-only Quick Booking Card (Redesigned) -->
+          <div class="mobile-booking-card" id="mobileBookingCard">
+            <div class="m-booking-header">
+              <span class="m-booking-title">Drop in Tonight</span>
+              <span class="m-booking-live"><span class="m-live-dot"></span>LIVE</span>
+            </div>
+            
+            <div class="m-booking-grid-2">
+              <div class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+                <span class="m-card-icon">📍</span>
+                <span class="m-card-val">Coimbatore</span>
+              </div>
+              <div class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+                <span class="m-card-icon">🕒</span>
+                <span class="m-card-val">7:30 PM</span>
+              </div>
+            </div>
+            
+            <div class="m-booking-grid-3">
+              <div class="m-status-card">
+                <span class="m-status-val">🎮 12 PCs</span>
+              </div>
+              <div class="m-status-card">
+                <span class="m-status-val">🎮 3 PS5</span>
+              </div>
+              <div class="m-status-card">
+                <span class="m-status-val">🥽 VR Wait</span>
+              </div>
+            </div>
+            
+            <a class="m-booking-cta" href="#book">FIND A STATION →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -281,7 +350,6 @@
       </div>
     </section>
 
-    <!-- Power-Up Station (Café launcher, Phase 2) -->
     <!-- Power-Up Station Section (v7 Menu Expansion) -->
     <section class="section cafe" id="power-up" style="background: #08090c; padding-top: 100px;">
       <div class="wrap" style="max-width: 1200px;">
@@ -289,8 +357,8 @@
         <!-- Cinematic Menu Hero -->
         <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px;">
           <div>
-            <div class="section-kicker" style="color: var(--lime);">Power-up Station</div>
-            <h1 class="display" style="font-size: 52px; line-height: 0.95; margin-bottom: 20px;">FUEL YOUR<br><span>SESSION.</span></h1>
+            <div class="section-kicker" style="color: var(--lime);">POWER-UP STATION</div>
+            <h1 class="display" style="font-size: 52px; line-height: 0.95; margin-bottom: 20px;">Find your<br><span>next loadout.</span></h1>
             <p class="section-intro" style="margin-bottom: 30px;">Select from BGC's gourmet kitchen loadouts. Real gaming setup snacks, thick potion milkshakes, and squad combo boxes prepared to keep you in the queue.</p>
             
             <!-- Menu Features -->
@@ -308,27 +376,21 @@
         </div>
 
 
-        <!-- Search and Quick Filters Shelf -->
-        <div class="reveal" style="background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px;">
-          <div style="position: relative; display: flex; gap: 15px; flex-wrap: wrap;">
-            <input type="text" id="foodSearchInput" placeholder="Search loadout snacks or drinks..." style="flex: 1; min-width: 250px; background: rgba(0,0,0,0.4); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: var(--mono);">
+        <!-- Premium Sticky Search, Filters and Categories Navigation Shelf -->
+        <div class="sticky-menu-shelf reveal">
+          <!-- Search Shelf -->
+          <div style="margin-bottom: 16px;">
+            <div style="position: relative;">
+              <div style="position: relative; width: 100%;">
+                <input type="text" id="foodSearchInput" placeholder="Search burgers, pasta, mocktails..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 75px 14px 20px; color: #fff; font-size: 14px; font-family: 'Manrope', sans-serif; outline: none; transition: border-color 0.2s, box-shadow 0.2s;">
+                <button id="clearSearchBtn" style="position: absolute; right: 48px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 18px; cursor: pointer; display: none;">&times;</button>
+                <span style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.6; pointer-events: none;">🔍</span>
+              </div>
+              
           </div>
-          
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; font-family: var(--mono); font-size: 10px;">
-            <button class="food-filter-btn active" data-filter="all" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">All Items</button>
-            <button class="food-filter-btn" data-filter="veg" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--lime); cursor: pointer; text-transform: uppercase;">🟢 Veg Only</button>
-            <button class="food-filter-btn" data-filter="non-veg" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--red); cursor: pointer; text-transform: uppercase;">🔴 Non-Veg</button>
-            <button class="food-filter-btn" data-filter="under-200" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Under ₹200</button>
-            <button class="food-filter-btn" data-filter="bestseller" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #efbd4e; cursor: pointer; text-transform: uppercase;">⭐ Best Seller</button>
-            <button class="food-filter-btn" data-filter="snacks" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Snacks</button>
-            <button class="food-filter-btn" data-filter="drinks" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; text-transform: uppercase;">Drinks</button>
-            <button class="food-filter-btn" data-filter="combos" style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--lime); cursor: pointer; text-transform: uppercase;">🎁 Combos</button>
-          </div>
-        </div>
 
-        <!-- Category Tab Selectors (12 categories) -->
-        <div class="reveal" style="margin-bottom: 30px;">
-          <div class="cafe-tabs" role="tablist" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; border-bottom: 1px solid var(--line);">
+          <!-- Category Tab Selectors (12 categories) -->
+          <div class="cafe-tabs" role="tablist">
             <button class="cafe-tab-btn" onclick="switchCafeTab('best-sellers', this)">⭐ Best Sellers</button>
             <button class="cafe-tab-btn active" onclick="switchCafeTab('xp-starters', this)">🍟 XP Starters</button>
             <button class="cafe-tab-btn" onclick="switchCafeTab('tactical-starters', this)">🍗 Tactical Starters</button>
@@ -344,6 +406,11 @@
             <button class="cafe-tab-btn" onclick="switchCafeTab('mocktails', this)">🍹 Mocktail Lab</button>
             <button class="cafe-tab-btn" onclick="switchCafeTab('squad-combos', this)">🎁 Squad Combos</button>
           </div>
+        </div>
+
+        <!-- Search Results Count Banner -->
+        <div id="searchResultsBanner" class="reveal" style="font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; display: none; align-items: center; gap: 8px;">
+          <span style="color: var(--lime);">●</span> <span id="searchResultsCountText">0 Results Found</span>
         </div>
         
         <!-- Tab items content grid -->
@@ -375,7 +442,7 @@
               <li>🎮 PC & Console · 1 to 4 joysticks</li>
               <li>💰 Prices starting at ₹100</li>
             </ul>
-            <a class="button" href="#book">Book Happy Hours →</a>
+            <a class="button" href="#" onclick="openHappyHoursModal(); return false;">Book Happy Hours →</a>
           </div>
           <div class="deal-image"></div>
         </div>
@@ -391,48 +458,69 @@
           <p class="section-intro">Grab maximum gaming value: combined sessions and kitchen refills in one single checkout.</p>
         </div>
         
-        <div class="gallery-grid reveal" style="margin-top:40px;">
-          <!-- Custom Bundle cards -->
-          <div class="badge-card" style="text-align: left; border-color: rgba(239, 189, 78, 0.4); position: relative;">
-            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #ff4f70; color: #fff; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">🔥 Popular</span>
-            <div style="font: 500 10px var(--mono); color: var(--lime); text-transform: uppercase;">Solo Grinder</div>
-            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Solo Grinder Combo</h3>
-            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours PC Gaming + 1 RTX Burger + 1 Soft Drink.</p>
-            <div style="font: 500 9px var(--mono); color: var(--lime); margin-bottom: 15px;">🔥 Save ₹91 · Ordered 247 times</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
-              <span style="font: 700 22px var(--display); color: var(--lime);">₹349 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹440</small></span>
-              <button class="cafe-add-btn" onclick="addBundleToBooking('bundle-1')">+ Add Combo</button>
+        <div class="bundle-carousel reveal" style="margin-top:40px;">
+          <!-- Card 1 -->
+          <div class="bundle-card">
+            <div class="bundle-img-wrap">
+              <img src="assets/images/boomers_cafe_food.jpg" alt="Solo Grinder Combo">
+              <span class="bundle-badge badge-red">🔥 Popular</span>
+            </div>
+            <div class="bundle-content">
+              <div class="bundle-kicker">Solo Grinder</div>
+              <h3 class="bundle-title">Solo Grinder Combo</h3>
+              <p class="bundle-desc">2 Hours PC Gaming + 1 RTX Burger + 1 Soft Drink.</p>
+              <div class="bundle-savings">🔥 Save ₹91 · Ordered 247 times</div>
+              <div class="bundle-footer">
+                <span class="bundle-price">₹349 <small>₹440</small></span>
+                <button class="button primary bundle-btn" onclick="addBundleToBooking('bundle-1')">+ Add Combo</button>
+              </div>
             </div>
           </div>
           
-          <div class="badge-card" style="text-align: left; border-color: rgba(176, 119, 88, 0.4); position: relative;">
-            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #5d40b6; color: #fff; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">⚡ Best Seller</span>
-            <div style="font: 500 10px var(--mono); color: #ffbb54; text-transform: uppercase;">Co-Op Lounge</div>
-            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Console Co-Op Combo</h3>
-            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours PS5 Lounge + 1 Loaded Nachos + 2 Soft Drinks.</p>
-            <div style="font: 500 9px var(--mono); color: #ffbb54; margin-bottom: 15px;">🔥 Save ₹121 · Ordered 184 times</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
-              <span style="font: 700 22px var(--display); color: #ffbb54;">₹499 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹620</small></span>
-              <button class="cafe-add-btn" style="color:#ffbb54; border-color:#ffbb54;" onclick="addBundleToBooking('bundle-2')">+ Add Combo</button>
+          <!-- Card 2 -->
+          <div class="bundle-card">
+            <div class="bundle-img-wrap">
+              <img src="assets/images/cheesefries.jpeg" alt="Console Co-Op Combo">
+              <span class="bundle-badge badge-purple">⚡ Best Seller</span>
+            </div>
+            <div class="bundle-content">
+              <div class="bundle-kicker">Co-Op Lounge</div>
+              <h3 class="bundle-title">Console Co-Op Combo</h3>
+              <p class="bundle-desc">2 Hours PS5 Lounge + 1 Loaded Nachos + 2 Soft Drinks.</p>
+              <div class="bundle-savings">🔥 Save ₹121 · Ordered 184 times</div>
+              <div class="bundle-footer">
+                <span class="bundle-price price-gold">₹499 <small>₹620</small></span>
+                <button class="button primary bundle-btn btn-gold" onclick="addBundleToBooking('bundle-2')">+ Add Combo</button>
+              </div>
             </div>
           </div>
           
-          <div class="badge-card" style="text-align: left; border-color: rgba(0, 219, 120, 0.4); position: relative;">
-            <span style="position: absolute; top: 15px; right: 15px; font: 700 8px var(--mono); background: #00db78; color: #000; padding: 3px 6px; border-radius: 4px; text-transform: uppercase;">🏎️ Pro Racer</span>
-            <div style="font: 500 10px var(--mono); color: #00db78; text-transform: uppercase;">Speed Run</div>
-            <h3 style="font: 700 20px var(--display); margin: 8px 0 12px; color: #fff;">Pro Racer Pack</h3>
-            <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">2 Hours Sim Racing Cockpit + 1 Spicy Wrap + 1 Red Bull.</p>
-            <div style="font: 500 9px var(--mono); color: #00db78; margin-bottom: 15px;">🔥 Save ₹101 · Ordered 96 times</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid var(--line); padding-top: 12px;">
-              <span style="font: 700 22px var(--display); color: #00db78;">₹449 <small style="font-size: 11px; text-decoration: line-through; color: var(--muted);">₹550</small></span>
-              <button class="cafe-add-btn" style="color:#00db78; border-color:#00db78;" onclick="addBundleToBooking('bundle-3')">+ Add Combo</button>
+          <!-- Card 3 -->
+          <div class="bundle-card">
+            <div class="bundle-img-wrap">
+              <img src="assets/images/food-wrap.png" alt="Pro Racer Pack">
+              <span class="bundle-badge badge-green">🏎️ Pro Racer</span>
+            </div>
+            <div class="bundle-content">
+              <div class="bundle-kicker">Speed Run</div>
+              <h3 class="bundle-title">Pro Racer Pack</h3>
+              <p class="bundle-desc">2 Hours Sim Racing Cockpit + 1 Spicy Wrap + 1 Red Bull.</p>
+              <div class="bundle-savings">🔥 Save ₹101 · Ordered 96 times</div>
+              <div class="bundle-footer">
+                <span class="bundle-price price-green">₹449 <small>₹550</small></span>
+                <button class="button primary bundle-btn btn-green" onclick="addBundleToBooking('bundle-3')">+ Add Combo</button>
+              </div>
             </div>
           </div>
 
-          <div class="badge-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; border: 1px dashed var(--line);">
-            <span class="badge-icon">🎁</span>
-            <div class="badge-title">Custom Deal?</div>
-            <p style="font-size:12px; color:var(--muted);">Select your station and stack food items during booking.</p>
+          <!-- Card 4 -->
+          <div class="bundle-card custom-deal-card">
+            <div class="custom-deal-inner">
+              <span class="custom-deal-icon">🎁</span>
+              <h3 class="bundle-title">Custom Deal?</h3>
+              <p class="bundle-desc">Select your station and stack food items during booking.</p>
+              <a class="button secondary bundle-btn" href="#book">Configure Live →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -447,11 +535,12 @@
           <p class="section-intro">Competitive esports, big-screen couch sessions, and a game library that gives every squad a reason to return.</p>
         </div>
         <div class="library-grid reveal">
-          <div class="library-game" style="--cover:url('assets/images/Valorant_cover.jpg')"><small>PC</small><b>VALORANT</b></div>
-          <div class="library-game" style="--cover:url('assets/images/dota2.jpeg')"><small>PC</small><b>DOTA 2</b></div>
-          <div class="library-game" style="--cover:url('assets/images/cs2.jpeg')"><small>PC</small><b>CS2</b></div>
-          <div class="library-game" style="--cover:url('assets/images/fc.webp')"><small>PS5</small><b>EA FC</b></div>
-          <div class="library-game" style="--cover:url('assets/images/tekken.jpeg')"><small>PS5</small><b>TEKKEN</b></div>
+          <div class="library-game" style="background-image: url('assets/images/valorant_new.jpg');"><small>PC</small><b>VALORANT</b></div>
+          <div class="library-game" style="background-image: url('assets/images/dota2_new.png');"><small>PC</small><b>DOTA 2</b></div>
+          <div class="library-game" style="background-image: url('assets/images/cs2_new.jpg');"><small>PC</small><b>CS2</b></div>
+          <div class="library-game" style="background-image: url('assets/images/apex.png');"><small>PC</small><b>APEX LEGENDS</b></div>
+          <div class="library-game" style="background-image: url('assets/images/fc26.png');"><small>PS5</small><b>EA FC</b></div>
+          <div class="library-game" style="background-image: url('assets/images/tekken8.jpg');"><small>PS5</small><b>TEKKEN</b></div>
         </div>
       </div>
     </section>
@@ -459,135 +548,115 @@
     <!-- Simulator & VR Modes -->
     <section class="section modes">
       <div class="wrap mode-grid">
-        <article class="mode glass-card reveal" style="--mode-color:#00e47b; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
+        <article class="mode glass-card reveal" id="mode-racing" style="--mode-color:#00e47b; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
           <div class="mode-tag" style="color: #00db78;">Logitech Simulation</div>
           <h3 style="margin-top: 15px; font-family: var(--display); letter-spacing: -0.06em;">SIM<br><span style="color: #00db78;">RACING</span></h3>
-          <p>Immerse yourself in professional racing physics. Professional Logitech G29 / G923 simulator setups with true force feedback, pedals, and manual shifters.</p>
+          <p>Immerse yourself in professional racing physics. Logitech G29/G923 simulator setups with true force feedback, pedals, and manual shifters.</p>
           
-          <!-- Large simulator preview loop -->
-          <div style="position: relative; margin: 24px 0 16px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
+          <!-- Video preview -->
+          <div style="position: relative; margin: 20px 0 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
             <video autoplay muted loop playsinline poster="assets/images/boomers_racing_sim.jpg" style="width: 100%; height: 100%; object-fit: cover;">
               <source src="https://assets.mixkit.co/videos/preview/mixkit-race-car-simulator-in-esports-arena-41551-large.mp4" type="video/mp4">
             </video>
           </div>
 
-          <!-- Feature Cards Grid (6 items) -->
-          <div class="mode-details-box" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">🏎️</span>
-              <b>Logitech G29/G923</b>
-              <span style="color: var(--muted); font-size: 9px;">Force Feedback Wheel</span>
+          <!-- Compact feature chips (always visible) -->
+          <div class="mode-chip-row" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🏎 Logitech G29</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🦶 3 Pedals</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🖥 Triple Screen</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">⚙ H Shifter</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">💑 Cockpit</span>
+          </div>
+
+          <!-- Collapsible tech specs accordion -->
+          <details class="mode-accordion" style="margin-bottom: 16px;">
+            <summary style="font: 700 10px var(--mono); color: var(--accent); text-transform: uppercase; cursor: pointer; padding: 6px 0; outline: none; display: list-item;">View Technical Details</summary>
+            <div class="mode-accordion-body" style="padding-top: 10px;">
+              <div class="mode-details-box" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px;">
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Logitech G29/G923</b><span style="color:var(--muted);font-size:9px;">Force Feedback Wheel</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">3 Pedal Setup</b><span style="color:var(--muted);font-size:9px;">Gas/Brake/Clutch</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Triple Monitor</b><span style="color:var(--muted);font-size:9px;">180° Curved</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Manual Shifter</b><span style="color:var(--muted);font-size:9px;">6-Speed H-Pattern</span></div>
+                <div class="mode-detail-item" style="grid-column:span 2; font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Cockpit Seating</b><span style="color:var(--muted);font-size:9px;">Steel-Chassis Bucket Seat</span></div>
+              </div>
+              <div class="mode-specs-list" style="font-family: var(--mono); font-size: 10px; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px;">
+                <div class="mode-spec-row" style="display:flex; justify-content:space-between;"><span>Hardware</span><b>Logitech Force Feedback</b></div>
+                <div class="mode-spec-row" style="display:flex; justify-content:space-between;"><span>Games</span><b style="font-size:11px;">Assetto Corsa • F1 25 • Forza</b></div>
+              </div>
             </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">🦶</span>
-              <b>3 Pedal Racing Setup</b>
-              <span style="color: var(--muted); font-size: 9px;">Realistic Gas/Brake/Clutch</span>
+          </details>
+
+          <!-- Status panel -->
+          <div class="mode-status-panel" style="display: flex; gap: 20px; font-family: var(--mono); font-size: 11px; margin-bottom: 20px; margin-top: auto; border-top: 1px solid var(--line); padding-top: 16px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span>🟢</span>
+              <div><strong>Pune</strong> <span style="color: var(--lime); margin-left: 2px;">Available Now</span></div>
             </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">🖥️</span>
-              <b>Triple Monitor</b>
-              <span style="color: var(--muted); font-size: 9px;">180° Curved Displays</span>
-            </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">⚙️</span>
-              <b>Manual Shifter</b>
-              <span style="color: var(--muted); font-size: 9px;">6-Speed H-Pattern Shift</span>
-            </div>
-            <div class="mode-detail-item" style="grid-column: span 2;">
-              <span style="font-size: 16px;">💺</span>
-              <b>Cockpit Seating</b>
-              <span style="color: var(--muted); font-size: 9px;">Steel-Chassis Bucket Seat Rig</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span>🚀</span>
+              <div><strong>Coimbatore</strong> <span style="color: var(--muted); margin-left: 2px;">Coming Soon</span></div>
             </div>
           </div>
 
-          <!-- Specs Panel -->
-          <div class="mode-specs-list">
-            <div class="mode-spec-row"><span>Hardware</span><b>Logitech Force Feedback</b></div>
-            <div class="mode-spec-row"><span>Supported Games</span><b style="font-size:11px;">Assetto Corsa · F1 25 · Forza · Dirt Rally</b></div>
-          </div>
-
-          <!-- How it works strip -->
-          <div class="mode-steps-strip">
-            <span>① Sit in Cockpit</span>
-            <span>➔</span>
-            <span>② Grab the Wheel</span>
-            <span>➔</span>
-            <span>③ Race Like Real Life</span>
-          </div>
-
-          <!-- Status and Booking Button -->
-          <div class="mode-status-row">
-            <div class="mode-status-info">
-              <div style="color: #00db78; font-weight: bold; font-family: var(--mono); font-size: 10px;">🟢 AVAILABLE AT PUNE</div>
-              <div style="color: #ffbb54; font-weight: bold; font-family: var(--mono); margin-top: 3px; font-size: 10px;">🚀 COIMBATORE COMING SOON</div>
-            </div>
-            <a href="#book" class="button" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="padding: 10px 18px; font-size: 10px; transition: transform 0.2s; will-change: transform;">Reserve Cockpit</a>
+          <div class="mode-status-row" style="width: 100%;">
+            <a href="#book" class="button mode-cta" data-zone="racing" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00db78; color: #000; box-shadow: 0 4px 15px rgba(0, 219, 120, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Reserve Sim Racing →</a>
           </div>
         </article>
 
-        <article class="mode glass-card reveal" style="--mode-color:#00c8ff; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
+        <article class="mode glass-card reveal" id="mode-vr" style="--mode-color:#00c8ff; display: flex; flex-direction: column; background: rgba(20,21,25,0.65);">
           <div class="mode-tag" style="color: #00c8ff;">VR Experience</div>
           <h3 style="margin-top: 15px; font-family: var(--display); letter-spacing: -0.06em;">VR<br><span style="color: #00c8ff;">EXPERIENCE</span></h3>
-          <p>OLED HDR, eye tracking and 3D spatial haptics. Step into immersive worlds beyond the screen with PS VR2 room-scale playrooms.</p>
+          <p>OLED HDR, eye tracking and 3D spatial haptics. Step into immersive worlds with PS VR2 room-scale playrooms.</p>
           
-          <!-- Large VR preview loop -->
-          <div style="position: relative; margin: 24px 0 16px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
+          <!-- Video preview -->
+          <div style="position: relative; margin: 20px 0 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #000;">
             <video autoplay muted loop playsinline poster="assets/images/boomers_vr_lounge.jpg" style="width: 100%; height: 100%; object-fit: cover;">
               <source src="https://assets.mixkit.co/videos/preview/mixkit-man-playing-vr-game-in-esports-arena-41550-large.mp4" type="video/mp4">
             </video>
           </div>
 
-          <!-- Feature Cards Grid (6 items) -->
-          <div class="mode-details-box" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">🥽</span>
-              <b>PlayStation VR2</b>
-              <span style="color: var(--muted); font-size: 9px;">Room Scale Space</span>
+          <!-- Compact feature chips -->
+          <div class="mode-chip-row" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🥽 PSVR2</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">👀 Eye Tracking</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🎮 Haptics</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🖥 4K HDR OLED</span>
+            <span class="mode-chip" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 12px; border-radius: 50px; font: 500 10px var(--mono); color: #fff;">🎯 20+ Games</span>
+          </div>
+
+          <!-- Collapsible tech specs accordion -->
+          <details class="mode-accordion" style="margin-bottom: 16px;">
+            <summary style="font: 700 10px var(--mono); color: var(--accent); text-transform: uppercase; cursor: pointer; padding: 6px 0; outline: none; display: list-item;">View Technical Details</summary>
+            <div class="mode-accordion-body" style="padding-top: 10px;">
+              <div class="mode-details-box" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px;">
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">PlayStation VR2</b><span style="color:var(--muted);font-size:9px;">Room Scale</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">4K HDR OLED</b><span style="color:var(--muted);font-size:9px;">Dual 2000×2040</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Eye Tracking</b><span style="color:var(--muted);font-size:9px;">Foveated Rendering</span></div>
+                <div class="mode-detail-item" style="font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">Motion Controllers</b><span style="color:var(--muted);font-size:9px;">Sense Haptics</span></div>
+                <div class="mode-detail-item" style="grid-column:span 2; font-size:11px; display:flex; flex-direction:column; gap:2px;"><b style="color:#fff;">20+ Games</b><span style="color:var(--muted);font-size:9px;">Beat Saber • GT7 • Resident Evil</span></div>
+              </div>
+              <div class="mode-specs-list" style="font-family: var(--mono); font-size: 10px; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px;">
+                <div class="mode-spec-row" style="display:flex; justify-content:space-between;"><span>Display</span><b>OLED 120Hz Refresh</b></div>
+                <div class="mode-spec-row" style="display:flex; justify-content:space-between;"><span>Games</span><b style="font-size:11px;">Beat Saber • GT7 • Resident Evil</b></div>
+              </div>
             </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">⚡</span>
-              <b>4K HDR OLED</b>
-              <span style="color: var(--muted); font-size: 9px;">Dual 2000x2040 displays</span>
+          </details>
+
+          <!-- Status panel -->
+          <div class="mode-status-panel" style="display: flex; gap: 20px; font-family: var(--mono); font-size: 11px; margin-bottom: 20px; margin-top: auto; border-top: 1px solid var(--line); padding-top: 16px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span>🟢</span>
+              <div><strong>Pune</strong> <span style="color: var(--lime); margin-left: 2px;">Available Now</span></div>
             </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">👀</span>
-              <b>Eye Tracking</b>
-              <span style="color: var(--muted); font-size: 9px;">Foveated Rendering Sensors</span>
-            </div>
-            <div class="mode-detail-item">
-              <span style="font-size: 16px;">🎮</span>
-              <b>Motion Controllers</b>
-              <span style="color: var(--muted); font-size: 9px;">VR Sense Haptic Triggers</span>
-            </div>
-            <div class="mode-detail-item" style="grid-column: span 2;">
-              <span style="font-size: 16px;">🕹️</span>
-              <b>20+ Supported Games</b>
-              <span style="color: var(--muted); font-size: 9px;">Beat Saber · GT7 · Resident Evil</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span>🚀</span>
+              <div><strong>Coimbatore</strong> <span style="color: var(--muted); margin-left: 2px;">Coming Soon</span></div>
             </div>
           </div>
 
-          <!-- Specs Panel -->
-          <div class="mode-specs-list">
-            <div class="mode-spec-row"><span>Display Specs</span><b>OLED 120Hz Refresh</b></div>
-            <div class="mode-spec-row"><span>Available Games</span><b style="font-size:11px;">Beat Saber · GT7 · Resident Evil · Arizona Sunshine</b></div>
-          </div>
-
-          <!-- How it works strip -->
-          <div class="mode-steps-strip">
-            <span>① Wear VR Headset</span>
-            <span>➔</span>
-            <span>② Calibrate Eyes</span>
-            <span>➔</span>
-            <span>③ Enter Virtual World</span>
-          </div>
-
-          <!-- Status and Booking Button -->
-          <div class="mode-status-row">
-            <div class="mode-status-info">
-              <div style="color: #00db78; font-weight: bold; font-family: var(--mono); font-size: 10px;">🟢 AVAILABLE AT PUNE</div>
-              <div style="color: #ffbb54; font-weight: bold; font-family: var(--mono); margin-top: 3px; font-size: 10px;">🚀 COIMBATORE COMING SOON</div>
-            </div>
-            <a href="#book" class="button" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="padding: 10px 18px; font-size: 10px; border-color: #00c8ff; color: #00c8ff; transition: transform 0.2s; will-change: transform;">Book VR (30 Min Session)</a>
+          <div class="mode-status-row" style="width: 100%;">
+            <a href="#book" class="button mode-cta" data-zone="vr" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00c8ff; color: #000; box-shadow: 0 4px 15px rgba(0, 200, 255, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Book VR Session →</a>
           </div>
         </article>
       </div>
@@ -725,13 +794,13 @@
             <div class="eyebrow">Team off-site</div>
             <h3>Corporate<br>booking</h3>
             <p>Reserve premium gaming rigs or consoles for your team in a distraction-free setting.</p>
-            <a class="button secondary" href="#book">Plan your session →</a>
+            <a class="button secondary" href="corporate.html">Plan your session →</a>
           </article>
           <article class="event-card reveal" style="--event-bg:url('assets/images/party-booking.jpg')">
             <div class="eyebrow" style="color:#e77fff">Celebrate here</div>
             <h3>Party<br>booking</h3>
             <p>Birthdays, celebrations, or simply an epic night with the squad—make it a shared experience.</p>
-            <a class="button secondary" href="#book">Book a party →</a>
+            <a class="button secondary" href="party.html">Book a party →</a>
           </article>
         </div>
       </div>
@@ -790,9 +859,60 @@
               <div class="calc-row total"><span>Est. Total:</span><b id="calc-disp-total">₹236</b></div>
             </div>
           </div>
+        </div>
+        
+        <!-- Right Column: Booking Card & Venue Status -->
+        <div class="booking-right-col" style="display: flex; flex-direction: column; gap: 24px;">
+          <!-- Compact Floating Booking Card -->
+          <div class="booking-card reveal" id="compactBookingCard" style="display: block;">
+            <div class="hud-header" style="border: none; padding-bottom: 0; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="hud-icon" style="font-size: 16px;">🎮</span>
+                <h3 style="font: 700 13px var(--mono); color: #fff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">STEP 1 OF 7</h3>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="hud-status-dot"></span>
+                <span style="font: 700 9px var(--mono); color: #00db78; text-transform: uppercase;">LIVE</span>
+              </div>
+            </div>
+          
+            <h2 style="font: 800 24px var(--display); color: #fff; margin: 0 0 20px; line-height: 1.2;">BOOK YOUR SESSION</h2>
+          
+            <!-- Dropdown Inputs -->
+            <div class="booking-field" style="margin-bottom: 16px;">
+              <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Location</label>
+              <select id="compact-branch" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
+                <option value="coimbatore" style="background:#141519; color:#fff;">Coimbatore (Tamil Nadu)</option>
+                <option value="pune" style="background:#141519; color:#fff;">Pune (Viman Nagar)</option>
+              </select>
+            </div>
+
+            <div class="booking-field" style="margin-bottom: 16px;">
+              <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Experience Zone</label>
+              <select id="compact-zone" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
+                <option value="pc" style="background:#141519; color:#fff;">PC Arena (240Hz/RTX)</option>
+                <option value="console" style="background:#141519; color:#fff;">Console Lounge (PS5/Tekken)</option>
+                <option value="vip" style="background:#141519; color:#fff;">VIP Squad Room (Private/RTX 4070)</option>
+                <option value="racing" style="background:#141519; color:#fff;">Sim Racing (Logitech G29 setup)</option>
+                <option value="vr" style="background:#141519; color:#fff;">VR Lounge (PlayStation VR2)</option>
+              </select>
+            </div>
+
+            <!-- Dynamic Info Row -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 12px 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;">
+              <span style="font: 500 11px var(--mono); color: var(--muted);" id="compact-avail-text">🟢 12 Available Stations</span>
+              <span style="font: 700 13px var(--display); color: var(--lime);" id="compact-price-text">From ₹100/hr</span>
+            </div>
+
+            <!-- Book Button -->
+            <button class="hud-reserve-btn" id="startBookingBtn" style="height: 52px; background: var(--lime); color: #171008;" onclick="window.startFullBookingFlow()">
+              <span>FIND MY STATION</span>
+              <span class="hud-btn-arrow">➔</span>
+            </button>
+          </div>
 
           <!-- Venue Image with Info Overlay -->
-          <div style="position: relative; margin-top: 30px; border-radius: 18px; overflow: hidden; height: 220px; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%), url('assets/images/boomers_pc_lounge.jpg') center/cover;">
+          <div style="position: relative; border-radius: 18px; overflow: hidden; height: 200px; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%), url('assets/images/boomers_pc_lounge.jpg') center/cover;">
             <div class="booking-image-overlay">
               <h4>RTX Arena</h4>
               <div class="overlay-stats">
@@ -803,56 +923,8 @@
             </div>
           </div>
         </div>
-        
-        <!-- Compact Floating Booking Card (Option 1 & 2 Combined) -->
-        <div class="booking-card reveal" id="compactBookingCard" style="display: block;">
-          <div class="hud-header" style="border: none; padding-bottom: 0; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="hud-icon" style="font-size: 16px;">🎮</span>
-              <h3 style="font: 700 13px var(--mono); color: #fff; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">READY TO PLAY</h3>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <span class="hud-status-dot"></span>
-              <span style="font: 700 9px var(--mono); color: #00db78; text-transform: uppercase;">LIVE</span>
-            </div>
-          </div>
-          
-          <h2 style="font: 800 24px var(--display); color: #fff; margin: 0 0 20px; line-height: 1.2;">BOOK YOUR SESSION</h2>
-          
-          <!-- Dropdown Inputs -->
-          <div class="booking-field" style="margin-bottom: 16px;">
-            <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Location</label>
-            <select id="compact-branch" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
-              <option value="coimbatore" style="background:#141519; color:#fff;">Coimbatore (Tamil Nadu)</option>
-              <option value="pune" style="background:#141519; color:#fff;">Pune (Viman Nagar)</option>
-            </select>
-          </div>
 
-          <div class="booking-field" style="margin-bottom: 16px;">
-            <label style="font: 700 10px var(--mono); color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 0.05em;">Experience Zone</label>
-            <select id="compact-zone" class="glass-select" style="width: 100%; height: 50px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; color: #fff; font: 600 13px var(--mono); cursor: pointer; outline: none;">
-              <option value="pc" style="background:#141519; color:#fff;">PC Arena (240Hz/RTX)</option>
-              <option value="console" style="background:#141519; color:#fff;">Console Lounge (PS5/Tekken)</option>
-              <option value="vip" style="background:#141519; color:#fff;">VIP Squad Room (Private/RTX 4070)</option>
-              <option value="racing" style="background:#141519; color:#fff;">Sim Racing (Logitech G29 setup)</option>
-              <option value="vr" style="background:#141519; color:#fff;">VR Lounge (PlayStation VR2)</option>
-            </select>
-          </div>
-
-          <!-- Dynamic Info Row -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 12px 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;">
-            <span style="font: 500 11px var(--mono); color: var(--muted);" id="compact-avail-text">🟢 12 Available Stations</span>
-            <span style="font: 700 13px var(--display); color: var(--lime);" id="compact-price-text">From ₹100/hr</span>
-          </div>
-
-          <!-- Book Button -->
-          <button class="hud-reserve-btn" id="startBookingBtn" style="height: 52px; background: var(--lime); color: #171008;" onclick="window.startFullBookingFlow()">
-            <span>FIND MY STATION</span>
-            <span class="hud-btn-arrow">➔</span>
-          </button>
-        </div>
-
-        <!-- Multi-Step Wizard Panel Card -->
+        <!-- Multi-Step Wizard Panel Card (also inside right col for desktop) -->
         <div class="booking-card reveal" id="bookingCardForm" style="display: none;">
           
           <!-- Step 1: Branch Selection -->
@@ -914,7 +986,7 @@
 
           <!-- Step 4: Session Settings -->
           <div class="booking-step-panel" id="step-3">
-            <h3>Session Options</h3>
+            <h3>Arena Session</h3>
             <div class="calc-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
               <div class="calc-field">
                 <label for="w-duration">Duration (Hours)</label>
@@ -951,38 +1023,41 @@
 
           <!-- Step 5: Café Food Upgrades (New) -->
           <div class="booking-step-panel" id="step-4">
-            <h3>Add Power-Up Snacks</h3>
+            <h3>Power-Up Add-ons</h3>
             <p style="font-size:11px; color:var(--muted); margin-bottom:15px;">Stack your session with premium snacks. Added items update your cart instantly.</p>
             <div id="wizardFoodList" style="max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
               <!-- Loaded dynamically in booking.js -->
             </div>
           </div>
 
-          <!-- Step 6: Summary & Checkout Simulation -->
+          <!-- Step 6: Mission Briefing -->
           <div class="booking-step-panel" id="step-5">
-            <h3>Review Summary & Checkout</h3>
-            
-            <div id="bookingSummaryCost" style="margin-bottom:20px;">
-              <!-- Cost totals and add-on lists updated dynamically -->
+            <div class="mission-briefing-header">
+              <span class="mission-briefing-eyebrow">⚡ MISSION BRIEFING</span>
+              <p class="mission-briefing-sub">Review your session details before confirming</p>
             </div>
             
-            <div class="calc-field" style="margin-bottom:15px;">
-              <label>Enter Mock Credit Card Number</label>
-              <input type="text" placeholder="4111 2222 3333 4444" value="4111 2222 3333 4444" style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--line); padding:10px; color:#fff;">
+            <div id="bookingSummaryCost" style="margin-bottom:20px;">
+              <!-- Rendered dynamically by booking.js -->
+            </div>
+            
+            <div class="mission-payment-block">
+              <div class="mission-payment-label">💳 SECURE PAYMENT</div>
+              <input type="text" placeholder="4111 2222 3333 4444" value="4111 2222 3333 4444" class="mission-card-input" aria-label="Mock Credit Card Number">
             </div>
           </div>
 
-          <!-- Step 7: Confirmation Success Ticket -->
+          <!-- Step 7: Mission Locked -->
           <div class="booking-step-panel" id="step-6">
             <div id="bookingSuccessTicket">
-              <!-- Confirmation receipt rendering (QR, download buttons) -->
+              <!-- Rendered dynamically by booking.js as MISSION LOCKED screen -->
             </div>
           </div>
 
           <!-- Wizard control buttons -->
           <div class="booking-nav-row">
             <button class="button secondary hidden" type="button" id="wizardPrevBtn">← Back</button>
-            <button class="button" type="button" id="wizardNextBtn">Continue →</button>
+            <button class="button" type="button" id="wizardNextBtn" data-default-text="Continue →" data-confirm-text="CONFIRM MISSION ✓">Continue →</button>
           </div>
           
         </div>
@@ -1125,130 +1200,106 @@
   </div>
 
 
-  <!-- Premium Session HUD Widget -->
+  <!-- Premium Session HUD Widget (Compact Redesign) -->
   <aside class="premium-session-hud" id="premiumSessionHUD" aria-label="Premium Session HUD">
     <!-- Close button for mobile drawer -->
     <button class="hud-close-btn" id="hudCloseBtn" aria-label="Close HUD">&times;</button>
-    
+
+    <!-- Header: Logo + Title + Live dot -->
+    <!-- Header: Logo + Title + Live dot -->
     <div class="hud-header">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img class="brand-mark" src="assets/images/logo.png" style="width: 20px; height: 20px; filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
-        <h4 style="font: 700 12px var(--mono); color: #fff; margin: 0; text-transform: uppercase;">YOUR SESSION</h4>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/logo.png" style="width:18px;height:18px;filter:drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
+        <h4 style="font:700 11px var(--mono);color:#fff;margin:0;text-transform:uppercase;letter-spacing:0.05em;">MISSION LOADOUT</h4>
       </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
+      <div style="display:flex;align-items:center;gap:5px;">
         <span class="hud-status-dot"></span>
-        <span style="font: 700 9px var(--mono); color: #00db78; text-transform: uppercase; letter-spacing: 0.05em;">LIVE</span>
+        <span id="hudAvailBadge" style="font:700 9px var(--mono);color:#00db78;text-transform:uppercase;">12 Available</span>
       </div>
     </div>
 
-    <!-- Progress Indicator -->
+    <!-- Step progress bar -->
     <div class="hud-progress-block">
       <div class="hud-progress-label">
         <span id="hudProgressText">STEP 1 OF 7</span>
         <span id="hudProgressPercent">14%</span>
       </div>
-      <div class="hud-progress-bar-wrap">
-        <div class="hud-progress-bar" id="hudProgressBar" style="width: 14%;"></div>
-      </div>
+      <div class="hud-progress-bar-wrap"><div class="hud-progress-bar" id="hudProgressBar" style="width:14%;"></div></div>
     </div>
 
-    <!-- Station Details & Thumbnail -->
+    <!-- Station Card: thumb + name + branch + avail badge -->
     <div class="hud-station-preview">
-      <div class="hud-station-thumb" id="hudStationThumb" style="background-image: url('assets/images/boomers_pc_lounge.jpg');"></div>
+      <div class="hud-station-thumb" id="hudStationThumb" style="background-image:url('assets/images/boomers_pc_lounge.jpg');"></div>
       <div class="hud-station-info">
-        <h3 id="hudStationName">Browse Stations</h3>
-        <p id="hudStationSpecs">No Specs Available</p>
-        <div style="display: flex; gap: 6px; align-items: center; font-size: 10px; color: var(--muted); margin-top: 4px;">
-          <span>👤 <span id="hudPlayersCount">1 Gamer</span></span>
-          <span>•</span>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+          <h3 id="hudStationName" style="margin:0;">Browse Stations</h3>
+          <span class="hud-badge" id="hudZoneBadge">PC ARENA</span>
+        </div>
+        <p id="hudStationSpecs" style="margin:0 0 4px;">Select a station to continue</p>
+        <div style="display:flex;gap:8px;align-items:center;font-size:9px;color:var(--muted);">
           <span>📍 <span id="hudBranchName">Coimbatore</span></span>
+          <span>•</span>
+          <span>👤 <span id="hudPlayersCount">1 Gamer</span></span>
         </div>
       </div>
     </div>
 
-    <!-- Session Details List -->
-    <div class="hud-details-list">
-      <div class="hud-details-item">
-        <span>🎮 Zone</span>
-        <strong id="hudZoneName">PC Arena</strong>
+    <!-- Quick details: zone / time / duration in one row -->
+    <div class="hud-quick-row">
+      <div class="hud-quick-item">
+        <span>⏰</span>
+        <strong id="hudTimeSlot">7:00 PM</strong>
       </div>
-      <div class="hud-details-item">
-        <span>⏰ Time</span>
-        <strong id="hudTimeSlot">Today • 7:00 PM</strong>
-      </div>
-      <div class="hud-details-item">
-        <span>⌛ Duration</span>
+      <div class="hud-quick-divider"></div>
+      <div class="hud-quick-item">
+        <span>⌛</span>
         <strong id="hudDurationText">2 Hours</strong>
       </div>
-    </div>
-
-    <!-- Gaming Equipment Preview -->
-    <div class="hud-equipment-block" id="hudEquipmentBlock">
-      <div class="hud-section-title">EQUIPMENT PRO</div>
-      <ul class="hud-eq-list" id="hudEqList">
-        <li><span>Processor:</span><strong>Intel i7</strong></li>
-        <li><span>Graphics:</span><strong>RTX 3070</strong></li>
-        <li><span>Monitor:</span><strong>240Hz Display</strong></li>
-        <li><span>Keyboard:</span><strong>Mechanical Keyboard</strong></li>
-        <li><span>Headset:</span><strong>HyperX Headset</strong></li>
-      </ul>
-    </div>
-
-    <!-- Kitchen Section -->
-    <div class="hud-kitchen-block" id="hudKitchenBlock">
-      <div class="hud-section-title">KITCHEN ADD-ONS</div>
-      <div class="hud-food-cards" id="hudFoodCards">
-        <!-- Mini cards loaded dynamically in menu.js -->
-        <div class="hud-food-empty">🍔 No food added yet</div>
+      <div class="hud-quick-divider"></div>
+      <div class="hud-quick-item">
+        <span>💰</span>
+        <strong id="hudRateText">₹100/hr</strong>
       </div>
     </div>
 
-    <!-- Live Status strip -->
-    <div class="hud-live-status-block">
-      <div class="hud-section-title">LIVE STATUS</div>
-      <div class="hud-status-grid">
-        <div class="hud-status-card">
-          <span>🟢 PC Arena</span>
-          <b>12 Available</b>
-        </div>
-        <div class="hud-status-card">
-          <span>🟡 PS5</span>
-          <b>3 Available</b>
-        </div>
-        <div class="hud-status-card">
-          <span>🔴 VR</span>
-          <b>Full</b>
-        </div>
-        <div class="hud-status-card">
-          <span>🏁 Sim Racing</span>
-          <b>2 Left</b>
+    <!-- Equipment chips -->
+    <div class="hud-chips-block">
+      <div class="hud-section-title">BATTLE RIG</div>
+      <div class="hud-chips" id="hudEqChips">
+        <span class="hud-chip">⚡ RTX 3070</span>
+        <span class="hud-chip">🖥 180Hz</span>
+        <span class="hud-chip">⌨ Mechanical</span>
+        <span class="hud-chip">🎧 HyperX</span>
+        <span class="hud-chip">🖱 Gaming Mouse</span>
+      </div>
+    </div>
+
+    <!-- Kitchen: show added items OR recommended combo if empty -->
+    <div class="hud-kitchen-compact" id="hudKitchenBlock">
+      <div class="hud-section-title">POWER-UP ADD-ONS</div>
+
+      <!-- Added food cards rendered here by JS -->
+      <div id="hudFoodCards">
+        <!-- Recommended combo shown when no food added -->
+        <div class="hud-combo-card" id="hudComboCard">
+          <div class="hud-combo-left">
+            <span class="hud-combo-tag">🔥 Popular Combo</span>
+            <strong>Burger + Fries + Drink</strong>
+            <span class="hud-combo-price">₹499</span>
+          </div>
+          <button class="hud-combo-btn" onclick="window.addFoodToCart && window.addFoodToCart('combo-1')" type="button">Add</button>
         </div>
       </div>
     </div>
 
-    <!-- Live Countdown Section -->
-    <div class="hud-countdown-block" id="hudCountdownBlock">
-      <div class="hud-section-title">NEXT SLOT COUNTDOWN</div>
-      <div class="hud-countdown-row">
-        <div>
-          <span>Next Slot</span>
-          <strong id="hudNextSlotTime">07:30 PM</strong>
-        </div>
-        <div>
-          <span>Starts In</span>
-          <strong id="hudCountdownTimer">08m 42s</strong>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pricing Summary (GST & Total) -->
+    <!-- Pricing: condensed -->
     <div class="hud-pricing-block">
       <div class="hud-price-line">
-        <span>Gaming Cost</span>
+        <span>Arena Session</span>
         <strong id="hudGamingCost">₹0</strong>
       </div>
       <div class="hud-price-line">
-        <span>Kitchen Add-ons</span>
+        <span>Power-Up Add-ons</span>
         <strong id="hudKitchenCost">₹0</strong>
       </div>
       <div class="hud-price-line">
@@ -1256,13 +1307,13 @@
         <strong id="hudGstCost">₹0</strong>
       </div>
       <div class="hud-price-line total">
-        <span>GRAND TOTAL</span>
+        <span>TOTAL</span>
         <strong id="hudGrandTotal">₹0</strong>
       </div>
     </div>
 
-    <!-- Ticket Preview Section -->
-    <div class="hud-ticket-preview" id="hudTicketPreview" style="display: none;">
+    <!-- Ticket Preview (only on step 7) -->
+    <div class="hud-ticket-preview" id="hudTicketPreview" style="display:none;">
       <div class="hud-section-title">YOUR TICKET</div>
       <div class="hud-ticket-card">
         <div class="hud-ticket-details">
@@ -1270,22 +1321,20 @@
           <span id="hudTicketStation">Station 12</span>
           <span id="hudTicketTime">Today • 7:00 PM</span>
         </div>
-        <div class="hud-ticket-qr">
-          <span style="font-size: 28px;">🔲</span>
-        </div>
+        <div class="hud-ticket-qr"><span style="font-size:28px;">🔲</span></div>
       </div>
       <a href="#book" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
     </div>
 
-    <!-- Floating CTA -->
+    <!-- Primary CTA -->
     <div class="hud-cta-wrap">
-      <button class="hud-reserve-btn" id="hudReserveBtn" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}">
-        <span>LOCK MY STATION</span>
+      <button class="hud-reserve-btn" id="hudReserveBtn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}">
+        <span>RESERVE THIS STATION</span>
         <span class="hud-btn-arrow">➔</span>
       </button>
     </div>
 
-    <!-- Achievement Strip at very bottom of card -->
+    <!-- Achievement strip -->
     <div class="hud-achievement-strip">
       <div>⭐ 4.9 Rating</div>
       <div>👥 14K Players</div>
@@ -1294,8 +1343,8 @@
     </div>
   </aside>
 
-  <!-- Mobile Floating HUD Toggle Button -->
-  <button class="mobile-hud-toggle" id="mobileHUDToggleBtn" aria-label="View Session HUD">
+  <!-- Mobile Floating HUD Toggle Button (hidden until scrolled past hero) -->
+  <button class="mobile-hud-toggle fab-hidden" id="mobileHUDToggleBtn" aria-label="View Session HUD">
     <span class="hud-icon">🎮</span>
     <span class="badge" id="mobileHUDCountBadge">0</span>
   </button>
@@ -1319,13 +1368,69 @@
     <a href="#book" class="floating-avail-btn">Book Now</a>
   </aside>
 
-  <!-- Audio Toggle Floating button (Phase 4) -->
-  <button class="audio-toggle" id="audioToggleBtn" aria-label="Toggle Audio">
-    <span class="audio-icon">🔇</span> Sound <b class="audio-state-text">OFF</b>
-  </button>
+  <!-- Audio Toggle hidden -->
 
-  <!-- Mobile Sticky Bottom Booking Trigger -->
-  <a class="mobile-book" href="#book">Book a station →</a>
+  <!-- Happy Hours Modal -->
+  <div id="happyHoursModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; padding:20px;" onclick="closeHHModal(event)">
+    <div id="hhModalInner" style="background:linear-gradient(135deg,#0c0d12,#10080f); border:1px solid rgba(239,189,78,0.25); border-radius:24px; padding:40px; max-width:480px; width:100%; position:relative; box-shadow:0 40px 100px rgba(0,0,0,0.7), 0 0 80px rgba(239,189,78,0.06);">
+      <!-- Close -->
+      <button onclick="closeHappyHoursModal()" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;display:grid;place-items:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">&times;</button>
+
+      <!-- Badge -->
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);border-radius:999px;padding:6px 14px;margin-bottom:18px;">
+        <span style="font:700 10px var(--mono,monospace);color:#efbd4e;letter-spacing:0.15em;text-transform:uppercase;">🔥 Happy Hours Deal</span>
+      </div>
+
+      <!-- Heading -->
+      <h2 style="font:800 2.4rem/0.92 var(--display,'Space Grotesk',sans-serif);letter-spacing:-0.05em;margin-bottom:8px;">Buy 1 Hour<br><span style="color:#efbd4e;">Get 1 Hour FREE</span></h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:24px;">Every Monday, Tuesday &amp; Wednesday on PC and Console gaming. No code needed — just select your slot and book.</p>
+
+      <!-- Days -->
+      <div style="margin-bottom:22px;">
+        <div style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Available Days</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Mon</span>
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Tue</span>
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Wed</span>
+        </div>
+      </div>
+
+      <!-- Branch select -->
+      <div style="margin-bottom:16px;">
+        <label style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:8px;">Select Branch</label>
+        <div style="display:flex;gap:10px;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font:500 12px var(--mono,monospace);color:rgba(255,255,255,0.65);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(239,189,78,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input type="radio" name="hh-branch" value="coimbatore" style="accent-color:#efbd4e;"> Coimbatore
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font:500 12px var(--mono,monospace);color:rgba(255,255,255,0.65);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(239,189,78,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input type="radio" name="hh-branch" value="pune" style="accent-color:#efbd4e;"> Pune
+          </label>
+        </div>
+      </div>
+
+      <!-- Time select -->
+      <div style="margin-bottom:22px;">
+        <label style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:8px;">Select Time Slot</label>
+        <select id="hhTimeSlot" style="width:100%;height:46px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0 16px;color:#fff;font:500 13px var(--mono,monospace);outline:none;">
+          <option>10:00 AM – 12:00 PM (Morning Deal)</option>
+          <option>12:00 PM – 2:00 PM (Lunch Slot)</option>
+          <option>2:00 PM – 4:00 PM (Afternoon Deal)</option>
+          <option>4:00 PM – 6:00 PM (Evening Rush)</option>
+        </select>
+      </div>
+
+      <!-- CTA -->
+      <button onclick="bookHappyHours()" style="width:100%;height:50px;background:#efbd4e;color:#0a0700;border:none;border-radius:12px;font:800 12px var(--mono,monospace);letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.2s;" onmouseover="this.style.background='#ffc800'" onmouseout="this.style.background='#efbd4e'">Book Happy Hours →</button>
+
+      <p style="text-align:center;font:500 10px var(--mono,monospace);color:rgba(255,255,255,0.25);margin-top:14px;letter-spacing:0.05em;">OFFER VALID ON PC &amp; CONSOLE · NO CODE NEEDED</p>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Booking Trigger (context-aware) -->
+  <a class="mobile-book" id="mobileBookBar" href="#book">
+    <span id="mobileBookLabel">Book a Station</span>
+    <span class="mobile-book-price" id="mobileBookPrice">→</span>
+  </a>
 
   <!-- Script Modules loading progressively -->
   <script src="assets/js/tracker.js"></script>
@@ -1336,6 +1441,8 @@
   <script src="assets/js/menu.js"></script>
   <script src="assets/js/gallery.js"></script>
   <script src="assets/js/audio.js"></script>
+  <script src="assets/js/cinematic.js"></script>
+  <script src="assets/js/mobile-audit.js"></script>
   
   <script>
     // Activate the 20-second hero video once the page loads and video can play
@@ -1351,6 +1458,87 @@
         heroVid.play();
       }
     }
+
+    // Happy Hours Modal Functions
+    function openHappyHoursModal() {
+      document.getElementById('happyHoursModal').style.display = 'flex';
+    }
+    function closeHappyHoursModal() {
+      document.getElementById('happyHoursModal').style.display = 'none';
+    }
+    function closeHHModal(e) {
+      if (e.target === document.getElementById('happyHoursModal')) {
+        closeHappyHoursModal();
+      }
+    }
+    function bookHappyHours() {
+      const branches = document.getElementsByName('hh-branch');
+      let selectedBranch = 'coimbatore';
+      for (const b of branches) {
+        if (b.checked) {
+          selectedBranch = b.value;
+          break;
+        }
+      }
+
+      const branchSelect = document.getElementById('compact-branch');
+      if (branchSelect) {
+        branchSelect.value = selectedBranch;
+        branchSelect.dispatchEvent(new Event('change'));
+      }
+
+      const zoneSelect = document.getElementById('compact-zone');
+      if (zoneSelect) {
+        zoneSelect.value = 'pc'; // default to PC Arena for Happy Hours
+        zoneSelect.dispatchEvent(new Event('change'));
+      }
+
+      closeHappyHoursModal();
+
+      const bookSec = document.getElementById('book');
+      if (bookSec) {
+        bookSec.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      setTimeout(() => {
+        if (window.startFullBookingFlow) {
+          window.startFullBookingFlow();
+        }
+      }, 600);
+    }
+
+    // Expose functions globally
+    window.openHappyHoursModal = openHappyHoursModal;
+    window.closeHappyHoursModal = closeHappyHoursModal;
+    window.closeHHModal = closeHHModal;
+    window.bookHappyHours = bookHappyHours;
+
+    // Countdown Timer for Live Tournament Ring Card
+    function initRingCardCountdown() {
+      const el = document.getElementById('ringCardCountdown');
+      if (!el) return;
+      
+      let seconds = 2 * 3600 + 15 * 60 + 44; // Starts from 02:15:44
+      
+      const interval = setInterval(() => {
+        if (seconds <= 0) {
+          clearInterval(interval);
+          el.textContent = "00:00:00";
+          return;
+        }
+        seconds--;
+        const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+        const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        el.textContent = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRingCardCountdown();
+    });
+
+
   </script>
 </body>
 </html>

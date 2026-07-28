@@ -38,22 +38,118 @@ function initFoodMenuEngine() {
   renderMenuGrid();
 
   // Search input handler
+  // Search input handler
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const shortcut = document.querySelector('.search-shortcut-badge');
+  const sortSelect = document.getElementById('foodSortSelect');
+  
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       activeSearchQuery = e.target.value.toLowerCase().trim();
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = activeSearchQuery ? 'block' : 'none';
+      }
+      if (shortcut) {
+        shortcut.style.display = activeSearchQuery ? 'none' : 'block';
+      }
       renderMenuGrid();
     });
   }
 
+  if (clearSearchBtn && searchInput) {
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      activeSearchQuery = '';
+      clearSearchBtn.style.display = 'none';
+      if (shortcut) {
+        shortcut.style.display = 'block';
+      }
+      renderMenuGrid();
+    });
+  }
+
+  // Rotating placeholders for search box
+  const searchPlaceholders = [
+    "Search burgers, pasta, mocktails...",
+    "Search fries, sandwiches, energy drinks...",
+    "Search squad combos, milkshakes, wraps...",
+    "Search wings, instant maggi, popcorn..."
+  ];
+  let placeholderIdx = 0;
+  setInterval(() => {
+    if (searchInput) {
+      placeholderIdx = (placeholderIdx + 1) % searchPlaceholders.length;
+      searchInput.placeholder = searchPlaceholders[placeholderIdx];
+    }
+  }, 3000);
+
+  // Dynamic category item counts
+  tabButtons.forEach(btn => {
+    const onclickStr = btn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/'([^']+)'/);
+    if (match && match[1]) {
+      const catKey = match[1];
+      let count = 0;
+      if (catKey === 'best-sellers') {
+        count = allFoodItems.filter(item => 
+          item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9
+        ).length;
+      } else if (POWER_UP_MENU[catKey]) {
+        count = POWER_UP_MENU[catKey].length;
+      }
+      
+      const cleanText = btn.textContent.trim().replace(/\s*\(\d+\s*Items\)$/i, '').replace(/\s*\d+\s*Items$/i, '').replace(/\s*\(\d+\)$/i, '');
+      btn.innerHTML = `${cleanText} <span style="opacity:0.75; font-size:9px; margin-left:4px;">(${count})</span>`;
+    }
+  });
+
+  // Global helper for trending search chips
+  window.applySearchQuery = function(query) {
+    if (searchInput) {
+      searchInput.value = query;
+      activeSearchQuery = query.toLowerCase().trim();
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = 'block';
+      }
+      if (shortcut) {
+        shortcut.style.display = 'none';
+      }
+      renderMenuGrid();
+      
+      // Focus and scroll
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  // Set checkmark prefix for filters dynamically
+  filterButtons.forEach(btn => {
+    const originalText = btn.textContent.replace('✓ ', '').trim();
+    btn.dataset.original = originalText;
+    if (btn.classList.contains('active') && !btn.textContent.startsWith('✓')) {
+      btn.textContent = '✓ ' + originalText;
+    }
+  });
+
   // Filter tags click handler
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
+      filterButtons.forEach(b => {
+        b.classList.remove('active');
+        b.textContent = b.dataset.original || b.textContent.replace('✓ ', '').trim();
+      });
       btn.classList.add('active');
+      btn.textContent = '✓ ' + (btn.dataset.original || btn.textContent.trim());
       activeFilterType = btn.dataset.filter;
       renderMenuGrid();
     });
   });
+
+  // Sort dropdown change listener
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      renderMenuGrid();
+    });
+  }
 
   // Category tab button click handler
   window.switchCafeTab = function(category, btnElement) {
@@ -69,16 +165,24 @@ function initFoodMenuEngine() {
       if (targetBtn) targetBtn.classList.add('active');
     }
 
-    renderMenuGrid();
-    
     // Clear search and other filters on tab change to prevent confusion
     if (searchInput) searchInput.value = '';
     activeSearchQuery = '';
-    filterButtons.forEach(b => b.classList.remove('active'));
+    if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+    if (shortcut) shortcut.style.display = 'block';
+    
+    filterButtons.forEach(b => {
+      b.classList.remove('active');
+      b.textContent = b.dataset.original || b.textContent.replace('✓ ', '').trim();
+    });
     const allFilterBtn = Array.from(filterButtons).find(b => b.dataset.filter === 'all');
-    if (allFilterBtn) allFilterBtn.classList.add('active');
+    if (allFilterBtn) {
+      allFilterBtn.classList.add('active');
+      allFilterBtn.textContent = '✓ ' + (allFilterBtn.dataset.original || 'All Items');
+    }
     activeFilterType = 'all';
 
+    renderMenuGrid();
     Tracker.track('Cafe Tab Switched', { category });
   };
 
@@ -125,10 +229,59 @@ function initFoodMenuEngine() {
       filteredList = allFoodItems.filter(item => item.categoryKey === 'squad-combos');
     }
 
+    // 3.5 Apply sorting
+    const sortVal = document.getElementById('foodSortSelect') ? document.getElementById('foodSortSelect').value : 'popular';
+    const sortLabels = {
+      'popular': 'Popular',
+      'price-asc': 'Price Low → High',
+      'price-desc': 'Price High → Low',
+      'prep': 'Prep Time',
+      'rating': 'Best Rated'
+    };
+
+    if (sortVal === 'price-asc') {
+      filteredList.sort((a, b) => a.price - b.price);
+    } else if (sortVal === 'price-desc') {
+      filteredList.sort((a, b) => b.price - a.price);
+    } else if (sortVal === 'prep') {
+      filteredList.sort((a, b) => {
+        const timeA = parseInt(a.prep) || 0;
+        const timeB = parseInt(b.prep) || 0;
+        return timeA - timeB;
+      });
+    } else if (sortVal === 'rating') {
+      filteredList.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+    } else {
+      // popular (default)
+      filteredList.sort((a, b) => {
+        const popRank = { 'Must Try': 3, 'Bestseller': 2, 'Popular': 1 };
+        const rankA = popRank[a.popularity] || 0;
+        const rankB = popRank[b.popularity] || 0;
+        if (rankB !== rankA) return rankB - rankA;
+        return parseFloat(b.rating) - parseFloat(a.rating);
+      });
+    }
+
+    // Update search banner count & description
+    const banner = document.getElementById('searchResultsBanner');
+    const bannerText = document.getElementById('searchResultsCountText');
+    if (banner && bannerText) {
+      if (activeSearchQuery !== '' || activeFilterType !== 'all') {
+        banner.style.display = 'flex';
+        bannerText.textContent = `${filteredList.length} Results Found Sorted by ${sortLabels[sortVal]}`;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    // Empty state
     if (filteredList.length === 0) {
       container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted); font-family: var(--mono); font-size: 13px;">
-          ❌ No matching items found. Try another search or filter tag!
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
+          <span style="font-size: 32px;">🎮</span>
+          <strong>No loadouts found.</strong>
+          <span>Try another category or filter search terms.</span>
+          <button class="button secondary" onclick="if(window.clearAllFoodFilters) window.clearAllFoodFilters()" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Show All ]</button>
         </div>
       `;
       return;
@@ -140,28 +293,24 @@ function initFoodMenuEngine() {
       card.className = 'badge-card glass-card food-product-card';
       card.style.cursor = 'pointer';
       
-      const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity}</span>` : '';
-      const prepBadge = `<span class="food-prep-badge">⏱️ ${item.prep}</span>`;
-      const spiceIcons = '🌶️'.repeat(item.spice || 0);
-      const spiceHTML = spiceIcons ? `<span style="margin-left:8px;">${spiceIcons}</span>` : '';
+      const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
       
       card.innerHTML = `
         <div class="food-image-container" onclick="openFoodDetailsModal('${item.id}')">
           <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
           ${popularityBadge}
-          ${prepBadge}
         </div>
-        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')">
+        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')" style="padding: 16px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span class="food-type-badge ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
-            <span style="color:#efbd4e; font-size:11px;">★ ${item.rating}</span>
+            <div style="display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; color:var(--accent);">
+              <span>⭐ ${item.rating}</span>
+              <span style="opacity:0.3">|</span>
+              <span>⏱ ${item.prep}</span>
+            </div>
           </div>
           <h4 class="food-card-title">${item.name}</h4>
           <p class="food-card-desc">${item.desc}</p>
-          <div style="font: 500 9px var(--mono); color: var(--muted); margin-bottom: 12px; display:flex; align-items:center;">
-            <span>🔥 ${item.calories}</span>
-            ${spiceHTML}
-          </div>
         </div>
         <div class="food-card-footer">
           <span class="food-card-price">₹${item.price}</span>
@@ -386,7 +535,13 @@ window.addFoodToCart = function(itemId) {
   }
 
   updatePremiumSessionHUD();
-  alert(`Added ${found.name} to your session order!`);
+  
+  // Calculate total count
+  const totalCount = cartState.addedFood.reduce((sum, item) => sum + item.qty, 0);
+  if (window.showBgcNotification) {
+    window.showBgcNotification(`✔ Added to Session`, `<strong>${found.name}</strong> added successfully • ${totalCount} Items total`);
+  }
+  
   Tracker.track('Cart Item Added', { name: found.name });
 };
 
@@ -422,7 +577,11 @@ window.addFoodQtyToCart = function(itemId) {
 
   updatePremiumSessionHUD();
   closeFoodDetailsModal();
-  alert(`Added ${qty}x ${found.name} to your session order!`);
+  
+  const totalCount = cartState.addedFood.reduce((sum, item) => sum + item.qty, 0);
+  if (window.showBgcNotification) {
+    window.showBgcNotification(`✔ Added to Session`, `<strong>${qty}x ${found.name}</strong> added successfully • ${totalCount} Items total`);
+  }
 };
 
 /**
@@ -473,7 +632,7 @@ function animateCartValue(element, start, end, duration = 300) {
 }
 
 /**
- * Re-calculate costs and update sticky widget HTML
+ * Re-calculate costs and update compact HUD panel
  */
 function updatePremiumSessionHUD() {
   const hud = document.getElementById('premiumSessionHUD');
@@ -507,150 +666,140 @@ function updatePremiumSessionHUD() {
     progressBar.style.width = `${percent}%`;
   }
 
-  // 3. Station details & Thumbnail
-  const nameDisp = document.getElementById('hudStationName');
-  const specsDisp = document.getElementById('hudStationSpecs');
-  const thumbDisp = document.getElementById('hudStationThumb');
-  const playersDisp = document.getElementById('hudPlayersCount');
-  const branchDisp = document.getElementById('hudBranchName');
+  // 3. Availability badge (header)
+  const availBadge = document.getElementById('hudAvailBadge');
+  if (availBadge && window.STATIONS_DATA) {
+    const avCount = STATIONS_DATA.filter(s => s.branch === activeBooking.branch && s.zone === activeBooking.zone && s.status === 'available').length;
+    availBadge.textContent = avCount > 0 ? `${avCount} Available` : 'Zone Full';
+    availBadge.style.color = avCount > 0 ? '#00db78' : '#ff4f70';
+  }
 
-  if (nameDisp) {
-    nameDisp.textContent = activeBooking.station ? activeBooking.station.name : 'Select Station';
-  }
-  if (specsDisp) {
-    specsDisp.textContent = activeBooking.station 
-      ? `${activeBooking.station.gpu} · ${activeBooking.station.monitor}` 
-      : 'No Specs Selected';
-  }
+  // 4. Station thumbnail
+  const thumbDisp = document.getElementById('hudStationThumb');
   if (thumbDisp) {
     let thumbUrl = 'assets/images/boomers_pc_lounge.jpg';
-    if (activeBooking.zone === 'racing') {
-      thumbUrl = 'assets/images/boomers_racing_sim.jpg';
-    } else if (activeBooking.zone === 'console' || activeBooking.zone === 'vr') {
-      thumbUrl = 'assets/images/boomers_vr_lounge.jpg';
-    }
+    if (activeBooking.zone === 'racing') thumbUrl = 'assets/images/boomers_racing_sim.jpg';
+    else if (activeBooking.zone === 'console' || activeBooking.zone === 'vr') thumbUrl = 'assets/images/boomers_vr_lounge.jpg';
     thumbDisp.style.backgroundImage = `url('${thumbUrl}')`;
   }
-  if (playersDisp) {
-    playersDisp.textContent = `${activeBooking.players} Gamer${activeBooking.players > 1 ? 's' : ''}`;
-  }
-  if (branchDisp) {
-    branchDisp.textContent = activeBooking.branch.charAt(0).toUpperCase() + activeBooking.branch.slice(1);
+
+  // 5. Station name + specs
+  const nameDisp = document.getElementById('hudStationName');
+  const specsDisp = document.getElementById('hudStationSpecs');
+  if (nameDisp) nameDisp.textContent = activeBooking.station ? activeBooking.station.name : 'Browse Stations';
+  if (specsDisp) {
+    specsDisp.textContent = activeBooking.station
+      ? `${activeBooking.station.gpu} · ${activeBooking.station.monitor}`
+      : 'Select a station to continue';
   }
 
-  // 4. Session details list
-  const zoneDisp = document.getElementById('hudZoneName');
+  // 6. Zone badge
+  const zoneBadge = document.getElementById('hudZoneBadge');
+  if (zoneBadge) {
+    const zoneLabels = { pc: 'PC ARENA', console: 'CONSOLE', vip: 'VIP SQUAD', racing: 'SIM RACING', vr: 'VR LOUNGE' };
+    zoneBadge.textContent = zoneLabels[activeBooking.zone] || activeBooking.zone.toUpperCase();
+  }
+
+  // 7. Branch + players
+  const branchDisp = document.getElementById('hudBranchName');
+  const playersDisp = document.getElementById('hudPlayersCount');
+  if (branchDisp) branchDisp.textContent = activeBooking.branch.charAt(0).toUpperCase() + activeBooking.branch.slice(1);
+  if (playersDisp) playersDisp.textContent = `${activeBooking.players} Gamer${activeBooking.players > 1 ? 's' : ''}`;
+
+  // 8. Quick row: time / duration / rate
   const timeDisp = document.getElementById('hudTimeSlot');
   const durationDisp = document.getElementById('hudDurationText');
+  const rateDisp = document.getElementById('hudRateText');
+  const rate = activeBooking.station ? activeBooking.station.price : (() => {
+    const priceMap = { pc: activeBooking.branch === 'pune' ? 120 : 100, console: activeBooking.branch === 'pune' ? 150 : 120, vip: activeBooking.branch === 'pune' ? 300 : 250, racing: activeBooking.branch === 'pune' ? 200 : 150, vr: 200 };
+    return priceMap[activeBooking.zone] || 100;
+  })();
+  if (timeDisp) timeDisp.textContent = activeBooking.slots && activeBooking.slots.length > 0 ? activeBooking.slots[0] : '7:00 PM';
+  if (durationDisp) durationDisp.textContent = `${activeBooking.duration}h`;
+  if (rateDisp) rateDisp.textContent = `₹${rate}/hr`;
 
-  if (zoneDisp) {
-    const zoneLabels = { pc: 'PC Arena', console: 'Console Lounge', vip: 'VIP Squad', racing: 'Sim Racing', vr: 'VR Lounge' };
-    zoneDisp.textContent = zoneLabels[activeBooking.zone] || activeBooking.zone.toUpperCase();
-  }
-  if (timeDisp) {
-    timeDisp.textContent = activeBooking.slots && activeBooking.slots.length > 0 
-      ? `Today • ${activeBooking.slots[0]}` 
-      : 'Not Selected';
-  }
-  if (durationDisp) {
-    durationDisp.textContent = `${activeBooking.duration} Hour${activeBooking.duration > 1 ? 's' : ''}`;
-  }
-
-  // 5. Gaming Equipment Specs
-  const eqList = document.getElementById('hudEqList');
-  if (eqList) {
-    let eqHTML = '';
-    const isPune = activeBooking.branch === 'pune';
-    const gpuName = activeBooking.station ? activeBooking.station.gpu : (activeBooking.zone === 'vip' ? 'RTX 4070 SUPER' : (isPune ? 'RTX 4070 SUPER' : 'RTX 3070'));
-    const monitorHz = activeBooking.station ? activeBooking.station.monitor : (isPune ? '240Hz' : '180Hz');
-
+  // 9. Equipment chips (zone-specific)
+  const chipsEl = document.getElementById('hudEqChips');
+  if (chipsEl) {
+    let chips = [];
     if (activeBooking.zone === 'racing') {
-      eqHTML = `
-        <li><span>Rig:</span><strong>Logitech G29/G923</strong></li>
-        <li><span>Pedals:</span><strong>3-Pedal Floor Unit</strong></li>
-        <li><span>Shifter:</span><strong>Manual H-Shifter</strong></li>
-        <li><span>Cockpit:</span><strong>Playseat Seat</strong></li>
-        <li><span>Screen:</span><strong>Triple 27" Curved</strong></li>
-      `;
+      chips = ['🏎 Logitech G29', '🖥 Triple Screen', '🪑 Playseat', '⚙️ H-Shifter'];
     } else if (activeBooking.zone === 'vr') {
-      eqHTML = `
-        <li><span>Headset:</span><strong>PlayStation VR2</strong></li>
-        <li><span>Controllers:</span><strong>Sense Haptic</strong></li>
-        <li><span>Tracking:</span><strong>Inside-out IR</strong></li>
-        <li><span>Area:</span><strong>3m x 3m VR Pod</strong></li>
-        <li><span>Haptics:</span><strong>TactSuit Support</strong></li>
-      `;
+      chips = ['🥽 PS VR2', '🎮 Sense Haptic', '📡 IR Tracking', '📦 3m × 3m Pod'];
     } else if (activeBooking.zone === 'console') {
-      eqHTML = `
-        <li><span>Console:</span><strong>PlayStation 5</strong></li>
-        <li><span>Display:</span><strong>4K OLED TV</strong></li>
-        <li><span>Controller:</span><strong>DualSense Wireless</strong></li>
-        <li><span>Couch:</span><strong>Premium Recliner</strong></li>
-        <li><span>Sound:</span><strong>Dolby Atmos</strong></li>
-      `;
+      chips = ['🎮 PlayStation 5', '📺 4K OLED', '🔊 Dolby Atmos', '🛋 Recliner'];
     } else {
       // pc / vip
-      const cpu = activeBooking.zone === 'vip' ? 'Intel i9' : 'Intel i7';
-      eqHTML = `
-        <li><span>Processor:</span><strong>${cpu}</strong></li>
-        <li><span>Graphics:</span><strong>${gpuName}</strong></li>
-        <li><span>Monitor:</span><strong>${monitorHz} Display</strong></li>
-        <li><span>Keyboard:</span><strong>Mechanical Pro</strong></li>
-        <li><span>Headset:</span><strong>HyperX Headset</strong></li>
-      `;
+      const isPune = activeBooking.branch === 'pune';
+      const gpu = activeBooking.station ? activeBooking.station.gpu : (activeBooking.zone === 'vip' || isPune ? 'RTX 4070 S' : 'RTX 3070');
+      const hz = activeBooking.station ? activeBooking.station.monitor : (isPune || activeBooking.zone === 'vip' ? '240Hz' : '180Hz');
+      chips = [`⚡ ${gpu}`, `🖥 ${hz}`, '⌨ Mechanical', '🎧 HyperX', '🖱 Gaming Mouse'];
     }
-    eqList.innerHTML = eqHTML;
+    chipsEl.innerHTML = chips.map(c => `<span class="hud-chip">${c}</span>`).join('');
   }
 
-  // 6. Food Preview cards aggregation
+  // 10. Food section: combo card vs added food cards
   const foodContainer = document.getElementById('hudFoodCards');
+  const comboCard = document.getElementById('hudComboCard');
   let foodTotal = 0;
   let totalItemsCount = 0;
+
   if (foodContainer) {
     if (activeBooking.addedFood.length === 0) {
-      foodContainer.innerHTML = '<div class="hud-food-empty">🍔 No food added yet</div>';
+      // Show and update the dynamic recommended combo card
+      if (comboCard) {
+        comboCard.style.display = 'flex';
+        
+        const recTag = comboCard.querySelector('.hud-combo-tag');
+        const recTitle = comboCard.querySelector('strong');
+        const recPrice = comboCard.querySelector('.hud-combo-price');
+        const recBtn = comboCard.querySelector('.hud-combo-btn');
+        
+        if (activeBooking.zone === 'racing') {
+          if (recTag) recTag.textContent = '🏎️ Perfect with Sim Racing';
+          if (recTitle) recTitle.textContent = 'Pro Racer Pack';
+          if (recPrice) recPrice.textContent = '₹449';
+          if (recBtn) recBtn.setAttribute('onclick', "window.addBundleToBooking('bundle-3')");
+        } else if (activeBooking.zone === 'console' || activeBooking.zone === 'vr') {
+          if (recTag) recTag.textContent = '🎮 Perfect with Console';
+          if (recTitle) recTitle.textContent = 'Console Co-Op Combo';
+          if (recPrice) recPrice.textContent = '₹499';
+          if (recBtn) recBtn.setAttribute('onclick', "window.addBundleToBooking('bundle-2')");
+        } else {
+          // PC Arena / VIP
+          if (recTag) recTag.textContent = '🍔 Perfect with PC Arena';
+          if (recTitle) recTitle.textContent = 'Solo Grinder Combo';
+          if (recPrice) recPrice.textContent = '₹349';
+          if (recBtn) recBtn.setAttribute('onclick', "window.addBundleToBooking('bundle-1')");
+        }
+      }
     } else {
+      // Hide combo, show added items
+      if (comboCard) comboCard.style.display = 'none';
+
+      // Remove old dynamic cards (keep comboCard)
+      const existingDynamic = foodContainer.querySelectorAll('.hud-food-card-dynamic');
+      existingDynamic.forEach(el => el.remove());
+
       const aggregatedFood = [];
       activeBooking.addedFood.forEach(item => {
         foodTotal += item.price;
         totalItemsCount += 1;
         const existing = aggregatedFood.find(f => f.name === item.name);
-        if (existing) {
-          existing.qty += 1;
-        } else {
-          let prep = '12 mins';
-          let categoryLabel = 'Snack';
-          // Find details from POWER_UP_MENU
-          Object.keys(POWER_UP_MENU).forEach(cat => {
-            const found = POWER_UP_MENU[cat].find(f => f.name === item.name);
-            if (found) {
-              prep = found.prep;
-              categoryLabel = found.popularity || 'Freshly Prepared';
-            }
-          });
-          aggregatedFood.push({
-            name: item.name,
-            price: item.price,
-            qty: 1,
-            prep: prep,
-            categoryLabel: categoryLabel
-          });
-        }
+        if (existing) { existing.qty += 1; } else { aggregatedFood.push({ name: item.name, price: item.price, qty: 1 }); }
       });
 
-      foodContainer.innerHTML = '';
       aggregatedFood.forEach(item => {
-        const emoji = item.name.toLowerCase().includes('drink') || item.name.toLowerCase().includes('mojito') || item.name.toLowerCase().includes('soda') || item.name.toLowerCase().includes('shake') || item.name.toLowerCase().includes('tea') || item.name.toLowerCase().includes('coffee') ? '🥤' : '🍔';
+        const isDrink = ['drink','mojito','soda','shake','tea','coffee'].some(k => item.name.toLowerCase().includes(k));
         const card = document.createElement('div');
-        card.className = 'hud-food-card';
+        card.className = 'hud-food-card hud-food-card-dynamic';
         card.innerHTML = `
           <div class="hud-food-card-left">
-            <strong>${emoji} ${item.qty}x ${item.name}</strong>
-            <span>${item.categoryLabel} • ${item.prep}</span>
+            <strong>${isDrink ? '🥤' : '🍔'} ${item.qty}x ${item.name}</strong>
           </div>
           <div class="hud-food-card-right">
             <b>₹${item.price * item.qty}</b>
-            <button type="button" onclick="window.removeHUDFoodItem('${item.name}')" aria-label="Remove item">&times;</button>
+            <button type="button" onclick="window.removeHUDFoodItem('${item.name}')" aria-label="Remove">&times;</button>
           </div>
         `;
         foodContainer.appendChild(card);
@@ -658,63 +807,45 @@ function updatePremiumSessionHUD() {
     }
   }
 
-  // 7. Badge count sync
+  // 11. Mobile badge count
   const mobileHUDBadge = document.getElementById('mobileHUDCountBadge');
-  if (mobileHUDBadge) {
-    mobileHUDBadge.textContent = totalItemsCount;
-  }
+  if (mobileHUDBadge) mobileHUDBadge.textContent = totalItemsCount;
 
-  // 8. Cost calculations & Countup animation
-  const rate = activeBooking.station ? activeBooking.station.price : 100;
+  // 12. Cost calculations & count-up animation
   const gamingCost = rate * activeBooking.duration * activeBooking.players;
   const subTotal = gamingCost + foodTotal;
   const gst = Math.round(subTotal * 0.18);
   const grandTotal = subTotal + gst;
 
-  const gamingDisp = document.getElementById('hudGamingCost');
-  const kitchenDisp = document.getElementById('hudKitchenCost');
-  const gstDisp = document.getElementById('hudGstCost');
-  const totalDisp = document.getElementById('hudGrandTotal');
-
-  animateCartValue(gamingDisp, previousCartValues.gaming, gamingCost);
+  animateCartValue(document.getElementById('hudGamingCost'), previousCartValues.gaming, gamingCost);
   previousCartValues.gaming = gamingCost;
-
-  animateCartValue(kitchenDisp, previousCartValues.food, foodTotal);
+  animateCartValue(document.getElementById('hudKitchenCost'), previousCartValues.food, foodTotal);
   previousCartValues.food = foodTotal;
-
-  animateCartValue(gstDisp, previousCartValues.gst, gst);
+  animateCartValue(document.getElementById('hudGstCost'), previousCartValues.gst, gst);
   previousCartValues.gst = gst;
-
-  animateCartValue(totalDisp, previousCartValues.grand, grandTotal);
+  animateCartValue(document.getElementById('hudGrandTotal'), previousCartValues.grand, grandTotal);
   previousCartValues.grand = grandTotal;
 
-  // 9. Ticket Preview Section (Visible on Step 7)
+  // 13. Ticket Preview (step 7 only)
   const ticketPreview = document.getElementById('hudTicketPreview');
   if (ticketPreview) {
     if (currentStep === 6) {
       ticketPreview.style.display = 'block';
-      const tZone = document.getElementById('hudTicketZone');
-      const tStation = document.getElementById('hudTicketStation');
-      const tTime = document.getElementById('hudTicketTime');
-      if (tZone) {
-        tZone.textContent = zoneDisp ? zoneDisp.textContent : 'PC Arena';
-      }
-      if (tStation) {
-        tStation.textContent = activeBooking.station ? activeBooking.station.name : 'Station TBD';
-      }
-      if (tTime) {
-        tTime.textContent = timeDisp ? timeDisp.textContent : 'Today • 7:00 PM';
-      }
+      const zoneLabels = { pc: 'PC Arena', console: 'Console Lounge', vip: 'VIP Squad', racing: 'Sim Racing', vr: 'VR Lounge' };
+      const el = document.getElementById('hudTicketZone');
+      if (el) el.textContent = zoneLabels[activeBooking.zone] || 'PC Arena';
+      const elS = document.getElementById('hudTicketStation');
+      if (elS) elS.textContent = activeBooking.station ? activeBooking.station.name : 'Station TBD';
+      const elT = document.getElementById('hudTicketTime');
+      if (elT) elT.textContent = activeBooking.slots && activeBooking.slots.length ? `Today • ${activeBooking.slots[0]}` : 'Today • 7:00 PM';
     } else {
       ticketPreview.style.display = 'none';
     }
   }
 
-  // Sync with main booking cost displays if visible
+  // Sync summary if open
   const summaryCostDisp = document.getElementById('bookingSummaryCost');
-  if (summaryCostDisp && window.renderBookingSummary) {
-    renderBookingSummary();
-  }
+  if (summaryCostDisp && window.renderBookingSummary) renderBookingSummary();
 }
 
 function getActiveGameTheme(activeBooking) {
@@ -812,3 +943,41 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updatePremiumSessionHUD();
   }
 });
+
+/**
+ * 13. Global Helper to Clear All Food Filters (for Empty States)
+ */
+window.clearAllFoodFilters = function() {
+  const searchInput = document.getElementById('foodSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const shortcut = document.querySelector('.search-shortcut-badge');
+  const filterButtons = document.querySelectorAll('.food-filter-btn');
+  const tabButtons = document.querySelectorAll('.cafe-tab-btn');
+  
+  if (searchInput) {
+    searchInput.value = '';
+    // Reset placeholder
+    searchInput.placeholder = "Search burgers, pasta, mocktails...";
+  }
+  if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+  if (shortcut) shortcut.style.display = 'block';
+  
+  // Reset filter buttons
+  filterButtons.forEach(b => {
+    b.classList.remove('active');
+    b.textContent = b.dataset.original || b.textContent.replace('✓ ', '').trim();
+  });
+  
+  const allFilterBtn = Array.from(filterButtons).find(b => b.dataset.filter === 'all');
+  if (allFilterBtn) {
+    allFilterBtn.classList.add('active');
+    allFilterBtn.textContent = '✓ ' + (allFilterBtn.dataset.original || 'All Items');
+  }
+  
+  // Set category filter
+  window.activeFilterType = 'all';
+  window.activeSearchQuery = '';
+  
+  // Switch to first category
+  window.switchCafeTab('best-sellers', tabButtons[0]);
+};

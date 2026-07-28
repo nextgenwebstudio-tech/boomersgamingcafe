@@ -452,18 +452,19 @@ function renderSuccessTicket() {
   const bookingId = `BMR-${Math.floor(100000 + Math.random() * 900000)}`;
 
   successDiv.innerHTML = `
+  successDiv.innerHTML = `
     <div class="confirmation-card glass-card" style="padding: 28px; text-align: center; border: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
-      <span style="font-family: var(--mono); color: var(--lime); font-weight: 700; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">✔ Reservation Confirmed</span>
-      <h4 class="ticket-title" style="font-size: 26px; font-family: var(--display); letter-spacing: -0.06em; margin: 10px 0 20px; color: #fff;">${station ? station.name : 'Station'} Locked</h4>
+      <span style="font-family: var(--mono); color: var(--lime); font-weight: 700; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">✔ Mission Locked</span>
+      <h4 class="ticket-title" style="font-size: 26px; font-family: var(--display); letter-spacing: -0.06em; margin: 10px 0 20px; color: #fff;">${station ? station.name : 'Rig'} Active</h4>
       
       <div class="ticket-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; text-align: left; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 20px 0; margin-bottom: 24px;">
         <div class="ticket-field">Booking ID<b>${bookingId}</b></div>
         <div class="ticket-field">Branch<b>${branchName}</b></div>
-        <div class="ticket-field">Station<b>${station ? station.name : 'N/A'}</b></div>
+        <div class="ticket-field">Rig Station<b>${station ? station.name : 'N/A'}</b></div>
         <div class="ticket-field">Time Slot<b>${slotsList}</b></div>
         <div class="ticket-field">Duration<b>${activeBooking.duration} Hours</b></div>
-        <div class="ticket-field">Players<b>${activeBooking.players} Gamer(s)</b></div>
-        <div class="ticket-field" style="grid-column: span 2;">Food Add-ons<b>${activeBooking.addedFood.map(f => f.name).join(', ') || 'None'}</b></div>
+        <div class="ticket-field">Gamers<b>${activeBooking.players} Player(s)</b></div>
+        <div class="ticket-field" style="grid-column: span 2;">Power-Up Add-ons<b>${activeBooking.addedFood.map(f => f.name).join(', ') || 'None'}</b></div>
       </div>
 
       <!-- Canvas for dynamic offline QR Code drawing -->
@@ -476,10 +477,11 @@ function renderSuccessTicket() {
           <button type="button" class="button" onclick="downloadMockTicket('${bookingId}')" style="flex: 1; font-size: 10px; padding: 12px 10px;">💾 Download Ticket</button>
           <button type="button" class="button secondary" onclick="alert('Syncing: Reservation added to your Calendar!')" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2);">📅 Add to Calendar</button>
         </div>
-        <div style="display: flex; gap: 8px; width: 100%; margin-top: 4px;">
-          <button type="button" class="button secondary" onclick="window.bookingWizardShowStep(0)" style="flex: 1; font-size: 9px; padding: 10px; border-color: rgba(255,255,255,0.15);">Book Again</button>
-          <a href="#top" class="button secondary" onclick="document.getElementById('top').scrollIntoView({behavior: 'smooth'})" style="flex: 1; font-size: 9px; padding: 10px; border-color: rgba(255,255,255,0.15); text-align: center; display: flex; align-items: center; justify-content: center; text-transform: uppercase; font-family: var(--mono);">Browse Arena</a>
+        <div style="display: flex; gap: 8px; width: 100%;">
+          <a href="https://maps.google.com" target="_blank" class="button secondary" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; text-transform: uppercase;">🗺 Directions</a>
+          <button type="button" class="button secondary" onclick="window.shareBooking && window.shareBooking('${bookingId}')" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2);">🔗 Share Booking</button>
         </div>
+        <button type="button" class="button secondary" onclick="window.bookingWizardShowStep(0)" style="width: 100%; font-size: 10px; padding: 10px; border-color: rgba(255,255,255,0.1); margin-top: 4px;">🔄 Book Another Session</button>
       </div>
     </div>
   `;
@@ -779,11 +781,15 @@ function initLiveAvailabilityWidget() {
   setInterval(updateDashboardNumbers, 15000);
 }
 
-// Global functions linked to booking actions
 window.addFoodToBooking = function(foodName, price) {
   activeBooking.addedFood.push({ name: foodName, price: price });
   Tracker.trackBundleAdded('food', foodName, price);
-  alert(`Added ${foodName} to your booking loadout!`);
+  if (window.showBgcNotification) {
+    window.showBgcNotification(`✔ Added to Session`, `<strong>${foodName}</strong> added to your booking loadout!`);
+  }
+  if (window.updatePremiumSessionHUD) {
+    window.updatePremiumSessionHUD();
+  }
   renderBookingSummary();
 };
 
@@ -792,7 +798,29 @@ window.addBundleToBooking = function(bundleId) {
   if (bundle) {
     activeBooking.bundle = bundle;
     Tracker.trackBundleAdded(bundle.id, bundle.name, bundle.price);
-    alert(`Added ${bundle.name} to your session reservation!`);
+    
+    // Extract bundle items and display them in the HUD list
+    activeBooking.addedFood = activeBooking.addedFood.filter(f => !f.fromBundle);
+    if (bundleId === 'bundle-1') {
+      activeBooking.addedFood.push({ name: 'RTX Burger', price: 0, fromBundle: true });
+      activeBooking.addedFood.push({ name: 'Soft Drink', price: 0, fromBundle: true });
+    } else if (bundleId === 'bundle-2') {
+      activeBooking.addedFood.push({ name: 'Loaded Nachos', price: 0, fromBundle: true });
+      activeBooking.addedFood.push({ name: 'Soft Drink', price: 0, fromBundle: true });
+      activeBooking.addedFood.push({ name: 'Soft Drink', price: 0, fromBundle: true });
+    } else if (bundleId === 'bundle-3') {
+      activeBooking.addedFood.push({ name: 'Spicy Wrap', price: 0, fromBundle: true });
+      activeBooking.addedFood.push({ name: 'Red Bull', price: 0, fromBundle: true });
+    }
+
+    if (window.showBgcNotification) {
+      window.showBgcNotification(`✔ Added to Session`, `<strong>${bundle.name}</strong> added to your reservation!`);
+    }
+    
+    if (window.updatePremiumSessionHUD) {
+      window.updatePremiumSessionHUD();
+    }
+    
     renderBookingSummary();
   }
 };
@@ -1060,5 +1088,27 @@ window.startFullBookingFlow = function() {
   
   if (window.updatePremiumSessionHUD) {
     window.updatePremiumSessionHUD();
+  }
+};
+
+/**
+ * 8. Share Booking functionality with navigator.share and clipboard copy fallbacks
+ */
+window.shareBooking = function(bookingId) {
+  if (navigator.share) {
+    navigator.share({
+      title: "My Boomer's Gaming Cafe Reservation",
+      text: `Hey! I just locked my rig at Boomer's Gaming Cafe! Booking ID: ${bookingId}. Join my queue!`,
+      url: window.location.href
+    }).catch(() => {});
+  } else {
+    // Fallback: Copy link
+    navigator.clipboard.writeText(`Boomer's Gaming Cafe Booking ID: ${bookingId}`).then(() => {
+      if (window.showBgcNotification) {
+        window.showBgcNotification("✔ Link Copied", "Booking ID copied to clipboard!");
+      } else {
+        alert("Booking ID copied to clipboard!");
+      }
+    });
   }
 };

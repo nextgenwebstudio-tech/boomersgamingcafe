@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08090c" />
+  <meta name="description" content="Boomer's Power-Up Station menu. Order premium burgers, potation milkshakes, gaming combos, pasta and wraps directly while you play." />
+  <title>Power-Up Station Menu — Boomer's Gaming Café</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <style>
+    :root {
+      --menu-gold: #efbd4e;
+      --menu-dark: #08090c;
+      --menu-card: rgba(20,21,28,0.9);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--menu-dark);
+      color: #fff;
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Nav */
+    .menu-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 68px;
+      background: rgba(8,9,12,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .menu-nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font: 700 16px 'Space Grotesk', sans-serif;
+      color: #fff;
+    }
+    .menu-nav .brand img { width: 34px; height: 34px; border-radius: 50%; }
+    .menu-nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font: 500 12px 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .menu-nav-back:hover { color: var(--menu-gold); }
+
+    /* Hero */
+    .menu-hero {
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 40px;
+      background: linear-gradient(180deg, #13141a 0%, var(--menu-dark) 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
+
+    .menu-hero h1 {
+      font: 800 clamp(2.5rem, 5vw, 4rem)/0.92 'Space Grotesk', sans-serif;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+    .menu-hero h1 span { color: var(--menu-gold); }
+    .menu-hero-lead {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      max-width: 600px;
+    }
+
+    /* Menu container */
+    .menu-page-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      padding: 40px 0 80px;
+      align-items: start;
+    }
+
+    /* Sidebar Categories */
+    .menu-sidebar {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .menu-side-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font: 700 14px/1 'Space Grotesk', sans-serif;
+      text-align: left;
+      padding: 14px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-side-btn:hover,
+    .menu-side-btn.active {
+      background: rgba(239,189,78,0.08);
+      color: var(--menu-gold);
+    }
+    .menu-side-btn.active {
+      border-left: 3px solid var(--menu-gold);
+      border-radius: 0 10px 10px 0;
+      padding-left: 17px;
+    }
+
+    /* Main Area */
+    .menu-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* Search & Filter Shelf */
+    .menu-shelf-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .search-wrap {
+      position: relative;
+      width: 100%;
+    }
+    .search-input {
+      width: 100%;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.03) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 12px !important;
+      padding: 0 46px 0 20px;
+      font: 500 14px 'Manrope', sans-serif;
+      outline: none;
+      box-shadow: none !important;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.4) !important;
+      font-weight: 400 !important;
+    }
+    .search-input:focus {
+      border-color: var(--menu-gold) !important;
+      box-shadow: 0 0 20px rgba(239, 189, 78, 0.15) !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+    }
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+    }
+    .filter-chips-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 0;
+    }
+    .filter-chips-row::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 99px;
+      color: rgba(255,255,255,0.7);
+      padding: 8px 16px;
+      font: 600 11px 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .filter-chip:hover,
+    .filter-chip.active {
+      background: rgba(239,189,78,0.12);
+      border-color: var(--menu-gold);
+      color: var(--menu-gold);
+    }
+
+    /* Grid layout */
+    .menu-grid-view {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    /* Food card overrides */
+    .menu-food-card {
+      background: var(--menu-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .menu-food-img {
+      height: 180px;
+      background: var(--img) center/cover;
+      position: relative;
+    }
+    .menu-food-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--bg, #ff4f70);
+      color: #fff;
+      font: 700 8px 'DM Mono', monospace;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .menu-food-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .menu-food-meta {
+      display: flex;
+      justify-content: space-between;
+      font: 500 10px 'DM Mono', monospace;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .menu-food-name {
+      font: 700 16px 'Space Grotesk', sans-serif;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .menu-food-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+    .menu-food-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 14px;
+    }
+    .menu-food-price {
+      font: 800 18px 'Space Grotesk', sans-serif;
+      color: var(--menu-gold);
+    }
+    .menu-food-btn {
+      height: 38px;
+      background: transparent;
+      border: 1px solid var(--menu-gold);
+      border-radius: 8px;
+      color: var(--menu-gold);
+      padding: 0 16px;
+      font: 800 10px 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .menu-food-btn:hover {
+      background: var(--menu-gold);
+      color: #000;
+    }
+
+    /* Footer strip */
+    .menu-footer-bar {
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-footer-bar span { font: 500 12px 'DM Mono', monospace; color: rgba(255,255,255,0.3); }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .wrap { padding: 0 20px; }
+      .menu-nav { padding: 0 20px; }
+      .menu-page-grid { grid-template-columns: 1fr; gap: 24px; padding: 24px 0 60px; }
+      .menu-sidebar { display: none; } /* Hide sidebar on mobile, chips handle it */
+      .menu-shelf-row { grid-template-columns: 1fr; gap: 14px; }
+      .menu-grid-view { grid-template-columns: 1fr; gap: 14px; }
+      .menu-food-img { height: 150px; }
+      .menu-footer-bar { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="menu-nav">
+    <a class="brand" href="index.html">
+      <img src="assets/images/logo.png" alt="Boomer's logo">
+      BOOMERS Gaming Cafe
+    </a>
+    <a class="menu-nav-back" href="index.html">← Back to main site</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="menu-hero">
+    <div class="wrap">
+      <h1>Power-Up <span>Station Menu.</span></h1>
+      <p class="menu-hero-lead">Real gaming setup snacks, thick potion milkshakes, burgers, and squad combo boxes prepared fresh to order in our kitchen.</p>
+    </div>
+  </section>
+
+  <!-- Main Menu Grid -->
+  <div class="wrap">
+    <div class="menu-page-grid">
+      
+      <!-- Sidebar Categories -->
+      <aside class="menu-sidebar">
+        <button class="menu-side-btn active" onclick="switchCategory('xp-starters', this)">🍟 Starters</button>
+        <button class="menu-side-btn" onclick="switchCategory('squad-combos', this)">🎁 Squad Combos</button>
+        <button class="menu-side-btn" onclick="switchCategory('potion-bar', this)">🥤 Potion Bar</button>
+        <button class="menu-side-btn" onclick="switchCategory('recharge-station', this)">🍔 Recharge Station</button>
+        <button class="menu-side-btn" onclick="switchCategory('all-items', this)">🔀 View All</button>
+      </aside>
+
+      <!-- Main Area -->
+      <main class="menu-main-content">
+        
+        <!-- Search & Filter shelf -->
+        <div class="menu-shelf-row">
+          <div class="search-wrap">
+            <input type="text" id="menuSearchInput" class="search-input" placeholder="Search squad combos, burgers, milkshakes..." oninput="handleSearch(this)">
+            <span class="search-icon">🔍</span>
+          </div>
+          
+          <div class="filter-chips-row">
+            <button class="filter-chip active" onclick="filterType('all', this)">All</button>
+            <button class="filter-chip" onclick="filterType('veg', this)">🟢 Veg Only</button>
+            <button class="filter-chip" onclick="filterType('non-veg', this)">🔴 Non-Veg</button>
+            <button class="filter-chip" onclick="filterType('bestseller', this)">🔥 Bestsellers</button>
+          </div>
+        </div>
+
+        <!-- Food items grid -->
+        <div class="menu-grid-view" id="menuItemsGrid">
+          <!-- Loaded dynamically -->
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="menu-footer-bar">
+    <span>© 2026 Boomer's Gaming Café · <a href="index.html" style="color:var(--menu-gold); text-decoration:none;">boomers.in</a></span>
+    <span>📍 Pune & Coimbatore</span>
+  </footer>
+
+  <!-- Load BGC Data -->
+  <script src="assets/js/data.js"></script>
+  <script>
+    let activeCategory = 'xp-starters';
+    let searchQuery = '';
+    let vegFilter = 'all'; // all, veg, non-veg, bestseller
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu();
+    });
+
+    function renderMenu() {
+      const grid = document.getElementById('menuItemsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      let items = [];
+      if (activeCategory === 'all-items') {
+        Object.keys(POWER_UP_MENU).forEach(cat => {
+          items.push(...POWER_UP_MENU[cat]);
+        });
+      } else if (POWER_UP_MENU[activeCategory]) {
+        items = [...POWER_UP_MENU[activeCategory]];
+      }
+
+      // Filter by search query
+      if (searchQuery) {
+        items = items.filter(item => 
+          item.name.toLowerCase().includes(searchQuery) ||
+          item.desc.toLowerCase().includes(searchQuery)
+        );
+      }
+
+      // Filter by veg/non-veg/bestseller
+      if (vegFilter === 'veg') {
+        items = items.filter(item => item.isVeg === true);
+      } else if (vegFilter === 'non-veg') {
+        items = items.filter(item => item.isVeg === false);
+      } else if (vegFilter === 'bestseller') {
+        items = items.filter(item => item.popularity === 'Bestseller' || item.popularity === 'Must Try');
+      }
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: rgba(255,255,255,0.45); font-family: var(--mono);">
+            No items found matching the selected filters.
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'menu-food-card';
+        
+        let badgeColor = '#ff4f70';
+        if (item.isVeg) badgeColor = '#00db78';
+        if (item.popularity === 'Bestseller') badgeColor = '#efbd4e';
+
+        const imgPath = item.image.startsWith('assets') ? item.image : `assets/images/${item.image}`;
+
+        card.innerHTML = `
+          <div class="menu-food-img" style="--img: url('${imgPath}')">
+            ${item.popularity ? `<span class="menu-food-badge" style="background:${badgeColor}">${item.popularity}</span>` : ''}
+          </div>
+          <div class="menu-food-info">
+            <div class="menu-food-meta">
+              <span>${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+              <span>⭐ ${item.rating} · ${item.prep}</span>
+            </div>
+            <div class="menu-food-name">${item.name}</div>
+            <div class="menu-food-desc">${item.desc}</div>
+            <div class="menu-food-footer">
+              <div class="menu-food-price">₹${item.price}</div>
+              <button class="menu-food-btn" onclick="addToOrder('${item.id}')">+ Add to order</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function switchCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.menu-side-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenu();
+    }
+
+    function handleSearch(input) {
+      searchQuery = input.value.toLowerCase().trim();
+      renderMenu();
+    }
+
+    function filterType(type, btn) {
+      vegFilter = type;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenu();
+    }
+
+    function addToOrder(itemId) {
+      alert(`Item added to your session tab! Configure booking to complete checkout.`);
+    }
+  </script>
+</body>
+</html>

@@ -25,6 +25,33 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize mobile responsive HUD toggle
   initMobileHUD();
 
+  // Initialize context-aware bottom sticky CTA
+  initContextAwareCTA();
+
+  // Initialize scroll-visibility for mobile sticky booking bar
+  initMobileBookBarScrollToggle();
+
+  // Initialize lightweight hero mouse move parallax
+  initHeroParallax();
+
+  // Initialize background floating particles
+  initHeroParticles();
+
+  // Initialize trust badges count animations
+  initTrustCounters();
+
+  // Initialize Twitch live widget countdown clock
+  initLiveCardCountdown();
+
+  // Initialize magnetic buttons hover pull
+  initMagneticButtons();
+
+  // Initialize video performance observer
+  initVideoPerformanceSpy();
+
+  // Initialize click ripple effects on buttons
+  initButtonRipples();
+
   // Initialize reveal animations (progressive fallback to IntersectionObserver if GSAP ScrollTrigger fails)
   initScrollReveals();
 });
@@ -343,6 +370,17 @@ function initMobileHUD() {
   
   if (!toggleBtn || !hud) return;
 
+  // Show FAB only after scrolling past the hero (300px)
+  const handleHUDScroll = () => {
+    if (window.scrollY > 300) {
+      toggleBtn.classList.remove('fab-hidden');
+    } else {
+      toggleBtn.classList.add('fab-hidden');
+    }
+  };
+  window.addEventListener('scroll', handleHUDScroll);
+  handleHUDScroll(); // Run initially
+
   // Create overlay if not present
   let cartOverlay = document.getElementById('mobileCartOverlay');
   if (!cartOverlay) {
@@ -374,4 +412,470 @@ function initMobileHUD() {
     reserveBtn.addEventListener('click', closeHUD);
   }
 }
+
+/**
+ * 9. Context-Aware Sticky Bottom Booking CTA
+ */
+function initContextAwareCTA() {
+  const label = document.getElementById('mobileBookLabel');
+  if (!label) return;
+
+  const sections = [
+    { id: 'power-up', text: 'Order Combo →' },
+    { id: 'mode-vr', text: 'Book VR Session →' },
+    { id: 'mode-racing', text: 'Reserve Cockpit →' },
+    { id: 'arena', text: 'Reserve PC Arena →' },
+    { id: 'play', text: 'Reserve PC Arena →' },
+    { id: 'hero-sec', text: 'Book a Station →' }
+  ];
+
+  window.addEventListener('scroll', () => {
+    let currentText = 'Book a Station →';
+    
+    // Find which section is currently occupying the center of the viewport
+    const viewportHeight = window.innerHeight;
+    const centerLine = window.scrollY + (viewportHeight / 2);
+    
+    for (const sec of sections) {
+      const el = document.getElementById(sec.id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const top = window.scrollY + rect.top;
+        const bottom = top + rect.height;
+        
+        if (centerLine >= top && centerLine <= bottom) {
+          currentText = sec.text;
+          break;
+        }
+      }
+    }
+    
+    // Fallback if we scroll past booking form
+    const bookEl = document.getElementById('book');
+    if (bookEl) {
+      const rect = bookEl.getBoundingClientRect();
+      const top = window.scrollY + rect.top;
+      if (window.scrollY + (viewportHeight * 0.75) >= top) {
+        currentText = 'Lock My Station →';
+      }
+    }
+    
+    if (label.textContent !== currentText) {
+      label.textContent = currentText;
+    }
+  });
+}
+
+/**
+ * 10. Scroll-Visibility for Mobile Sticky Booking Bar
+ */
+function initMobileBookBarScrollToggle() {
+  const bookBar = document.getElementById('mobileBookBar');
+  if (!bookBar) return;
+  
+  // Hide on load
+  bookBar.classList.add('mobile-book-hidden');
+  
+  window.addEventListener('scroll', () => {
+    // Show only when scrolled down past the hero area (300px)
+    if (window.scrollY < 300) {
+      bookBar.classList.add('mobile-book-hidden');
+    } else {
+      bookBar.classList.remove('mobile-book-hidden');
+    }
+  });
+}
+
+/**
+ * 11. Lightweight Mouse-Move Parallax for Desktop Viewports
+ */
+function initHeroParallax() {
+  const hero = document.getElementById('hero-sec');
+  if (!hero || window.innerWidth < 1024) return;
+  
+  const light = hero.querySelector('.hero-light');
+  const content = hero.querySelector('.hero-main');
+  const media = hero.querySelector('.hero-media');
+  const video = hero.querySelector('.hero-video');
+  const orbitWrap = hero.querySelector('.hero-orbit-wrap');
+  const liveCard = hero.querySelector('.hero-live-card');
+  
+  hero.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { width, height } = hero.getBoundingClientRect();
+    const x = (clientX / width - 0.5) * 2; // scale of -1 to 1
+    const y = (clientY / height - 0.5) * 2;
+    
+    if (light) {
+      light.style.transform = `translate3d(${x * -25}px, ${y * -25}px, 0)`;
+    }
+    if (content) {
+      content.style.transform = `translate3d(${x * 10}px, ${y * 10}px, 0)`;
+    }
+    if (media) {
+      media.style.transform = `translate3d(${x * 12}px, ${y * 12}px, 0) scale(1.05)`;
+    }
+    if (video) {
+      video.style.transform = `translate3d(${x * 12}px, ${y * 12}px, 0) scale(1.05)`;
+    }
+    if (orbitWrap) {
+      orbitWrap.style.transform = `translate3d(${x * -15}px, ${y * -15}px, 0)`;
+    }
+    if (liveCard) {
+      liveCard.style.transform = `translate3d(${x * -18}px, ${y * -18}px, 0)`;
+    }
+  });
+}
+
+/**
+ * 12. Premium BGC iOS/Apple Style Toast Notification Framework
+ */
+window.showBgcNotification = function(title, desc) {
+  let toast = document.getElementById('bgcToastNotification');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'bgcToastNotification';
+    toast.className = 'bgc-toast';
+    toast.innerHTML = `
+      <div class="bgc-toast-title" id="bgcToastTitle"></div>
+      <div class="bgc-toast-desc" id="bgcToastDesc"></div>
+    `;
+    document.body.appendChild(toast);
+  }
+  
+  const titleEl = document.getElementById('bgcToastTitle');
+  const descEl = document.getElementById('bgcToastDesc');
+  if (titleEl) titleEl.innerHTML = title;
+  if (descEl) descEl.innerHTML = desc;
+  
+  // Trigger transition reflow
+  toast.offsetHeight; 
+  toast.classList.add('show');
+  
+  if (window.bgcToastTimer) clearTimeout(window.bgcToastTimer);
+  window.bgcToastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3200);
+};
+
+/**
+ * 13. Background Warm-Gold Floating Particles Effect
+ */
+function initHeroParticles() {
+  const canvas = document.getElementById('heroParticles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  let width = canvas.width = canvas.offsetWidth;
+  let height = canvas.height = canvas.offsetHeight;
+  
+  const particles = [];
+  const particleCount = 35;
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 2.2 + 0.6,
+      speedY: -(Math.random() * 0.3 + 0.08),
+      speedX: (Math.random() - 0.5) * 0.15,
+      opacity: Math.random() * 0.4 + 0.1
+    });
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    for (let i = 0; i < particleCount; i++) {
+      const p = particles[i];
+      p.y += p.speedY;
+      p.x += p.speedX;
+      
+      // Reset if offscreen top
+      if (p.y < 0) {
+        p.y = height;
+        p.x = Math.random() * width;
+      }
+      if (p.x < 0 || p.x > width) {
+        p.speedX = -p.speedX;
+      }
+      
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 183, 3, ${p.opacity})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  }
+  
+  window.addEventListener('resize', () => {
+    if (canvas.offsetWidth && canvas.offsetHeight) {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+  });
+  
+  animate();
+}
+
+/**
+ * 14. Trust Badge Number Count up Micro-Interactions
+ */
+function initTrustCounters() {
+  const counters = [
+    { id: 'count-rating', target: 4.9, decimals: 1, suffix: '' },
+    { id: 'count-gamers', target: 14, decimals: 0, suffix: 'K+' },
+    { id: 'count-tournaments', target: 200, decimals: 0, suffix: '+' },
+    { id: 'count-stations', target: 64, decimals: 0, suffix: '' }
+  ];
+  
+  // Use IntersectionObserver so animation triggers when visible
+  const strip = document.getElementById('heroTrustStrip');
+  if (!strip) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        counters.forEach(c => {
+          const el = document.getElementById(c.id);
+          if (!el) return;
+          
+          let current = 0;
+          const stepTime = 25;
+          const steps = 30;
+          const increment = c.target / steps;
+          
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= c.target) {
+              current = c.target;
+              clearInterval(timer);
+            }
+            el.textContent = current.toFixed(c.decimals) + c.suffix;
+          }, stepTime);
+        });
+        observer.unobserve(strip);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  observer.observe(strip);
+}
+
+/**
+ * 15. Live Stream Match Ticking Countdown Timer
+ */
+function initLiveCardCountdown() {
+  const timerEl = document.getElementById('liveCardCountdown');
+  if (!timerEl) return;
+  
+  let totalSecs = 1 * 3600 + 42 * 60 + 18; // 01:42:18
+  
+  setInterval(() => {
+    totalSecs--;
+    if (totalSecs < 0) totalSecs = 3 * 3600; // reset
+    
+    const hrs = Math.floor(totalSecs / 3600);
+    const mins = Math.floor((totalSecs % 3600) / 60);
+    const secs = totalSecs % 60;
+    
+    timerEl.textContent = `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }, 1000);
+}
+
+/**
+ * 16. Magnetic CTA Pull effect on Cursor Hover
+ */
+function initMagneticButtons() {
+  if (window.innerWidth < 1024) return;
+  
+  const ctaBtn = document.querySelector('.hero-primary-cta');
+  if (!ctaBtn) return;
+  
+  ctaBtn.addEventListener('mousemove', (e) => {
+    const rect = ctaBtn.getBoundingClientRect();
+    const x = e.clientX - rect.left - (rect.width / 2);
+    const y = e.clientY - rect.top - (rect.height / 2);
+    
+    ctaBtn.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.02)`;
+  });
+  
+  ctaBtn.addEventListener('mouseleave', () => {
+    ctaBtn.style.transform = 'translate3d(0,0,0) scale(1)';
+  });
+}
+
+/**
+ * 17. Video Pause Observer (respect viewport off-screen status)
+ */
+function initVideoPerformanceSpy() {
+  const videos = document.querySelectorAll('video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        if (video.paused && video.autoplay) {
+          video.play().catch(() => {});
+        }
+      } else {
+        if (!video.paused) {
+          video.pause();
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  videos.forEach(v => observer.observe(v));
+}
+
+/**
+ * 18. Button Ripple Click Effect
+ */
+function initButtonRipples() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.button');
+    if (!btn) return;
+    
+    const circle = document.createElement('span');
+    const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+    const radius = diameter / 2;
+    
+    const rect = btn.getBoundingClientRect();
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${e.clientX - rect.left - radius}px`;
+    circle.style.top = `${e.clientY - rect.top - radius}px`;
+    circle.className = 'btn-ripple';
+    
+    const existing = btn.querySelector('.btn-ripple');
+    if (existing) existing.remove();
+    
+    btn.appendChild(circle);
+  });
+}
+
+/**
+ * 19. Mobile Live Countdown Sync
+ * Keeps the mobile hero live card countdown in sync with desktop card
+ */
+(function initMobileLiveCountdown() {
+  const mobileEl = document.getElementById('mobileLiveCountdown');
+  if (!mobileEl) return;
+
+  let totalSecs = 1 * 3600 + 42 * 60 + 18;
+
+  setInterval(() => {
+    totalSecs--;
+    if (totalSecs < 0) totalSecs = 3 * 3600;
+    const hrs = Math.floor(totalSecs / 3600);
+    const mins = Math.floor((totalSecs % 3600) / 60);
+    const secs = totalSecs % 60;
+    mobileEl.textContent = `${hrs.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+  }, 1000);
+})();
+
+/**
+ * 20. Lazy Image Loading
+ * Adds loading="lazy" to all non-critical images
+ */
+(function initLazyImages() {
+  document.querySelectorAll('img:not([loading])').forEach(img => {
+    if (!img.closest('.nav') && !img.closest('#loader') && !img.closest('.hero-main')) {
+      img.setAttribute('loading', 'lazy');
+    }
+  });
+})();
+
+/**
+ * 21. Active Section Nav Detection
+ * Adds .active class to nav links when their section is in view
+ */
+(function initActiveSectionDetection() {
+  if (!('IntersectionObserver' in window)) return;
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  if (!navLinks.length) return;
+
+  const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').slice(1)).filter(Boolean);
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href').slice(1) === id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+/**
+ * 22. Count-Up for membership/stats metric elements
+ * Animates data-val attributes on .count-metric elements
+ */
+(function initAllMetricCounters() {
+  if (!('IntersectionObserver' in window)) return;
+  const metrics = document.querySelectorAll('.count-metric[data-val]');
+  if (!metrics.length) return;
+
+  function animateCount(el, target) {
+    const isDecimal = !Number.isInteger(target);
+    const duration = 1600;
+    const startTime = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+
+      if (isDecimal) {
+        el.textContent = current.toFixed(1);
+      } else if (target >= 1000) {
+        el.textContent = Math.floor(current / 1000) + 'K+';
+      } else {
+        el.textContent = Math.floor(current) + '+';
+      }
+
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        animateCount(el, parseFloat(el.getAttribute('data-val')));
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  metrics.forEach(m => observer.observe(m));
+})();
+
+/**
+ * 23. Enhanced Scroll Reveal
+ */
+(function initEnhancedScrollReveal() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
 

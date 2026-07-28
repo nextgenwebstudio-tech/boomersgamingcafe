@@ -52,21 +52,21 @@ const GAMES_DATA = [
     waitTime: "4 mins",
     setup: "RTX 4070 SUPER / 240Hz",
     copy: "Precision, pressure, and the cleanest tactical shots in the room.",
-    image: "assets/images/Valorant_cover.jpg",
+    image: "assets/images/valorant_new.jpg",
     accent: "#ff4f70",
     rating: 5,
     tag: "Popular"
   },
   {
     id: "eafc",
-    name: "EA FC 25",
+    name: "EA FC 26",
     category: "Sports Simulator",
     players: 11,
     stations: 5,
     waitTime: "2 mins",
     setup: "PS5 / 4K OLED TV",
     copy: "Crowd noise, console rivalry, and one more match before closing.",
-    image: "assets/images/fc.webp",
+    image: "assets/images/fc26.png",
     accent: "#e1a350",
     rating: 5,
     tag: "Classic"
@@ -80,7 +80,7 @@ const GAMES_DATA = [
     waitTime: "3 mins",
     setup: "RTX 4070 SUPER / 240Hz",
     copy: "Fast calls, perfect utility, and a team that never tilts.",
-    image: "assets/images/cs2.jpeg",
+    image: "assets/images/cs2_new.jpg",
     accent: "#6bcfff",
     rating: 5,
     tag: "Top Played"
