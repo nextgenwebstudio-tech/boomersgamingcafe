@@ -232,10 +232,34 @@
   color: var(--accent);
 }
 
-/* Steps dividers on ivory background */
+/* Steps dividers and text on ivory background */
 .step {
   border-top-color: var(--paper-border) !important;
 }
+
+/* Step title text (Branch, Zone, Station …) */
+.book .step b {
+  color: var(--ink-heading) !important;
+}
+
+/* Step counter number on the right */
+.book .step p {
+  color: var(--ink-muted) !important;
+}
+
+/* Step counter pseudo-element (01, 02 …) */
+.book .step::before {
+  color: var(--ink-muted) !important;
+}
+
+/* Section kicker "YOUR NEXT SESSION" lands on ivory */
+.book .section-kicker {
+  color: var(--accent) !important;
+}
+
+/* "From plan to play." heading — stays white (renders on dark zone) */
+/* ".book .display" intentionally NOT overridden to dark */
+
 
 /* ================================================================
    SECTION TRANSITION — warm dividers between black / ivory
