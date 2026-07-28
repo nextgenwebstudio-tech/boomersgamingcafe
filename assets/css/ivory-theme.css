@@ -1,0 +1,336 @@
+/* ================================================================
+   BOOMER'S GAMING CAFE — Ivory Theme System
+   Premium warm ivory palette for light / luxury sections.
+
+   Primary Ivory    :  #F1EADF
+   Secondary Ivory  :  #F7F2EA
+   Warm Border      :  rgba(0, 0, 0, 0.08)
+   Warm Shadow      :  rgba(101, 58, 17, 0.10)
+   Dark headings    :  #1A1410
+   Muted body text  :  #6B5E52
+   ================================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --paper:            #F1EADF;
+  --paper-secondary:  #F7F2EA;
+  --paper-border:     rgba(0, 0, 0, 0.08);
+  --paper-shadow:     rgba(101, 58, 17, 0.10);
+  --paper-shadow-md:  rgba(101, 58, 17, 0.16);
+  --ink-heading:      #1A1410;
+  --ink-body:         #6B5E52;
+  --ink-muted:        #9A8D83;
+}
+
+/* ================================================================
+   STORY SECTION  (was already var(--paper) — lock it in)
+   ================================================================ */
+.story {
+  background: var(--paper) !important;
+}
+
+.story-copy .display {
+  color: var(--ink-heading);
+}
+
+.story-copy p {
+  color: var(--ink-body);
+}
+
+.story-numbers small {
+  color: var(--ink-muted);
+}
+
+/* ================================================================
+   GAME LIBRARY SECTION  →  Ivory Secondary
+   ================================================================ */
+.game-library {
+  background: var(--paper-secondary) !important;
+}
+
+.game-library .section-kicker {
+  color: var(--accent);
+}
+
+.game-library .display {
+  color: var(--ink-heading);
+}
+
+.game-library .display span {
+  color: var(--accent);
+}
+
+.game-library .section-intro {
+  color: var(--ink-body);
+}
+
+/* Keep game covers looking premium with a warm shadow */
+.library-game {
+  border-color: var(--paper-border) !important;
+  box-shadow: 0 10px 30px var(--paper-shadow);
+}
+
+/* ================================================================
+   BRANCH SPECS SECTION  →  Ivory Primary
+   ================================================================ */
+.branch-specs {
+  background: var(--paper) !important;
+}
+
+.branch-specs .section-kicker {
+  color: var(--accent);
+}
+
+.branch-specs .display {
+  color: var(--ink-heading);
+}
+
+.branch-specs .display span {
+  color: var(--accent);
+}
+
+.branch-specs .section-intro {
+  color: var(--ink-body);
+}
+
+/* Location cards: white-glass look on ivory bg */
+.branch-specs .badge-card.glass-card {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid var(--paper-border) !important;
+  box-shadow: 0 8px 32px var(--paper-shadow) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Headings inside location cards already white-on-dark — keep them */
+.branch-specs .badge-card h3 {
+  color: #fff !important;
+}
+
+/* ================================================================
+   GALLERY SECTION  →  Ivory Secondary
+   (Section gets `.ivory-gallery` class via index.html)
+   ================================================================ */
+.ivory-gallery {
+  background: var(--paper-secondary) !important;
+}
+
+.ivory-gallery .section-kicker {
+  color: var(--accent);
+}
+
+.ivory-gallery .display {
+  color: var(--ink-heading);
+}
+
+.ivory-gallery .display span {
+  color: var(--accent);
+}
+
+.ivory-gallery .section-intro {
+  color: var(--ink-body);
+}
+
+.ivory-gallery .gallery-item {
+  border-color: var(--paper-border) !important;
+  box-shadow: 0 6px 20px var(--paper-shadow);
+}
+
+/* ================================================================
+   CALENDAR SECTION  →  Ivory Primary
+   ================================================================ */
+.calendar {
+  background: var(--paper) !important;
+}
+
+.calendar .section-kicker {
+  color: var(--accent);
+}
+
+.calendar .display {
+  color: var(--ink-heading);
+}
+
+.calendar .display span {
+  color: var(--accent);
+}
+
+.calendar .section-intro {
+  color: var(--ink-body);
+}
+
+.calendar-grid {
+  border-color: var(--paper-border) !important;
+}
+
+.calendar-event {
+  border-color: var(--paper-border) !important;
+}
+
+.calendar-event b {
+  color: var(--ink-heading);
+}
+
+.calendar-event small {
+  color: var(--ink-muted);
+}
+
+.calendar-event a {
+  color: var(--accent);
+}
+
+/* ================================================================
+   PROOF / TESTIMONIALS SECTION  →  Ivory Primary (already was)
+   ================================================================ */
+.proof {
+  background: var(--paper) !important;
+  color: var(--ink-heading);
+}
+
+.proof .rating {
+  color: var(--ink-heading);
+}
+
+/* Grid gap line between metric tiles */
+.metrics {
+  background: var(--paper-border) !important;
+}
+
+.metric {
+  background: var(--paper) !important;
+}
+
+.metric b {
+  color: var(--ink-heading);
+}
+
+.metric small {
+  color: var(--ink-muted);
+}
+
+.reviews-slider-wrap {
+  border-top-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.review-dot {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+
+.review-dot.active {
+  background: var(--accent) !important;
+}
+
+/* ================================================================
+   BOOK SECTION (booking wizard)
+   Dark→Ivory fade — gradient endpoint uses updated --paper token
+   ================================================================ */
+.book {
+  background: linear-gradient(
+    180deg,
+    #101115 0%,
+    #14151a 80px,
+    var(--paper) 220px
+  ) !important;
+  color: var(--ink-heading);
+}
+
+.book .section-kicker {
+  color: var(--accent);
+}
+
+/* Steps dividers on ivory background */
+.step {
+  border-top-color: var(--paper-border) !important;
+}
+
+/* ================================================================
+   SECTION TRANSITION — warm dividers between black / ivory
+   ================================================================ */
+
+/* A very subtle warm glow at the top edge of ivory sections */
+.game-library,
+.branch-specs,
+.ivory-gallery,
+.calendar {
+  position: relative;
+}
+
+.game-library::before,
+.branch-specs::before,
+.ivory-gallery::before,
+.calendar::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(239, 189, 78, 0.35) 40%,
+    rgba(239, 189, 78, 0.35) 60%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* For ivory sections that follow another ivory section, suppress top line */
+.story + .section.game-library::before,
+.branch-specs + .calendar::before {
+  display: none;
+}
+
+/* ================================================================
+   WARM SHADOWS — override any cold box-shadows inside ivory areas
+   ================================================================ */
+
+/* Cards, panels, buttons inside ivory sections */
+.game-library .library-game:hover,
+.branch-specs .badge-card.glass-card:hover {
+  box-shadow: 0 20px 48px var(--paper-shadow-md) !important;
+}
+
+/* ================================================================
+   GLOBAL — warm borders replace cold greys on ivory sections
+   ================================================================ */
+.branch-specs .branch-button {
+  border-color: var(--paper-border) !important;
+  color: var(--ink-heading);
+}
+
+.branch-specs .branch-button small {
+  color: var(--ink-muted);
+}
+
+.branch-specs .branch-button b {
+  color: var(--ink-heading);
+}
+
+.branch-specs .branch-button:hover,
+.branch-specs .branch-button.active {
+  border-color: var(--accent) !important;
+  background: rgba(239, 189, 78, 0.08) !important;
+}
+
+/* Comparison table on ivory */
+.branch-specs .comparison-table {
+  border-color: var(--paper-border) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.branch-specs .comparison-table th,
+.branch-specs .comparison-table td {
+  border-color: var(--paper-border) !important;
+}
+
+.branch-specs .comparison-table th {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+.branch-specs .comparison-table td b {
+  color: var(--ink-heading) !important;
+}
+
+.branch-specs .comparison-table td {
+  color: var(--ink-body);
+}
