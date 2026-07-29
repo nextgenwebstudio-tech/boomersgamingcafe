@@ -281,8 +281,8 @@ button.button.hero-primary-cta {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 44px !important;
-    height: 44px !important;
+    width: 36px !important; /* Reduced yellow circle size slightly */
+    height: 36px !important; /* Reduced yellow circle size slightly */
     background: transparent !important;
     border: none !important;
     cursor: pointer !important;
@@ -291,16 +291,16 @@ button.button.hero-primary-cta {
     outline: none !important;
     margin: 0 0 0 auto !important; /* Aligned to right */
     border-radius: 50% !important;
-    transition: background-color 0.3s ease, transform 0.3s ease !important;
+    transition: background-color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
   }
   .nav-toggle:hover,
   .nav-toggle:active {
-    background-color: rgba(245, 198, 77, 0.05) !important; /* Gold hue hover glow */
+    background-color: rgba(245, 198, 77, 0.08) !important;
   }
   .nav-toggle .bar {
     display: block !important;
-    width: 24px !important; /* Visible icon size */
-    height: 2px !important; /* 2px-thick lines */
+    width: 18px !important; /* 18px width centered */
+    height: 2px !important; /* Thinner 2px stroke */
     background-color: #fff !important;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
     transform-origin: center !important;
@@ -312,20 +312,24 @@ button.button.hero-primary-cta {
   }
   .nav-toggle:hover .bar,
   .nav-toggle:active .bar {
-    background-color: #F5C64D !important; /* Change to gold on hover/tap */
+    background-color: #F5C64D !important;
+  }
+  .nav-toggle.active {
+    background-color: #F5C64D !important; /* Yellow background on active */
+    transform: rotate(180deg) !important; /* Smooth rotate animation on open/close */
   }
   .nav-toggle.active .bar {
-    background-color: #F5C64D !important; /* Hold gold state when menu opens */
+    background-color: #000 !important; /* Black X inside yellow circle */
   }
   .nav-toggle.active .bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg) !important; /* Smooth morph to X */
+    transform: translateY(7px) rotate(45deg) !important;
   }
   .nav-toggle.active .bar:nth-child(2) {
     opacity: 0 !important;
     transform: scaleX(0) !important;
   }
   .nav-toggle.active .bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg) !important; /* Smooth morph to X */
+    transform: translateY(-7px) rotate(-45deg) !important;
   }
 
   /* 3. Refine Mobile Navigation Overlay Links Sizing (All Pages) */
@@ -943,6 +947,166 @@ button.button.hero-primary-cta {
     flex-direction: column !important;
     gap: 8px !important;
     text-align: left !important;
+  }
+
+  /* ==========================================================================
+     MOBILE NAVIGATION DRAWER OVERLAY POLISH
+     ========================================================================== */
+  .mobile-menu-overlay {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: calc(90px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom)) 24px !important;
+    box-sizing: border-box !important;
+    background: rgba(8, 9, 12, 0.98) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+  }
+
+  .mobile-menu-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: auto 0 !important;
+  }
+
+  /* Menu Items list style */
+  .mobile-menu-links a:not(.mobile-menu-book-btn) {
+    height: 56px !important; /* Reduced menu item height */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.02) !important; /* Subtle glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    font-family: var(--display) !important;
+    font-size: 16px !important; /* Enhanced letters look sleek */
+    color: #fff !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.01em !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Hover & tap states */
+  .mobile-menu-links a:not(.mobile-menu-book-btn):hover,
+  .mobile-menu-links a:not(.mobile-menu-book-btn):active {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(245, 198, 77, 0.3) !important;
+    box-shadow: 0 0 15px rgba(245, 198, 77, 0.05) !important;
+    color: #F5C64D !important;
+  }
+
+  /* Active page left accent bar */
+  .mobile-menu-links a:not(.mobile-menu-book-btn).active {
+    border-left: 4px solid #F5C64D !important;
+    background: rgba(245, 198, 77, 0.04) !important;
+    border-color: rgba(245, 198, 77, 0.15) !important;
+    color: #F5C64D !important;
+    padding-left: 24px !important;
+  }
+
+  /* Chevron arrow on the right */
+  .mobile-menu-links a:not(.mobile-menu-book-btn)::after {
+    content: '→' !important;
+    font-family: var(--mono) !important;
+    font-size: 16px !important;
+    color: #F5C64D !important;
+    opacity: 0 !important;
+    transform: translateX(-8px) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  
+  .mobile-menu-links a:not(.mobile-menu-book-btn):hover::after,
+  .mobile-menu-links a:not(.mobile-menu-book-btn):active::after,
+  .mobile-menu-links a:not(.mobile-menu-book-btn).active::after {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  /* CTA Button (Book Now) */
+  .mobile-menu-links a.mobile-menu-book-btn {
+    height: 56px !important; /* Book Now button height to 56px */
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #F5C64D 0%, #d4a327 100%) !important; /* Stronger gold gradient */
+    color: #000 !important;
+    font: 800 13px var(--mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important; /* Glow only on hover */
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+  
+  .mobile-menu-links a.mobile-menu-book-btn:hover,
+  .mobile-menu-links a.mobile-menu-book-btn:active {
+    background: linear-gradient(135deg, #ffcc33 0%, #e6b23c 100%) !important;
+    box-shadow: 0 0 25px rgba(245, 198, 77, 0.45) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Staggered load animation */
+  .mobile-menu-overlay .mobile-menu-links a {
+    opacity: 0 !important;
+    transform: translateY(15px) !important;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition-delay: calc(var(--i) * 0.05s) !important;
+  }
+  
+  .mobile-menu-overlay.active .mobile-menu-links a {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Social Icons and Drawer Footer styling */
+  .mobile-menu-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-top: 20px !important;
+  }
+  
+  .mobile-menu-footer .social-links {
+    display: flex !important;
+    gap: 20px !important;
+  }
+  
+  .mobile-menu-footer .social-links a {
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    font-family: var(--mono) !important;
+    transition: color 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  
+  .mobile-menu-footer .social-links a:hover {
+    color: #F5C64D !important;
+  }
+  
+  .mobile-menu-footer .footer-meta {
+    font-size: 11px !important;
+    font-family: var(--mono) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
   }
 }
 
