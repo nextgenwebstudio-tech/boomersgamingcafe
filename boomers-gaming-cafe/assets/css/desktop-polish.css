@@ -123,5 +123,27 @@
   .cafe-photo {
     background-position: 70% center !important;
   }
+  .floating-avail-widget {
+    width: 115px !important;
+    background: rgba(10, 10, 10, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 10px !important;
+  }
+  .floating-avail-row {
+    font-size: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .floating-avail-btn {
+    height: 32px !important;
+    font-size: 9px !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 }
 @media (prefers-reduced-motion:reduce) and (min-width:801px){.hero-media{animation:none!important}.cursor-glow{display:none!important}.magnetic{transform:none!important}}

@@ -294,11 +294,17 @@ function initFoodMenuEngine() {
       card.style.cursor = 'pointer';
       
       const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
+      const gamingBadge = `<span class="food-gaming-badge" style="position: absolute; right: 12px; top: 12px; font: 700 8px var(--mono); background: rgba(167, 110, 255, 0.95); color: #fff; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; z-index: 2; letter-spacing: 0.05em; display: flex; align-items: center; gap: 4px;">🎮 Setup Delivery</span>`;
       
       card.innerHTML = `
         <div class="food-image-container" onclick="openFoodDetailsModal('${item.id}')">
           <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
           ${popularityBadge}
+          ${gamingBadge}
+          <div class="quick-card-actions">
+            <button class="quick-fav-btn" onclick="event.stopPropagation(); this.classList.toggle('active')" title="Add to Favorites" aria-label="Favorite">♡</button>
+            <button class="quick-add-image-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add to Booking" aria-label="Quick Add">+</button>
+          </div>
         </div>
         <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')" style="padding: 16px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
