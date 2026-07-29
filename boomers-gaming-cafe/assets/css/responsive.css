@@ -1,0 +1,2818 @@
+/* Hide mobile overlay by default on desktop viewports */
+.mobile-menu-overlay {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  /* General Variables and Layouts */
+  .nav {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 20px !important;
+    height: 66px;
+  }
+  
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-cta {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+  
+  .hero-media, .hero-video {
+    position: relative !important;
+    height: 240px !important;
+    z-index: 1 !important;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .hero {
+    padding: 80px 0 20px !important;
+    min-height: auto;
+  }
+  
+  .hero h1 {
+    font-size: clamp(3.2rem, 14vw, 5.5rem);
+    line-height: 0.85;
+    margin-bottom: 20px;
+  }
+  
+  .hero-orbit {
+    width: 75vw;
+    right: -20%;
+    top: 18%;
+  }
+  
+  /* Flex/Grid collapses to single columns */
+  .hero-bottom,
+  .story-grid,
+  .floor,
+  .booking-grid,
+  .cafe-grid,
+  .happy-grid,
+  .mode-grid,
+  .spec-intro,
+  .event-grid,
+  .proof-grid,
+  .membership-grid,
+  .library-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  
+  .booking-float {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .hero-meta {
+    gap: 17px;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+  
+  .story-copy {
+    padding: 40px 24px;
+    padding-right: 24px;
+  }
+  
+  .story-copy .display {
+    font-size: clamp(2.2rem, 10vw, 4rem);
+  }
+  
+  .story-image {
+    min-height: 320px;
+  }
+  
+  /* Game Launcher */
+  .game-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 30px;
+  }
+  
+  .game-tab {
+    min-height: 140px;
+    padding: 15px;
+  }
+  
+  .game-tab b {
+    font-size: 18px;
+  }
+  
+  .game-panel {
+    padding: 24px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 24px;
+  }
+  
+  .game-panel .button {
+    justify-self: start;
+    width: 100%;
+  }
+  
+  .game-detail {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  /* Live Arena Floor Plan */
+  .floor {
+    gap: 24px;
+  }
+  
+  .floor-plan {
+    min-height: 320px;
+  }
+  
+  .z1, .z2, .z3, .z4 {
+    padding: 6px;
+    font-size: 8px;
+  }
+  
+  /* Cafe & Bundles */
+  .cafe-photo {
+    height: 300px;
+  }
+  
+  .happy {
+    padding: 50px 0;
+  }
+  
+  .deal-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .deal-copy {
+    padding: 24px;
+  }
+  
+  .deal-image {
+    min-height: 200px;
+  }
+  
+  /* Library */
+  .library-game {
+    height: 200px;
+  }
+  
+  .library-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  /* Simulator Specs & Modes */
+  .mode {
+    min-height: 350px;
+    padding: 24px;
+  }
+  
+  .mode h3 {
+    margin: 20px 0 12px;
+  }
+  
+  .mode-foot {
+    inset: auto 24px 24px;
+  }
+  
+  /* Calendar & Membership */
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .calendar-event {
+    min-height: 140px;
+  }
+  
+  .member-card {
+    box-shadow: 10px 10px 0 rgba(239, 189, 78, 0.85);
+    padding: 24px;
+  }
+  
+  .member-price {
+    font-size: 48px;
+  }
+  
+  /* Bookings */
+  .booking-card {
+    box-shadow: 10px 10px 0 var(--lime);
+    padding: 20px;
+  }
+  
+  .slot-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Footer elements */
+  .footer-top {
+    display: block;
+  }
+  
+  .footer-top .button {
+    margin-top: 24px;
+    width: 100%;
+  }
+  
+  .footer-quick {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .footer-bottom {
+    display: block;
+    line-height: 2;
+    text-align: center;
+  }
+  
+  .socials {
+    margin: 12px 0;
+    justify-content: center;
+  }
+  
+  /* Mobile Sticky Booking Bar */
+  .mobile-book {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: var(--lime);
+    color: #171008;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    font: 800 12px var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hide desktop sticky booking header */
+  #desktop-sticky-book {
+    display: none !important;
+  }
+  
+  /* Swipeable layouts for horizontal scroll triggers on mobile */
+  .swipe-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+  
+  .swipe-gallery::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .swipe-gallery > * {
+    scroll-snap-align: start;
+    flex: 0 0 85%;
+  }
+
+  /* Mobile Floating HUD Toggle Button */
+  .mobile-hud-toggle {
+    display: flex !important;
+    bottom: 84px !important;
+    right: 16px !important;
+  }
+
+  .hud-close-btn {
+    display: block !important;
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 28px !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    line-height: 1 !important;
+    padding: 0 4px !important;
+  }
+
+  /* Premium Session HUD styled as slide-up drawer on mobile */
+  .premium-session-hud {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    transform: translateY(105%) !important;
+    z-index: 10002 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-bottom: none !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7) !important;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    padding: 24px 20px 30px !important;
+  }
+
+  .premium-session-hud.drawer-active {
+    transform: translateY(0) !important;
+  }
+
+  /* Overlay backdrop when mobile HUD is open */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cart-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Add bottom padding to body so mobile sticky book button doesn't cover content */
+  body {
+    padding-bottom: 90px;
+  }
+
+  /* Floating availability widget hidden on mobile */
+  .floating-avail-widget {
+    display: none !important;
+  }
+}
+
+/* Landscape/Tablet Adjustments */
+@media (min-width: 801px) and (max-width: 1100px) {
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  .story-grid, .floor, .booking-grid, .cafe-grid, .happy-grid, .membership-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .library-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .calendar-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ==========================================
+   Premium Mobile-First Overlay Drawer & Swipes
+   (Screens below 768px viewport width)
+   ========================================== */
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Dynamic Hamburger Toggle Button */
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10001;
+    padding: 0;
+    outline: none;
+  }
+  
+  .nav-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: left center;
+  }
+  
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate3d(2px, -1px, 0);
+    background-color: var(--lime);
+  }
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate3d(2px, 1px, 0);
+    background-color: var(--lime);
+  }
+
+  /* Fullscreen Backdrop Blur Navigation Menu Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 9, 12, 0.97);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, -20px, 0);
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    width: 80%;
+  }
+
+  .mobile-menu-links a {
+    font: 700 24px var(--display);
+    color: #fff;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .mobile-menu-links a:hover,
+  .mobile-menu-links a:focus {
+    color: var(--lime);
+  }
+
+  /* Lock body scrolling when overlay is active */
+  body.no-scroll {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Hero Section stacks and heights */
+  .hero {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+  
+  .hero-main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-main .eyebrow {
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 11vw, 3.6rem) !important;
+    line-height: 0.9 !important;
+    text-align: center;
+    width: 100%;
+    margin: 15px 0 20px;
+  }
+
+  .hero-lead {
+    text-align: center;
+    margin: 0 auto 20px;
+    max-width: 100%;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-secondary-ctas {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .trust-strip-scroll {
+    justify-content: center;
+    margin: 16px auto 0;
+    width: 100%;
+  }
+
+  /* Touch-friendly Game Launcher Swipe tab lists */
+  .game-tabs {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-top: 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .game-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .game-tab {
+    flex: 0 0 75%;
+    scroll-snap-align: start;
+    min-height: 120px !important;
+  }
+
+  /* Power-Up Categories Horizontal swipe list */
+  .cafe-tabs {
+    display: flex !important;
+    overflow-x: auto !important;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cafe-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Café cards carousel swipes */
+  .cafe-items-list {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 16px;
+    padding: 12px 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .cafe-items-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cafe-items-list .badge-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
+  /* Interactive Floor Plan pinch / zoom hints */
+  .floor-plan {
+    overflow: auto;
+    cursor: grab;
+    min-height: 280px;
+    touch-action: pan-x pan-y;
+  }
+
+  .station-dot {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  /* Reviews & Testimonials Carousel Swiping */
+  .reviews-slider-wrap {
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .reviews-slider-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews-track {
+    display: flex !important;
+    transform: none !important; /* Deactivates javascript horizontal translations */
+  }
+
+  .review-slide {
+    flex: 0 0 88% !important;
+    scroll-snap-align: start;
+    margin-right: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px !important;
+    border-radius: 18px;
+  }
+
+  .reviews-nav {
+    display: none !important;
+  }
+
+  /* Gallery Masonry to Swipe Carousel */
+  .gallery-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-item {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
+
+  /* Section Padding reduction on mobile views */
+  .section {
+    padding: 50px 0 !important;
+  }
+
+  .section-intro {
+    margin-bottom: 20px !important;
+  }
+
+  .library-head, .section-title-bar {
+    margin-bottom: 12px !important;
+  }
+
+  /* Typography enhancements */
+  body, p, .section-intro {
+    font-size: 16px !important;
+  }
+
+  /* Pill-shaped scrollable trust strip */
+  .trust-strip-scroll {
+    display: flex !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding: 10px 0 !important;
+    border: none !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+  }
+  .trust-strip-scroll::-webkit-scrollbar {
+    display: none !important;
+  }
+  .trust-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 8px 16px !important;
+    border-radius: 100px !important;
+    font-size: 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    color: #fff !important;
+  }
+  .trust-sep {
+    display: none !important;
+  }
+
+  /* Glass stats card */
+  .hero-meta.hero-stats-card {
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+    margin-top: 24px !important;
+  }
+  .hero-stat-divider {
+    width: 100% !important;
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    margin: 4px 0 !important;
+  }
+  .hero-stat-item {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Bundles Carousel swipe on mobile */
+  .bundle-carousel {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    gap: 20px !important;
+    padding: 10px 24px 20px !important;
+    margin-left: -24px !important;
+    margin-right: -24px !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+  }
+  .bundle-carousel::-webkit-scrollbar {
+    display: none !important;
+  }
+  .bundle-card {
+    flex: 0 0 280px !important;
+    scroll-snap-align: center !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  .bundle-img-wrap {
+    height: 140px !important; /* ~38% of card height */
+  }
+
+  /* Horizontal Category scroll */
+  .cafe-tabs {
+    display: flex !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+    gap: 8px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  .cafe-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .cafe-tab-btn {
+    flex-shrink: 0 !important;
+  }
+
+  /* Library Grid Carousel scroll on mobile */
+  .library-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    gap: 12px !important;
+    padding: 10px 24px 20px !important;
+    margin-left: -24px !important;
+    margin-right: -24px !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+  }
+  .library-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .library-game {
+    flex: 0 0 180px !important; /* ~1.5 cards visible per view on mobile screens */
+    scroll-snap-align: center !important;
+    height: 260px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Button touch target optimization (minimum 48px height) */
+  .button,
+  .cafe-add-btn,
+  .nav-cta,
+  .mobile-menu-links a,
+  .game-tab,
+  .cafe-tab-btn,
+  .branch-button,
+  .bundle-btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px !important;
+  }
+
+  /* ==========================================
+      BGC Mobile Hero UX & Typography Overhauls
+     ========================================== */
+  .hero {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    padding-top: 40px !important;
+    padding-bottom: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .hero-main {
+    max-width: 340px !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: auto !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(52px, 12vw, 72px) !important;
+    line-height: 0.82 !important;
+    letter-spacing: -0.06em !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 15px 0 16px !important;
+    font-weight: 700 !important;
+  }
+
+  .hero-lead {
+    max-width: 320px !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    opacity: 0.9 !important;
+    text-align: center !important;
+    margin: 0 auto 20px !important;
+    font-weight: 500 !important;
+  }
+
+  /* Buttons sizes and gaps */
+  .hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+
+  .hero-primary-cta {
+    height: 54px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 15px 45px rgba(239, 189, 78, 0.25) !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-secondary-ctas {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .hero-secondary-ctas .button {
+    height: 48px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    font-weight: 700 !important;
+    flex: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Trust Strip Scroll Pills */
+  .trust-strip-scroll {
+    display: flex !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding: 10px 0 !important;
+    border: none !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+  }
+
+  .trust-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    padding: 10px 18px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    color: #fff !important;
+  }
+
+  .trust-sep {
+    display: none !important;
+  }
+
+  /* 3-Column Glass Stats Card on Mobile */
+  .hero-meta.hero-stats-card {
+    grid-template-columns: 1fr auto 1fr auto 1fr !important;
+    display: grid !important;
+    padding: 16px 12px !important;
+    gap: 8px !important;
+    border-radius: 18px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    margin-top: 24px !important;
+  }
+
+  .hero-stat-item {
+    text-align: center !important;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .stat-lbl {
+    font-size: 8px !important;
+  }
+
+  .hero-stat-item strong {
+    font-size: 11px !important;
+    margin-top: 2px !important;
+  }
+
+  .hero-stat-divider {
+    width: 1px !important;
+    height: 28px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    display: block !important;
+  }
+
+  /* Mobile Sticky Booking Bar */
+  .mobile-book {
+    height: 58px !important;
+    border-radius: 18px !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    right: 16px !important;
+    box-shadow: 0 18px 45px rgba(239, 189, 78, 0.35) !important;
+    background: var(--lime) !important;
+    color: #000 !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+  }
+
+  .mobile-book-hidden {
+    transform: translateY(120px) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Mobile header height & hamburger sizes */
+  .nav {
+    height: 72px !important;
+  }
+
+  .brand-mark {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .brand {
+    font-size: 18px !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .nav-toggle {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 6px 4px !important;
+  }
+
+  /* Sticky menu shelf height tweak for mobile header */
+  .sticky-menu-shelf {
+    top: 72px !important;
+    padding-top: 10px !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Food Card mobile hover override */
+  .food-product-card .cafe-add-btn {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    width: auto !important;
+    min-height: 0 !important;
+    height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 8px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .food-card-footer {
+    padding: 8px 12px !important;
+  }
+
+  /* =============================================
+     MOMENT-FACT — Fix floating card overlap on mobile
+     Was position:absolute overlapping section text
+     ============================================= */
+  .moment-fact {
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    margin-top: 24px !important;
+
+    /* Upgrade to premium inline glass card on mobile */
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-left: 3px solid var(--lime) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-radius: 0 12px 12px 0 !important;
+    padding: 14px 16px !important;
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+  }
+
+  /* Wrap .moment so height is correct with static child */
+  .moment .wrap {
+    position: relative !important;
+    overflow: visible !important;
+  }
+}
+
+/* Deal image hover micro-animation */
+.deal-image {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
+}
+.deal-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(93, 64, 182, 0.25);
+}
+
+/* =============================================
+   HERO LIVE CARD — Desktop positioning fix
+   Never overlaps the CTA buttons
+   ============================================= */
+
+/* Default: hide mobile version on desktop */
+.hero-mobile-live-card {
+  display: none;
+}
+
+/* Desktop: absolute-position the floating live card safely */
+@media (min-width: 1024px) {
+  .hero-live-card {
+    top: auto !important;
+    bottom: 120px !important;  /* above bottom stats row */
+    right: 40px !important;
+    max-width: 280px !important;
+  }
+}
+
+/* On mid-size screens (1024–1400px), dock to bottom-right corner, never overlapping CTAs */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .hero-live-card {
+    right: 20px !important;
+    bottom: 80px !important;
+    top: auto !important;
+    width: 240px !important;
+    padding: 18px !important;
+  }
+  .live-card-title {
+    font-size: 18px !important;
+  }
+}
+
+/* =============================================
+   MOBILE LIVE CARD — Show below hero CTA buttons
+   ============================================= */
+@media (max-width: 1023px) {
+  /* Hide desktop floating card */
+  .hero-live-card {
+    display: none !important;
+  }
+
+  /* Show the mobile compact live card */
+  .hero-mobile-live-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mobile-live-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+}
+
+/* =============================================
+   NAVBAR — Hover animations & active underline
+   ============================================= */
+
+/* Desktop nav link hover: slide-up underline */
+.nav-links a {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-links a:hover {
+  color: #fff !important;
+}
+
+/* Scrolled navbar: glass blur effect */
+.nav.scrolled {
+  background: rgba(8, 9, 12, 0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.35) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Mobile menu items: fade-in stagger via CSS custom property */
+.mobile-menu-links a {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s;
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+.mobile-menu-overlay.active .mobile-menu-links a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Book Now button accent style */
+.mobile-menu-book-btn {
+  color: var(--accent) !important;
+  border: 1px solid rgba(239,189,78,0.3);
+  border-radius: 8px;
+  padding: 10px 24px;
+  margin-top: 8px;
+}
+
+/* =============================================
+   ARENA CARDS — Vertical stacking on mobile
+   ============================================= */
+@media (max-width: 800px) {
+  /* Booking grid fully vertical */
+  .booking-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Mode grid: single column, no horizontal scroll */
+  .mode-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    overflow-x: visible !important;
+  }
+
+  /* Arena (location) cards vertical */
+  .badge-card.glass-card[style*="minmax(320px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero secondary buttons: equal width side by side */
+  .hero-secondary-ctas {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  /* Booking progress bar - tighter on mobile */
+  .booking-nav-row {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  /* HUD sidebar full-screen on mobile */
+  .premium-session-hud {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    right: 0 !important;
+    left: 0 !important;
+    height: 75vh !important;
+    overflow-y: auto !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .premium-session-hud.active {
+    transform: translateY(0) !important;
+  }
+
+  /* Combo cards resize correctly */
+  .hud-combo-card {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .hud-combo-btn {
+    align-self: stretch !important;
+    text-align: center !important;
+  }
+
+  /* Search section wraps properly */
+  .sticky-menu-shelf {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  /* No horizontal scrolling globally */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  /* Cards stack vertically, no horizontal scroll on small screens */
+  .booking-choices {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Sticky CTA safe area */
+  .mobile-book {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* =============================================
+   MICRO INTERACTIONS — Scroll reveal animation
+   ============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger child reveals */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+.reveal-stagger.in-view > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: none; }
+.reveal-stagger.in-view > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
+.reveal-stagger.in-view > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
+
+/* Card lift on hover */
+.glass-card {
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+/* Image zoom on hover */
+.cafe-img img,
+.bundle-img-wrap img,
+.gallery-item img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cafe-img:hover img,
+.bundle-img-wrap:hover img,
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+/* Button click ripple styles */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0);
+  animation: btnRipple 0.6s linear;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes btnRipple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* =============================================
+   TRUST STRIP — Animated counters & glows
+   ============================================= */
+.trust-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.trust-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Individual icon glow colors */
+.trust-item:nth-child(1) strong { color: #ffd700; }
+.trust-item:nth-child(3) strong { color: #00db78; }
+.trust-item:nth-child(5) strong { color: var(--accent); }
+.trust-item:nth-child(7) strong { color: #00c8ff; }
+
+/* =============================================
+   PERFORMANCE — Lazy loading & CLS reduction
+   ============================================= */
+img[loading="lazy"] {
+  will-change: opacity;
+}
+
+/* Reserve space for images to prevent CLS */
+.cafe-img,
+.bundle-img-wrap,
+.food-card-img,
+.hud-station-thumb {
+  background-color: rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+/* Skeleton loading pulse */
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =============================================
+   LIVE STATUS WIDGETS — Animated counters
+   ============================================= */
+.live-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font: 700 10px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.live-status-badge:hover {
+  transform: scale(1.04);
+}
+
+.live-status-badge.available {
+  background: rgba(0, 219, 120, 0.12);
+  border: 1px solid rgba(0, 219, 120, 0.25);
+  color: #00db78;
+}
+
+.live-status-badge.full {
+  background: rgba(255, 68, 68, 0.12);
+  border: 1px solid rgba(255, 68, 68, 0.25);
+  color: #ff4444;
+}
+
+.live-status-badge.soon {
+  background: rgba(239, 189, 78, 0.12);
+  border: 1px solid rgba(239, 189, 78, 0.25);
+  color: var(--accent);
+}
+
+/* Count-up animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.count-metric,
+#count-rating,
+#count-gamers,
+#count-tournaments,
+#count-stations {
+  animation: countUp 0.6s ease forwards;
+  animation-play-state: paused;
+}
+
+.count-animating {
+  animation-play-state: running !important;
+}
+
+/* =============================================
+   BOOKING WIZARD — Polish pass
+   ============================================= */
+
+/* Step header spacing */
+.booking-step-panel h3 {
+  font: 800 20px var(--display) !important;
+  color: #fff !important;
+  letter-spacing: -0.04em !important;
+  margin: 0 0 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Progress bar animation */
+.hud-progress-bar {
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Booking choice button - selected */
+.booking-choice-btn.selected {
+  border-color: var(--accent) !important;
+  background: rgba(239, 189, 78, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(239,189,78,0.15) inset, 0 4px 16px rgba(239,189,78,0.1) !important;
+}
+
+/* Step panel fade-in */
+.booking-step-panel.active {
+  animation: stepReveal 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes stepReveal {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Checkout section improved shadow */
+.mission-payment-block {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  background: rgba(255,255,255,0.02) !important;
+}
+
+/* Mission card input */
+.mission-card-input {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-family: var(--mono) !important;
+  padding: 12px 16px !important;
+  width: 100% !important;
+  margin-top: 10px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.05em !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mission-card-input:focus {
+  outline: none !important;
+  border-color: rgba(239,189,78,0.4) !important;
+  box-shadow: 0 0 0 3px rgba(239,189,78,0.08) !important;
+}
+
+/* =============================================
+   CHAT BUTTON — Never cover sticky CTA
+   ============================================= */
+@media (max-width: 800px) {
+  /* If there's a chat widget or WhatsApp bubble */
+  [class*="chat-widget"],
+  [class*="whatsapp-btn"],
+  [id*="chat"],
+  .wa-float {
+    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+    z-index: 999 !important;
+  }
+}
+
+/* =============================================
+   SMOOTH SCROLL — Native browser
+   ============================================= */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* =============================================
+   PAGE TRANSITION — Fade in on load
+   ============================================= */
+body {
+  animation: pageFadeIn 0.6s ease forwards;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =============================================
+   LOADING SKELETON — Food cards
+   ============================================= */
+.food-product-card.loading .food-card-img {
+  animation: skeleton-shimmer 1.8s infinite;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================================================
+   FIX 1: SESSION COST CALCULATOR — Premium UI Enhancement
+   ============================================================ */
+.calc-widget {
+  background: linear-gradient(135deg,
+    rgba(20, 17, 10, 0.95) 0%,
+    rgba(14, 12, 8, 0.98) 100%
+  ) !important;
+  border: 1px solid rgba(239, 189, 78, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 28px !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow:
+    0 0 0 1px rgba(239,189,78,0.06),
+    0 24px 60px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Corner accent glow */
+.calc-widget::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(239,189,78,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Title */
+.calc-widget h4 {
+  font: 700 11px var(--mono) !important;
+  color: var(--accent) !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.calc-widget h4::before {
+  content: '⚡';
+  font-size: 13px;
+}
+
+/* Grid layout */
+.calc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 800px) {
+  .calc-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Labels */
+.calc-field label {
+  display: block !important;
+  font: 600 9px var(--mono) !important;
+  color: rgba(255,255,255,0.4) !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+}
+
+/* Select and Input fields — dark themed */
+.calc-field select,
+.calc-field input[type="number"] {
+  width: 100% !important;
+  height: 44px !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  font: 600 13px var(--mono) !important;
+  padding: 0 14px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+.calc-field select:focus,
+.calc-field input[type="number"]:focus {
+  border-color: rgba(239,189,78,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(239,189,78,0.08) !important;
+}
+
+/* Dropdown arrow for select */
+.calc-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  padding-right: 36px !important;
+}
+
+/* Divider line */
+.calc-summary {
+  border-top: 1px solid rgba(255,255,255,0.07) !important;
+  padding-top: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+/* Summary rows */
+.calc-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font: 500 12px var(--mono) !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+.calc-row b {
+  color: rgba(255,255,255,0.8) !important;
+  font-weight: 700 !important;
+}
+
+/* Total row — highlighted */
+.calc-row.total {
+  margin-top: 8px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(239,189,78,0.15) !important;
+  font: 700 15px var(--display) !important;
+  color: var(--accent) !important;
+}
+
+.calc-row.total b {
+  font: 800 20px var(--display) !important;
+  color: var(--accent) !important;
+}
+
+/* ============================================================
+   FIX 2: DROPDOWN — Dark background so text is always visible
+   Both native OS dropdowns and the calc-field selects
+   ============================================================ */
+
+/* Style the <select> element itself — forces dark bg */
+select,
+.calc-field select,
+.glass-select,
+#calc-branch,
+#calc-game {
+  background-color: #1a1b20 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  color-scheme: dark !important; /* tells OS to use dark popup */
+}
+
+/* Options inside dropdown */
+select option,
+.calc-field select option {
+  background: #1a1b20 !important;
+  color: #fff !important;
+  padding: 8px 12px !important;
+}
+
+/* Focus state for all selects */
+select:focus {
+  outline: none !important;
+  border-color: rgba(239,189,78,0.4) !important;
+  box-shadow: 0 0 0 3px rgba(239,189,78,0.08) !important;
+}
+
+/* ============================================================
+   FIX 3: CAFE TAB BUTTONS — Better visibility for all states
+   ============================================================ */
+
+/* Non-active tabs: brighter text, clear border */
+.cafe-tab-btn {
+  color: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  letter-spacing: 0.05em !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Hover state */
+.cafe-tab-btn:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Active state — gold pill with dark text, clearly visible */
+.cafe-tab-btn.active {
+  background: var(--accent, #efbd4e) !important;
+  color: #0a0700 !important;
+  border-color: var(--accent, #efbd4e) !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(239, 189, 78, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Filter chips — same treatment */
+.food-filter-btn {
+  color: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+.food-filter-btn:hover {
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.food-filter-btn.active {
+  background: var(--accent, #efbd4e) !important;
+  color: #0a0700 !important;
+  border-color: var(--accent, #efbd4e) !important;
+  font-weight: 800 !important;
+}
+
+/* ============================================================
+   FIX 4: REMOVE sticky-book-mobile YELLOW BAR (from cinematic.css)
+   This is replaced by the mobile-book bar from mobile-audit.css
+   ============================================================ */
+.sticky-book-mobile {
+  display: none !important;
+}
+
+/* ============================================================
+   FIX 5: HIDE experience-preview-grid SCROLLBAR
+   The horizontal scroll is fine but the visible scrollbar is ugly
+   ============================================================ */
+.experience-preview-grid {
+  scrollbar-width: none !important;    /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+.experience-preview-grid::-webkit-scrollbar {
+  display: none !important;           /* Chrome/Safari/Opera */
+}
+
+/* Also fix on mobile where cinematic.css makes it overflow:auto */
+@media (max-width: 800px) {
+  .experience-preview-grid {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    /* Ensure horizontal scroll still works, just hidden bar */
+    overflow-x: auto !important;
+    padding-bottom: 0 !important; /* Remove extra padding for scrollbar */
+  }
+  
+  .experience-preview-grid::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+}
+
+/* ============================================================
+   NEW FIXES BASED ON LATEST FEEDBACK
+   ============================================================ */
+
+/* 1. Hero Stats invisibility (🕒 Open Today, 👥 Players, 🏆 Next Event) */
+.hero-stat-item strong, .hero-live-readout b {
+  color: #fff !important;
+}
+.hero-stat-item .stat-lbl, .hero-live-readout div {
+  color: #aeb1b4 !important;
+}
+
+/* 2. Bundle Card Alignment on Mobile (Food combos) */
+@media (max-width: 800px) {
+  .bundle-card, .loadout-card {
+    flex: 0 0 calc(100% - 40px) !important;
+    min-height: 0 !important;
+  }
+  .bundle-footer {
+    padding-top: 12px !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  .bundle-img-wrap {
+    height: 180px !important; /* give image slightly more space */
+  }
+}
+
+/* 3. Smooth background gradient for "From Plan to Play" so black shades don't cut off abruptly */
+.section.book {
+  background: linear-gradient(180deg, #101115 0%, #14151a 180px, var(--paper, #eae6df) 480px, var(--paper, #eae6df) 100%) !important;
+}
+@media (max-width: 800px) {
+  .section.book {
+    background: linear-gradient(180deg, #101115 0%, #14151a 120px, var(--paper, #eae6df) 380px, var(--paper, #eae6df) 100%) !important;
+  }
+}
+
+/* 4. Completely remove the yellow booking bar */
+#mobileBookBar, .mobile-book {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ============================================================
+   BATCH 2 NEW FIXES
+   ============================================================ */
+
+/* 1. Fix Hero Live Readout Text (Make it fully visible) */
+.hero-live-readout div { color: #aeb1b4 !important; font-size: 9px !important; }
+.hero-live-readout b { 
+  color: #fff !important; 
+  font-size: 13px !important; 
+  display: block !important; 
+  visibility: visible !important; 
+  opacity: 1 !important; 
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8) !important; 
+}
+
+/* 2. Mobile Live Grid fully left fix & width */
+@media (max-width: 800px) {
+  .mobile-live-grid {
+    width: 100% !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+}
+
+/* 3. Power-Up Station empty right space fix + Game Picture */
+@media (max-width: 800px) {
+  .section.cafe .reveal {
+    grid-template-columns: 1fr !important;
+  }
+  .cafe-photo {
+    display: block !important;
+    height: 220px !important;
+    background-image: url('../images/cafe-background.jpg') !important; 
+    background-size: cover !important;
+    background-position: 70% center !important; 
+    margin-top: 20px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+  }
+}
+
+/* 4. Menu list 2 columns (instead of carousel/1 column) */
+@media (max-width: 800px) {
+  .cafe-items-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    gap: 12px !important;
+    padding: 0 !important;
+  }
+  .cafe-items-list .badge-card {
+    flex: none !important;
+    min-width: 0 !important;
+  }
+}
+
+/* 5. Booking section congested UI, watermark fix, responsive fields */
+@media (max-width: 800px) {
+  .section.book .reveal > h2.display, .section.book .reveal > .section-kicker {
+    display: none !important; /* Remove watermark on mobile booking field */
+  }
+  .booking-card {
+    margin: 0 auto !important;
+    padding: 22px !important; /* Less congested */
+  }
+  .glass-select {
+    appearance: none !important; /* Native styling removal for cleaner look */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23efbd4e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 16px !important;
+    padding-right: 40px !important;
+  }
+  .booking-field label {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+/* 6. Swiggy-style Search Bar (Dark Glass, Gold border on focus) */
+#foodSearchInput {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  height: 52px !important;
+  padding-left: 20px !important;
+  padding-right: 75px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+#foodSearchInput::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-weight: 400 !important;
+}
+#foodSearchInput:focus {
+  border-color: #efbd4e !important;
+  box-shadow: 0 0 20px rgba(239, 189, 78, 0.15) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  outline: none !important;
+}
+
+/* ================================================================
+   BATCH 3 — COMPREHENSIVE POLISHES
+   Sound Toggle, Hero Stats, Booking Section, Library Grid
+   ================================================================ */
+
+/* ── 1. Remove Sound Toggle permanently ── */
+.audio-toggle,
+#audioToggleBtn {
+  display: none !important;
+}
+
+/* ── 2. Hero stats — force fully visible values ── */
+.hero-stats-card {
+  background: rgba(8,9,12,0.55) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  margin-top: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  width: fit-content !important;
+}
+.hero-stat-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  padding: 0 20px !important;
+}
+.hero-stat-item:first-child { padding-left: 0 !important; }
+.hero-stat-divider {
+  width: 1px !important;
+  height: 32px !important;
+  background: rgba(255,255,255,0.12) !important;
+  flex-shrink: 0 !important;
+}
+.stat-lbl {
+  font: 500 9px var(--mono, monospace) !important;
+  color: rgba(255,255,255,0.55) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  display: block !important;
+  visibility: visible !important;
+}
+.hero-stat-item strong {
+  font: 700 14px/1 var(--display, sans-serif) !important;
+  color: #ffffff !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* ── 3. DESKTOP BOOKING SECTION: Tight, two-column, premium ── */
+@media (min-width: 801px) {
+  .section.book {
+    background: linear-gradient(160deg, #0c0d10 0%, #101115 40%, #0f0e18 100%) !important;
+    padding: 60px 0 80px !important;
+  }
+
+  /* Override booking-grid to proper two-col with tight gap */
+  .booking-grid.wrap {
+    display: grid !important;
+    grid-template-columns: 1fr 1.1fr !important;
+    gap: 52px !important;
+    align-items: start !important;
+    padding-top: 0 !important;
+  }
+
+  /* Left col: kicker + heading + steps + calc widget */
+  .booking-grid.wrap > .reveal {
+    position: sticky !important;
+    top: 80px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Right col: booking card wrapper */
+  .booking-right-col {
+    position: relative !important;
+  }
+
+  /* Booking card glassmorphism */
+  .booking-card {
+    background: rgba(20, 21, 28, 0.85) !important;
+    border: 1px solid rgba(239,189,78,0.15) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 0 0 1px rgba(239,189,78,0.06),
+      0 24px 64px rgba(0,0,0,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.04) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    min-height: 0 !important;
+    padding: 32px !important;
+    /* Remove ugly lime offset shadow */
+    --original-shadow: none;
+  }
+
+  /* Remove the 18px lime-green hard shadow */
+  .booking-card::before {
+    display: none !important;
+  }
+
+  /* Override the 18px yellow offset */
+  #compactBookingCard {
+    box-shadow: 
+      0 0 60px rgba(239,189,78,0.07),
+      0 30px 70px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(239,189,78,0.12) !important;
+  }
+
+  /* Steps: tighter vertical spacing on desktop */
+  .steps {
+    margin-top: 22px !important;
+  }
+  .step {
+    padding: 12px 0 !important;
+  }
+
+  /* Display heading smaller */
+  .book .display {
+    font-size: clamp(2.4rem, 3.5vw, 3.2rem) !important;
+    line-height: 0.92 !important;
+    margin-top: 8px !important;
+  }
+
+  /* Remove gap between "Book a Party" and "Book Your Session" */
+  .section.book {
+    margin-top: 0 !important;
+  }
+}
+
+/* ── 4. MOBILE BOOKING SECTION: App-like wizard, no whitespace ── */
+@media (max-width: 800px) {
+  .section.book {
+    background: #0c0d10 !important;
+    padding: 24px 0 100px !important;
+  }
+
+  /* Hide left column (FROM PLAN TO PLAY + steps) entirely */
+  .booking-grid.wrap > .reveal {
+    display: none !important;
+  }
+
+  /* Right column takes full width */
+  .booking-right-col {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Booking card gets a premium dark card style */
+  .booking-card {
+    background: rgba(18,19,26,0.97) !important;
+    border: 1px solid rgba(239,189,78,0.18) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 0 40px rgba(239,189,78,0.05), 0 20px 50px rgba(0,0,0,0.7) !important;
+    padding: 24px !important;
+    min-height: 0 !important;
+  }
+
+  /* "BOOK YOUR SESSION" h2 inside card: slightly smaller */
+  #compactBookingCard h2 {
+    font-size: 20px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Glass select on mobile: dark, readable */
+  .glass-select {
+    background: rgba(255,255,255,0.05) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 10px !important;
+    height: 48px !important;
+    font-size: 12px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23efbd4e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 14px !important;
+    padding: 0 36px 0 14px !important;
+  }
+
+  .booking-field {
+    margin-bottom: 14px !important;
+  }
+
+  .booking-field label {
+    font-size: 10px !important;
+    color: rgba(255,255,255,0.5) !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+  }
+
+  /* Availability pill */
+  #compactBookingCard [id="compact-avail-text"],
+  #compactBookingCard [id="compact-price-text"] {
+    font-size: 11px !important;
+  }
+
+  /* FIND MY STATION button */
+  .hud-reserve-btn {
+    height: 48px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* Step panels inside wizard */
+  .booking-step-panel h3 {
+    font: 700 18px var(--display, sans-serif) !important;
+    letter-spacing: -0.05em !important;
+    margin: 0 0 14px !important;
+    color: #fff !important;
+  }
+
+  /* Step nav: prev/next buttons */
+  .booking-nav-row {
+    padding-top: 16px !important;
+    gap: 10px !important;
+    flex-direction: row !important;
+  }
+
+  /* Remove calc widget on mobile */
+  .calc-widget {
+    display: none !important;
+  }
+}
+
+/* ── 5. PC & PS5 Library: PlayStation Store card style ── */
+.library-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 40px !important;
+}
+
+.library-game {
+  height: 280px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.library-game::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%) !important;
+  z-index: 1 !important;
+}
+
+.library-game::after {
+  display: none !important;
+}
+
+.library-game:hover {
+  transform: translateY(-6px) scale(1.015) !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(239,189,78,0.25) !important;
+}
+
+.library-game b {
+  position: absolute !important;
+  bottom: 16px !important;
+  left: 16px !important;
+  font: 700 16px/1.1 var(--display, sans-serif) !important;
+  letter-spacing: -0.04em !important;
+  color: #fff !important;
+  z-index: 2 !important;
+}
+
+.library-game small {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  background: rgba(0,0,0,0.7) !important;
+  color: #efbd4e !important;
+  border: 1px solid rgba(239,189,78,0.4) !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  font: 700 9px var(--mono, monospace) !important;
+  letter-spacing: 0.08em !important;
+  z-index: 2 !important;
+}
+
+@media (max-width: 800px) {
+  .library-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .library-game {
+    height: 200px !important;
+  }
+
+  .library-game b {
+    font-size: 13px !important;
+    bottom: 12px !important;
+    left: 12px !important;
+  }
+}
+
+/* ── 6. Reduce gap between Book-a-Party CTA and Book section ── */
+.section.events {
+  padding-bottom: 30px !important;
+}
+
+/* ── 7. Booking right col: venue image beneath card ── */
+.booking-right-col > div:last-child {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* ── 8. Mobile stats card: always readable ── */
+@media (max-width: 800px) {
+  .hero-stats-card {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    gap: 0 !important;
+    margin-top: 18px !important;
+  }
+  .hero-stat-item {
+    flex: 1 1 0 !important;
+    padding: 0 10px !important;
+    min-width: 0 !important;
+  }
+  .stat-lbl {
+    font-size: 8px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .hero-stat-item strong {
+    font-size: 12px !important;
+  }
+  .hero-stat-divider {
+    height: 28px !important;
+    align-self: center !important;
+  }
+}
+
+/* ================================================================
+   BATCH 4 — Menu grid, Bundle fix, Watermark removal
+   ================================================================ */
+
+/* ── 1. FOOD MENU LIST: Force 2-column grid on mobile (not carousel) ── */
+@media (max-width: 800px) {
+  /* Override the flex carousel from mobile-audit.css and responsive.css */
+  #cafeItemsContainer,
+  .cafe-items-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-wrap: unset !important;
+  }
+  /* Each food card: full width within its grid cell */
+  .cafe-items-list .badge-card,
+  .cafe-items-list .food-product-card {
+    flex: none !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    scroll-snap-align: none !important;
+    width: 100% !important;
+  }
+  /* Slightly reduce the image height so cards are compact */
+  .cafe-items-list .food-image-container,
+  .cafe-items-list .food-image-bg {
+    height: 120px !important;
+  }
+}
+
+/* ── 2. LOADOUT BUNDLES: Reduce size, center properly on mobile ── */
+@media (max-width: 800px) {
+  .bundle-carousel {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    overflow-x: visible !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-wrap: unset !important;
+  }
+  .bundle-card {
+    flex: none !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 12px !important;
+    scroll-snap-align: none !important;
+    box-shadow: none !important;
+  }
+  .bundle-img-wrap {
+    height: 130px !important;
+  }
+  .bundle-content {
+    padding: 12px !important;
+  }
+  .bundle-title {
+    font-size: 14px !important;
+    margin: 4px 0 6px !important;
+  }
+  .bundle-desc {
+    font-size: 11px !important;
+    margin-bottom: 8px !important;
+  }
+  .bundle-kicker {
+    font-size: 9px !important;
+  }
+  .bundle-savings {
+    font-size: 9px !important;
+    margin-bottom: 8px !important;
+  }
+  .bundle-footer {
+    padding-top: 8px !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+  .bundle-price {
+    font-size: 16px !important;
+  }
+  .bundle-btn {
+    width: 100% !important;
+    text-align: center !important;
+    height: 34px !important;
+    font-size: 10px !important;
+    padding: 0 10px !important;
+    border-radius: 6px !important;
+  }
+  /* Custom deal card: span both columns */
+  .bundle-card.custom-deal-card {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* ── 3. PC & PS5 LIBRARY: Remove watermark / background table ── */
+
+/* The watermark is the pc_ps5_cover.jpg background on .game-library.
+   Kill the background image entirely so only the dark overlay shows. */
+.game-library {
+  background: #08090c !important;
+}
+
+/* Also block any pseudo-element content bleeds */
+.game-library::before,
+.game-library::after {
+  display: none !important;
+}
+
+/* Ensure the library grid sits on clean dark background */
+.library-grid {
+  background: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Desktop: 3-column is more spacious and avoids the crowded look */
+@media (min-width: 801px) {
+  .library-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 18px !important;
+  }
+  .library-game {
+    height: 310px !important;
+  }
+}
+
+/* ================================================================
+   BATCH 5 — Bundle 1-col + Happy Hours modal compact
+   ================================================================ */
+
+/* ── 1. Loadout Bundles: Horizontally scrollable single row on mobile ── */
+@media (max-width: 800px) {
+  .bundle-carousel {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 16px !important;
+    padding: 4px 4px 16px 4px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .bundle-carousel::-webkit-scrollbar {
+    display: none !important;
+  }
+  .bundle-card {
+    flex: 0 0 280px !important;
+    max-width: 280px !important;
+    width: 280px !important;
+    height: 360px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    scroll-snap-align: start !important;
+    margin: 0 !important;
+  }
+  .bundle-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    justify-content: space-between !important;
+    padding: 12px !important;
+  }
+  .bundle-card.custom-deal-card {
+    grid-column: auto !important;
+    flex: 0 0 280px !important;
+    max-width: 280px !important;
+    width: 280px !important;
+    height: 360px !important;
+  }
+}
+
+/* ── 2. Happy Hours Modal: Compact sizing for mobile fit ── */
+@media (max-width: 800px) {
+  #happyHoursModal {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  #hhModalInner {
+    border-radius: 20px 20px 0 0 !important;
+    padding: 24px 20px 28px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  #hhModalInner h2 {
+    font-size: 1.7rem !important;
+    margin-bottom: 6px !important;
+  }
+  #hhModalInner p {
+    font-size: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  #hhModalInner [style*="margin-bottom:22px"] {
+    margin-bottom: 14px !important;
+  }
+  #hhModalInner [style*="margin-bottom:16px"] {
+    margin-bottom: 12px !important;
+  }
+  #hhTimeSlot {
+    height: 42px !important;
+  }
+  #hhModalInner button:last-of-type {
+    height: 46px !important;
+  }
+}
+
+/* Desktop: Also keep modal from being too tall */
+@media (min-width: 801px) {
+  #hhModalInner {
+    padding: 32px 36px !important;
+    max-width: 440px !important;
+  }
+  #hhModalInner h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* ── 3. Hero Live Cards: Always hidden (removed from HTML) ── */
+.hero-mobile-live-card,
+.hero-live-card {
+  display: none !important;
+}
+
+/* ================================================================
+   HERO RING CARD — Responsive
+   ================================================================ */
+
+/* Large desktop: keep card inside ring at scale */
+@media (min-width: 1400px) {
+  .hero-ring-card {
+    width: 420px;
+    right: calc(7% + 17vw - 210px);
+    top:  calc(19% + 17vw - 150px);
+  }
+  .ring-card-countdown { font-size: 52px; }
+}
+
+/* Standard desktop: default styles apply */
+
+/* Tablet: move card below hero text, hide ring card */
+@media (max-width: 1024px) and (min-width: 801px) {
+  .hero-ring-card {
+    display: none !important;
+  }
+}
+
+/* Mobile: hide ring card, show mobile banner */
+@media (max-width: 800px) {
+  .hero-ring-card {
+    display: none !important;
+  }
+  .hero-mobile-tournament-banner {
+    display: flex !important;
+  }
+
+  /* Redesigned Quick Booking (Drop In Tonight) for Mobile */
+  .booking-float {
+    display: none !important;
+  }
+  .mobile-booking-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+    background: rgba(8, 9, 12, 0.85) !important;
+    border: 1px solid rgba(239, 189, 78, 0.25) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    width: calc(100% - 32px) !important;
+    margin: 24px auto 28px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 50px rgba(239,189,78,0.03) !important;
+  }
+
+  .hero {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .mobile-live-grid {
+    display: none !important; /* Remove redundant double quick booking/status info */
+  }
+
+  /* Force Hero Stats Card to render on mobile */
+  .hero-meta.hero-stats-card {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-top: 24px !important;
+    width: calc(100% - 32px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    backdrop-filter: blur(10px) !important;
+    box-sizing: border-box !important;
+  }
+  .hero-stat-item {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .stat-lbl {
+    font-size: 8px !important;
+  }
+  .hero-meta strong {
+    font-size: 14px !important;
+    margin-top: 2px !important;
+  }
+  .hero-stat-divider {
+    height: 18px !important;
+    opacity: 0.5 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Ensure Navbar book now button color is high contrast gold */
+  .nav-book-link {
+    background: #efbd4e !important;
+    color: #100d0a !important;
+    opacity: 1 !important;
+    display: inline-flex !important;
+  }
+}
+
+/* ================================================================
+   MOBILE BOOKING CARD ELEMENTS (Desktop default is hidden)
+   ================================================================ */
+.mobile-booking-card {
+  display: none;
+}
+
+.m-booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 12px;
+}
+
+.m-booking-title {
+  font: 800 16px var(--display, sans-serif);
+  color: #fff;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.m-booking-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 10px var(--mono, monospace);
+  color: #ff4444;
+  letter-spacing: 0.1em;
+}
+
+.m-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff4444;
+  box-shadow: 0 0 8px #ff4444;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+.m-booking-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.m-select-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.m-select-card:active {
+  background: rgba(239, 189, 78, 0.08);
+  border-color: rgba(239, 189, 78, 0.3);
+}
+
+.m-card-icon {
+  font-size: 14px;
+}
+
+.m-card-val {
+  font: 700 13px var(--display, sans-serif);
+  color: #fff;
+}
+
+.m-booking-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.m-status-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 8px 4px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.m-status-val {
+  font: 600 11px var(--mono, monospace);
+  color: #efbd4e;
+}
+
+.m-booking-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: #efbd4e;
+  color: #190f08;
+  border: none;
+  border-radius: 12px;
+  font: 800 12px var(--mono, monospace);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.m-booking-cta:active {
+  background: #f1c762;
+  box-shadow: 0 4px 20px rgba(239, 189, 78, 0.4);
+  transform: scale(0.98);
+}
+
