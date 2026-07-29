@@ -1425,6 +1425,69 @@
         font-size: 10px !important;
         border-radius: 6px !important;
       }
+
+      /* Force hamburger menu icon to show on the right on all mobile screens up to 800px */
+      .nav-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 26px !important;
+        height: 18px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        z-index: 10001 !important;
+        padding: 0 !important;
+        outline: none !important;
+      }
+      .nav-toggle .bar {
+        display: block !important;
+        width: 100% !important;
+        height: 2px !important;
+        background-color: #fff !important;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        transform-origin: left center !important;
+      }
+      .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate3d(2px, -1px, 0) !important;
+        background-color: var(--lime) !important;
+      }
+      .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0 !important;
+        transform: scaleX(0) !important;
+      }
+      .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate3d(2px, 1px, 0) !important;
+        background-color: var(--lime) !important;
+      }
+
+      /* Refine mobile menu overlay links to be clean and elegant (not oversized) */
+      .mobile-menu-links {
+        gap: 8px !important;
+        width: 100% !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
+      .mobile-menu-links a {
+        font-size: 18px !important; /* Elegant letters */
+        font-weight: 700 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        color: #fff !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        font-family: var(--display) !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      .mobile-menu-book-btn {
+        margin-top: 14px !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        padding: 12px 24px !important;
+        width: auto !important;
+        border-radius: 8px !important;
+      }
     }
   </style>
 </head>
