@@ -1765,44 +1765,51 @@
         width: calc(100% - 32px) !important; /* 16px margins on both sides */
         max-width: 100% !important;
         margin: 24px auto 0 auto !important; /* Always centered, 24px margin-top */
+        background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important; /* 12px rounded borders */
+        padding: 0 8px 0 16px !important;
         box-sizing: border-box !important;
+        height: 52px !important;
         position: relative !important;
         overflow: visible !important;
+        transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease !important;
+      }
+      .search-wrap:focus-within {
+        border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
+        background: rgba(10, 10, 12, 0.8) !important;
+        box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
       }
       .search-lead-icon {
-        position: absolute !important;
-        left: 16px !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
         color: rgba(255, 255, 255, 0.4) !important;
-        pointer-events: none !important;
-        z-index: 2 !important;
-        transition: color 0.2s ease, transform 0.2s ease !important;
+        flex-shrink: 0 !important;
+        transition: color 200ms ease !important;
         display: flex !important;
+        margin-right: 12px !important;
+        position: static !important; /* aligned naturally next to input */
+        transform: none !important;
+      }
+      .search-wrap:focus-within .search-lead-icon {
+        color: rgba(255, 199, 70, 0.9) !important;
       }
       .search-input {
         flex: 1 !important; /* input takes up remaining space */
         width: 0 !important;
-        height: 52px !important; /* 52-56px height */
-        background: rgba(10, 10, 12, 0.65) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 16px !important; /* 16px border radius */
-        font-size: 13px !important;
-        padding: 0 16px 0 44px !important; /* Search icon inside input with proper left padding */
-        color: #fff !important;
+        height: 100% !important;
+        background: transparent !important;
+        border: none !important;
         outline: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        color: #fff !important;
+        font: 500 13px var(--mono) !important; /* Monospace typography */
+        letter-spacing: 0.03em !important;
         box-sizing: border-box !important;
-        line-height: normal !important; /* Vertically center placeholder */
-        transition: all 200ms ease !important;
+        line-height: normal !important; /* Vertically centered text input content */
       }
-      .search-input:focus ~ .search-lead-icon {
-        color: rgba(255, 199, 70, 0.9) !important;
-        transform: translateY(-50%) scale(1.05) !important;
-      }
-      .search-input:focus {
-        border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
-        background: rgba(10, 10, 12, 0.8) !important;
-        box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
+      .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.35) !important;
+        font-weight: 400 !important;
       }
       .search-kbd-shortcut {
         display: none !important;
@@ -1811,12 +1818,12 @@
         position: static !important; /* Aligned beside input */
         transform: none !important;
         flex-shrink: 0 !important;
-        height: 52px !important; /* Matches search height */
+        height: 38px !important; /* Smaller button height to look like unified pill inside container */
         background: rgba(255, 255, 255, 0.03) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 16px !important; /* Matches search border radius */
-        padding: 0 16px !important;
-        font-size: 10px !important;
+        border-radius: 8px !important;
+        padding: 0 12px !important;
+        font-size: 9px !important;
         font-weight: 800 !important;
         font-family: var(--mono) !important;
         color: rgba(255, 255, 255, 0.8) !important;

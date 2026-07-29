@@ -152,98 +152,94 @@
   /* Desktop Search, Categories & Food Grid Proportions */
   .search-wrap {
     position: relative !important;
-    width: 100% !important;
-    max-width: 980px !important; /* Premium balanced desktop width */
-    margin-left: auto !important;
-    margin-right: auto !important;
     display: flex !important;
     align-items: center !important;
-  }
-  .search-lead-icon {
-    position: absolute !important;
-    left: 16px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    color: rgba(255, 255, 255, 0.4) !important;
-    pointer-events: none !important;
-    z-index: 2 !important;
-    transition: color 0.2s ease, transform 0.2s ease !important;
-  }
-  .search-input {
     width: 100% !important;
+    max-width: 980px !important; /* Premium balanced desktop width */
     height: 52px !important;
     background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 8px !important; /* Premium sharp corners */
-    padding: 0 180px 0 44px !important; /* Space for lead SVG search icon */
-    font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
-    letter-spacing: 0.03em;
+    border-radius: 12px !important; /* 12px rounded borders */
+    padding: 0 8px 0 16px !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
+    background: rgba(10, 10, 12, 0.8) !important;
+    box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
+  }
+  .search-lead-icon {
+    color: rgba(255, 255, 255, 0.4) !important;
+    flex-shrink: 0 !important;
+    transition: color 200ms ease !important;
+    display: flex !important;
+    margin-right: 12px !important;
+  }
+  .search-wrap:focus-within .search-lead-icon {
+    color: rgba(255, 199, 70, 0.9) !important;
+  }
+  .search-input {
+    flex: 1 !important;
+    width: 0 !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: none !important;
     outline: none !important;
-    box-shadow: none !important;
-    transition: all 200ms ease !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #fff !important;
+    font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
+    letter-spacing: 0.03em !important;
     box-sizing: border-box !important;
     line-height: normal !important; /* Vertically centered text input content */
-  }
-  .search-input:focus ~ .search-lead-icon {
-    color: rgba(255, 199, 70, 0.9) !important;
-    transform: translateY(-50%) scale(1.05) !important;
   }
   .search-input::placeholder {
     color: rgba(255, 255, 255, 0.35) !important;
     font-weight: 400 !important;
   }
-  .search-input:focus {
-    border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
-    background: rgba(10, 10, 12, 0.8) !important;
-    box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
-  }
   
   /* Command Palette Badge (CTRL + K) */
   .search-kbd-shortcut {
-    position: absolute;
-    right: 120px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    padding: 3px 6px;
-    font-size: 9px;
-    font-weight: 700;
-    font-family: var(--mono);
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.05em;
-    pointer-events: none;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px !important;
+    padding: 3px 6px !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    font-family: var(--mono) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    letter-spacing: 0.05em !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-right: 16px !important;
+    flex-shrink: 0 !important;
   }
   
-  /* Sleek Filter Button */
+  /* Sleek Filter Button inside Search Bar */
   .search-filters-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 10px;
-    font-weight: 800;
-    font-family: var(--mono);
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-    z-index: 2;
+    position: static !important;
+    transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 8px !important;
+    padding: 8px 14px !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    font-family: var(--mono) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    cursor: pointer !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
   }
   .search-filters-btn:hover {
     background: var(--lime) !important;
@@ -252,7 +248,7 @@
     box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
   }
   .search-filters-btn svg {
-    stroke: currentColor;
+    stroke: currentColor !important;
   }
   .sticky-menu-shelf {
     max-width: 1200px !important;
