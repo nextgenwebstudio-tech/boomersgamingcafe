@@ -410,6 +410,523 @@ button.button.hero-primary-cta {
     background: #F5C64D !important;
     color: #000 !important;
   }
+
+  /* ==========================================================================
+     MOBILE FOOD DETAILS MODAL POLISH — NATIVE bottom sheet
+     ========================================================================== */
+
+  /* 1. Full-Screen Bottom Sheet Overlay container */
+  .food-modal-overlay,
+  .food-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    background: rgba(0,0,0,0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    z-index: 11000 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .food-modal-overlay.active,
+  .food-modal.active {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
+  /* 2. Slide-up bottom sheet container wrapper */
+  .food-modal-overlay .food-modal,
+  .food-modal-wrapper {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 90dvh !important;
+    max-height: 90dvh !important;
+    background: #08090C !important;
+    border-top-left-radius: 24px !important;
+    border-top-right-radius: 24px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.5) !important;
+  }
+  .food-modal-overlay.active .food-modal,
+  .food-modal.active .food-modal-wrapper {
+    transform: translateY(0) !important;
+  }
+
+  /* 3. Hero Cover Image with Bottom Gradient */
+  .food-modal-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .food-modal-media {
+    position: relative !important;
+    width: 100% !important;
+    height: 250px !important;
+    flex-shrink: 0 !important;
+    overflow: hidden !important;
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    margin: 0 !important;
+    background: #08090C !important;
+    border: none !important;
+  }
+  .food-modal-media .modal-food-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-radius: 0 !important;
+  }
+  .food-modal-media::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(to top, rgba(8,9,12,0.95) 0%, rgba(8,9,12,0.4) 40%, transparent 100%) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* 4. Badges Overlay */
+  .modal-food-badge-wrap {
+    position: absolute !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    z-index: 2 !important;
+    display: flex !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    top: auto !important;
+    right: auto !important;
+  }
+  .modal-food-badge.bestseller {
+    background: #F5C64D !important;
+    color: #000 !important;
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    text-transform: uppercase !important;
+  }
+  .modal-food-veg-badge {
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .modal-food-veg-badge.veg {
+    background: rgba(0, 219, 120, 0.2) !important;
+    border: 1px solid rgba(0, 219, 120, 0.4) !important;
+  }
+  .modal-food-veg-badge.nonveg {
+    background: rgba(255, 79, 112, 0.2) !important;
+    border: 1px solid rgba(255, 79, 112, 0.4) !important;
+  }
+
+  /* 5. Heart Favorite overlay & Close buttons */
+  .food-modal-close {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .modal-fav-btn {
+    position: absolute !important;
+    top: 16px !important;
+    left: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    transition: all 0.25s ease !important;
+  }
+  .modal-fav-btn.active {
+    color: #ff3366 !important;
+    border-color: rgba(255, 51, 102, 0.4) !important;
+    transform: scale(1.1) !important;
+  }
+
+  /* 6. Modal Details Body (Scrollable area) */
+  .food-modal-body,
+  .food-modal-details {
+    padding: 24px 20px calc(110px + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    scrollbar-width: none !important;
+    max-height: calc(90dvh - 250px) !important;
+  }
+  .food-modal-body::-webkit-scrollbar,
+  .food-modal-details::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Sticky Header Behavior on scroll */
+  .food-modal-header-block {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  .food-modal-kicker {
+    font: 800 10px var(--mono) !important;
+    color: #F5C64D !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+  }
+  .food-modal-title,
+  .food-modal-details h3 {
+    font: 800 32px var(--display) !important;
+    color: #fff !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em !important;
+  }
+  .food-modal-price-rating {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 6px !important;
+  }
+  .food-modal-price {
+    font: 800 28px var(--display) !important;
+    color: #F5C64D !important;
+  }
+  .food-modal-rating {
+    font: 700 12px var(--mono) !important;
+    color: #fff !important;
+  }
+  .food-modal-desc,
+  .food-modal-details p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: #B8B8B8 !important;
+    margin: 0 !important;
+  }
+
+  /* 7. Premium Stats Chips */
+  .food-stat-chips,
+  .food-modal-details > div[style*="display:flex; gap:16px"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .food-stat-chip {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    font-family: var(--mono) !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .food-stat-chip:active {
+    border-color: #F5C64D !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 0 10px rgba(245, 198, 77, 0.15) !important;
+  }
+  .food-stat-chip .chip-icon {
+    font-size: 16px !important;
+  }
+  .food-stat-chip .chip-label {
+    font-size: 9px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-weight: 700 !important;
+  }
+
+  /* 8. Ingredients Tags list */
+  .food-modal-section-title,
+  .food-modal-details h4 {
+    font: 800 10px var(--mono) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    margin: 0 0 12px !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .food-ingredient-tags,
+  .food-modal-details ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+  .food-ingredient-tag,
+  .food-modal-details ul li {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid #F5C64D !important;
+    border-radius: 99px !important;
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    color: #F5C64D !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+  }
+
+  /* Hide Desktop controls on mobile modal */
+  .food-qty-section-desktop,
+  .food-modal-details > div[style*="align-items:center; gap:16px"] {
+    display: none !important;
+  }
+
+  /* 9. Mobile Sticky Bottom Action Bar */
+  .food-add-sticky-wrap {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(8, 9, 12, 0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    z-index: 10000 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-qty-selector,
+  .food-add-sticky-wrap .quantity-selector {
+    display: flex !important;
+    align-items: center !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    height: 52px !important;
+    padding: 0 4px !important;
+    box-sizing: border-box !important;
+  }
+  .food-add-sticky-wrap .food-qty-btn,
+  .food-add-sticky-wrap .quantity-selector button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-qty-value,
+  .food-add-sticky-wrap .quantity-selector input {
+    width: 32px !important;
+    text-align: center !important;
+    font: 700 15px var(--mono) !important;
+    color: #fff !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-add-btn,
+  .food-add-sticky-wrap button.button {
+    flex-grow: 1 !important;
+    height: 52px !important;
+    background: #F5C64D !important;
+    border: none !important;
+    border-radius: 12px !important;
+    color: #000 !important;
+    font: 800 12px var(--mono) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 20px rgba(245, 198, 77, 0.35) !important;
+    transition: all 0.2s ease !important;
+    padding: 0 16px !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-add-btn:active,
+  .food-add-sticky-wrap button.button:active {
+    background: #ffcc33 !important;
+    transform: translateY(1px) !important;
+  }
+
+  /* 10. Horizontally Scrollable Related items */
+  .food-related-scroll,
+  .related-items-wrap {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    scroll-snap-type: x mandatory !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .food-related-scroll::-webkit-scrollbar,
+  .related-items-wrap::-webkit-scrollbar {
+    display: none !important;
+  }
+  .food-related-card,
+  .related-food-item {
+    flex: 0 0 160px !important;
+    background: #141414 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    scroll-snap-align: start !important;
+    text-align: left !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+  }
+  .food-related-card img,
+  .related-food-item img {
+    width: 100% !important;
+    height: 100px !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: 1/1 !important;
+  }
+  .food-related-card .rel-name,
+  .related-food-item b {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin: 8px 10px 4px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .food-related-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-related-card .rel-meta,
+  .related-food-item div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 10px 10px !important;
+    margin-top: auto !important;
+  }
+  .food-related-card .rel-price,
+  .related-food-item span {
+    font-size: 13px !important;
+    color: #F5C64D !important;
+    font-weight: 700 !important;
+  }
+  .food-related-card .rel-add {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: all 0.2s ease !important;
+  }
+  .food-related-card .rel-add:active {
+    background: #F5C64D !important;
+    color: #000 !important;
+    border-color: #F5C64D !important;
+  }
+
+  /* 11. Recommended Drink Pairing & Gaming tags */
+  .recommended-pairing-block {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: left !important;
+  }
 }
+
 
 
