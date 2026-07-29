@@ -320,7 +320,7 @@
             <div class="section-kicker">Live from the floor</div>
             <h2 class="display">The arena<br>is <span>awake.</span></h2>
           </div>
-          <div class="live">Updated 12 sec ago</div>
+          <div class="live">Updated 8 sec ago</div>
         </div>
         
         <div class="pulse-line" aria-hidden="true"></div>
@@ -337,7 +337,10 @@
           <div class="arena-status reveal">
             <!-- Availability Dashboard Widget (Phase 2) -->
             <div class="live-availability" id="liveAvailabilityDashboardWrap">
-              <div class="live-avail-title">Live Capacity Status <span class="live">Online</span></div>
+              <div class="live-avail-title">
+                <span>● LIVE CAPACITY</span>
+                <small style="font-size: 10px; color: var(--muted); text-transform: uppercase; font-family: var(--mono); font-weight: normal; margin-top: 4px; display: block;">Updated 8 sec ago</small>
+              </div>
               <div class="live-avail-grid" id="liveAvailabilityDashboard">
                 <!-- Loaded Dynamically -->
               </div>
@@ -392,6 +395,7 @@
           <!-- Search Shelf -->
           <div style="margin-bottom: 16px;">
             <div class="search-wrap">
+              <svg class="search-lead-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <input type="text" id="foodSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
               <span class="search-kbd-shortcut">CTRL + K</span>
               <div class="search-filters-btn" onclick="document.querySelector('.cafe-tabs').scrollIntoView({behavior:'smooth', block:'center'});">

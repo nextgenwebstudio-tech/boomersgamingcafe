@@ -158,6 +158,16 @@
     display: flex !important;
     align-items: center !important;
   }
+  .search-lead-icon {
+    position: absolute !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+  }
   .search-input {
     width: 100% !important;
     height: 52px !important;
@@ -167,22 +177,27 @@
     color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 8px !important; /* Premium sharp corners */
-    padding: 0 180px 0 18px !important; /* Left aligned placeholder (no leading icon) */
+    padding: 0 180px 0 44px !important; /* Space for lead SVG search icon */
     font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
     letter-spacing: 0.03em;
     outline: none !important;
     box-shadow: none !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-sizing: border-box !important;
+    line-height: normal !important; /* Vertically centered text input content */
+  }
+  .search-input:focus ~ .search-lead-icon {
+    color: rgba(255, 199, 70, 0.9) !important;
+    transform: translateY(-50%) scale(1.05) !important;
   }
   .search-input::placeholder {
     color: rgba(255, 255, 255, 0.35) !important;
     font-weight: 400 !important;
   }
   .search-input:focus {
-    border-color: var(--lime) !important;
+    border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
     background: rgba(10, 10, 12, 0.8) !important;
-    box-shadow: 0 0 20px rgba(0, 219, 120, 0.15) !important;
+    box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
   }
   
   /* Command Palette Badge (CTRL + K) */

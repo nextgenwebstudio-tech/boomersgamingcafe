@@ -335,6 +335,16 @@
       display: flex;
       align-items: center;
     }
+    .search-lead-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      z-index: 2;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
     .search-input {
       width: 100%;
       height: 52px;
@@ -344,22 +354,27 @@
       color: #fff !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       border-radius: 8px !important; /* Premium sharp corners */
-      padding: 0 180px 0 18px !important; /* Left aligned (no leading icon), space for keys + filters on right */
+      padding: 0 180px 0 44px !important; /* Left aligned, space for lead SVG and right controls */
       font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
       letter-spacing: 0.03em;
       outline: none;
       box-shadow: none !important;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
       box-sizing: border-box !important;
+      line-height: normal !important;
+    }
+    .search-input:focus ~ .search-lead-icon {
+      color: rgba(255, 199, 70, 0.9) !important;
+      transform: translateY(-50%) scale(1.05);
     }
     .search-input::placeholder {
       color: rgba(255, 255, 255, 0.35) !important;
       font-weight: 400 !important;
     }
     .search-input:focus {
-      border-color: var(--menu-gold) !important;
+      border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
       background: rgba(10, 10, 12, 0.8) !important;
-      box-shadow: 0 0 20px rgba(245, 198, 77, 0.15) !important;
+      box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
     }
     
     /* Command Palette Badge (CTRL + K) */
@@ -1648,22 +1663,22 @@
 
       /* 3. Hamburger menu */
       .nav-toggle, .mobile-menu-toggle {
-        width: 40px !important; /* Hamburger button container should be 40x40px */
-        height: 40px !important;
+        width: 44px !important; /* Touch target 44x44px */
+        height: 44px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
         margin: 0 !important;
-        margin-right: 0 !important; /* Flush right */
+        margin-right: -4px !important; /* Align flush right with container margin */
         border: none !important;
         background: transparent !important;
         cursor: pointer !important;
         z-index: 10001 !important;
       }
       .nav-toggle .bar, .mobile-menu-toggle span {
-        width: 22px !important; /* Line width: 22px */
+        width: 18px !important; /* Reduced icon size by about 20% (from 22px to 18px) */
         height: 2px !important; /* Line height: 2px */
         margin: 2.5px 0 !important; /* Spacing gap between lines: 5px */
         border-radius: 999px !important;
@@ -1692,25 +1707,32 @@
         display: none !important; /* Remove Book Now from header */
       }
       .menu-nav-back {
-        position: fixed !important;
-        top: 84px !important; /* Place Back button below 68px navbar as a floating pill */
-        left: 16px !important;
+        display: none !important; /* Hide old back button */
+      }
+      .menu-back-row {
+        display: flex !important;
+        justify-content: flex-start !important;
+        margin-bottom: 20px !important; /* Spacing: 20px between Back button and search bar */
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .menu-nav-back-mobile {
         display: inline-flex !important;
         align-items: center !important;
-        justify-content: center !important;
-        background: rgba(20, 21, 25, 0.8) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 99px !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
         color: #fff !important;
         padding: 8px 16px !important;
-        font-size: 11px !important;
+        font-size: 12px !important;
         font-weight: 700 !important;
-        z-index: 999 !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
         text-decoration: none !important;
         transition: all 0.2s ease !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+      }
+      .menu-nav-back-mobile:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: var(--lime) !important;
       }
       
       /* 5. Content wrapper */
@@ -1737,10 +1759,24 @@
 
       /* 6. Search bar */
       .search-wrap {
+        position: relative !important;
         margin-top: 24px !important;
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .search-lead-icon {
+        position: absolute !important;
+        left: 16px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        color: rgba(255, 255, 255, 0.4) !important;
+        pointer-events: none !important;
+        z-index: 2 !important;
+        transition: color 0.2s ease, transform 0.2s ease !important;
+        display: flex !important;
       }
       .search-input {
         width: 100% !important;
@@ -1749,10 +1785,20 @@
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
         border-radius: 8px !important;
         font-size: 13px !important;
-        padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
+        padding: 0 100px 0 44px !important; /* Left padding: 44px for icon, Right padding: 100px for Filters */
         color: #fff !important;
         outline: none !important;
         box-sizing: border-box !important;
+        line-height: normal !important; /* Vertically center placeholder */
+      }
+      .search-input:focus ~ .search-lead-icon {
+        color: rgba(255, 199, 70, 0.9) !important;
+        transform: translateY(-50%) scale(1.05) !important;
+      }
+      .search-input:focus {
+        border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
+        background: rgba(10, 10, 12, 0.8) !important;
+        box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
       }
       .search-kbd-shortcut {
         display: none !important;
@@ -1803,9 +1849,9 @@
       .menu-grid-view {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important; /* Two cards per row */
-        column-gap: 12px !important;
-        row-gap: 16px !important;
-        margin-top: 24px !important;
+        column-gap: 16px !important; /* Column gap: 16px */
+        row-gap: 20px !important;    /* Row gap: 20px */
+        margin-top: 20px !important; /* 20px between chips and grid */
         width: 100% !important;
         box-sizing: border-box !important;
       }
@@ -1824,27 +1870,62 @@
         justify-content: space-between !important;
         border-radius: 12px !important;
         background: rgba(20, 21, 25, 0.6) !important;
+        width: 100% !important;
+        max-width: 180px !important; /* Width: 170-180px */
+        min-width: 170px !important;
+        margin: 0 auto !important; /* Center card inside grid cell */
+        box-sizing: border-box !important;
+        overflow: hidden !important;
       }
+      @media (max-width: 360px) {
+        .food-product-card {
+          min-width: 100% !important;
+        }
+      }
+
       .food-image-container {
         width: 100% !important;
-        aspect-ratio: 4 / 3 !important; /* Responsive image ratio */
-        height: auto !important;
+        height: 170px !important; /* Image height ~170px */
+        aspect-ratio: auto !important;
+        overflow: hidden !important;
+        position: relative !important;
+      }
+      .food-image-bg {
+        width: 100% !important;
+        height: 170px !important;
+        background-size: cover !important;
+        background-position: center !important;
       }
       .food-card-details {
         flex-grow: 1 !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
         padding: 12px !important;
+        box-sizing: border-box !important;
       }
       .food-card-title {
-        font-size: 15px !important;
-        line-height: 1.2 !important;
+        font-size: 14px !important;
+        line-height: 1.25 !important;
+        height: 2.5em !important; /* Title limited to 2 lines */
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 4px !important;
+        color: #fff !important;
       }
       .food-card-desc {
         font-size: 11px !important;
-        line-height: 1.4 !important;
+        line-height: 1.35 !important;
+        height: 2.7em !important; /* Description limited to 2 lines with ellipsis */
+        overflow: hidden !important;
+        display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 8px !important;
+        color: rgba(255,255,255,0.72) !important;
       }
       .cafe-add-btn {
         width: 100% !important; /* Full width buttons */
@@ -1852,7 +1933,10 @@
         font-size: 11px !important;
       }
       .food-card-footer {
-        padding: 0 12px 12px !important;
+        margin-top: auto !important; /* Price and CTA aligned to the bottom */
+        padding: 10px 12px 12px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+        box-sizing: border-box !important;
       }
       
       /* Mobile Menu Overlay adjustments */
@@ -2054,7 +2138,11 @@
         
         <!-- Search & Filter shelf -->
         <div class="menu-shelf-row">
+          <div class="menu-back-row">
+            <a class="menu-nav-back-mobile" href="index.html">← Back to Home</a>
+          </div>
           <div class="search-wrap">
+            <svg class="search-lead-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="text" id="menuSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
             <span class="search-kbd-shortcut">CTRL + K</span>
             <div class="search-filters-btn" onclick="document.querySelector('.menu-categories-row').scrollIntoView({behavior:'smooth', block:'center'});">
