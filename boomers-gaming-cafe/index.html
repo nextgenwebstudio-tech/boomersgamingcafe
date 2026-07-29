@@ -391,10 +391,13 @@
         <div class="sticky-menu-shelf reveal">
           <!-- Search Shelf -->
           <div style="margin-bottom: 16px;">
-            <div class="search-wrap" style="position: relative; width: 100%; max-width: 100%;">
-              <span class="search-icon" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 18px; color: rgba(255,255,255,0.4); pointer-events: none; z-index: 2;">🔍</span>
-              <input type="text" id="foodSearchInput" class="search-input" placeholder="Search burgers, wraps, shakes..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 14px 52px 14px 52px; color: #fff; font-size: 14px; font-family: 'Manrope', sans-serif; outline: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-sizing: border-box;">
-              <span class="filter-icon" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 18px; color: rgba(255,255,255,0.4); pointer-events: none; z-index: 2;">🎛️</span>
+            <div class="search-wrap">
+              <input type="text" id="foodSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
+              <span class="search-kbd-shortcut">CTRL + K</span>
+              <div class="search-filters-btn" onclick="document.querySelector('.cafe-tabs').scrollIntoView({behavior:'smooth', block:'center'});">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="17" y1="12" y2="12"/><line x1="13" x2="3" y1="12" y2="12"/><line x1="21" x2="11" y1="20" y2="20"/><line x1="7" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="17" x2="17" y1="10" y2="14"/><line x1="7" x2="7" y1="18" y2="22"/></svg>
+                Filters
+              </div>
             </div>
               
           </div>
@@ -1551,6 +1554,18 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initRingCardCountdown();
+    });
+
+    // Ctrl + K listener to focus search bar
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('foodSearchInput');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     });
 
 

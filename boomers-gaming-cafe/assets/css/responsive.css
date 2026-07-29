@@ -9,6 +9,37 @@ html, body {
 }
 
 @media (max-width: 800px) {
+  /* Premium Mobile Search overrides */
+  .search-wrap {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .search-input {
+    width: 100% !important;
+    height: 52px !important;
+    background: rgba(10, 10, 12, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
+    color: #fff !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+  }
+  .search-kbd-shortcut {
+    display: none !important;
+  }
+  .search-filters-btn {
+    right: 8px !important;
+    padding: 4px 8px !important;
+    font-size: 9px !important;
+    gap: 4px !important;
+  }
+
   /* General Variables and Layouts */
   .nav {
     width: 100% !important;

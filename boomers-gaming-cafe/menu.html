@@ -332,21 +332,25 @@
     .search-wrap {
       position: relative;
       width: 100%;
+      display: flex;
+      align-items: center;
     }
     .search-input {
       width: 100%;
       height: 52px;
-      background: rgba(255, 255, 255, 0.03) !important;
+      background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
       backdrop-filter: blur(10px) !important;
       -webkit-backdrop-filter: blur(10px) !important;
       color: #fff !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      border-radius: 12px !important;
-      padding: 0 52px 0 52px !important; /* Space for both left search and right filter icons */
-      font: 500 14px 'Manrope', sans-serif;
+      border-radius: 8px !important; /* Premium sharp corners */
+      padding: 0 180px 0 18px !important; /* Left aligned (no leading icon), space for keys + filters on right */
+      font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
+      letter-spacing: 0.03em;
       outline: none;
       box-shadow: none !important;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-sizing: border-box !important;
     }
     .search-input::placeholder {
       color: rgba(255, 255, 255, 0.35) !important;
@@ -354,38 +358,63 @@
     }
     .search-input:focus {
       border-color: var(--menu-gold) !important;
-      box-shadow: 0 0 24px rgba(239, 189, 78, 0.15) !important;
-      background: rgba(255, 255, 255, 0.06) !important;
+      background: rgba(10, 10, 12, 0.8) !important;
+      box-shadow: 0 0 20px rgba(245, 198, 77, 0.15) !important;
     }
-    .search-icon {
+    
+    /* Command Palette Badge (CTRL + K) */
+    .search-kbd-shortcut {
       position: absolute;
-      left: 20px !important;
-      right: auto !important;
+      right: 120px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 3px 6px;
+      font-size: 9px;
+      font-weight: 700;
+      font-family: var(--mono);
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.05em;
       pointer-events: none;
-      transition: color 0.2s;
-      z-index: 2;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.2s ease;
     }
-    .filter-icon {
+    
+    /* Sleek Filter Button */
+    .search-filters-btn {
       position: absolute;
-      right: 20px !important;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 10px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: rgba(255, 255, 255, 0.7);
       cursor: pointer;
-      transition: color 0.2s, transform 0.2s;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
       z-index: 2;
     }
-    .search-input:focus ~ .search-icon {
-      color: var(--menu-gold);
+    .search-filters-btn:hover {
+      background: var(--lime) !important;
+      color: #000 !important;
+      border-color: var(--lime) !important;
+      box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
     }
-    .filter-icon:hover {
-      color: var(--menu-gold);
-      transform: translateY(-50%) scale(1.1);
+    .search-filters-btn svg {
+      stroke: currentColor;
     }
     .filter-chips-row {
       display: flex;
@@ -1716,28 +1745,23 @@
       .search-input {
         width: 100% !important;
         height: 52px !important; /* Height: 52px */
-        border-radius: 12px !important;
-        font-size: 14px !important;
-        padding: 0 48px 0 16px !important; /* Left padding: 16px, Right padding: 48px for icon */
-        background: rgba(255, 255, 255, 0.03) !important;
+        background: rgba(10, 10, 12, 0.65) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        font-size: 13px !important;
+        padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
         color: #fff !important;
         outline: none !important;
         box-sizing: border-box !important;
       }
-      .search-icon {
-        position: absolute !important;
-        right: 16px !important; /* Icon aligned to the right */
-        left: auto !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        font-size: 16px !important;
-        color: rgba(255, 255, 255, 0.5) !important;
-        pointer-events: none !important;
-        display: flex !important;
-      }
-      .filter-icon {
+      .search-kbd-shortcut {
         display: none !important;
+      }
+      .search-filters-btn {
+        right: 8px !important;
+        padding: 4px 8px !important;
+        font-size: 9px !important;
+        gap: 4px !important;
       }
 
       /* 7. Category chips horizontal scroll */
@@ -2031,9 +2055,12 @@
         <!-- Search & Filter shelf -->
         <div class="menu-shelf-row">
           <div class="search-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="menuSearchInput" class="search-input" placeholder="Search burgers, wraps, shakes..." oninput="handleSearch(this)">
-            <span class="filter-icon" onclick="event.stopPropagation();">🎛️</span>
+            <input type="text" id="menuSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
+            <span class="search-kbd-shortcut">CTRL + K</span>
+            <div class="search-filters-btn" onclick="document.querySelector('.menu-categories-row').scrollIntoView({behavior:'smooth', block:'center'});">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="17" y1="12" y2="12"/><line x1="13" x2="3" y1="12" y2="12"/><line x1="21" x2="11" y1="20" y2="20"/><line x1="7" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="17" x2="17" y1="10" y2="14"/><line x1="7" x2="7" y1="18" y2="22"/></svg>
+              Filters
+            </div>
           </div>
 
           <!-- Category Pills horizontal scroll below search -->
@@ -2557,6 +2584,18 @@
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeFoodDetailsModal();
+    });
+
+    // Ctrl + K listener to focus search bar
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('menuSearchInput');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     });
   </script>
 </body>
