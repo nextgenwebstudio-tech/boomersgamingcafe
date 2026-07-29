@@ -338,27 +338,77 @@ button.button.hero-primary-cta {
     border-radius: 8px !important;
   }
 
-  /* 4. Food Card Footer Column Stacking & Alignment (Homepage Mobile) */
-  .food-card-footer {
+  /* 4. Food Card Compact Styling, Stacked Footer & Alignment (Homepage Mobile) */
+  .cafe-items-list .food-product-card {
+    border-radius: 16px !important;
+    background: #141414 !important; /* Match menu card bg */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  .cafe-items-list .food-card-details {
+    padding: 12px !important; /* Compact padding */
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+  }
+  .cafe-items-list .food-card-title {
+    font-size: 14px !important; /* Smaller title */
+    font-family: var(--display) !important;
+    color: #fff !important;
+    margin: 4px 0 6px !important;
+    line-height: 1.2 !important;
+  }
+  .cafe-items-list .food-card-desc {
+    font-size: 11px !important; /* Compact desc */
+    color: #B8B8B8 !important;
+    line-height: 1.45 !important;
+    margin-bottom: 12px !important;
+    min-height: 0 !important; /* Remove min-height to avoid stretching */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Limit description to 2 lines */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .cafe-items-list .food-type-badge {
+    font-size: 10px !important;
+  }
+  .cafe-items-list .food-card-footer {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 8px !important;
-    padding: 12px !important;
+    padding: 0 12px 12px !important; /* Match padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-top: 10px !important;
+    margin-top: auto !important;
   }
-  .food-card-price {
-    font-size: 18px !important;
+  .cafe-items-list .food-card-price {
+    font-size: 16px !important; /* Clean, compact price */
+    color: #F5C64D !important; /* Gold: #F5C64D */
+    font-weight: 800 !important;
     text-align: left !important;
   }
-  .food-product-card .cafe-add-btn {
+  .cafe-items-list .food-product-card .cafe-add-btn {
     width: 100% !important;
     margin: 0 !important;
-    height: 34px !important;
-    font-size: 10px !important;
+    height: 32px !important; /* Compact height */
+    font-size: 9px !important; /* Smaller label */
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
     border-radius: 8px !important;
+    background: transparent !important;
+    border: 1px solid #F5C64D !important;
+    color: #F5C64D !important;
+    text-transform: uppercase !important;
+    font-family: var(--mono) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn:hover {
+    background: #F5C64D !important;
+    color: #000 !important;
   }
 }
 
