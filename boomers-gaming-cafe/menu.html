@@ -1759,13 +1759,15 @@
 
       /* 6. Search bar */
       .search-wrap {
-        position: relative !important;
-        margin-top: 24px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
         display: flex !important;
         align-items: center !important;
+        gap: 10px !important; /* 8-12px gap between search input and filters */
+        width: calc(100% - 32px) !important; /* 16px margins on both sides */
+        max-width: 100% !important;
+        margin: 24px auto 0 auto !important; /* Always centered, 24px margin-top */
+        box-sizing: border-box !important;
+        position: relative !important;
+        overflow: visible !important;
       }
       .search-lead-icon {
         position: absolute !important;
@@ -1779,17 +1781,19 @@
         display: flex !important;
       }
       .search-input {
-        width: 100% !important;
-        height: 52px !important; /* Height: 52px */
+        flex: 1 !important; /* input takes up remaining space */
+        width: 0 !important;
+        height: 52px !important; /* 52-56px height */
         background: rgba(10, 10, 12, 0.65) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 8px !important;
+        border-radius: 16px !important; /* 16px border radius */
         font-size: 13px !important;
-        padding: 0 100px 0 44px !important; /* Left padding: 44px for icon, Right padding: 100px for Filters */
+        padding: 0 16px 0 44px !important; /* Search icon inside input with proper left padding */
         color: #fff !important;
         outline: none !important;
         box-sizing: border-box !important;
         line-height: normal !important; /* Vertically center placeholder */
+        transition: all 200ms ease !important;
       }
       .search-input:focus ~ .search-lead-icon {
         color: rgba(255, 199, 70, 0.9) !important;
@@ -1804,10 +1808,33 @@
         display: none !important;
       }
       .search-filters-btn {
-        right: 8px !important;
-        padding: 4px 8px !important;
-        font-size: 9px !important;
-        gap: 4px !important;
+        position: static !important; /* Aligned beside input */
+        transform: none !important;
+        flex-shrink: 0 !important;
+        height: 52px !important; /* Matches search height */
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 16px !important; /* Matches search border radius */
+        padding: 0 16px !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        font-family: var(--mono) !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        letter-spacing: 0.05em !important;
+        text-transform: uppercase !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        box-sizing: border-box !important;
+        transition: all 0.2s ease !important;
+      }
+      .search-filters-btn:hover {
+        background: var(--lime) !important;
+        color: #000 !important;
+        border-color: var(--lime) !important;
+        box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
       }
 
       /* 7. Category chips horizontal scroll */
@@ -1853,11 +1880,11 @@
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important; /* Two cards per row */
         column-gap: 12px !important; /* Column gap: 12px */
-        row-gap: 14px !important;    /* Row gap: 14px */
+        row-gap: 16px !important;    /* Row gap: 16px */
         margin-top: 24px !important; /* 24px between chips and grid */
         width: 100% !important;
         box-sizing: border-box !important;
-        padding: 0 4px !important;
+        padding: 0 16px !important; /* Equal left/right page padding (16px) */
       }
 
       .food-product-card {
@@ -1906,11 +1933,30 @@
         flex-grow: 1 !important;
         display: flex !important;
         flex-direction: column !important;
-        padding: 10px !important; /* Reduced padding */
+        padding: 16px !important; /* Equal internal padding */
         box-sizing: border-box !important;
       }
+      
+      /* New layout order: Meta Row -> Title -> Description -> Price */
+      .food-card-meta {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important; /* Spreads evenly */
+        width: 100% !important;
+        font-size: 9px !important;
+        gap: 4px !important;
+        padding: 0 0 8px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+        order: 1 !important; /* Meta row first */
+      }
+      .food-card-meta span {
+        white-space: nowrap !important;
+      }
+      
       .food-card-title {
-        font-size: 13px !important; /* Reduced size */
+        font-size: 14px !important; /* Reduced size */
         font-weight: 700 !important;
         line-height: 1.25 !important;
         height: 2.5em !important; /* Title limited to 2 lines */
@@ -1919,10 +1965,12 @@
         -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
         text-overflow: ellipsis !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 8px !important;
         color: #fff !important;
-        order: 1 !important;
+        text-align: center !important; /* Centered content */
+        order: 2 !important;
       }
+      
       .food-card-desc {
         font-size: 11px !important; /* Reduced size */
         line-height: 1.35 !important;
@@ -1932,45 +1980,33 @@
         -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
         text-overflow: ellipsis !important;
-        margin-bottom: 6px !important;
-        color: rgba(255,255,255,0.6) !important;
-        order: 2 !important;
+        margin-bottom: 10px !important;
+        color: rgba(255, 255, 255, 0.6) !important;
+        text-align: center !important; /* Centered content */
+        order: 3 !important;
       }
+      
       .food-card-price {
-        font-size: 14px !important;
+        font-size: 22px !important; /* Prominent size: 22-24px */
         font-weight: 800 !important;
         color: #F5C54B !important; /* Boomer's Gold */
-        text-align: center !important; /* Centered */
-        margin: 6px 0 !important;
-        order: 3 !important; /* Centered below description */
+        text-align: center !important; /* Centered horizontally */
+        margin: 12px 0 !important; /* 10-12px spacing above and below */
+        order: 4 !important; /* Centered below description */
         width: 100% !important;
       }
-      .food-card-meta {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important; /* Spreads evenly */
-        width: 100% !important;
-        font-size: 8px !important; /* Smaller size */
-        gap: 4px !important;
-        padding: 6px 0 0 0 !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
-        margin-top: 4px !important;
-        order: 4 !important;
-      }
-      .food-card-meta span {
-        white-space: nowrap !important;
-      }
+      
       .food-card-footer {
         margin-top: auto !important;
-        padding: 0 10px 10px !important;
+        padding: 0 16px 16px !important; /* Equal internal padding */
         border-top: none !important;
         box-sizing: border-box !important;
       }
       .cafe-add-btn {
         width: 100% !important;
-        height: 40px !important; /* Height: 40px */
+        height: 40px !important; /* Height: 40-44px */
         font-size: 0 !important; /* Hide original text */
-        border-radius: 6px !important;
+        border-radius: 8px !important; /* esports standard radius */
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -1978,7 +2014,7 @@
       }
       .cafe-add-btn::after {
         content: '+ QUICK VIEW' !important; /* Compact button text */
-        font-size: 9px !important;
+        font-size: 10px !important;
         font-family: var(--mono) !important;
         font-weight: 700 !important;
         color: #181006 !important;
@@ -2428,7 +2464,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('menuSearchInput');
       if (searchInput && window.innerWidth <= 768) {
-        searchInput.placeholder = 'Search...';
+        searchInput.placeholder = 'Search burgers, fries...';
       }
 
       const stickyBtn = document.getElementById('mobileStickyOrder');
