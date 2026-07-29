@@ -516,13 +516,43 @@ button.button.hero-primary-cta {
     background: #08090C !important;
     border: none !important;
   }
-  .food-modal-media .modal-food-img {
+  .modal-image-carousel {
+    display: flex !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    border-radius: 0 !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .modal-image-carousel::-webkit-scrollbar {
+    display: none !important;
+  }
+  .carousel-slide {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    scroll-snap-align: start !important;
+  }
+  .carousel-dots-indicator {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+  }
+  .carousel-dots-indicator .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.25s ease;
+  }
+  .carousel-dots-indicator .dot.active {
+    background: #efbd4e;
+    transform: scale(1.2);
   }
   .food-modal-media::after {
     content: '' !important;
@@ -621,17 +651,23 @@ button.button.hero-primary-cta {
     transform: scale(1.1) !important;
   }
 
-  /* 6. Modal Details Body (Scrollable area) */
+  /* 6. Modal Details Body (Scrollable area disabled to keep product info fixed on mobile) */
   .food-modal-body,
   .food-modal-details {
-    padding: 24px 20px calc(110px + env(safe-area-inset-bottom)) !important;
-    overflow-y: auto !important;
+    padding: 20px 20px calc(100px + env(safe-area-inset-bottom)) !important;
+    overflow-y: hidden !important; /* Fixed details layout */
     flex-grow: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 24px !important;
+    gap: 16px !important; /* Tighter gap to fit mobile viewports */
     scrollbar-width: none !important;
-    max-height: calc(90dvh - 250px) !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+  
+  /* Hide dynamic extra sections on mobile to keep product details fixed on screen */
+  .modal-extra-section {
+    display: none !important;
   }
   .food-modal-body::-webkit-scrollbar,
   .food-modal-details::-webkit-scrollbar {

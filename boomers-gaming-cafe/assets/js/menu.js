@@ -294,33 +294,33 @@ function initFoodMenuEngine() {
       card.style.cursor = 'pointer';
       
       const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
-      const gamingBadge = `<span class="food-gaming-badge" style="position: absolute; right: 12px; top: 12px; font: 700 8px var(--mono); background: rgba(167, 110, 255, 0.95); color: #fff; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; z-index: 2; letter-spacing: 0.05em; display: flex; align-items: center; gap: 4px;">🎮 Setup Delivery</span>`;
-      
       card.innerHTML = `
         <div class="food-image-container" onclick="openFoodDetailsModal('${item.id}')">
           <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
           ${popularityBadge}
-          ${gamingBadge}
-          <div class="quick-card-actions">
-            <button class="quick-fav-btn" onclick="event.stopPropagation(); this.classList.toggle('active')" title="Add to Favorites" aria-label="Favorite">♡</button>
-            <button class="quick-add-image-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add to Booking" aria-label="Quick Add">+</button>
-          </div>
+          <button class="food-card-quick-add" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add" aria-label="Quick Add">+</button>
         </div>
-        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')" style="padding: 16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span class="food-type-badge ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
-            <div style="display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; color:var(--accent);">
-              <span>⭐ ${item.rating}</span>
-              <span style="opacity:0.3">|</span>
-              <span>⏱ ${item.prep}</span>
+        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')" style="padding: 14px 14px 12px;">
+          <!-- Rating Row with price: VEG ★4.9 • 10 min • ₹229 -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-family:var(--mono); font-size:11px;">
+            <span style="color:rgba(255,255,255,0.5);">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span style="color:#F5C64D;">★${item.rating}</span>
+              <span style="color:rgba(255,255,255,0.2);">·</span>
+              <span style="color:rgba(255,255,255,0.4);">${item.prep}</span>
+              <span style="color:rgba(255,255,255,0.2);">·</span>
+              <span style="color:#F5C64D; font-weight:700;">₹${item.price}</span>
             </div>
           </div>
-          <h4 class="food-card-title">${item.name}</h4>
-          <p class="food-card-desc">${item.desc}</p>
+          <!-- Title -->
+          <h4 class="food-card-title" style="font-size:16px; margin-bottom:6px;">${item.name}</h4>
+          <!-- Price in title area (before description) -->
+          <div style="color:#F5C64D; font:800 15px var(--display); margin-bottom:4px;">₹${item.price}</div>
+          <!-- Description -->
+          <p class="food-card-desc" style="font-size:13px; color:rgba(255,255,255,0.72); line-height:1.5; margin-bottom:8px;">${item.desc}</p>
         </div>
-        <div class="food-card-footer">
-          <span class="food-card-price">₹${item.price}</span>
-          <button class="cafe-add-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')">+ Add To Booking</button>
+        <div class="food-card-footer" style="padding:10px 14px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; gap:6px;">
+          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')" style="width:100%; height:36px; background:transparent; border:1px solid #F5C64D; border-radius:8px; color:#F5C64D; font:700 10px var(--mono); letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; transition:all 0.25s ease;">Add to Booking</button>
         </div>
       `;
       container.appendChild(card);
@@ -399,13 +399,25 @@ window.openFoodDetailsModal = function(itemId) {
 
   contentWrap.innerHTML = `
     <div class="food-modal-grid">
-      <!-- Left: Image -->
+      <!-- Left: Image (Swipable Carousel on Mobile) -->
       <div class="food-modal-media">
         <div class="modal-food-badge-wrap">
           ${foundItem.popularity === 'Bestseller' || foundItem.popularity === 'Must Try' ? `<span class="modal-food-badge bestseller">🔥 ${foundItem.popularity}</span>` : ''}
           <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '🟢 Vegetarian' : '🔴 Non-Vegetarian'}</span>
         </div>
-        <img class="modal-food-img" src="${foundItem.image}" alt="${foundItem.name}">
+        
+        <div class="modal-image-carousel" id="modalImageCarousel">
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center;"></div>
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: brightness(1.1) contrast(1.05);"></div>
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: saturate(1.25) brightness(0.95);"></div>
+        </div>
+        
+        <div class="carousel-dots-indicator" id="carouselDotsIndicator">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
         <!-- Favourite Heart Icon overlay -->
         <button class="modal-fav-btn" onclick="this.classList.toggle('active')" aria-label="Favorite">❤️</button>
       </div>
@@ -431,7 +443,7 @@ window.openFoodDetailsModal = function(itemId) {
         </div>
 
         <!-- Ingredients tags -->
-        <div>
+        <div class="modal-extra-section">
           <div class="food-modal-section-title">⚙️ Loadout Ingredients</div>
           <div class="food-ingredient-tags">
             ${foundItem.ingredients ? foundItem.ingredients.map(ing => `<span class="food-ingredient-tag">${ing}</span>`).join('') : '<span class="food-ingredient-tag">Premium ingredients</span>'}
@@ -470,7 +482,7 @@ window.openFoodDetailsModal = function(itemId) {
 
         <!-- Related Items -->
         ${related.length > 0 ? `
-          <div>
+          <div class="modal-extra-section">
             <div class="food-modal-section-title">🎯 Customers Also Ordered</div>
             <div class="food-related-scroll">
               ${related.map(rel => `
@@ -490,7 +502,7 @@ window.openFoodDetailsModal = function(itemId) {
         ` : ''}
 
         <!-- Recommended Drink Pairing -->
-        <div class="recommended-pairing-block">
+        <div class="recommended-pairing-block modal-extra-section">
           <div class="food-modal-section-title">🥤 Recommended Pairing</div>
           <div style="font-size:12px; color:#B8B8B8; display:flex; align-items:center; gap:8px;">
             <span>Recommended Drink:</span>
@@ -499,7 +511,7 @@ window.openFoodDetailsModal = function(itemId) {
         </div>
 
         <!-- Gaming tags -->
-        <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; font-size:11px; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
+        <div class="modal-extra-section" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; font-size:11px; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
           <span>🚀 Ready in ${foundItem.prep} minutes</span>
           <span>🎮 Perfect with PC Arena</span>
         </div>
@@ -509,6 +521,20 @@ window.openFoodDetailsModal = function(itemId) {
 
   modal.classList.add('active');
   document.body.classList.add('no-scroll');
+
+  // Bind carousel dots scroll listener
+  setTimeout(() => {
+    const carousel = document.getElementById('modalImageCarousel');
+    const dots = document.querySelectorAll('#carouselDotsIndicator .dot');
+    if (carousel && dots.length) {
+      carousel.addEventListener('scroll', () => {
+        const index = Math.round(carousel.scrollLeft / (carousel.offsetWidth || 1));
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      });
+    }
+  }, 100);
 
   Tracker.track('Food Modal Opened', { item: foundItem.name });
 };

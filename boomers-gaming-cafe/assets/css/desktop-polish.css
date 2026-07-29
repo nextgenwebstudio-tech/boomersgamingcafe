@@ -145,5 +145,32 @@
     align-items: center !important;
     justify-content: center !important;
   }
+  .sticky-menu-shelf {
+    top: 84px !important; /* Align perfectly with the 84px PC navbar */
+  }
+  /* Desktop Search, Categories & Food Grid Proportions */
+  .search-wrap {
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .sticky-menu-shelf {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .menu-categories-row {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 28px !important;
+    margin-bottom: 28px !important;
+  }
+  .menu-grid-view {
+    margin-top: 32px !important;
+    gap: 32px !important;
+  }
 }
 @media (prefers-reduced-motion:reduce) and (min-width:801px){.hero-media{animation:none!important}.cursor-glow{display:none!important}.magnetic{transform:none!important}}

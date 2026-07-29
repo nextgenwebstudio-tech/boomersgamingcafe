@@ -80,6 +80,170 @@
       border-color: var(--menu-gold);
       background: rgba(239,189,78,0.06);
     }
+    
+    /* Mobile Book Now button in nav */
+    .mobile-nav-book {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      min-width: 100px;
+      max-width: 110px;
+      padding: 0 14px;
+      background: var(--menu-gold);
+      color: #0a0700;
+      border: none;
+      border-radius: 8px;
+      font: 800 13px 'DM Mono', monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .mobile-nav-book:hover {
+      opacity: 0.9;
+    }
+    
+    /* New Floating Order Bar */
+    .mobile-order-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(12,13,18,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .order-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .order-bar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(239,189,78,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .order-bar-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .order-bar-count {
+      font: 700 12px 'Space Grotesk', sans-serif;
+      color: #fff;
+    }
+    .order-bar-total {
+      font: 600 15px 'Space Grotesk', sans-serif;
+      color: var(--menu-gold);
+    }
+    .order-bar-checkout {
+      height: 44px;
+      padding: 0 20px;
+      background: linear-gradient(135deg, #efbd4e, #d4a43e);
+      border: none;
+      border-radius: 10px;
+      color: #0a0700;
+      font: 800 12px 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .order-bar-checkout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(239,189,78,0.3);
+    }
+    .order-bar-checkout:active {
+      transform: scale(0.97);
+    }
+    
+    /* Badge pill redesign */
+    .food-pop-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 4px 10px !important;
+      border-radius: 99px !important; /* pill shape */
+      font: 700 7px 'DM Mono', monospace !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      background: rgba(128,90,213,0.85) !important;
+      color: #fff !important;
+      position: absolute !important;
+      top: 10px !important;
+      left: 10px !important;
+      z-index: 2 !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+    }
+    /* .food-gaming-badge removed per user request */
+    
+    /* Quick Add button on card hover */
+    .food-card-quick-add {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 3;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--menu-gold);
+      border: none;
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(239,189,78,0.3);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .food-product-card:hover .food-card-quick-add {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .food-card-quick-add:hover {
+      transform: scale(1.1) !important;
+      box-shadow: 0 6px 20px rgba(239,189,78,0.4) !important;
+    }
+    
+    @media (max-width: 800px) {
+      .mobile-nav-book {
+        display: inline-flex !important;
+      }
+      .food-card-quick-add {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        bottom: 8px;
+        right: 8px;
+      }
+    }
 
     /* Hero */
     .menu-hero {
@@ -155,10 +319,15 @@
     }
 
     /* Search & Filter Shelf */
+    .menu-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* improved spacing between search, chips, grid */
+    }
     .menu-shelf-row {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px; /* better proportion on desktop */
     }
     .search-wrap {
       position: relative;
@@ -407,7 +576,7 @@
       .menu-page-grid { grid-template-columns: 1fr; gap: 20px; padding: 20px 0 48px; }
       .menu-sidebar { display: none; }
       .menu-shelf-row { gap: 12px; }
-      .search-input { height: 44px; font-size: 13px; padding: 0 42px 0 16px; }
+      .search-input { height: 56px !important; font-size: 14px; padding: 0 56px 0 48px; }
       .filter-chips-row { gap: 10px; padding: 2px 0; }
       .filter-chip { height: 42px; padding: 0 16px; font-size: 10px; }
       .menu-grid-view { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -959,9 +1128,13 @@
         overflow-y: auto;
       }
       .food-modal-media {
+        position: sticky !important; /* Image stays at top, doesn't scroll away */
+        top: 0 !important;
+        z-index: 3 !important;
         height: 220px;
         min-height: 220px;
         flex-shrink: 0;
+        touch-action: pan-x; /* Horizontal swipe only for image */
       }
       .food-modal-body {
         padding: 20px;
@@ -1144,34 +1317,36 @@
     }
     
     /* Search Bar with Glass effect */
+    /* Search Bar - Desktop wider, cleaner */
     .search-wrap {
-      margin-top: 32px !important; /* 32px spacing above */
+      margin-top: 32px !important;
       position: relative;
       width: 100%;
-      max-width: 600px;
+      max-width: 100% !important; /* Full width on desktop */
     }
     .search-input {
       width: 100%;
-      height: 56px !important; /* Height: 56px */
-      background: rgba(255, 255, 255, 0.03) !important; /* Glass effect */
+      height: 56px !important;
+      background: rgba(255, 255, 255, 0.03) !important;
       backdrop-filter: blur(15px) !important;
       -webkit-backdrop-filter: blur(15px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Borders: rgba(255,255,255,.08) */
-      border-radius: 18px !important; /* Rounded: 18px */
-      padding: 0 52px 0 52px !important; /* Space for search and filter icons */
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 18px !important;
+      padding: 0 56px 0 52px !important; /* symmetric padding, enough for icons */
       font-size: 14px !important;
       color: #fff !important;
       outline: none !important;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-sizing: border-box !important;
     }
     .search-input:focus {
-      border-color: #F5C64D !important; /* Gold border on focus */
+      border-color: #F5C64D !important;
       box-shadow: 0 0 24px rgba(245, 198, 77, 0.25) !important;
       background: rgba(255, 255, 255, 0.05) !important;
     }
     .search-icon {
       position: absolute;
-      left: 20px !important; /* Search icon perfectly centered on left */
+      left: 20px !important;
       right: auto !important;
       top: 50%;
       transform: translateY(-50%);
@@ -1182,6 +1357,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 2;
     }
     .filter-icon {
       position: absolute;
@@ -1205,17 +1381,20 @@
       transform: translateY(-50%) scale(1.1);
     }
 
-    /* Category pills horizontal scroll row */
+    /* Category pills horizontal scroll row - no clipping */
     .menu-categories-row {
       display: flex;
       gap: 12px;
       overflow-x: auto;
+      overflow-y: hidden;
       scrollbar-width: none;
-      padding: 10px 0 !important;
+      padding: 12px 0 !important;
       scroll-snap-type: x mandatory;
-      margin-top: 24px; /* 24px spacing from search */
+      scroll-padding: 0 4px;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 24px;
       position: sticky !important;
-      top: 84px !important; /* Sticky category bar: pin below the 84px PC navbar */
+      top: 84px !important;
       background: #08090c !important;
       z-index: 100 !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -1223,10 +1402,10 @@
     .menu-categories-row::-webkit-scrollbar { display: none; }
     
     .menu-categories-row .menu-side-btn {
-      flex: 1; /* equal width on desktop */
-      min-width: 160px;
+      flex: 0 0 auto !important; /* Don't stretch, scroll instead */
+      min-width: 140px;
       height: 44px !important;
-      background: rgba(255, 255, 255, 0.03) !important; /* Inactive: Dark glass */
+      background: rgba(255, 255, 255, 0.03) !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       border-radius: 99px !important;
       color: rgba(255, 255, 255, 0.6) !important;
@@ -1238,23 +1417,24 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      white-space: nowrap;
+      white-space: nowrap !important;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
       scroll-snap-align: start;
+      box-sizing: border-box !important;
     }
     .menu-categories-row .menu-side-btn:hover {
       background: rgba(255, 255, 255, 0.06) !important;
       border-color: rgba(255, 255, 255, 0.18) !important;
       color: #fff !important;
-      transform: scale(1.03) translateY(-2px) !important; /* Hover scale of 1.03 + lift */
+      transform: scale(1.03) translateY(-2px) !important;
       box-shadow: 0 4px 15px rgba(255, 255, 255, 0.06) !important;
     }
     .menu-categories-row .menu-side-btn.active {
-      background: #F5C64D !important; /* Active: Gold background */
+      background: #F5C64D !important;
       border-color: #F5C64D !important;
       color: #000 !important;
       font-weight: 800;
-      box-shadow: 0 4px 20px rgba(245, 198, 77, 0.45), 0 0 10px rgba(245, 198, 77, 0.3) !important; /* Glow/shadow when active */
+      box-shadow: 0 4px 20px rgba(245, 198, 77, 0.55), 0 0 16px rgba(245, 198, 77, 0.35) !important;
       border-left: none !important;
       padding-left: 20px !important;
       transform: scale(1.03) !important;
@@ -1398,76 +1578,146 @@
         padding: 0 32px 64px !important;
       }
     }
+    /* ====== MOBILE RESPONSIVE OVERRIDES ====== */
     @media (max-width: 800px) {
-      .menu-hero .wrap {
-        padding: 0 24px !important;
+      /* Mobile Nav — consistent 66px, Book Now aligned */
+      .nav { padding: 0 16px !important; height: 66px !important; }
+      .nav .brand { font-size: 14px !important; max-width: 140px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
+      .nav .brand img { width: 30px !important; height: 30px !important; flex-shrink: 0 !important; }
+      .mobile-nav-book { display: none !important; }
+      
+      /* Hero Section */
+      .menu-hero { padding: 100px 0 36px !important; min-height: auto !important; }
+      .menu-hero .wrap { padding: 0 24px !important; gap: 20px; }
+      .menu-hero h1 { font-size: 32px !important; line-height: 0.95 !important; }
+      .menu-hero-lead { font-size: 16px !important; line-height: 1.7 !important; color: #B8B8B8 !important; }
+      .menu-hero-kicker { font-size: 10px !important; margin-bottom: 4px !important; }
+      .menu-feature-chips { gap: 10px; margin-top: 4px; }
+      .feature-chip { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
+
+      /* Section Spacing */
+      .menu-page-grid { padding: 0 16px 48px !important; }
+
+      /* Search bar — full width, no clipping, proper padding */
+      .search-wrap { margin-top: 32px !important; max-width: 100% !important; }
+      .search-input { 
+        height: 56px !important; 
+        border-radius: 18px !important; 
+        font-size: 14px !important; 
+        padding: 0 56px 0 48px !important;
+        min-width: 0 !important;
+        width: 100% !important;
       }
-      .menu-page-grid {
-        padding: 0 16px 48px !important; /* 16px padding */
-      }
+      .search-icon { left: 16px !important; font-size: 16px !important; }
+      .filter-icon { right: 16px !important; font-size: 16px !important; }
+
+      /* Search → Categories: 24px spacing, no clipping */
       .menu-categories-row {
-        gap: 8px;
-        scroll-snap-type: x mandatory;
-      }
-      .menu-categories-row .menu-side-btn {
-        flex: 0 0 auto !important; /* Don't wrap category row */
-        min-width: 130px;
-        height: 38px !important;
-        font-size: 11px !important;
-      }
-      .menu-grid-view {
-        grid-template-columns: repeat(2, 1fr) !important; /* Mobile: 2 cards */
-        gap: 16px !important; /* 16px gap */
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 10px !important;
         margin-top: 24px !important;
+        padding: 10px 16px !important; /* Edge padding */
+        margin: 0 -16px !important; /* Counteract padding to extend full-width */
+        top: 66px !important; /* Align perfectly with 66px mobile navbar */
       }
+      .menu-categories-row::-webkit-scrollbar { display: none !important; }
+      .menu-categories-row .menu-side-btn {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        min-width: 90px !important;
+        height: 36px !important;
+        font-size: 10px !important;
+        padding: 0 14px !important;
+        opacity: 0.65 !important;
+        white-space: nowrap !important;
+      }
+      .menu-categories-row .menu-side-btn.active {
+        opacity: 1 !important;
+        box-shadow: 0 4px 24px rgba(245, 198, 77, 0.55), 0 0 16px rgba(245, 198, 77, 0.35) !important;
+        transform: scale(1.05) !important;
+      }
+
+      /* Categories → Food Grid: 28px spacing */
+      .menu-grid-view {
+        grid-template-columns: repeat(2, 1fr) !important;
+        column-gap: 16px !important;
+        row-gap: 20px !important;
+        margin-top: 28px !important;
+      }
+
       .menu-food-card {
         border-radius: 16px !important;
       }
       .menu-food-img {
-        aspect-ratio: 1 / 1 !important;
+        aspect-ratio: 4 / 3 !important; /* 55-60% image height ratio */
         height: auto !important;
       }
       .menu-food-info {
-        padding: 12px !important;
-      }
-      .menu-food-name {
-        font-size: 14px !important;
-      }
-      .menu-food-desc {
-        font-size: 11px !important;
-        margin-bottom: 12px !important;
-        -webkit-line-clamp: 2 !important;
+        padding: 14px 14px 16px !important;
       }
       .menu-food-meta {
-        font-size: 10px !important;
+        font-size: 13px !important;
+        margin-bottom: 6px !important;
+      }
+      .menu-food-name {
+        font-size: 18px !important;
+        margin-bottom: 6px !important;
+      }
+      .menu-food-desc {
+        font-size: 14px !important; /* 14px description */
+        color: rgba(255,255,255,0.72) !important; /* improved contrast */
+        margin-bottom: 14px !important;
+        -webkit-line-clamp: 2 !important;
+        line-height: 1.5 !important;
       }
       .menu-food-price {
-        font-size: 16px !important;
+        font-size: 20px !important;
       }
       .menu-food-btn {
-        height: 32px !important;
-        font-size: 9px !important;
+        height: 38px !important;
+        font-size: 15px !important;
         min-width: 0 !important;
         width: 100% !important;
+        letter-spacing: 0.03em !important;
+      }
+      .menu-food-btn:hover {
+        transform: scale(1.03) !important;
       }
       .menu-food-footer {
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 10px !important;
         align-items: stretch !important;
-        padding-top: 10px !important;
+        padding-top: 12px !important;
       }
+
+      /* Floating Cart CTA — now replaced by new order bar, hide old one */
       .mobile-sticky-order {
-        bottom: max(32px, env(safe-area-inset-bottom)) !important;
-        right: 24px !important;
-        left: auto !important; /* preserve alignment */
+        display: none !important;
       }
+      /* New floating order bar */
+      .mobile-order-bar {
+        display: flex !important;
+      }
+
       .menu-nav-back {
         padding: 4px 8px !important;
         font-size: 10px !important;
         border-radius: 6px !important;
       }
 
-      /* Force hamburger menu icon to show on the right on all mobile screens up to 800px */
+      /* Spacing between food rows */
+      .menu-food-card {
+        margin-bottom: 0 !important;
+      }
+      .menu-grid-view > * {
+        margin-bottom: 0 !important;
+      }
+
+      /* Nav toggle */
       .nav-toggle {
         display: flex !important;
         flex-direction: column !important;
@@ -1502,7 +1752,7 @@
         background-color: var(--lime) !important;
       }
 
-      /* Refine mobile menu overlay links to be clean and elegant (not oversized) */
+      /* Mobile menu overlay */
       .mobile-menu-links {
         gap: 8px !important;
         width: 100% !important;
@@ -1510,7 +1760,7 @@
         align-items: center !important;
       }
       .mobile-menu-links a {
-        font-size: 18px !important; /* Elegant letters */
+        font-size: 18px !important;
         font-weight: 700 !important;
         letter-spacing: 0.04em !important;
         text-transform: uppercase !important;
@@ -1660,7 +1910,7 @@
       <a href="index.html#community">Events</a>
     </div>
     <a href="index.html#book" class="nav-book-link">Book Now</a>
-    <div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
       <a class="menu-nav-back" href="index.html">← Back</a>
       <!-- Hamburger Toggle Button for mobile viewports -->
       <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
