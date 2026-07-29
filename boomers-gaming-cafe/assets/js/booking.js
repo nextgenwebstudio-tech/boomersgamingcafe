@@ -744,7 +744,23 @@ function initCostCalculator() {
  */
 function initLiveAvailabilityWidget() {
   const capacityDashboard = document.getElementById('liveAvailabilityDashboard');
-  if (!capacityDashboard) return;
+  let secondsSinceUpdate = 0;
+  let updateIntervalTimer = null;
+
+  function resetUpdateTimer() {
+    secondsSinceUpdate = 0;
+    const timeLabel = document.getElementById('liveUpdatedTime');
+    if (timeLabel) timeLabel.textContent = 'Updated just now';
+    
+    if (updateIntervalTimer) clearInterval(updateIntervalTimer);
+    updateIntervalTimer = setInterval(() => {
+      secondsSinceUpdate++;
+      const lbl = document.getElementById('liveUpdatedTime');
+      if (lbl) {
+        lbl.textContent = `Updated ${secondsSinceUpdate}s ago`;
+      }
+    }, 1000);
+  }
 
   function updateDashboardNumbers() {
     // Generate simulated dynamic counts
@@ -828,10 +844,17 @@ function initLiveAvailabilityWidget() {
     Tracker.track('Live Dashboard Refreshed');
   }
 
-  updateDashboardNumbers();
+  function runUpdate() {
+    updateDashboardNumbers();
+    resetUpdateTimer();
+  }
+
+  if (!capacityDashboard) return;
+
+  runUpdate();
   
   // Randomly refresh every 15 seconds
-  setInterval(updateDashboardNumbers, 15000);
+  setInterval(runUpdate, 15000);
 }
 
 window.addFoodToBooking = function(foodName, price) {

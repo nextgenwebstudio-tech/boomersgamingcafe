@@ -300,27 +300,18 @@ function initFoodMenuEngine() {
           ${popularityBadge}
           <button class="food-card-quick-add" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add" aria-label="Quick Add">+</button>
         </div>
-        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')" style="padding: 14px 14px 12px;">
-          <!-- Rating Row with price: VEG ★4.9 • 10 min • ₹229 -->
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-family:var(--mono); font-size:11px;">
-            <span style="color:rgba(255,255,255,0.5);">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
-            <div style="display:flex; align-items:center; gap:4px;">
-              <span style="color:#F5C64D;">★${item.rating}</span>
-              <span style="color:rgba(255,255,255,0.2);">·</span>
-              <span style="color:rgba(255,255,255,0.4);">${item.prep}</span>
-              <span style="color:rgba(255,255,255,0.2);">·</span>
-              <span style="color:#F5C64D; font-weight:700;">₹${item.price}</span>
-            </div>
+        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')">
+          <h4 class="food-card-title">${item.name}</h4>
+          <div class="food-card-price">₹${item.price}</div>
+          <p class="food-card-desc">${item.desc}</p>
+          <div class="food-card-meta">
+            <span class="meta-veg ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+            <span class="meta-rating">★ ${item.rating}</span>
+            <span class="meta-prep">⏱ ${item.prep}</span>
           </div>
-          <!-- Title -->
-          <h4 class="food-card-title" style="font-size:16px; margin-bottom:6px;">${item.name}</h4>
-          <!-- Price in title area (before description) -->
-          <div style="color:#F5C64D; font:800 15px var(--display); margin-bottom:4px;">₹${item.price}</div>
-          <!-- Description -->
-          <p class="food-card-desc" style="font-size:13px; color:rgba(255,255,255,0.72); line-height:1.5; margin-bottom:8px;">${item.desc}</p>
         </div>
-        <div class="food-card-footer" style="padding:10px 14px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; gap:6px;">
-          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')" style="width:100%; height:36px; background:transparent; border:1px solid #F5C64D; border-radius:8px; color:#F5C64D; font:700 10px var(--mono); letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; transition:all 0.25s ease;">Add to Booking</button>
+        <div class="food-card-footer">
+          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Booking</button>
         </div>
       `;
       container.appendChild(card);
@@ -354,14 +345,18 @@ function renderMostOrderedShelf(foodItems) {
         <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
         <span class="food-pop-badge" style="background:var(--lime); color:#000;">★ Ranked #${index + 1}</span>
       </div>
-      <div style="padding:16px;">
-        <span class="food-type-badge ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
-        <h4 style="font:700 16px var(--display); color:#fff; margin:6px 0 4px;">${item.name}</h4>
-        <p style="font-size:11px; color:var(--muted); line-height:1.4; margin-bottom:12px; min-height:34px;">${item.desc}</p>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font:700 16px var(--display); color:var(--lime);">₹${item.price}</span>
-          <button class="cafe-add-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')">+ Add</button>
+      <div class="food-card-details">
+        <h4 class="food-card-title">${item.name}</h4>
+        <div class="food-card-price">₹${item.price}</div>
+        <p class="food-card-desc">${item.desc}</p>
+        <div class="food-card-meta">
+          <span class="meta-veg ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+          <span class="meta-rating">★ ${item.rating}</span>
+          <span class="meta-prep">⏱ ${item.prep}</span>
         </div>
+      </div>
+      <div class="food-card-footer">
+        <button class="cafe-add-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')">Add to Booking</button>
       </div>
     `;
     shelf.appendChild(card);

@@ -138,38 +138,44 @@ button {
   color: #efbd4e;
 }
 
-.nav-cta, .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--lime);
-  color: #181006;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 13px 18px;
-  border-radius: 2px;
-  transition: transform 0.25s, box-shadow 0.25s;
-  border: 1px solid transparent;
+.nav-cta, .button, .cafe-add-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background: var(--lime) !important;
+  color: #181006 !important;
+  font: 700 11px var(--mono) !important; /* Esports monospace look */
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important; /* Unified 8px sharp esports radius */
+  border: 1px solid transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  transition: all 200ms ease !important; /* Standardized 200ms ease */
+  cursor: pointer !important;
+  height: 42px !important;
+  box-sizing: border-box !important;
 }
 
-.nav-cta:hover, .button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 34px rgba(239, 189, 78, 0.25);
+.nav-cta:hover, .button:hover, .cafe-add-btn:hover {
+  transform: translateY(-4px) !important;
+  background: var(--lime) !important;
+  box-shadow: 0 8px 24px rgba(167, 255, 0, 0.3) !important; /* Unified soft glow */
 }
 
+/* Secondary Button styling */
 .button.secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line);
-  color: #fff;
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  box-shadow: none !important;
 }
 
 .button.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 .button:disabled {
@@ -1230,14 +1236,15 @@ button {
   background: rgba(18, 18, 22, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px; /* Better spacing inside cards */
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 250ms ease !important; /* Standardized transition */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 120px;
+  min-height: 140px; /* Better height on mobile/desktop */
+  box-sizing: border-box;
 }
 
 .live-card-glow {
@@ -1250,45 +1257,45 @@ button {
   z-index: 1;
 }
 
-/* Category borders & glows */
+/* Category borders & glows - reduced intensity for a softer glow */
 .pc-arena-card:hover {
-  border-color: #00c8ff !important;
-  box-shadow: 0 0 16px rgba(0, 200, 255, 0.2) !important;
+  border-color: rgba(0, 200, 255, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.1) !important;
 }
 .pc-arena-card:hover .live-card-glow {
   opacity: 1;
-  box-shadow: inset 0 0 20px rgba(0, 200, 255, 0.1);
+  box-shadow: inset 0 0 20px rgba(0, 200, 255, 0.05);
 }
 
 .ps5-lounge-card:hover {
-  border-color: #ad8cff !important;
-  box-shadow: 0 0 16px rgba(173, 140, 255, 0.2) !important;
+  border-color: rgba(173, 140, 255, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(173, 140, 255, 0.1) !important;
 }
 .ps5-lounge-card:hover .live-card-glow {
   opacity: 1;
-  box-shadow: inset 0 0 20px rgba(173, 140, 255, 0.1);
+  box-shadow: inset 0 0 20px rgba(173, 140, 255, 0.05);
 }
 
 .sim-racing-card:hover {
-  border-color: #efbd4e !important;
-  box-shadow: 0 0 16px rgba(239, 189, 78, 0.2) !important;
+  border-color: rgba(239, 189, 78, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(239, 189, 78, 0.1) !important;
 }
 .sim-racing-card:hover .live-card-glow {
   opacity: 1;
-  box-shadow: inset 0 0 20px rgba(239, 189, 78, 0.1);
+  box-shadow: inset 0 0 20px rgba(239, 189, 78, 0.05);
 }
 
 .vr-lounge-card:hover {
-  border-color: #ff4f70 !important;
-  box-shadow: 0 0 16px rgba(255, 79, 112, 0.2) !important;
+  border-color: rgba(255, 79, 112, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(255, 79, 112, 0.1) !important;
 }
 .vr-lounge-card:hover .live-card-glow {
   opacity: 1;
-  box-shadow: inset 0 0 20px rgba(255, 79, 112, 0.1);
+  box-shadow: inset 0 0 20px rgba(255, 79, 112, 0.05);
 }
 
 .live-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px) !important; /* Unified translateY(-8px) */
   background: rgba(22, 22, 28, 0.85);
 }
 
@@ -3162,48 +3169,27 @@ button {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(20, 21, 25, 0.65);
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-
-.food-product-card::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 18px;
-  padding: 1px;
-  background: linear-gradient(90deg, #efbd4e, #ad8cff, #00c8ff, #efbd4e);
-  background-size: 400% 400%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
+  background: rgba(16, 17, 21, 0.65) !important;
+  border-radius: 12px !important;
+  transition: all 250ms ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
 }
 
 .food-product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-.food-product-card:hover::before {
-  opacity: 1;
-  animation: borderGlow 6s linear infinite;
-}
-
-@keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  transform: translateY(-8px) !important;
+  border-color: rgba(255, 199, 70, 0.6) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 199, 70, 0.1) !important;
 }
 
 .food-image-container {
-  height: 160px;
+  height: 170px !important;
   width: 100%;
   overflow: hidden;
   position: relative;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .food-image-bg {
@@ -3211,11 +3197,11 @@ button {
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 300ms ease !important;
 }
 
 .food-product-card:hover .food-image-bg {
-  transform: scale(1.08);
+  transform: scale(1.04) !important;
 }
 
 .food-pop-badge {
@@ -3245,52 +3231,78 @@ button {
 }
 
 .food-card-details {
-  padding: 16px 16px 8px;
-}
-
-.food-type-badge {
-  font: 700 8px var(--mono);
-  padding: 2px 6px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  display: inline-block;
-}
-.food-type-badge.veg {
-  background: rgba(0, 219, 120, 0.1);
-  color: var(--lime);
-}
-.food-type-badge.non-veg {
-  background: rgba(255, 79, 112, 0.1);
-  color: var(--red);
+  padding: 20px 20px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
 }
 
 .food-card-title {
-  font: 700 18px var(--display);
-  color: #fff;
-  margin: 6px 0;
-  letter-spacing: -0.04em;
-}
-
-.food-card-desc {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.4;
-  margin: 0 0 10px;
-  min-height: 32px;
-}
-
-.food-card-footer {
-  padding: 0 16px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  padding-top: 12px;
+  font: 700 15px var(--display) !important;
+  color: #fff !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+  height: 2.5em !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-overflow: ellipsis !important;
 }
 
 .food-card-price {
-  font: 700 20px var(--display);
-  color: var(--lime);
+  color: #F5C54B !important; /* Boomer's gold */
+  font: 800 16px var(--mono) !important; /* bold, slightly larger */
+  margin: 8px 0 10px 0 !important; /* 8-12px spacing from title and description */
+}
+
+.food-card-desc {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  line-height: 1.35 !important;
+  height: 2.7em !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-overflow: ellipsis !important;
+  margin-bottom: 12px !important;
+}
+
+.food-card-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  font: 500 11px var(--mono) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding-top: 12px !important;
+  margin-top: auto !important; /* Push metadata to bottom of details */
+  padding-bottom: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.meta-veg {
+  font-weight: 700 !important;
+}
+.meta-veg.veg {
+  color: #00db78 !important;
+}
+.meta-veg.non-veg {
+  color: #ff4f70 !important;
+}
+.meta-rating {
+  color: #ffbb54 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+}
+
+.food-card-footer {
+  padding: 10px 20px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Most Ordered Ranked Cards */
@@ -4115,6 +4127,37 @@ button {
   overflow: hidden;
 }
 
+.bundle-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bundle-img-wrap::before {
+  content: 'View Details →';
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font: 700 9px var(--mono);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px 8px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.25s ease;
+}
+
+.bundle-card:hover .bundle-img-wrap::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .bundle-img-wrap img {
   width: 100%;
   height: 100%;
@@ -4836,19 +4879,19 @@ button {
   position: fixed;
   top: 104px; /* 20px below desktop 84px navbar */
   left: 50%;
-  transform: translate(-50%, -20px) scale(0.96);
-  width: 380px;
-  height: 76px;
+  transform: translate(-50%, -15px) scale(0.97);
+  width: 320px !important; /* Smaller, more compact */
+  height: 68px !important; /* Reduced height */
   background: rgba(18, 18, 22, 0.96) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(255, 199, 70, 0.35) !important;
-  border-radius: 18px !important;
+  border-radius: 12px !important; /* matches general cards */
   box-shadow: 0 0 16px rgba(255, 199, 70, 0.12), 0 8px 32px rgba(0, 0, 0, 0.5) !important;
   z-index: 999999 !important;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1), transform 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -4862,7 +4905,7 @@ button {
 .toast-content {
   width: 100%;
   height: 100%;
-  padding: 14px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4874,28 +4917,28 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
 }
 
 .toast-heading {
-  font: 700 13px var(--mono) !important;
+  font: 700 12px var(--mono) !important; /* Slightly smaller typography */
   color: #fff !important;
 }
 
 .toast-subtext {
-  font: 500 11px var(--mono) !important;
+  font: 500 10px var(--mono) !important; /* Muted subtitle */
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .toast-action {
-  font: 800 11px var(--mono) !important;
+  font: 800 10px var(--mono) !important;
   color: var(--menu-gold) !important;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 6px 12px;
+  padding: 4px 10px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 
@@ -4913,7 +4956,7 @@ button {
     padding: 0 !important;
   }
   .toast-content {
-    padding: 12px 16px !important;
+    padding: 10px 14px !important;
   }
 }
 

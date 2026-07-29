@@ -448,38 +448,43 @@ html, body {
 @media (max-width: 767px) {
   /* Dynamic Hamburger Toggle Button */
   .nav-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 26px;
-    height: 18px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 10001;
-    padding: 0;
-    outline: none;
+    width: 44px !important; /* Touch target 44x44px */
+    height: 44px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-right: -4px !important; /* Align flush right */
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    z-index: 10001 !important;
   }
   
   .nav-toggle .bar {
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    transform-origin: left center;
+    width: 18px !important; /* Reduced icon size by about 20% (from 22px to 18px) */
+    height: 2px !important; /* Line height: 2px */
+    margin: 2.5px 0 !important; /* Spacing gap between lines: 5px */
+    border-radius: 999px !important;
+    display: block !important;
+    background-color: #fff !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform-origin: left center !important;
   }
   
   .nav-toggle.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate3d(2px, -1px, 0);
-    background-color: var(--lime);
+    transform: rotate(45deg) translate3d(2px, -1px, 0) !important;
+    background-color: var(--lime) !important;
   }
   .nav-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
   }
   .nav-toggle.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate3d(2px, 1px, 0);
-    background-color: var(--lime);
+    transform: rotate(-45deg) translate3d(2px, 1px, 0) !important;
+    background-color: var(--lime) !important;
   }
 
   /* Fullscreen Backdrop Blur Navigation Menu Overlay */
