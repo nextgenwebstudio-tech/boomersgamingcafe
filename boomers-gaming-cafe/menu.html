@@ -1579,166 +1579,72 @@
       }
     }
     /* ====== MOBILE RESPONSIVE OVERRIDES ====== */
-    @media (max-width: 800px) {
-      /* Mobile Nav — consistent 66px, Book Now aligned */
-      .nav { padding: 0 16px !important; height: 66px !important; }
-      .nav .brand { font-size: 14px !important; max-width: 140px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
-      .nav .brand img { width: 30px !important; height: 30px !important; flex-shrink: 0 !important; }
-      .mobile-nav-book { display: none !important; }
-      
-      /* Hero Section */
-      .menu-hero { padding: 100px 0 36px !important; min-height: auto !important; }
-      .menu-hero .wrap { padding: 0 24px !important; gap: 20px; }
-      .menu-hero h1 { font-size: 32px !important; line-height: 0.95 !important; }
-      .menu-hero-lead { font-size: 16px !important; line-height: 1.7 !important; color: #B8B8B8 !important; }
-      .menu-hero-kicker { font-size: 10px !important; margin-bottom: 4px !important; }
-      .menu-feature-chips { gap: 10px; margin-top: 4px; }
-      .feature-chip { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
-
-      /* Section Spacing */
-      .menu-page-grid { padding: 0 16px 48px !important; }
-
-      /* Search bar — full width, no clipping, proper padding */
-      .search-wrap { margin-top: 32px !important; max-width: 100% !important; }
-      .search-input { 
-        height: 56px !important; 
-        border-radius: 18px !important; 
-        font-size: 14px !important; 
-        padding: 0 56px 0 48px !important;
-        min-width: 0 !important;
+    @media (max-width: 768px) {
+      /* 1. Viewport & Scroll Safeguards */
+      body, .menu-page-grid, .menu-hero {
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
       }
-      .search-icon { left: 16px !important; font-size: 16px !important; }
-      .filter-icon { right: 16px !important; font-size: 16px !important; }
+      .menu-page-grid {
+        padding: 0 16px 48px !important;
+      }
 
-      /* Search → Categories: 24px spacing, no clipping */
-      .menu-categories-row {
+      /* 2. Header improvements */
+      .nav {
+        height: 68px !important; /* Navbar height: 68px */
+        padding: 0 16px !important;
         display: flex !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        scrollbar-width: none !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 10px !important;
-        margin-top: 24px !important;
-        padding: 10px 16px !important; /* Edge padding */
-        margin: 0 -16px !important; /* Counteract padding to extend full-width */
-        top: 66px !important; /* Align perfectly with 66px mobile navbar */
-      }
-      .menu-categories-row::-webkit-scrollbar { display: none !important; }
-      .menu-categories-row .menu-side-btn {
-        flex: 0 0 auto !important;
-        scroll-snap-align: start !important;
-        min-width: 90px !important;
-        height: 36px !important;
-        font-size: 10px !important;
-        padding: 0 14px !important;
-        opacity: 0.65 !important;
-        white-space: nowrap !important;
-      }
-      .menu-categories-row .menu-side-btn.active {
-        opacity: 1 !important;
-        box-shadow: 0 4px 24px rgba(245, 198, 77, 0.55), 0 0 16px rgba(245, 198, 77, 0.35) !important;
-        transform: scale(1.05) !important;
-      }
-
-      /* Categories → Food Grid: 28px spacing */
-      .menu-grid-view {
-        grid-template-columns: repeat(2, 1fr) !important;
-        column-gap: 16px !important;
-        row-gap: 20px !important;
-        margin-top: 28px !important;
-      }
-
-      .menu-food-card {
-        border-radius: 16px !important;
-      }
-      .menu-food-img {
-        aspect-ratio: 4 / 3 !important; /* 55-60% image height ratio */
-        height: auto !important;
-      }
-      .menu-food-info {
-        padding: 14px 14px 16px !important;
-      }
-      .menu-food-meta {
-        font-size: 13px !important;
-        margin-bottom: 6px !important;
-      }
-      .menu-food-name {
-        font-size: 18px !important;
-        margin-bottom: 6px !important;
-      }
-      .menu-food-desc {
-        font-size: 14px !important; /* 14px description */
-        color: rgba(255,255,255,0.72) !important; /* improved contrast */
-        margin-bottom: 14px !important;
-        -webkit-line-clamp: 2 !important;
-        line-height: 1.5 !important;
-      }
-      .menu-food-price {
-        font-size: 20px !important;
-      }
-      .menu-food-btn {
-        height: 38px !important;
-        font-size: 15px !important;
-        min-width: 0 !important;
-        width: 100% !important;
-        letter-spacing: 0.03em !important;
-      }
-      .menu-food-btn:hover {
-        transform: scale(1.03) !important;
-      }
-      .menu-food-footer {
-        flex-direction: column !important;
-        gap: 10px !important;
-        align-items: stretch !important;
-        padding-top: 12px !important;
-      }
-
-      /* Floating Cart CTA — now replaced by new order bar, hide old one */
-      .mobile-sticky-order {
-        display: none !important;
-      }
-      /* New floating order bar */
-      .mobile-order-bar {
-        display: flex !important;
-      }
-
-      .menu-nav-back {
-        padding: 4px 8px !important;
-        font-size: 10px !important;
-        border-radius: 6px !important;
-      }
-
-      /* Spacing between food rows */
-      .menu-food-card {
-        margin-bottom: 0 !important;
-      }
-      .menu-grid-view > * {
-        margin-bottom: 0 !important;
-      }
-
-      /* Nav toggle */
-      .nav-toggle {
-        display: flex !important;
-        flex-direction: column !important;
+        align-items: center !important;
         justify-content: space-between !important;
-        width: 26px !important;
-        height: 18px !important;
-        background: transparent !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .nav .brand {
+        font-size: 15px !important; /* Site title font size: 14-16px */
+        white-space: nowrap !important; /* Prevent wrapping */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        height: 100% !important;
+      }
+      .brand-mark {
+        width: 34px !important; /* Logo size: 34px */
+        height: 34px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* 3. Hamburger menu */
+      .nav-toggle, .mobile-menu-toggle {
+        width: 40px !important; /* Hamburger button container should be 40x40px */
+        height: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-right: 0 !important; /* Flush right */
         border: none !important;
+        background: transparent !important;
         cursor: pointer !important;
         z-index: 10001 !important;
-        padding: 0 !important;
-        outline: none !important;
       }
-      .nav-toggle .bar {
+      .nav-toggle .bar, .mobile-menu-toggle span {
+        width: 22px !important; /* Line width: 22px */
+        height: 2px !important; /* Line height: 2px */
+        margin: 2.5px 0 !important; /* Spacing gap between lines: 5px */
+        border-radius: 999px !important;
         display: block !important;
-        width: 100% !important;
-        height: 2px !important;
         background-color: #fff !important;
         transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
         transform-origin: left center !important;
       }
+      
+      /* Hamburger animations */
       .nav-toggle.active .bar:nth-child(1) {
         transform: rotate(45deg) translate3d(2px, -1px, 0) !important;
         background-color: var(--lime) !important;
@@ -1752,32 +1658,189 @@
         background-color: var(--lime) !important;
       }
 
-      /* Mobile menu overlay */
-      .mobile-menu-links {
-        gap: 8px !important;
-        width: 100% !important;
-        text-align: center !important;
+      /* 4. Navigation layout elements repositioning */
+      .nav-book-link, .mobile-nav-book {
+        display: none !important; /* Remove Book Now from header */
+      }
+      .menu-nav-back {
+        position: fixed !important;
+        top: 84px !important; /* Place Back button below 68px navbar as a floating pill */
+        left: 16px !important;
+        display: inline-flex !important;
         align-items: center !important;
-      }
-      .mobile-menu-links a {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.04em !important;
-        text-transform: uppercase !important;
+        justify-content: center !important;
+        background: rgba(20, 21, 25, 0.8) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 99px !important;
         color: #fff !important;
-        padding: 10px 0 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        font-family: var(--display) !important;
-        width: 100% !important;
-        text-align: center !important;
-      }
-      .mobile-menu-book-btn {
-        margin-top: 14px !important;
+        padding: 8px 16px !important;
         font-size: 11px !important;
-        font-weight: 800 !important;
-        padding: 12px 24px !important;
-        width: auto !important;
-        border-radius: 8px !important;
+        font-weight: 700 !important;
+        z-index: 999 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+      }
+      
+      /* 5. Content wrapper */
+      .menu-hero {
+        padding: 90px 0 24px !important;
+        min-height: auto !important;
+      }
+      .menu-hero .wrap {
+        padding: 0 16px !important;
+        gap: 16px;
+      }
+      .menu-hero h1 {
+        font-size: 28px !important;
+        line-height: 1.0 !important;
+      }
+      .menu-hero-lead {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+      }
+      .feature-chip {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+      }
+
+      /* 6. Search bar */
+      .search-wrap {
+        margin-top: 24px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .search-input {
+        width: 100% !important;
+        height: 52px !important; /* Height: 52px */
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        padding: 0 48px 0 16px !important; /* Left padding: 16px, Right padding: 48px for icon */
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        color: #fff !important;
+        outline: none !important;
+        box-sizing: border-box !important;
+      }
+      .search-icon {
+        position: absolute !important;
+        right: 16px !important; /* Icon aligned to the right */
+        left: auto !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        font-size: 16px !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        pointer-events: none !important;
+        display: flex !important;
+      }
+      .filter-icon {
+        display: none !important;
+      }
+
+      /* 7. Category chips horizontal scroll */
+      .menu-categories-row {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 10px !important;
+        margin-top: 20px !important;
+        padding: 8px 16px !important;
+        margin: 0 -16px !important;
+        top: 68px !important; /* Sticky category bar below 68px navbar */
+        position: sticky !important;
+        background: #08090c !important;
+        z-index: 100 !important;
+      }
+      .menu-categories-row::-webkit-scrollbar {
+        display: none !important;
+      }
+      .menu-categories-row .menu-side-btn {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        min-width: 120px !important; /* Minimum chip width around 120px */
+        height: 38px !important;
+        font-size: 11px !important;
+        padding: 0 16px !important;
+        opacity: 0.7 !important;
+        white-space: nowrap !important;
+      }
+      .menu-categories-row .menu-side-btn.active {
+        opacity: 1 !important;
+        box-shadow: 0 4px 20px rgba(245, 198, 77, 0.45) !important;
+        transform: scale(1.03) !important;
+      }
+
+      /* 8. Product cards spacing and sizes */
+      .menu-grid-view {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Two cards per row */
+        column-gap: 12px !important;
+        row-gap: 16px !important;
+        margin-top: 24px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* One card per row below 360px viewports */
+      @media (max-width: 360px) {
+        .menu-grid-view {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      .food-product-card {
+        height: 100% !important; /* Equal height cards */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        border-radius: 12px !important;
+        background: rgba(20, 21, 25, 0.6) !important;
+      }
+      .food-image-container {
+        width: 100% !important;
+        aspect-ratio: 4 / 3 !important; /* Responsive image ratio */
+        height: auto !important;
+      }
+      .food-card-details {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 12px !important;
+      }
+      .food-card-title {
+        font-size: 15px !important;
+        line-height: 1.2 !important;
+      }
+      .food-card-desc {
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        -webkit-line-clamp: 2 !important;
+      }
+      .cafe-add-btn {
+        width: 100% !important; /* Full width buttons */
+        height: 34px !important;
+        font-size: 11px !important;
+      }
+      .food-card-footer {
+        padding: 0 12px 12px !important;
+      }
+      
+      /* Mobile Menu Overlay adjustments */
+      .mobile-menu-links {
+        padding-top: 80px !important;
+      }
+      
+      .mobile-order-bar {
+        display: flex !important;
+      }
+      .mobile-sticky-order {
+        display: none !important;
       }
     }
     
