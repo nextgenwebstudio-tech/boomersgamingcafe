@@ -275,12 +275,14 @@ button.button.hero-primary-cta {
 
 @media (max-width: 800px) {
   /* 2. Global Hamburger Toggle Button Fixes (All Pages) */
+  /* 2. Refined Global Hamburger Toggle Button (All Pages) */
   .nav-toggle {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
-    width: 26px !important;
-    height: 18px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
     background: transparent !important;
     border: none !important;
     cursor: pointer !important;
@@ -288,26 +290,42 @@ button.button.hero-primary-cta {
     padding: 0 !important;
     outline: none !important;
     margin: 0 0 0 auto !important; /* Aligned to right */
+    border-radius: 50% !important;
+    transition: background-color 0.3s ease, transform 0.3s ease !important;
+  }
+  .nav-toggle:hover,
+  .nav-toggle:active {
+    background-color: rgba(245, 198, 77, 0.05) !important; /* Gold hue hover glow */
   }
   .nav-toggle .bar {
     display: block !important;
-    width: 100% !important;
-    height: 2px !important;
+    width: 24px !important; /* Visible icon size */
+    height: 2px !important; /* 2px-thick lines */
     background-color: #fff !important;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    transform-origin: left center !important;
+    transform-origin: center !important;
+    margin: 0 !important;
+  }
+  .nav-toggle .bar:nth-child(2) {
+    margin-top: 5px !important; /* 5px spacing */
+    margin-bottom: 5px !important; /* 5px spacing */
+  }
+  .nav-toggle:hover .bar,
+  .nav-toggle:active .bar {
+    background-color: #F5C64D !important; /* Change to gold on hover/tap */
+  }
+  .nav-toggle.active .bar {
+    background-color: #F5C64D !important; /* Hold gold state when menu opens */
   }
   .nav-toggle.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate3d(2px, -1px, 0) !important;
-    background-color: var(--lime, #c3e83b) !important;
+    transform: translateY(7px) rotate(45deg) !important; /* Smooth morph to X */
   }
   .nav-toggle.active .bar:nth-child(2) {
     opacity: 0 !important;
     transform: scaleX(0) !important;
   }
   .nav-toggle.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate3d(2px, 1px, 0) !important;
-    background-color: var(--lime, #c3e83b) !important;
+    transform: translateY(-7px) rotate(-45deg) !important; /* Smooth morph to X */
   }
 
   /* 3. Refine Mobile Navigation Overlay Links Sizing (All Pages) */
