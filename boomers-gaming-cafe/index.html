@@ -57,7 +57,7 @@
     <div class="nav-links">
       <a href="#play">Games</a>
       <a href="#arena">Locations</a>
-      <a href="menu.html">Power-Up Station</a>
+      <a href="#power-up">Power-Up Station</a>
       <a href="#calendar">Tournaments</a>
       <a href="membership.html">Membership</a>
       <a href="#community">Events</a>
@@ -78,7 +78,7 @@
     <nav class="mobile-menu-links">
       <a href="#play" onclick="window.toggleMobileMenu()" style="--i:0">Games</a>
       <a href="#arena" onclick="window.toggleMobileMenu()" style="--i:1">Locations</a>
-      <a href="menu.html" onclick="window.toggleMobileMenu()" style="--i:2">Power-Up Station</a>
+      <a href="#power-up" onclick="window.toggleMobileMenu()" style="--i:2">Power-Up Station</a>
       <a href="#calendar" onclick="window.toggleMobileMenu()" style="--i:3">Tournaments</a>
       <a href="membership.html" onclick="window.toggleMobileMenu()" style="--i:4">Membership</a>
       <a href="#community" onclick="window.toggleMobileMenu()" style="--i:5">Events</a>
@@ -1558,6 +1558,10 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initRingCardCountdown();
+      const searchInput = document.getElementById('foodSearchInput');
+      if (searchInput && window.innerWidth <= 768) {
+        searchInput.placeholder = 'Search burgers, fries...';
+      }
     });
 
     // Ctrl + K listener to focus search bar

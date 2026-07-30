@@ -11,33 +11,87 @@ html, body {
 @media (max-width: 800px) {
   /* Premium Mobile Search overrides */
   .search-wrap {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
+    gap: 10px !important; /* 8-12px gap between search input and filters */
+    width: calc(100% - 32px) !important; /* 16px margins on both sides */
+    max-width: 100% !important;
+    margin: 24px auto 0 auto !important; /* Always centered, 24px margin-top */
+    background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important; /* 12px rounded borders */
+    padding: 0 8px 0 16px !important;
+    box-sizing: border-box !important;
+    height: 52px !important;
+    position: relative !important;
+    overflow: visible !important;
+    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
+    background: rgba(10, 10, 12, 0.8) !important;
+    box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
+  }
+  .search-lead-icon {
+    color: rgba(255, 255, 255, 0.4) !important;
+    flex-shrink: 0 !important;
+    transition: color 200ms ease !important;
+    display: flex !important;
+    margin-right: 12px !important;
+    position: static !important; /* aligned naturally next to input */
+    transform: none !important;
+  }
+  .search-wrap:focus-within .search-lead-icon {
+    color: rgba(255, 199, 70, 0.9) !important;
   }
   .search-input {
-    width: 100% !important;
-    height: 52px !important;
-    background: rgba(10, 10, 12, 0.65) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 8px !important;
-    font-size: 13px !important;
-    padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
-    color: #fff !important;
+    flex: 1 !important; /* input takes up remaining space */
+    width: 0 !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: none !important;
     outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #fff !important;
+    font: 500 13px var(--mono) !important; /* Monospace typography */
+    letter-spacing: 0.03em !important;
     box-sizing: border-box !important;
+    line-height: normal !important; /* Vertically centered text input content */
+  }
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+    font-weight: 400 !important;
   }
   .search-kbd-shortcut {
     display: none !important;
   }
   .search-filters-btn {
-    right: 8px !important;
-    padding: 4px 8px !important;
+    position: static !important; /* Aligned beside input */
+    transform: none !important;
+    flex-shrink: 0 !important;
+    height: 38px !important; /* Smaller button height to look like unified pill inside container */
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    padding: 0 12px !important;
     font-size: 9px !important;
-    gap: 4px !important;
+    font-weight: 800 !important;
+    font-family: var(--mono) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+  }
+  .search-filters-btn:hover {
+    background: var(--lime) !important;
+    color: #000 !important;
+    border-color: var(--lime) !important;
+    box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
   }
 
   /* Mobile stack for Live Capacity Cards */
