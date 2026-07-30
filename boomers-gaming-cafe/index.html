@@ -16,8 +16,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Libraries (GSAP & ScrollTrigger) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   
   <!-- Core Modular Stylesheets -->
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -178,8 +178,8 @@
           <aside class="booking-float" aria-label="Quick Booking Options">
             <div class="booking-head">Drop in tonight <span class="live">Live capacity</span></div>
             <div class="booking-row">
-              <div class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">Location<b>Coimbatore ⌄</b></div>
-              <div class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">From<b>7:30 PM ⌄</b></div>
+              <button class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">Location<b>Coimbatore ⌄</b></button>
+              <button class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">From<b>7:30 PM ⌄</b></button>
             </div>
             <a class="button" href="#book">Find a station →</a>
           </aside>
@@ -192,14 +192,14 @@
             </div>
             
             <div class="m-booking-grid-2">
-              <div class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+              <button class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
                 <span class="m-card-icon">📍</span>
                 <span class="m-card-val">Coimbatore</span>
-              </div>
-              <div class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+              </button>
+              <button class="m-select-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
                 <span class="m-card-icon">🕒</span>
                 <span class="m-card-val">7:30 PM</span>
-              </div>
+              </button>
             </div>
             
             <div class="m-booking-grid-3">
@@ -377,10 +377,10 @@
             
             <!-- Premium Feature Chips (matching menu.html) -->
             <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px;">
-              <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 18px; font-size:13px; font-weight:600; color:#fff; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); cursor:default;" onmouseover="this.style.borderColor='#F5C64D';this.style.boxShadow='0 0 15px rgba(245,198,77,0.15)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';this.style.transform='none'"><span>⭐</span> Best Sellers</div>
-              <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 18px; font-size:13px; font-weight:600; color:#fff; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); cursor:default;" onmouseover="this.style.borderColor='#F5C64D';this.style.boxShadow='0 0 15px rgba(245,198,77,0.15)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';this.style.transform='none'"><span>🎮</span> Order While Gaming</div>
-              <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 18px; font-size:13px; font-weight:600; color:#fff; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); cursor:default;" onmouseover="this.style.borderColor='#F5C64D';this.style.boxShadow='0 0 15px rgba(245,198,77,0.15)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';this.style.transform='none'"><span>🎁</span> Gaming Combos</div>
-              <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 18px; font-size:13px; font-weight:600; color:#fff; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); cursor:default;" onmouseover="this.style.borderColor='#F5C64D';this.style.boxShadow='0 0 15px rgba(245,198,77,0.15)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';this.style.transform='none'"><span>🥤</span> Freshly Prepared</div>
+              <div class="premium-feature-chip"><span>⭐</span> Best Sellers</div>
+              <div class="premium-feature-chip"><span>🎮</span> Order While Gaming</div>
+              <div class="premium-feature-chip"><span>🎁</span> Gaming Combos</div>
+              <div class="premium-feature-chip"><span>🥤</span> Freshly Prepared</div>
             </div>
           </div>
           
@@ -1455,16 +1455,16 @@
   </a>
 
   <!-- Script Modules loading progressively -->
-  <script src="assets/js/tracker.js"></script>
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/launcher.js"></script>
-  <script src="assets/js/booking.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/gallery.js"></script>
-  <script src="assets/js/audio.js"></script>
-  <script src="assets/js/cinematic.js"></script>
-  <script src="assets/js/mobile-audit.js"></script>
+  <script src="assets/js/tracker.js" defer></script>
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/launcher.js" defer></script>
+  <script src="assets/js/booking.js" defer></script>
+  <script src="assets/js/menu.js" defer></script>
+  <script src="assets/js/gallery.js" defer></script>
+  <script src="assets/js/audio.js" defer></script>
+  <script src="assets/js/cinematic.js" defer></script>
+  <script src="assets/js/mobile-audit.js" defer></script>
   
   <script>
     // Activate the 20-second hero video once the page loads and video can play

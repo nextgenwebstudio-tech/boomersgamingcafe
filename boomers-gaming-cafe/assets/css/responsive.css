@@ -2896,6 +2896,10 @@ select:focus {
   gap: 8px;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
+  width: 100% !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  color: inherit !important;
 }
 
 .m-select-card:active {

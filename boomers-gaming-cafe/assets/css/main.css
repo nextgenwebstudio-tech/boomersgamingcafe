@@ -680,6 +680,8 @@ button {
   border: 1px solid transparent;
   transition: border-color 0.2s;
   cursor: pointer;
+  width: 100% !important;
+  text-align: left !important;
 }
 
 .select:hover {
