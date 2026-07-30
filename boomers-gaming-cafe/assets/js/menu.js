@@ -43,8 +43,7 @@ function initFoodMenuEngine() {
     };
   }
 
-  // Initial menu render
-  renderMenuGrid(true);
+
 
   // Search input handler
   const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -393,6 +392,9 @@ function initFoodMenuEngine() {
       });
     }
   }
+
+  // Initial menu render (called after all variables are fully declared)
+  renderMenuGrid(true);
 }
 
 /**
