@@ -14,15 +14,15 @@ html, body {
     display: flex !important;
     align-items: center !important;
     gap: 10px !important; /* 8-12px gap between search input and filters */
-    width: calc(100% - 32px) !important; /* 16px margins on both sides */
+    width: calc(100% - 24px) !important; /* Expanded breadth: 12px margins on both sides */
     max-width: 100% !important;
     margin: 24px auto 0 auto !important; /* Always centered, 24px margin-top */
     background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 12px !important; /* 12px rounded borders */
-    padding: 0 8px 0 16px !important;
+    padding: 0 16px !important; /* Symmetrical padding since filters button is removed on mobile */
     box-sizing: border-box !important;
-    height: 52px !important;
+    height: 44px !important; /* Reduced height on mobile */
     position: relative !important;
     overflow: visible !important;
     transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease !important;
@@ -67,31 +67,7 @@ html, body {
     display: none !important;
   }
   .search-filters-btn {
-    position: static !important; /* Aligned beside input */
-    transform: none !important;
-    flex-shrink: 0 !important;
-    height: 38px !important; /* Smaller button height to look like unified pill inside container */
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 8px !important;
-    padding: 0 12px !important;
-    font-size: 9px !important;
-    font-weight: 800 !important;
-    font-family: var(--mono) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: all 0.2s ease !important;
-  }
-  .search-filters-btn:hover {
-    background: var(--lime) !important;
-    color: #000 !important;
-    border-color: var(--lime) !important;
-    box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
+    display: none !important;
   }
 
   /* Mobile stack for Live Capacity Cards */
