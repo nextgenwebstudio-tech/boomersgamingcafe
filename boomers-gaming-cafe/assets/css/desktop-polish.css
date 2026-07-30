@@ -12,8 +12,8 @@
     width: 100% !important;
     max-width: 100% !important;
     height: 84px !important; /* Navbar: 84px height */
-    padding-left: 32px !important;
-    padding-right: 32px !important;
+    padding-left: 48px !important; /* Increased left padding for logo breathing room */
+    padding-right: 48px !important; /* Balanced right padding */
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -47,11 +47,12 @@
     background: var(--lime) !important;
     padding: 2px !important;
     vertical-align: middle !important;
+    object-fit: contain !important; /* Prevent squeezing */
   }
   .nav-links {
     display: flex !important;
     align-items: center !important;
-    gap: 24px !important; /* Tighten navigation spacing slightly */
+    gap: 36px !important; /* Gutter increased to 32-40px for breathing room */
     height: 100% !important;
   }
   .nav-links a {
@@ -59,7 +60,7 @@
     align-items: center !important;
     height: 100% !important;
     padding-bottom: 0 !important;
-    color: #d3d4d0 !important;
+    color: #F7F2EA !important;
     font-size: 15px !important; /* Menu font: 15px */
     font-weight: 600 !important; /* SemiBold */
     transition: color 0.25s ease, text-shadow 0.25s ease !important;
@@ -115,9 +116,10 @@
   }
   .nav-book-link:hover {
     background: var(--lime) !important;
-    opacity: 0.95 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 18px rgba(167, 255, 0, 0.25) !important; /* Glow reduced by 30% */
+    opacity: 1 !important;
+    transform: translateY(-2px) scale(1.03) !important; /* Premium scaling and lift hover state */
+    box-shadow: 0 8px 24px rgba(167, 255, 0, 0.35) !important;
+    filter: brightness(1.05) !important;
   }
   .hero-live-card{position:absolute;right:0;top:50%;width:270px;transform:translateY(-48%);padding:19px;border:1px solid rgba(239,189,78,.42);background:linear-gradient(145deg,rgba(20,17,14,.78),rgba(11,12,15,.72));backdrop-filter:blur(17px);box-shadow:0 20px 55px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);z-index:2}.hero-live-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 0,rgba(239,189,78,.2),transparent 38%);pointer-events:none}.hero-live-card>*{position:relative}.hero-live-card .live{display:block;margin-bottom:11px}.hero-live-card h3{font:700 26px/.9 var(--display);letter-spacing:-.07em;margin:0 0 7px}.hero-live-card p{font-size:12px;color:#c7bbb0;margin:0 0 18px}.hero-live-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 0;border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13);font:500 9px var(--mono);letter-spacing:.07em;color:#a89b8f;text-transform:uppercase}.hero-live-meta b{display:block;color:#fff;font:700 16px var(--display);letter-spacing:-.05em;margin-top:4px;text-transform:none}.hero-live-card a{display:inline-flex;margin-top:15px;color:var(--lime);font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.hero-live-card a:hover{color:#fff}.hero-bottom{grid-template-columns:1fr 330px;margin-top:36px}
   .cursor-glow{position:fixed;z-index:9999;width:260px;height:260px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(239,189,78,.09),transparent 64%);transform:translate(-50%,-50%);mix-blend-mode:screen;transition:left .12s ease,top .12s ease;opacity:0}.cursor-glow.active{opacity:1}.magnetic{will-change:transform}@keyframes desktopKenBurns{from{transform:scale(1.03)}to{transform:scale(1.09)}}
