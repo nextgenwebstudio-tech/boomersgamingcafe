@@ -115,14 +115,7 @@
     calendar.append(liveTournament);
   }
 
-  const foodContainer = $('#cafeItemsContainer');
-  if (foodContainer && !$('#cinematicFoodDetails')) {
-    const featuredFood = document.createElement('div');
-    featuredFood.id = 'cinematicFoodDetails';
-    featuredFood.className = 'food-detail-grid reveal';
-    featuredFood.innerHTML = `<article class="food-detail-card" style="background-image:url('assets/images/food-burger.png')"><span class="food-badge">BESTSELLER</span><span class="menu-steam"></span><div class="food-detail-copy"><b>Loaded Burger</b><small>15 min prep · 720 kcal · Add to Order</small></div></article><article class="food-detail-card" style="background-image:url('assets/images/food-toast.png')"><span class="food-badge veg-badge">VEG FAVORITE</span><div class="food-detail-copy"><b>Garlic Toast</b><small>10 min prep · Vegetarian · Add to Order</small></div></article><article class="food-detail-card" style="background-image:url('assets/images/food-wrap.png')"><span class="food-badge squad-badge">SQUAD PICK</span><div class="food-detail-copy"><b>Power Wrap</b><small>12 min prep · High protein · Add to Order</small></div></article>`;
-    foodContainer.before(featuredFood);
-  }
+
 
   let seconds = 5961;
   setInterval(() => {
