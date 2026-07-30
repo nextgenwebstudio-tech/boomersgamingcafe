@@ -682,26 +682,7 @@ html, body {
     display: none;
   }
 
-  /* Café cards carousel swipes */
-  .cafe-items-list {
-    display: flex !important;
-    grid-template-columns: none !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    gap: 16px;
-    padding: 12px 4px;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .cafe-items-list::-webkit-scrollbar {
-    display: none;
-  }
 
-  .cafe-items-list .badge-card {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-  }
 
   /* Interactive Floor Plan pinch / zoom hints */
   .floor-plan {
@@ -2075,21 +2056,7 @@ select:focus {
   }
 }
 
-/* 4. Menu list 2 columns (instead of carousel/1 column) */
-@media (max-width: 800px) {
-  .cafe-items-list {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    overflow-x: visible !important;
-    scroll-snap-type: none !important;
-    gap: 12px !important;
-    padding: 0 !important;
-  }
-  .cafe-items-list .badge-card {
-    flex: none !important;
-    min-width: 0 !important;
-  }
-}
+
 
 /* 5. Booking section congested UI, watermark fix, responsive fields */
 @media (max-width: 800px) {

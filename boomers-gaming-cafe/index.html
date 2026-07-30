@@ -431,7 +431,7 @@
         </div>
         
         <!-- Tab items content grid -->
-        <div class="cafe-items-list reveal" id="cafeItemsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+        <div class="cafe-items-list reveal" id="cafeItemsContainer">
           <!-- Loaded Dynamically from menu.js -->
         </div>
 
@@ -1563,20 +1563,6 @@
         searchInput.placeholder = 'Search burgers, fries...';
       }
     });
-
-    // Ctrl + K listener to focus search bar
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        const searchInput = document.getElementById('foodSearchInput');
-        if (searchInput) {
-          searchInput.focus();
-          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    });
-
-
   </script>
 </body>
 </html>

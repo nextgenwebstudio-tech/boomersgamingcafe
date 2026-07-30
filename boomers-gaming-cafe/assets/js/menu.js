@@ -34,25 +34,38 @@ function initFoodMenuEngine() {
   // Render food gallery masonry
   renderFoodGalleryLightbox();
 
-  // Initial menu render
-  renderMenuGrid();
+  // Debounce helper
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
 
-  // Search input handler
+  // Initial menu render
+  renderMenuGrid(true);
+
   // Search input handler
   const clearSearchBtn = document.getElementById('clearSearchBtn');
   const shortcut = document.querySelector('.search-shortcut-badge');
   const sortSelect = document.getElementById('foodSortSelect');
   
   if (searchInput) {
+    const debouncedSearch = debounce((query) => {
+      activeSearchQuery = query;
+      renderMenuGrid();
+    }, 200);
+
     searchInput.addEventListener('input', (e) => {
-      activeSearchQuery = e.target.value.toLowerCase().trim();
+      const val = e.target.value.toLowerCase().trim();
       if (clearSearchBtn) {
-        clearSearchBtn.style.display = activeSearchQuery ? 'block' : 'none';
+        clearSearchBtn.style.display = val ? 'block' : 'none';
       }
       if (shortcut) {
-        shortcut.style.display = activeSearchQuery ? 'none' : 'block';
+        shortcut.style.display = val ? 'none' : 'block';
       }
-      renderMenuGrid();
+      debouncedSearch(val);
     });
   }
 
@@ -65,6 +78,7 @@ function initFoodMenuEngine() {
         shortcut.style.display = 'block';
       }
       renderMenuGrid();
+      searchInput.focus(); // Refocus input after clearing
     });
   }
 
@@ -117,6 +131,7 @@ function initFoodMenuEngine() {
       renderMenuGrid();
       
       // Focus and scroll
+      searchInput.focus();
       searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
@@ -182,140 +197,201 @@ function initFoodMenuEngine() {
     }
     activeFilterType = 'all';
 
-    renderMenuGrid();
+    renderMenuGrid(true); // Show skeleton on category switch
     Tracker.track('Cafe Tab Switched', { category });
   };
+
+  // Helper to show skeleton loader shimmer state cards
+  function showSkeletons() {
+    container.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+      const skeleton = document.createElement('div');
+      skeleton.className = 'badge-card glass-card food-product-card skeleton-card loaded';
+      skeleton.innerHTML = `
+        <div class="food-image-container skeleton-shimmer" style="height:140px; background: rgba(255,255,255,0.03);"></div>
+        <div class="food-card-details" style="padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+          <div class="skeleton-shimmer" style="height: 16px; width: 70%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
+          <div class="skeleton-shimmer" style="height: 12px; width: 45%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
+          <div class="skeleton-shimmer" style="height: 32px; width: 100%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
+        </div>
+      `;
+      container.appendChild(skeleton);
+    }
+  }
+
+  let activeRenderTimeout = null;
 
   /**
    * Evaluates filter conditions and renders matching cards
    */
-  function renderMenuGrid() {
-    container.innerHTML = '';
-    
-    let filteredList = [];
+  function renderMenuGrid(showSkeleton = false) {
+    if (activeRenderTimeout) {
+      clearTimeout(activeRenderTimeout);
+      activeRenderTimeout = null;
+    }
 
-    // 1. Filter by category first (unless doing search or combos/snacks queries)
-    if (currentCategory === 'best-sellers') {
-      // Pull items matching bestseller criteria
-      filteredList = allFoodItems.filter(item => 
-        item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9
-      );
+    if (showSkeleton) {
+      showSkeletons();
+      activeRenderTimeout = setTimeout(() => {
+        executeRender();
+      }, 250);
     } else {
-      filteredList = allFoodItems.filter(item => item.categoryKey === currentCategory);
+      executeRender();
     }
 
-    // 2. Apply search text query
-    if (activeSearchQuery !== '') {
-      filteredList = allFoodItems.filter(item => 
-        item.name.toLowerCase().includes(activeSearchQuery) || 
-        item.desc.toLowerCase().includes(activeSearchQuery)
-      );
-    }
+    function executeRender() {
+      container.innerHTML = '';
+      let filteredList = [];
 
-    // 3. Apply tag filters
-    if (activeFilterType === 'veg') {
-      filteredList = filteredList.filter(item => item.isVeg === true);
-    } else if (activeFilterType === 'non-veg') {
-      filteredList = filteredList.filter(item => item.isVeg === false);
-    } else if (activeFilterType === 'under-200') {
-      filteredList = filteredList.filter(item => item.price < 200);
-    } else if (activeFilterType === 'bestseller') {
-      filteredList = filteredList.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller');
-    } else if (activeFilterType === 'snacks') {
-      filteredList = filteredList.filter(item => ['xp-starters', 'tactical-starters', 'popcorn'].includes(item.categoryKey));
-    } else if (activeFilterType === 'drinks') {
-      filteredList = filteredList.filter(item => ['milkshake', 'hot-beverages', 'cold-beverages', 'mocktails'].includes(item.categoryKey));
-    } else if (activeFilterType === 'combos') {
-      filteredList = allFoodItems.filter(item => item.categoryKey === 'squad-combos');
-    }
-
-    // 3.5 Apply sorting
-    const sortVal = document.getElementById('foodSortSelect') ? document.getElementById('foodSortSelect').value : 'popular';
-    const sortLabels = {
-      'popular': 'Popular',
-      'price-asc': 'Price Low → High',
-      'price-desc': 'Price High → Low',
-      'prep': 'Prep Time',
-      'rating': 'Best Rated'
-    };
-
-    if (sortVal === 'price-asc') {
-      filteredList.sort((a, b) => a.price - b.price);
-    } else if (sortVal === 'price-desc') {
-      filteredList.sort((a, b) => b.price - a.price);
-    } else if (sortVal === 'prep') {
-      filteredList.sort((a, b) => {
-        const timeA = parseInt(a.prep) || 0;
-        const timeB = parseInt(b.prep) || 0;
-        return timeA - timeB;
-      });
-    } else if (sortVal === 'rating') {
-      filteredList.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
-    } else {
-      // popular (default)
-      filteredList.sort((a, b) => {
-        const popRank = { 'Must Try': 3, 'Bestseller': 2, 'Popular': 1 };
-        const rankA = popRank[a.popularity] || 0;
-        const rankB = popRank[b.popularity] || 0;
-        if (rankB !== rankA) return rankB - rankA;
-        return parseFloat(b.rating) - parseFloat(a.rating);
-      });
-    }
-
-    // Update search banner count & description
-    const banner = document.getElementById('searchResultsBanner');
-    const bannerText = document.getElementById('searchResultsCountText');
-    if (banner && bannerText) {
-      if (activeSearchQuery !== '' || activeFilterType !== 'all') {
-        banner.style.display = 'flex';
-        bannerText.textContent = `${filteredList.length} Results Found Sorted by ${sortLabels[sortVal]}`;
+      // 1. Filter by category first (unless doing search or combos/snacks queries)
+      if (currentCategory === 'best-sellers') {
+        filteredList = allFoodItems.filter(item => 
+          item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9
+        );
       } else {
-        banner.style.display = 'none';
+        filteredList = allFoodItems.filter(item => item.categoryKey === currentCategory);
       }
-    }
 
-    // Empty state
-    if (filteredList.length === 0) {
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
-          <span style="font-size: 32px;">🎮</span>
-          <strong>No loadouts found.</strong>
-          <span>Try another category or filter search terms.</span>
-          <button class="button secondary" onclick="if(window.clearAllFoodFilters) window.clearAllFoodFilters()" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Show All ]</button>
-        </div>
-      `;
-      return;
-    }
+      // 2. Apply search text query
+      if (activeSearchQuery !== '') {
+        filteredList = allFoodItems.filter(item => 
+          item.name.toLowerCase().includes(activeSearchQuery) || 
+          item.desc.toLowerCase().includes(activeSearchQuery)
+        );
+      }
 
-    // 4. Render product cards
-    filteredList.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'badge-card glass-card food-product-card';
-      card.style.cursor = 'pointer';
-      
-      const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
-      card.innerHTML = `
-        <div class="food-image-container" onclick="openFoodDetailsModal('${item.id}')">
-          <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
-          ${popularityBadge}
-          <button class="food-card-quick-add" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add" aria-label="Quick Add">+</button>
-        </div>
-        <div class="food-card-details" onclick="openFoodDetailsModal('${item.id}')">
-          <h4 class="food-card-title">${item.name}</h4>
-          <div class="food-card-price">₹${item.price}</div>
-          <p class="food-card-desc">${item.desc}</p>
-          <div class="food-card-meta">
-            <span class="meta-veg ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
-            <span class="meta-rating">★ ${item.rating}</span>
-            <span class="meta-prep">⏱ ${item.prep}</span>
+      // 3. Apply tag filters
+      if (activeFilterType === 'veg') {
+        filteredList = filteredList.filter(item => item.isVeg === true);
+      } else if (activeFilterType === 'non-veg') {
+        filteredList = filteredList.filter(item => item.isVeg === false);
+      } else if (activeFilterType === 'under-200') {
+        filteredList = filteredList.filter(item => item.price < 200);
+      } else if (activeFilterType === 'bestseller') {
+        filteredList = filteredList.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller');
+      } else if (activeFilterType === 'snacks') {
+        filteredList = filteredList.filter(item => ['xp-starters', 'tactical-starters', 'popcorn'].includes(item.categoryKey));
+      } else if (activeFilterType === 'drinks') {
+        filteredList = filteredList.filter(item => ['milkshake', 'hot-beverages', 'cold-beverages', 'mocktails'].includes(item.categoryKey));
+      } else if (activeFilterType === 'combos') {
+        filteredList = allFoodItems.filter(item => item.categoryKey === 'squad-combos');
+      }
+
+      // 3.5 Apply sorting
+      const sortVal = document.getElementById('foodSortSelect') ? document.getElementById('foodSortSelect').value : 'popular';
+      const sortLabels = {
+        'popular': 'Popular',
+        'price-asc': 'Price Low → High',
+        'price-desc': 'Price High → Low',
+        'prep': 'Prep Time',
+        'rating': 'Best Rated'
+      };
+
+      if (sortVal === 'price-asc') {
+        filteredList.sort((a, b) => a.price - b.price);
+      } else if (sortVal === 'price-desc') {
+        filteredList.sort((a, b) => b.price - a.price);
+      } else if (sortVal === 'prep') {
+        filteredList.sort((a, b) => {
+          const timeA = parseInt(a.prep) || 0;
+          const timeB = parseInt(b.prep) || 0;
+          return timeA - timeB;
+        });
+      } else if (sortVal === 'rating') {
+        filteredList.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+      } else {
+        // popular (default)
+        filteredList.sort((a, b) => {
+          const popRank = { 'Must Try': 3, 'Bestseller': 2, 'Popular': 1 };
+          const rankA = popRank[a.popularity] || 0;
+          const rankB = popRank[b.popularity] || 0;
+          if (rankB !== rankA) return rankB - rankA;
+          return parseFloat(b.rating) - parseFloat(a.rating);
+        });
+      }
+
+      // Update search banner count & description
+      const banner = document.getElementById('searchResultsBanner');
+      const bannerText = document.getElementById('searchResultsCountText');
+      if (banner && bannerText) {
+        if (activeSearchQuery !== '' || activeFilterType !== 'all') {
+          banner.style.display = 'flex';
+          bannerText.textContent = `${filteredList.length} Results Found Sorted by ${sortLabels[sortVal]}`;
+        } else {
+          banner.style.display = 'none';
+        }
+      }
+
+      // Empty / No Results state
+      if (filteredList.length === 0) {
+        if (activeSearchQuery !== '') {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <span style="font-size: 32px;">🔍</span>
+              <strong>No search results for "${activeSearchQuery}"</strong>
+              <span>Check spelling or try searching for another loadout.</span>
+              <button class="button secondary" onclick="document.getElementById('clearSearchBtn').click();" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Clear Search ]</button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <span style="font-size: 32px;">🎮</span>
+              <strong>No loadouts found in this category.</strong>
+              <span>Try another category or filter search terms.</span>
+              <button class="button secondary" onclick="if(window.clearAllFoodFilters) window.clearAllFoodFilters()" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Show All ]</button>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      // 4. Render product cards
+      filteredList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'badge-card glass-card food-product-card';
+        card.style.cursor = 'pointer';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `${item.name}, Price: ₹${item.price}. ${item.desc}. Press Enter or Space to view details.`);
+        
+        card.onclick = () => openFoodDetailsModal(item.id);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openFoodDetailsModal(item.id);
+          }
+        });
+
+        const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
+        card.innerHTML = `
+          <div class="food-image-container">
+            <img class="food-image-bg" src="${item.image}" alt="${item.name}" loading="lazy">
+            ${popularityBadge}
+            <button class="food-card-quick-add" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add" aria-label="Quick Add">+</button>
           </div>
-        </div>
-        <div class="food-card-footer">
-          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Order</button>
-        </div>
-      `;
-      container.appendChild(card);
-    });
+          <div class="food-card-details">
+            <h4 class="food-card-title">${item.name}</h4>
+            <div class="food-card-price">₹${item.price}</div>
+            <p class="food-card-desc">${item.desc}</p>
+            <div class="food-card-meta">
+              <span class="meta-veg ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+              <span class="meta-rating">★ ${item.rating}</span>
+              <span class="meta-prep">⏱ ${item.prep}</span>
+            </div>
+          </div>
+          <div class="food-card-footer">
+            <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Order</button>
+          </div>
+        `;
+        container.appendChild(card);
+        
+        // Trigger CSS transition
+        requestAnimationFrame(() => {
+          card.classList.add('loaded');
+        });
+      });
+    }
   }
 }
 
@@ -342,7 +418,7 @@ function renderMostOrderedShelf(foodItems) {
     card.innerHTML = `
       <div class="rank-number">${index + 1}</div>
       <div class="food-image-container" style="height:140px;">
-        <div class="food-image-bg" style="background-image: url('${item.image}')"></div>
+        <img class="food-image-bg" src="${item.image}" alt="${item.name}" loading="lazy">
         <span class="food-pop-badge" style="background:var(--lime); color:#000;">★ Ranked #${index + 1}</span>
       </div>
       <div class="food-card-details">

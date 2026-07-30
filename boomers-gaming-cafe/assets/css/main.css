@@ -1854,8 +1854,9 @@ button {
 
 .cafe-items-list {
   margin-top: 15px;
-  display: flex;
-  flex-direction: column;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 24px !important;
 }
 
 .cafe-item-row {
@@ -3199,6 +3200,7 @@ button {
   height: 100%;
   background-size: cover;
   background-position: center;
+  object-fit: cover !important;
   transition: transform 300ms ease !important;
 }
 
@@ -4961,5 +4963,37 @@ button {
   .toast-content {
     padding: 10px 14px !important;
   }
+}
+
+/* Shimmer Skeleton Loader for Food Menu Grid */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-card {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.5s infinite linear !important;
+}
+
+.food-product-card {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 300ms ease, transform 300ms ease !important;
+}
+
+.food-product-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
 }
 
