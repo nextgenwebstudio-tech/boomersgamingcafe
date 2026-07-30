@@ -60,7 +60,7 @@ html, body {
     line-height: normal !important; /* Vertically centered text input content */
   }
   .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.35) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
     font-weight: 400 !important;
   }
   .search-kbd-shortcut {
@@ -399,11 +399,29 @@ html, body {
     flex: 0 0 85%;
   }
 
-  /* Mobile Floating HUD Toggle Button */
   .mobile-hud-toggle {
     display: flex !important;
-    bottom: 84px !important;
+    bottom: calc(75px + env(safe-area-inset-bottom)) !important;
     right: 16px !important;
+    width: auto !important;
+    height: 44px !important;
+    border-radius: 22px !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+    gap: 8px !important;
+  }
+  .mobile-hud-toggle .badge {
+    position: static !important;
+    margin: 0 !important;
+    background: #ff4f70 !important;
+    color: #fff !important;
+    font: 800 11px var(--mono) !important;
+    padding: 2px 7px !important;
+    border-radius: 99px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
   }
 
   .hud-close-btn {

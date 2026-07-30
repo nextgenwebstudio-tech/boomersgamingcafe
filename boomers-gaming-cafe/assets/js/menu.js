@@ -311,7 +311,7 @@ function initFoodMenuEngine() {
           </div>
         </div>
         <div class="food-card-footer">
-          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Booking</button>
+          <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Order</button>
         </div>
       `;
       container.appendChild(card);
@@ -356,7 +356,7 @@ function renderMostOrderedShelf(foodItems) {
         </div>
       </div>
       <div class="food-card-footer">
-        <button class="cafe-add-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')">Add to Booking</button>
+        <button class="cafe-add-btn" onclick="event.stopPropagation(); addFoodToCart('${item.id}')">Add to Order</button>
       </div>
     `;
     shelf.appendChild(card);
@@ -458,7 +458,7 @@ window.openFoodDetailsModal = function(itemId) {
           </div>
           <div class="food-add-btn-wrap">
             <button class="food-add-btn" id="modalAddBtn" onclick="addFoodQtyToCart('${foundItem.id}')">
-              Add to Booking <span class="btn-price" id="modalBtnPrice">· ₹${foundItem.price}</span>
+              Add to Order <span class="btn-price" id="modalBtnPrice">· ₹${foundItem.price}</span>
             </button>
           </div>
         </div>
@@ -471,7 +471,7 @@ window.openFoodDetailsModal = function(itemId) {
             <button class="food-qty-btn" onclick="incrementFoodQuantity()" aria-label="Increase">+</button>
           </div>
           <button class="food-add-btn" id="modalAddBtnMobile" onclick="addFoodQtyToCart('${foundItem.id}')">
-            Add to Booking · <span id="modalBtnPriceMobile">₹${foundItem.price}</span>
+            Add to Order · <span id="modalBtnPriceMobile">₹${foundItem.price}</span>
           </button>
         </div>
 

@@ -964,18 +964,18 @@ window.switchCafeTab = function(category, btnElement) {
         ${popularityHTML}
         ${prepHTML}
       </div>
-      <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+      <div style="padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <h4 style="font: 700 16px var(--display); margin: 0 0 6px; color: #fff;">${item.name}</h4>
-          <p style="font-size: 11px; color: var(--muted); margin: 0 0 12px; line-height: 1.4; min-height: 38px;">${item.desc}</p>
+          <p style="font-size: 11px; color: var(--muted); margin: 0 0 6px; line-height: 1.4; min-height: 32px;">${item.desc}</p>
         </div>
-        <div style="display: flex; gap: 10px; font: 500 9px var(--mono); color: var(--muted); margin-bottom: 15px;">
+        <div style="display: flex; gap: 10px; font: 500 9px var(--mono); color: var(--muted); margin-bottom: 10px;">
           ${caloriesHTML}
           ${spicyHTML}
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 10px;">
           <span style="font: 700 18px var(--display); color: var(--lime);">₹${item.price}</span>
-          <button class="cafe-add-btn" onclick="addFoodToBooking('${item.name}', ${item.price})">+ Add Item</button>
+          <button class="cafe-add-btn" onclick="addFoodToBooking('${item.name}', ${item.price})">+ Add to Order</button>
         </div>
       </div>
     `;

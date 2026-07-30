@@ -75,6 +75,18 @@ function initStickyNavbar() {
   if (window.scrollY > 20) {
     nav.classList.add('scrolled');
   }
+
+  // CTRL + K shortcut to focus search input
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      const searchInput = document.getElementById('foodSearchInput');
+      if (searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  });
 }
 
 /**

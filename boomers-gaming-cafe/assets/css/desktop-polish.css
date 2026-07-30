@@ -232,7 +232,9 @@
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 8px !important;
-    padding: 8px 14px !important;
+    padding: 0 14px !important; /* Let height govern vertical sizing */
+    height: 36px !important; /* Exactly matches design proportions */
+    box-sizing: border-box !important;
     font-size: 10px !important;
     font-weight: 800 !important;
     font-family: var(--mono) !important;
